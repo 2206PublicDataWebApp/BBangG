@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<h1 align="center">점포 리스트 </h1>
 	<table border="1">
 		<tr>
 			<th>등록번호</th>

@@ -8,7 +8,7 @@
 </head>
 <body>
     <h1 align="center">점포등록화면</h1>
-    <form action="/store/regist.do" method="post">
+    <form action="/store/regist.kh" method="post">
       <table align="center" border="1">
         <tr>
           <td>이름</td>
