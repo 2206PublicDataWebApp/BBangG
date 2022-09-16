@@ -9,10 +9,10 @@
 	
 </settings>
 <typeAliases>
-	
+	<typeAlias type="com.kh.bbang.store.domain.Store" alias="Store"/>
 </typeAliases>
 	<mappers>
-
+		<mapper resource="mappers/store-mapper.xml"/>
 	</mappers>
 
 </configuration>
