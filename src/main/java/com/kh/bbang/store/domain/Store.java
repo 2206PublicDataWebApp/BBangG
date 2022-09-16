@@ -6,11 +6,15 @@ public class Store {
 	private String storeLocation;
 	private String storeCeo;
 	private String storeTel;
+	private String storeUrl;
 	private String storeAccount;
 	private String storeFilename;
 	private String storeFileRename;
 	private String storeFilepath;
 	private String storeStatus;
+	
+	
+	
 	public int getStoreNo() {
 		return storeNo;
 	}
@@ -40,6 +44,13 @@ public class Store {
 	}
 	public void setStoreTel(String storeTel) {
 		this.storeTel = storeTel;
+	}
+	
+	public String getStoreUrl() {
+		return storeUrl;
+	}
+	public void setStoreUrl(String storeUrl) {
+		this.storeUrl = storeUrl;
 	}
 	public String getStoreAccount() {
 		return storeAccount;
@@ -74,10 +85,14 @@ public class Store {
 	@Override
 	public String toString() {
 		return "Store [storeNo=" + storeNo + ", storeName=" + storeName + ", storeLocation=" + storeLocation
-				+ ", storeCeo=" + storeCeo + ", storeTel=" + storeTel + ", storeAccount=" + storeAccount
-				+ ", storeFilename=" + storeFilename + ", storeFileRename=" + storeFileRename + ", storeFilepath="
-				+ storeFilepath + ", storeStatus=" + storeStatus + "]";
+				+ ", storeCeo=" + storeCeo + ", storeTel=" + storeTel + ", storeUrl=" + storeUrl + ", storeAccount="
+				+ storeAccount + ", storeFilename=" + storeFilename + ", storeFileRename=" + storeFileRename
+				+ ", storeFilepath=" + storeFilepath + ", storeStatus=" + storeStatus + "]";
 	}
+	
+	
+	
+	
 	
 	
 }

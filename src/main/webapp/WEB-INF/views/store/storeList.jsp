@@ -22,14 +22,23 @@
 			<td>성심당</td>
 			<td>2022-09-16</td>
 			<td><button>이동</button></td>
-			<td><button>수정</button></td>
-			<td><button>삭제</button></td>
+			<td><button onclick="modifyStore()">수정</button></td>
+			<td><button onclick="storeRemove()">삭제</button></td>
 		</tr>
 	</table>
 	<button onclick="storeRegist();">점포등록</button>
 	<script>
 		function storeRegist(){
 			location.href="/store/storeRegistForm.kh";
+		}
+		function storeRemove(){
+			event.preventDefault();
+			if(confirm("게시물을 삭제하시겠습니까?")){
+				location.href="/store/removeStore.kh";
+			}
+		}
+		function modifyStore(){
+			location.href="/store/modifyStore.kh";
 		}
 	</script>
 </body>

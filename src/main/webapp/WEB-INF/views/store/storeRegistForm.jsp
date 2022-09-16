@@ -8,16 +8,16 @@
 </head>
 <body>
     <h1 align="center">점포등록화면</h1>
-    <form action="/store/regist.kh" method="post">
+    <form action="/store/storeRegist.kh" method="post">
       <table align="center" border="1">
         <tr>
           <td>이름</td>
-          <td colspan="2"><input type="text" /></td>
+          <td colspan="2"><input type="text" name="storeName"/></td>
         </tr>
         <tr>
           <td>우편번호</td>
           <td>
-            <input type="text" placeholder="우편번호" id="sample4_postcode" />
+            <input type="text" placeholder="우편번호" id="sample4_postcode" name="postCode"/>
           </td>
           <td>
             <input
@@ -30,7 +30,7 @@
         <tr>
           <td>주소</td>
           <td colspan="2">
-            <input type="text" placeholder="주소" id="sample4_roadAddress" />
+            <input type="text" placeholder="주소" id="sample4_roadAddress" name="address1"/>
           </td>
         </tr>
         <tr>
@@ -40,28 +40,34 @@
               type="text"
               placeholder="상세주소"
               id="sample4_detailAddress"
+              name="address2"
             />
           </td>
         </tr>
         <tr>
           <td>대표자</td>
-          <td colspan="2"><input type="text" /></td>
+          <td colspan="2"><input type="text" name="storeCeo"/></td>
         </tr>
         <tr>
           <td>전화번호</td>
-          <td colspan="2"><input type="text" /></td>
+          <td colspan="2"><input type="text" name="storeTel" /></td>
+        </tr>
+         <tr>
+          <td>대표사이트</td>
+          <td colspan="2"><input type="text" name="storeUrl" /></td>
         </tr>
         <tr>
           <td>계좌번호</td>
-          <td colspan="2"><input type="text" /></td>
+          <td colspan="2"><input type="text" name="storeAccount"/></td>
         </tr>
         <tr>
           <td>점포사진</td>
-          <td colspan="2"><input type="file" /></td>
+          <td colspan="2"><input type="file" name="uploadFile"/></td>
         </tr>
         <tr>
           <td colspan="3" align="center">
-            <input type="submit" value="등록" /><input
+            <input type="submit" value="등록" />
+            <input
               type="button"
               value="이전화면 돌아가기"
             />
