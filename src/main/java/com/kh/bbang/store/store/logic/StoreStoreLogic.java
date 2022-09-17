@@ -1,5 +1,7 @@
 package com.kh.bbang.store.store.logic;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
@@ -28,8 +30,9 @@ public class StoreStoreLogic implements StoreStore {
 	}
 
 	@Override
-	public void selectAllStore() {
-		// TODO Auto-generated method stub
+	public List<Store> selectAllStore(SqlSession session) {
+		List<Store> sList = session.selectList("StoreMapper.selectAllStore");
+		return sList;
 		
 	}
 

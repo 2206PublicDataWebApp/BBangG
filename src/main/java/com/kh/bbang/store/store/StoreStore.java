@@ -1,5 +1,7 @@
 package com.kh.bbang.store.store;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 
 import com.kh.bbang.store.domain.Store;
@@ -12,7 +14,7 @@ public interface StoreStore {
 	// updateStore
 	public void updateStore();
 	// selectAllStore
-	public void selectAllStore();
+	public List<Store> selectAllStore(SqlSession session);
 	// selectOneStoreById
 	public void selectOneStoreById();
 	// selectSearchedStore

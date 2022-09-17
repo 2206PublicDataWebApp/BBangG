@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,14 +18,16 @@
 			<th>수정</th>
 			<th>삭제</th>
 		</tr>
+		<c:forEach items="${sList }" var="store" varStatus="i">
 		<tr>
-			<td>001</td>
-			<td>성심당</td>
+			<td>${store.storeNo }</td>
+			<td>${store.storeName }</td>
 			<td>2022-09-16</td>
 			<td><button>이동</button></td>
 			<td><button onclick="modifyStore()">수정</button></td>
 			<td><button onclick="storeRemove()">삭제</button></td>
 		</tr>
+		</c:forEach>
 	</table>
 	<button onclick="storeRegist();">점포등록</button>
 	<script>

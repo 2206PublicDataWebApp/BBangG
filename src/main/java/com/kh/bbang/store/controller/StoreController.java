@@ -1,5 +1,7 @@
 package com.kh.bbang.store.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +22,15 @@ public class StoreController {
 	@Autowired
 	private StoreService sService;
 	
-	// 점포 리스트 페이지로 가는 것 까지만 구현했음
-	@RequestMapping(value="/store/storeList.kh", method=RequestMethod.GET)
-	public String storeList() {
-		return "store/storeList";
+	//관리자 점포 리스트 - DB에서 정보 불러오기까지 성공
+	@RequestMapping(value="/store/adminStoreList.kh", method=RequestMethod.GET)
+	public ModelAndView storeList(ModelAndView mv) {
+		List<Store> sList = sService.showAllStore();
+		if(!sList.isEmpty()) {
+			mv.addObject("sList", sList);
+			mv.setViewName("store/adminStoreList");
+		}
+		return mv;
 	}
 	
 	// 점포 등록 페이지
