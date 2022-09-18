@@ -6,7 +6,9 @@
 	<resultMap type="Store" id="storeResultMap">
 		<id property="storeNo" column="STORE_NO"/>
 		<result property="storeName" column="STORE_NAME"/>
-		<result property="storeLocation" column="STORE_LOCATION"/>
+		<result property="storeZipCode" column="STORE_ZIPCODE"/>
+		<result property="storeAddr" column="STORE_ADDR"/>
+		<result property="storeAddrDetail" column="STORE_ADDR_DETAIL"/>
 		<result property="storeCeo" column="STORE_CEO"/>
 		<result property="storeTel" column="STORE_TEL"/>
 		<result property="storeUrl" column="STORE_URL"/>
@@ -17,12 +19,15 @@
 		<result property="storeStatus" column="STORE_STATUS"/>
 	</resultMap>
 	<insert id="insertStore">
-	INSERT INTO STORE_TBL VALUES(SEQ_STORE_NO.NEXTVAL,#{storeName},#{storeLocation},#{storeCeo},#{storeTel},#{storeUrl},#{storeAccount},#{storeFilename},DEFAULT)
+	INSERT INTO STORE_TBL VALUES(SEQ_STORE_NO.NEXTVAL,#{storeName},#{storeZipCode},#{storeAddr},#{storeAddrDetail},#{storeCeo},#{storeTel},#{storeUrl},#{storeAccount},#{storeFilename},DEFAULT)
 	</insert>
 	<delete id="deleteStore">
-	DELETE FROM STORE_TBL WHERE STORE_ID = #{storeNo}
+	DELETE FROM STORE_TBL WHERE STORE_NO = #{storeNo}
 	</delete>
 	<select id="selectAllStore" resultMap="storeResultMap">
 	SELECT * FROM STORE_TBL WHERE STORE_STATUS = 'Y' ORDER BY STORE_NO DESC
+	</select>
+	<select id="selectStoreByNo" resultMap="storeResultMap">
+	SELECT * FROM STORE_TBL WHERE STORE_NO = #{storeNo} AND STORE_STATUS = 'Y'
 	</select>
 </mapper>

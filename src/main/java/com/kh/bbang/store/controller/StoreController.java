@@ -40,20 +40,16 @@ public class StoreController {
 	}
 	
 	// 점포 등록
-	@RequestMapping(value="/store/storeRegist.kh", method=RequestMethod.POST)
+	@RequestMapping(value="/store/registStore.kh", method=RequestMethod.POST)
 	public ModelAndView registStore(
 			ModelAndView mv,
 			@ModelAttribute Store store,
 			@RequestParam(value="uploadFile", required=false) MultipartFile uploadFile,
-			@RequestParam(value="postCode") String postCode,
-			@RequestParam(value="address1") String address1,
-			@RequestParam(value="address2") String address2,
 			HttpServletRequest request) {
 		try {
-			store.setStoreLocation(postCode + "," + address1 + "," + address2); 
 			int result = sService.registStore(store);
 			if(result > 0) {
-				mv.setViewName("redirect:/store/storeList.kh");
+				mv.setViewName("redirect:/store/adminStoreList.kh");
 			}
 			// 점포등록까지 성공
 			// 첨부파일 입력 코드.. 근데 다른 테이블을 사용함.. 어케하는지 조사..
@@ -65,10 +61,38 @@ public class StoreController {
 		return mv;
 	}
 	
-	@RequestMapping(value="/store/storeRemove.kh", method=RequestMethod.GET)
-	public ModelAndView removeStore(ModelAndView mv) {
-		int result = sService.removeStore();
+	// 점포 상세 조회 - 기초 완료 
+	@RequestMapping(value="/store/storeDetail.kh", method=RequestMethod.GET)
+	public ModelAndView showStoreDetail(
+			ModelAndView mv,
+			@RequestParam Integer storeNo) {
+		
+		Store store = sService.showOneStoreById(storeNo);
+		if(store != null) {
+			mv.addObject("store",store);
+			mv.setViewName("/store/storeDetailView");
+		}
 		return mv;
 	}
+	
+	// 점포 삭제 - 기초 완료
+	@RequestMapping(value="/store/removeStore.kh", method=RequestMethod.GET)
+	public ModelAndView removeStore(
+			ModelAndView mv,
+			@RequestParam("storeNo") Integer storeNo) {
+		try {
+			int result = sService.removeStore(storeNo);
+			if(result > 0) {
+				mv.setViewName("redirect:/store/adminStoreList.kh");
+			}
+		}catch(Exception e) {
+			mv.addObject("msg",e.toString());
+			
+			mv.setViewName("/common/errorPage");
+		}
+		return mv;
+	}
+	
+
 }
 

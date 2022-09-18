@@ -21,27 +21,27 @@
 		<c:forEach items="${sList }" var="store" varStatus="i">
 		<tr>
 			<td>${store.storeNo }</td>
-			<td>${store.storeName }</td>
+			<td><a href="/store/storeDetail.kh?storeNo=${store.storeNo }">${store.storeName }</a></td>
 			<td>2022-09-16</td>
 			<td><button>이동</button></td>
-			<td><button onclick="modifyStore()">수정</button></td>
-			<td><button onclick="storeRemove()">삭제</button></td>
+			<td><button onclick="modifyStore(${store.storeNo})">수정</button></td>
+			<td><button onclick="removeStore(${store.storeNo})">삭제</button></td>
 		</tr>
 		</c:forEach>
 	</table>
-	<button onclick="storeRegist();">점포등록</button>
+	<button onclick="registStore();">점포등록</button>
 	<script>
-		function storeRegist(){
+		function registStore(){
 			location.href="/store/storeRegistForm.kh";
 		}
-		function storeRemove(){
+		function removeStore(storeNo){
 			event.preventDefault();
 			if(confirm("게시물을 삭제하시겠습니까?")){
-				location.href="/store/removeStore.kh";
+				location.href="/store/removeStore.kh?storeNo="+storeNo;
 			}
 		}
-		function modifyStore(){
-			location.href="/store/modifyStore.kh";
+		function modifyStore(storeNo){
+			location.href="/store/modifyStore.kh?storeNo="+storeNo;
 		}
 	</script>
 </body>

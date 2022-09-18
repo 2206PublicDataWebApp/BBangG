@@ -26,8 +26,8 @@ public class StoreServiceImpl implements StoreService {
 	}
 
 	@Override
-	public int removeStore() {
-		int result = sStore.deleteStore(session);
+	public int removeStore(Integer storeNo) {
+		int result = sStore.deleteStore(session, storeNo);
 		return result;
 	}
 
@@ -44,9 +44,9 @@ public class StoreServiceImpl implements StoreService {
 	}
 
 	@Override
-	public void showOneStoreById() {
-		// TODO Auto-generated method stub
-		
+	public Store showOneStoreById(Integer storeNo) {
+		Store store = sStore.selectOneStoreById(session, storeNo);
+		return store;
 	}
 
 	@Override

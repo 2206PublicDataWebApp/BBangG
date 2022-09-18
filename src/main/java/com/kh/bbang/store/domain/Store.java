@@ -3,7 +3,9 @@ package com.kh.bbang.store.domain;
 public class Store {
 	private int storeNo;
 	private String storeName;
-	private String storeLocation;
+	private String storeZipCode;
+	private String storeAddr;
+	private String storeAddrDetail;
 	private String storeCeo;
 	private String storeTel;
 	private String storeUrl;
@@ -12,9 +14,6 @@ public class Store {
 	private String storeFileRename;
 	private String storeFilepath;
 	private String storeStatus;
-	
-	
-	
 	public int getStoreNo() {
 		return storeNo;
 	}
@@ -27,11 +26,23 @@ public class Store {
 	public void setStoreName(String storeName) {
 		this.storeName = storeName;
 	}
-	public String getStoreLocation() {
-		return storeLocation;
+	public String getStoreZipCode() {
+		return storeZipCode;
 	}
-	public void setStoreLocation(String storeLocation) {
-		this.storeLocation = storeLocation;
+	public void setStoreZipCode(String storeZipCode) {
+		this.storeZipCode = storeZipCode;
+	}
+	public String getStoreAddr() {
+		return storeAddr;
+	}
+	public void setStoreAddr(String storeAddr) {
+		this.storeAddr = storeAddr;
+	}
+	public String getStoreAddrDetail() {
+		return storeAddrDetail;
+	}
+	public void setStoreAddrDetail(String storeAddrDetail) {
+		this.storeAddrDetail = storeAddrDetail;
 	}
 	public String getStoreCeo() {
 		return storeCeo;
@@ -45,7 +56,6 @@ public class Store {
 	public void setStoreTel(String storeTel) {
 		this.storeTel = storeTel;
 	}
-	
 	public String getStoreUrl() {
 		return storeUrl;
 	}
@@ -84,11 +94,14 @@ public class Store {
 	}
 	@Override
 	public String toString() {
-		return "Store [storeNo=" + storeNo + ", storeName=" + storeName + ", storeLocation=" + storeLocation
-				+ ", storeCeo=" + storeCeo + ", storeTel=" + storeTel + ", storeUrl=" + storeUrl + ", storeAccount="
-				+ storeAccount + ", storeFilename=" + storeFilename + ", storeFileRename=" + storeFileRename
-				+ ", storeFilepath=" + storeFilepath + ", storeStatus=" + storeStatus + "]";
+		return "Store [storeNo=" + storeNo + ", storeName=" + storeName + ", storeZipCode=" + storeZipCode
+				+ ", storeAddr=" + storeAddr + ", storeAddrDetail=" + storeAddrDetail + ", storeCeo=" + storeCeo
+				+ ", storeTel=" + storeTel + ", storeUrl=" + storeUrl + ", storeAccount=" + storeAccount
+				+ ", storeFilename=" + storeFilename + ", storeFileRename=" + storeFileRename + ", storeFilepath="
+				+ storeFilepath + ", storeStatus=" + storeStatus + "]";
 	}
+	
+	
 	
 	
 	

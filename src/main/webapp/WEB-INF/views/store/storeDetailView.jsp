@@ -7,17 +7,17 @@
 <title>Insert title here</title>
 </head>
 <body>
-    <h1 align="center">점포등록화면</h1>
-    <form action="/store/registStore.kh" method="post">
+    <h1 align="center">점포상세정보화면</h1>
+    <form action="/store/storeModify.kh" method="post">
       <table align="center" border="1">
         <tr>
           <td>이름</td>
-          <td colspan="2"><input type="text" name="storeName"/></td>
+          <td colspan="2"><input type="text" name="storeName" value="${store.storeName }"/></td>
         </tr>
         <tr>
           <td>우편번호</td>
           <td>
-            <input type="text" placeholder="우편번호" id="sample4_postcode" name="storeZipCode"/>
+            <input type="text" placeholder="우편번호" id="sample4_postcode" name="postCode" value="${store.storeZipCode }"/>
           </td>
           <td>
             <input
@@ -30,7 +30,7 @@
         <tr>
           <td>주소</td>
           <td colspan="2">
-            <input type="text" placeholder="주소" id="sample4_roadAddress" name="storeAddr"/>
+            <input type="text" placeholder="주소" id="sample4_roadAddress" name="store_addr" value="${store.storeAddr}"/>
           </td>
         </tr>
         <tr>
@@ -41,24 +41,25 @@
               placeholder="상세주소"
               id="sample4_detailAddress"
               name="storeAddrDetail"
+              value="${store.storeAddrDetail}"
             />
           </td>
         </tr>
         <tr>
           <td>대표자</td>
-          <td colspan="2"><input type="text" name="storeCeo"/></td>
+          <td colspan="2"><input type="text" name="storeCeo"/ value="${store.storeCeo}"></td>
         </tr>
         <tr>
           <td>전화번호</td>
-          <td colspan="2"><input type="text" name="storeTel" /></td>
+          <td colspan="2"><input type="text" name="storeTel" value="${store.storeTel}"/></td>
         </tr>
          <tr>
           <td>대표사이트</td>
-          <td colspan="2"><input type="text" name="storeUrl" /></td>
+          <td colspan="2"><input type="text" name="storeUrl" value="${store.storeUrl}"/></td>
         </tr>
         <tr>
           <td>계좌번호</td>
-          <td colspan="2"><input type="text" name="storeAccount"/></td>
+          <td colspan="2"><input type="text" name="storeAccount" value="${store.storeAccount}"/></td>
         </tr>
         <tr>
           <td>점포사진</td>

@@ -9,13 +9,13 @@ public interface StoreService {
 	// registStore
 	public int registStore(Store store);
 	// removeStore
-	public int removeStore();
+	public int removeStore(Integer storeNo);
 	// modifyStore
 	public void modifyStore();
 	// showAllStore
 	public List<Store> showAllStore();
 	// showOneStoreById
-	public void showOneStoreById();
+	public Store showOneStoreById(Integer storeNo);
 	// showSearchedStore
 	public void showSearchedStore();
 }

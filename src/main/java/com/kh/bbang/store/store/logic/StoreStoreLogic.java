@@ -18,8 +18,8 @@ public class StoreStoreLogic implements StoreStore {
 	}
 
 	@Override
-	public int deleteStore(SqlSession session) {
-		int result = session.delete("StoreMapper.deleteStore");
+	public int deleteStore(SqlSession session, Integer storeNo) {
+		int result = session.delete("StoreMapper.deleteStore", storeNo);
 		return result;
 	}
 
@@ -37,9 +37,9 @@ public class StoreStoreLogic implements StoreStore {
 	}
 
 	@Override
-	public void selectOneStoreById() {
-		// TODO Auto-generated method stub
-		
+	public Store selectOneStoreById(SqlSession session, Integer storeNo) {
+		Store store = session.selectOne("StoreMapper.selectStoreByNo", storeNo);
+		return store;
 	}
 
 	@Override

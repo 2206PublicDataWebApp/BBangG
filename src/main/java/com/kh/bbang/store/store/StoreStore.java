@@ -10,13 +10,13 @@ public interface StoreStore {
 	// insertStore
 	public int insertStore(SqlSession session, Store store);
 	// deleteStore
-	public int deleteStore(SqlSession session);
+	public int deleteStore(SqlSession session, Integer storeNo);
 	// updateStore
 	public void updateStore();
 	// selectAllStore
 	public List<Store> selectAllStore(SqlSession session);
 	// selectOneStoreById
-	public void selectOneStoreById();
+	public Store selectOneStoreById(SqlSession session, Integer storeNo);
 	// selectSearchedStore
 	public void selectSearchedStore();
 }
