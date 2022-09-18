@@ -9,10 +9,10 @@
 	
 </settings>
 <typeAliases>
-	
+	<typeAlias type="com.kh.bbang.user.domain.User" alias="User"/>
 </typeAliases>
 	<mappers>
-
+		<mapper resource="mappers/user-mapper.xml"></mapper>
 	</mappers>
 
 </configuration>

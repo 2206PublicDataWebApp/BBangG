@@ -2,6 +2,7 @@ package com.kh.bbang.user.domain;
 
 public class User {
 
+	private String userId;
 	private String userPwd;
 	private String userName;
 	private String userGender;
@@ -12,8 +13,23 @@ public class User {
 	private String addrDetail;
 	private String status;
 	
+	@Override
+	public String toString() {
+		return "User [userId=" + userId + ", userPwd=" + userPwd + ", userName=" + userName + ", userGender="
+				+ userGender + ", userEmail=" + userEmail + ", userPhone=" + userPhone + ", userZipCode=" + userZipCode
+				+ ", addr=" + addr + ", addrDetail=" + addrDetail + ", status=" + status + "]";
+	}
+
 	public User() {}
 
+	public String getUserId() {
+		return userId;
+	}
+	
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+	
 	public String getUserPwd() {
 		return userPwd;
 	}
@@ -86,12 +102,5 @@ public class User {
 		this.status = status;
 	}
 
-	@Override
-	public String toString() {
-		return "User [userPwd=" + userPwd + ", userName=" + userName + ", userGender=" + userGender + ", userEmail="
-				+ userEmail + ", userPhone=" + userPhone + ", userZipCode=" + userZipCode + ", addr=" + addr
-				+ ", addrDetail=" + addrDetail + ", status=" + status + "]";
-	}
-	
 	
 }
