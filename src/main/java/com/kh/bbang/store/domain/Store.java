@@ -3,9 +3,12 @@ package com.kh.bbang.store.domain;
 public class Store {
 	private int storeNo;
 	private String storeName;
-	private String storeLocation;
+	private String storeZipCode;
+	private String storeAddr;
+	private String storeAddrDetail;
 	private String storeCeo;
 	private String storeTel;
+	private String storeUrl;
 	private String storeAccount;
 	private String storeFilename;
 	private String storeFileRename;
@@ -23,11 +26,23 @@ public class Store {
 	public void setStoreName(String storeName) {
 		this.storeName = storeName;
 	}
-	public String getStoreLocation() {
-		return storeLocation;
+	public String getStoreZipCode() {
+		return storeZipCode;
 	}
-	public void setStoreLocation(String storeLocation) {
-		this.storeLocation = storeLocation;
+	public void setStoreZipCode(String storeZipCode) {
+		this.storeZipCode = storeZipCode;
+	}
+	public String getStoreAddr() {
+		return storeAddr;
+	}
+	public void setStoreAddr(String storeAddr) {
+		this.storeAddr = storeAddr;
+	}
+	public String getStoreAddrDetail() {
+		return storeAddrDetail;
+	}
+	public void setStoreAddrDetail(String storeAddrDetail) {
+		this.storeAddrDetail = storeAddrDetail;
 	}
 	public String getStoreCeo() {
 		return storeCeo;
@@ -40,6 +55,12 @@ public class Store {
 	}
 	public void setStoreTel(String storeTel) {
 		this.storeTel = storeTel;
+	}
+	public String getStoreUrl() {
+		return storeUrl;
+	}
+	public void setStoreUrl(String storeUrl) {
+		this.storeUrl = storeUrl;
 	}
 	public String getStoreAccount() {
 		return storeAccount;
@@ -73,11 +94,18 @@ public class Store {
 	}
 	@Override
 	public String toString() {
-		return "Store [storeNo=" + storeNo + ", storeName=" + storeName + ", storeLocation=" + storeLocation
-				+ ", storeCeo=" + storeCeo + ", storeTel=" + storeTel + ", storeAccount=" + storeAccount
+		return "Store [storeNo=" + storeNo + ", storeName=" + storeName + ", storeZipCode=" + storeZipCode
+				+ ", storeAddr=" + storeAddr + ", storeAddrDetail=" + storeAddrDetail + ", storeCeo=" + storeCeo
+				+ ", storeTel=" + storeTel + ", storeUrl=" + storeUrl + ", storeAccount=" + storeAccount
 				+ ", storeFilename=" + storeFilename + ", storeFileRename=" + storeFileRename + ", storeFilepath="
 				+ storeFilepath + ", storeStatus=" + storeStatus + "]";
 	}
+	
+	
+	
+	
+	
+	
 	
 	
 }

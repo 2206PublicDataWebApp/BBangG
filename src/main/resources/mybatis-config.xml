@@ -10,8 +10,10 @@
 	</settings>
 	<typeAliases>
 		<typeAlias type="com.kh.bbang.user.domain.User" alias="User" />
+		<typeAlias type="com.kh.bbang.store.domain.Store" alias="Store"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="mappers/user-mapper.xml"></mapper>
+		<mapper resource="mappers/store-mapper.xml"/>
 	</mappers>
 </configuration>
