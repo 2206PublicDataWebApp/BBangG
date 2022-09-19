@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.bbang.order.domain.Order;
 import com.kh.bbang.order.domain.OrderProduct;
-import com.kh.bbang.order.domain.Product;
+
 @Service
 public interface OrderService {
 	public List<Order> findOrderByDate(Date date);

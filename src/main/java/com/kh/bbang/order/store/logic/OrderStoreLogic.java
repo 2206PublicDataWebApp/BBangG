@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.bbang.order.domain.Order;
 import com.kh.bbang.order.domain.OrderProduct;
-import com.kh.bbang.order.domain.Product;
+
 import com.kh.bbang.order.store.OrderStore;
 @Repository
 public class OrderStoreLogic implements OrderStore{

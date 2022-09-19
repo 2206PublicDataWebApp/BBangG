@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.bbang.order.domain.Order;
 import com.kh.bbang.order.domain.OrderProduct;
-import com.kh.bbang.order.domain.Product;
+
 import com.kh.bbang.order.service.OrderService;
 import com.kh.bbang.order.store.OrderStore;
 @Service

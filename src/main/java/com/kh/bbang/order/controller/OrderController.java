@@ -19,7 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.bbang.order.domain.Order;
 import com.kh.bbang.order.domain.OrderProduct;
-import com.kh.bbang.order.domain.Product;
+
 import com.kh.bbang.order.service.OrderService;
 
 

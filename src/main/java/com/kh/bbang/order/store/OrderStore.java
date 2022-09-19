@@ -9,7 +9,6 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.bbang.order.domain.Order;
 import com.kh.bbang.order.domain.OrderProduct;
-import com.kh.bbang.order.domain.Product;
 
 
 public interface OrderStore {
