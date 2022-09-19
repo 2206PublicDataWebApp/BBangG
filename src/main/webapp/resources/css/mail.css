@@ -1,0 +1,21 @@
+@charset "UTF-8";
+
+.mail_check_wrap{
+	margin-top: 20px;
+}
+
+.mail_check_input_box{
+	border: 1px solid black;
+	height: 31px;
+	padding: 10px 14px;
+	width: 61%;
+	float: left;
+}
+
+#mail_check_input_box_false{
+    background-color:#ebebe4;
+}
+ 
+#mail_check_input_box_true{
+    background-color:white;
+}
