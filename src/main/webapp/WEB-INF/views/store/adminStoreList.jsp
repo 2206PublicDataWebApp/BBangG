@@ -29,6 +29,7 @@
 		</tr>
 		</c:forEach>
 	</table>
+	<br>
 	<button onclick="registStore();">점포등록</button>
 	<script>
 		function registStore(){

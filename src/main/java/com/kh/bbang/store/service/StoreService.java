@@ -11,7 +11,7 @@ public interface StoreService {
 	// removeStore
 	public int removeStore(Integer storeNo);
 	// modifyStore
-	public void modifyStore();
+	public int modifyStore(Store store);
 	// showAllStore
 	public List<Store> showAllStore();
 	// showOneStoreById

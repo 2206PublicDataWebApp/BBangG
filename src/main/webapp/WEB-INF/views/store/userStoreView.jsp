@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,13 +20,12 @@
       }
       .image {
         width: 100%;
-        height: 200px;
-        border: 1px solid red;
+        height: 250px;
       }
       .word {
         width: 100%;
-        height: 100px;
-        border: 1px solid blue;
+        height: 50px;
+        text-align: center;
       }
       img {
         width: 100%;
@@ -38,27 +38,23 @@
     <header></header>
     <section>
       <div class="wrapper">
+    <c:forEach items="${sList }" var="store">
         <div class="item">
-          <a href="/store/storeDetail.kh">
-            <div class="image"><img src="45.png" alt="" /></div>
-            <div class="word">말디니에용</div>
+          <a href="/store/storeDetail.kh?storeNo=${store.storeNo }">
+            <div class="image"><img src="/resources/store-images/${store.storeFileRename }" alt="" /></div>
+            <div class="word">${store.storeName }</div>
           </a>
         </div>
-        <div class="item">2</div>
-        <div class="item">3</div>
-        <div class="item">4</div>
-        <div class="item">5</div>
-        <div class="item">6</div>
-        <div class="item">7</div>
-        <div class="item">8</div>
-        <div class="item">9</div>
+      </c:forEach>
       </div>
+      <div align="center">
       <select>
         <option>점포이름</option>
         <option>지역</option>
       </select>
       <input type="text" />
       <button>검색</button>
+      </div>
     </section>
     <footer></footer>
   </body>

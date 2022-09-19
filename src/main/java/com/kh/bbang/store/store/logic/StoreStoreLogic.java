@@ -24,9 +24,9 @@ public class StoreStoreLogic implements StoreStore {
 	}
 
 	@Override
-	public void updateStore() {
-		// TODO Auto-generated method stub
-		
+	public int updateStore(SqlSession session, Store store) {
+		int result = session.update("StoreMapper.updateStore", store);
+		return result;
 	}
 
 	@Override

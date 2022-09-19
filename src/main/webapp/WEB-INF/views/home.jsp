@@ -14,7 +14,7 @@
 	<nav id="nav">
 		<ul>
 			<a href="#">Home</a>
-			<a href="#">빵집검색</a>
+			<a href="/store/userStoreList.kh"">빵집검색</a>
 			<a href="#">리뷰게시판</a>
 			<a href="#">QnA게시판</a>
 			<c:if test="${sessionScope.loginUser eq null }">
