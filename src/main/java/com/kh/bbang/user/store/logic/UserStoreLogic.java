@@ -3,6 +3,7 @@ package com.kh.bbang.user.store.logic;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.kh.bbang.user.domain.LoginDTO;
 import com.kh.bbang.user.domain.User;
 import com.kh.bbang.user.store.UserStore;
 
@@ -16,9 +17,10 @@ public class UserStoreLogic implements UserStore{
 	}
 
 	@Override
-	public User selectLoginUser(SqlSession session, User user) {
-		User uOne = session.selectOne("UserMapper.selectLoginOne", user);
-		return uOne;
+	public User selectLoginUser(SqlSession session, LoginDTO loginDTO) {
+		System.out.println("DAOloginDTO"+loginDTO.getUserPdw());
+		User user = session.selectOne("UserMapper.loginUser", loginDTO);
+		return user;
 	}
 
 	@Override
@@ -26,5 +28,18 @@ public class UserStoreLogic implements UserStore{
 		User user = session.selectOne("UserMapper.selectOneById", userId);
 		return user;
 	}
+
+	@Override
+	public int updateUser(SqlSession session, User user) {
+		int result = session.insert("UserMapper.updateUser", user);
+		return result;
+	}
+
+	@Override
+	public int deleteUser(SqlSession session, String userId) {
+		int result = session.insert("UserMapper.deleteUser", userId);
+		return result;
+	}
+
 
 }

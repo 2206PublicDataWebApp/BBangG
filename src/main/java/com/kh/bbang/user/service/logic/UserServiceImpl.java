@@ -4,6 +4,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.bbang.user.domain.LoginDTO;
 import com.kh.bbang.user.domain.User;
 import com.kh.bbang.user.service.UserService;
 import com.kh.bbang.user.store.UserStore;
@@ -22,8 +23,8 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public User loginUser(User user) {
-		User uOne = uStore.selectLoginUser(session, user);
+	public User loginUser(LoginDTO loginDTO) {
+		User uOne = uStore.selectLoginUser(session, loginDTO);
 		return uOne;
 	}
 
@@ -32,5 +33,18 @@ public class UserServiceImpl implements UserService{
 		User uOne = uStore.selectOneById(session, userId);
 		return uOne;
 	}
+
+	@Override
+	public int modifyUser(User user) {
+		int result = uStore.updateUser(session, user);
+		return result;
+	}
+
+	@Override
+	public int removeUser(String userId) {
+		int result = uStore.deleteUser(session, userId);
+		return result;
+	}
+	
 
 }
