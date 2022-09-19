@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="OrderMapper">
+ 	<resultMap type="Product" id="productResultMap">
+ 		<id property="storeNo" column="STORE_NO"/>
+ 		<result property="productCode" column="PRODUCT_CODE"/>
+ 		<result property="productName" column="PRODUCT_NAME"/>
+ 		<result property="productPrice" column="PRODUCT_PRICE"/>
+ 	</resultMap>
+ 	 <resultMap type="Order" id="orderResultMapById">
+ 		<id property="userId" column="USER_ID"/>
+ 		<result property="orderNo" column="ORDER_NO"/>
+ 		<result property="orderDetail" column="ORDER_DETAIL"/>
+ 		<result property="storeNo" column="STORE_NO"/>
+ 		<result property="orderState" 				column="ORDER_STATE"/>
+ 	</resultMap>
+ 		 <resultMap type="Order" id="orderDetailResultMap">
+ 		<id property="orderNo" column="ORDER_NO"/>
+ 		<result property="userId" 					column="ORDER_DETAIL"/>
+ 		<result property="storeNo" 					column="STORE_NO"/>
+ 		<result property="orderDetail"				column="ORDER_DETAIL"/>
+ 		<result property="orderShipfee" 			column="ORDER_SHIPFEE"/>
+ 		<result property="totalPrice" 				column="TOTAL_PRICE"/>
+ 		<result property="orderDate" 				column="ORDER_DATE"/>
+ 		<result property="delivaryName" 			column="DELIVARY_NAME"/>
+ 		<result property="delivaryPhone" 			column="DELIVARY_PHONE"/>
+ 		<result property="delivaryZipcode" 			column="DELIVARY_ZIPCODE"/>
+ 		<result property="delivaryAddressFirst" 	column="DELIVARY_ADDRESS_FIRST"/>
+ 		<result property="delivaryAddressSecond" 	column="DELIVARY_ADDRESS_SECOND"/>
+ 		<result property="delivaryMemo" 			column="DELIVARY_MEMO"/>
+ 		<result property="orderState" 				column="ORDER_STATE"/>
+ 	</resultMap>
+ 	<resultMap type="Order" id="orderResultMapByDate">
+ 		<id property="orderDate" column="ORDER_DATE"/>
+ 		<result property="orderNo" column="ORDER_NO"/>
+ 		<result property="storeNo" column="STORE_NO"/>
+ 		<result property="orderState" 			column="ORDER_STATE"/>
+ 	</resultMap>
+ 	<insert id="insertOrder">
+		INSERT INTO ORDER_TBL
+		VALUES(SEQ_ORDER_NO.NEXTVAL,NULL,NULL,#{orderDetail},#{orderShipfee},#{totalPrice},DEFAULT,#{delivaryName},#{delivaryPhone},#{delivaryZipcode},#{delivaryAddressFirst},#{delivaryAddressSecond},#{delivaryMemo},DEFAULT)
+ 	</insert>
+ 	<update id="updateOrder">
+ 		UPDATE ORDER_TBL SET DELIVARY_NAME=#{delivaryName},DELIVARY_PHONE=#{delivaryPhone},DELIVARY_ZIPCODE=#{delivaryZipcode},DELIVARY_ADDRESS_FIRST=#{delivaryAddressFirst}, DELIVARY_ADDRESS_SECOND=#{delivaryAddressSecond}, DELIVARY_MEMO=#{delivaryMemo}
+ 		WHERE ORDER_NO=#{orderNo}
+ 	</update>
+ 	<select id="selectAllProduct" resultMap="productResultMap">
+ 		SELECT*FROM BREAD_TBL WHERE STORE_NO =#{storeNo}
+ 	</select>
+ 	<select id="selectOrderById" resultMap="orderResultMapById">
+ 		SELECT*FROM ORDER_TBL WHERE USER_ID=#{userId}
+ 	</select>
+ 	<select id="selectOneOrder" resultMap="orderDetailResultMap">
+ 		SELECT*FROM ORDER_TBL WHERE ORDER_NO=#{orderNo}
+ 	</select>
+	<delete id="deleteOrder">
+		DELETE FROM ORDER_TBL WHERE ORDER_NO=#{orderNo}
+	</delete>
+	<update id="deleteOrderRequest">
+		UPDATE ORDER_TBL SET ORDER_STATE=5 WHERE ORDER_NO=#{orderNo}
+	</update>
+	<update id="confirmDelivary">
+		UPDATE ORDER_TBL SET ORDER_STATE=4 WHERE ORDER_NO=#{orderNo}
+	</update>
+	
+	<select id="selectOrderByDate" resultMap="orderResultMapByDate">
+		SELECT*FROM ORDER_TBL WHERE ORDER_DATE=#{date}
+	</select>
+ 
+ </mapper>
