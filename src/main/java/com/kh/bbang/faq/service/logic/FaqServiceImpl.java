@@ -1,5 +1,7 @@
 package com.kh.bbang.faq.service.logic;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,18 @@ public class FaqServiceImpl implements FaqService {
 	public int registerFaq(Faq faq) {
 		int result = faqStore.insertFaq(session, faq);
 		return result;
+	}
+
+	@Override
+	public List<Faq> printAllFaq() {
+		List<Faq> faqList = faqStore.selectAllFaq(session);
+		return faqList;
+	}
+
+	@Override
+	public int getTotalCount() {
+		int totalCount = faqStore.selectTotalCount(session);
+		return totalCount;
 	}
 
 	
