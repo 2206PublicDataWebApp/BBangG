@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,7 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="/user/login.kh" method="post">
+	<form action="${path}/user/login" method="post">
 		<div>
 			ID <input type="text" name="userId">
 		</div>
@@ -27,7 +26,7 @@
 		<div><a href="">ID 찾기</a></div>
 		<div><a href="">PW 찾기</a></div>
 		<div><a href="/user/joinView.kh">회원가입</a></div>
-	<c:if test="${sessionScope.loginUser ne null }">
+	<c:if test="${not empty login}">
 		<script type="text/javascript">
 			alert("이미 로그인 하셨습니다. 메인으로 돌아갑니다.");
 			location.href = "/home.kh";

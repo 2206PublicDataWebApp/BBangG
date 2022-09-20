@@ -22,7 +22,23 @@
 	</beans:bean>
 	
 	<context:component-scan base-package="com.kh.bbang" />
-	
-	
-	
+
+	<beans:bean id="loginInterceptor" class="com.kh.bbang.user.interceptor.LoginInterceptor"/>
+			<beans:bean id="authInterceptor" class="com.kh.bbang.user.interceptor.AuthInterceptor"/>
+			<beans:bean id="rememberMeInterceptor" class="com.kh.bbang.user.interceptor.RememberMeInterceptor"/>
+			<interceptors>
+	        <interceptor>
+	            <mapping path="/user/login"/>
+	            <beans:ref bean="loginInterceptor"/>
+	        </interceptor>
+	        <interceptor>
+	            <mapping path="/user/modify.kh"/>
+	            <beans:ref bean="authInterceptor"/>
+	        </interceptor>
+	        <interceptor>
+	            <mapping path="/**/"/>
+	            <beans:ref bean="rememberMeInterceptor"/>
+	        </interceptor>
+	    </interceptors>
 </beans:beans>
+
