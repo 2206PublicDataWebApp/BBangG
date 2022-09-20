@@ -17,10 +17,10 @@
 				<form action="/admin/adminOrderList.kh?orderDate=orderdate">
 				 <label>
 				    날짜 : 
-				    <input type="date" id="orderDate" name="date" >
+				    <input type="date" id="orderDate" name="orderDate" >
 				  </label>
 				  <input type="submit" value="검색">
-				  
+				   </form>
 				  
 			</td>
 		</tr>
@@ -32,24 +32,23 @@
 			<th>취소요청</th>
 		</tr>
 		<c:forEach items="${oList}" var="order" varStatus="i">
-			<tr>
-				<td><a href="/admin/adminOrderDetail.kh?orderNo=${order.orderNo }">${order.orderNo }</a></td>
-				
-				<td><a href="#">${order.storeNo}</a></td>
-				<td>${order.orderDate}<td>
-				<td>
-					<c:if test="${order.orderState eq 0 }">입금전</c:if>
-					<c:if test="${order.orderState eq 1 }">입금완료</c:if>
-					<c:if test="${order.orderState eq 2 }">입금완료확인</c:if>
-					<c:if test="${order.orderState eq 3}" >배송출발</c:if>
-					<c:if test="${order.orderState eq 4}" >구매확정</c:if>
-					<c:if test="${order.orderState eq 5}" >취소진행중</c:if>
-				</td>
-				<td>
-					<c:if test="${order.orderState ne 5}" >N</c:if>
-					<c:if test="${order.orderState eq 5}" >Y</c:if>
-				</td>
-			</tr>
+		<tr>
+			<td><a href="/admin/adminOrderDetail.kh?orderNo=${order.orderNo }">${order.orderNo }</a></td>
+			<td><a href="#">${order.storeNo}</a></td>
+			<td>${order.orderDate}</td>
+			<td>
+				<c:if test="${order.orderState eq 0 }">입금전</c:if>
+				<c:if test="${order.orderState eq 1 }">입금완료</c:if>
+				<c:if test="${order.orderState eq 2 }">입금완료확인</c:if>
+				<c:if test="${order.orderState eq 3}" >배송출발</c:if>
+				<c:if test="${order.orderState eq 4}" >구매확정</c:if>
+				<c:if test="${order.orderState eq 5}" >취소진행중</c:if>
+			</td>
+			<td>
+				<c:if test="${order.orderState ne 5}" >N</c:if>
+				<c:if test="${order.orderState eq 5}" >Y</c:if>
+			</td>
+		</tr>
 		</c:forEach>
 </body>
 <script>

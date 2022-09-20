@@ -11,12 +11,14 @@ import com.kh.bbang.order.domain.Order;
 import com.kh.bbang.order.domain.OrderProduct;
 
 import com.kh.bbang.order.store.OrderStore;
+import com.kh.bbang.product.domain.Product;
+import com.kh.bbang.store.domain.Store;
 @Repository
 public class OrderStoreLogic implements OrderStore{
 
 	@Override
-	public List<Order> selectOrderByDate(SqlSession session, Date date) {
-		List<Order> oList = session.selectList("OrderMapper.selectOrderByDate",date);
+	public List<Order> selectOrderByDate(SqlSession session, String orderDate) {
+		List<Order> oList = session.selectList("OrderMapper.selectOrderByDate",orderDate);
 		return oList;
 	}
 
@@ -56,19 +58,6 @@ public class OrderStoreLogic implements OrderStore{
 	}
 
 	@Override
-	public int confirmPay(SqlSession session, int orderNo) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int startDelivary(SqlSession session, int orderNo) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-
-	@Override
 	public List<Product> selectAllProduct(SqlSession session, int storeNo) {
 		List<Product> pList = session.selectList("OrderMapper.selectAllProduct", storeNo);
 		return pList;
@@ -81,9 +70,15 @@ public class OrderStoreLogic implements OrderStore{
 	}
 
 	@Override
-	public int confirmDelivary(SqlSession session, int orderNo) {
-		int result = session.update("OrderMapper.confirmDelivary",orderNo);
+	public int changeOrdeState(SqlSession session, int orderNo) {
+		int result = session.update("OrderMapper.changeOrdeState",orderNo);
 		return result;
+	}
+
+	@Override
+	public Store selectStore(SqlSession session, int storeNo) {
+		Store store = session.selectOne("OrderMapper.selectStore", storeNo);
+		return store;
 	}
 
 

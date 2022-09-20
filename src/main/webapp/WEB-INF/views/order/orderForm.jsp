@@ -29,6 +29,23 @@
 			<div>+ 배송비 3000원</div>
 			요금합계 <b><input id="goodsTotAmt" style="border:none;text-align:right;" name="totalPrice" value=0></b>원
 			<table>
+				<legend>주문자정보</legend>
+				<tr>
+					<th>주문자 이름</th>
+					<td>${user.userName }</td>
+				</tr>
+				<tr>
+					<th>주문자 연락처</th>
+					<td>${user.userPhone }</td>
+				</tr>
+			
+			</table>
+			
+			<table>
+				
+				<tr>
+					<legend>배송지 정보</legend>
+				</tr>
 				<tr>
 					<td>수령인</td>
 					<td><input type="text" name="delivaryName">
@@ -49,11 +66,11 @@
 				</tr>
 				<tr>
 					<td>상세주소1</td>
-					<td><input type="text" id="delivaryAddressFirst" name="delivaryAddressFirst"></td>
+					<td><input type="text" id="delivaryAddr" name="delivaryAddr"></td>
 				</tr>
 				<tr>
 					<td>상세주소2</td>
-					<td><input type="text" id="delivaryAddressSecond" name="delivaryAddressSecond"></td>
+					<td><input type="text" id="delivaryAddrDetail" name="delivaryAddrDetail"></td>
 				</tr>
 				<tr>
 					<td>배송메모</td>
@@ -77,7 +94,7 @@
 	        var zoneCodeCompany = data.zonecode;
 	        var addressCompany = data.address;
 	        document.getElementById("delivaryZipcode").value = zoneCodeCompany; // zipcode
-	        document.getElementById("delivaryAddressFirst").value = addressCompany; // 주소 넣기
+	        document.getElementById("delivaryAddr").value = addressCompany; // 주소 넣기
 	        }
 	    }).open();
 	  }

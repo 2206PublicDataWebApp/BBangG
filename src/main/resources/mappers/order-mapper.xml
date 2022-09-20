@@ -28,8 +28,8 @@
  		<result property="delivaryName" 			column="DELIVARY_NAME"/>
  		<result property="delivaryPhone" 			column="DELIVARY_PHONE"/>
  		<result property="delivaryZipcode" 			column="DELIVARY_ZIPCODE"/>
- 		<result property="delivaryAddressFirst" 	column="DELIVARY_ADDRESS_FIRST"/>
- 		<result property="delivaryAddressSecond" 	column="DELIVARY_ADDRESS_SECOND"/>
+ 		<result property="delivaryAddr" 			column="DELIVARY_ADDR"/>
+ 		<result property="delivaryAddrDetail" 		column="DELIVARY_ADDR_DETAIL"/>
  		<result property="delivaryMemo" 			column="DELIVARY_MEMO"/>
  		<result property="orderState" 				column="ORDER_STATE"/>
  	</resultMap>
@@ -38,6 +38,15 @@
  		<result property="orderNo" column="ORDER_NO"/>
  		<result property="storeNo" column="STORE_NO"/>
  		<result property="orderState" 			column="ORDER_STATE"/>
+ 	</resultMap>
+ 	<resultMap type="Store" id="storeResultMap">
+ 		<id property="storeNo" column="STORE_NO"/>
+ 		<result property="storeCeo" column="STORE_CEO"/>
+ 		<result property="storeName" column="STORE_NAME"/>
+ 		<result property="storeTel" column="STORE_TEL"/>
+ 		<result property="storeAccount" column="STORE_ACCOUNT"/>
+ 		<result property="storeStatus" column="STORE_STATUS"/>
+ 		
  	</resultMap>
  	<insert id="insertOrder">
 		INSERT INTO ORDER_TBL
@@ -48,7 +57,7 @@
  		WHERE ORDER_NO=#{orderNo}
  	</update>
  	<select id="selectAllProduct" resultMap="productResultMap">
- 		SELECT*FROM BREAD_TBL WHERE STORE_NO =#{storeNo}
+ 		SELECT*FROM PRODUCT_TBL WHERE STORE_NO =#{storeNo}
  	</select>
  	<select id="selectOrderById" resultMap="orderResultMapById">
  		SELECT*FROM ORDER_TBL WHERE USER_ID=#{userId}
@@ -62,12 +71,15 @@
 	<update id="deleteOrderRequest">
 		UPDATE ORDER_TBL SET ORDER_STATE=5 WHERE ORDER_NO=#{orderNo}
 	</update>
-	<update id="confirmDelivary">
-		UPDATE ORDER_TBL SET ORDER_STATE=4 WHERE ORDER_NO=#{orderNo}
+	<update id="changeOrdeState">
+		UPDATE ORDER_TBL SET ORDER_STATE=ORDER_STATE+1 WHERE ORDER_NO=#{orderNo}
 	</update>
 	
 	<select id="selectOrderByDate" resultMap="orderResultMapByDate">
-		SELECT*FROM ORDER_TBL WHERE ORDER_DATE=#{date}
+		SELECT*FROM ORDER_TBL WHERE TO_CHAR(ORDER_DATE,'YYYY-MM-DD')=#{orderDate}
+	</select>
+	<select id="selectStore" resultMap="storeResultMap">
+		SELECT*FROM STORE_TBL WHERE STORE_NO=#{storeNo}
 	</select>
  
  </mapper>

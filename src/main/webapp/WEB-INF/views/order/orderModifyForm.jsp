@@ -48,10 +48,10 @@
 			</td>
 		</tr>
 		<tr>
-			<td><input type="text" id="delivaryAddressFirst" name="delivaryAddressFirst" value="${order.delivaryAddressFirst }" ></td>
+			<td><input type="text" id="delivaryAddr" name="delivaryAddr" value="${order.delivaryAddr }" ></td>
 		</tr>
 		<tr>
-			<td><input type="text" id="delivaryAddressSecond" name="delivaryAddressSecond" value="${order.delivaryAddressSecond }" ></td>
+			<td><input type="text" id="delivaryAddrDetail" name="delivaryAddrDetail" value="${order.delivaryAddrDetail }" ></td>
 		</tr>
 		<tr>
 			<th>배송메모</th>
@@ -72,7 +72,7 @@
 	        var zoneCodeCompany = data.zonecode;
 	        var addressCompany = data.address;
 	        document.getElementById("delivaryZipcode").value = zoneCodeCompany; // zipcode
-	        document.getElementById("delivaryAddressFirst").value = addressCompany; // 주소 넣기
+	        document.getElementById("delivaryAddr").value = addressCompany; // 주소 넣기
 	        }
 	    }).open();
 	  }

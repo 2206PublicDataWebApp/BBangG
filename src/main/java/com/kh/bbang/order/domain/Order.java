@@ -1,7 +1,7 @@
 package com.kh.bbang.order.domain;
 
 
-import java.util.Date;
+
 
 public class Order {
 	private int orderNo;
@@ -10,15 +10,14 @@ public class Order {
 	private String orderDetail;
 	private int orderShipfee;
 	private int totalPrice;
-	private Date orderDate;
+	private String orderDate;
 	private String delivaryName;
 	private String delivaryPhone;
 	private String delivaryZipcode;
-	private String delivaryAddressFirst;
-	private String delivaryAddressSecond;
+	private String delivaryAddr;
+	private String delivaryAddrDetail;
 	private String delivaryMemo;
 	private int orderState;
-	private String date;
 	
 	
 
@@ -59,10 +58,10 @@ public class Order {
 	public void setTotalPrice(int totalPrice) {
 		this.totalPrice = totalPrice;
 	}
-	public Date getOrderDate() {
+	public String getOrderDate() {
 		return orderDate;
 	}
-	public void setOrderDate(Date orderDate) {
+	public void setOrderDate(String orderDate) {
 		this.orderDate = orderDate;
 	}
 	public String getDelivaryName() {
@@ -83,17 +82,17 @@ public class Order {
 	public void setDelivaryZipcode(String delivaryZipcode) {
 		this.delivaryZipcode = delivaryZipcode;
 	}
-	public String getDelivaryAddressFirst() {
-		return delivaryAddressFirst;
+	public String getDelivaryAddr() {
+		return delivaryAddr;
 	}
-	public void setDelivaryAddressFirst(String delivaryAddressFirst) {
-		this.delivaryAddressFirst = delivaryAddressFirst;
+	public void setDelivaryAddr(String delivaryAddr) {
+		this.delivaryAddr = delivaryAddr;
 	}
-	public String getDelivaryAddressSecond() {
-		return delivaryAddressSecond;
+	public String getDelivaryAddrDetail() {
+		return delivaryAddrDetail;
 	}
-	public void setDelivaryAddressSecond(String delivaryAddressSecond) {
-		this.delivaryAddressSecond = delivaryAddressSecond;
+	public void setDelivaryAddrDetail(String delivaryAddrDetail) {
+		this.delivaryAddrDetail= delivaryAddrDetail;
 	}
 	public String getDelivaryMemo() {
 		return delivaryMemo;
@@ -112,8 +111,8 @@ public class Order {
 		return "Order [orderNo=" + orderNo + ", userId=" + userId + ", storeNo=" + storeNo + ", orderDetail="
 				+ orderDetail + ", orderShipfee=" + orderShipfee + ", totalPrice=" + totalPrice + ", orderDate="
 				+ orderDate + ", delivaryName=" + delivaryName + ", delivaryPhone=" + delivaryPhone
-				+ ", delivaryZipcode=" + delivaryZipcode + ", delivaryAddressFirst=" + delivaryAddressFirst
-				+ ", delivaryAddressSecond=" + delivaryAddressSecond + ", delivaryMemo=" + delivaryMemo
+				+ ", delivaryZipcode=" + delivaryZipcode + ", delivaryAddr=" + delivaryAddr
+				+ ", delivaryAddrDetail=" + delivaryAddrDetail + ", delivaryMemo=" + delivaryMemo
 				+ ", orderState=" + orderState + "]";
 	}
 

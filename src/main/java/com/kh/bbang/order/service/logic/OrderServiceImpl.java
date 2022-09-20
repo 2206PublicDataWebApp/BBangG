@@ -12,6 +12,8 @@ import com.kh.bbang.order.domain.OrderProduct;
 
 import com.kh.bbang.order.service.OrderService;
 import com.kh.bbang.order.store.OrderStore;
+import com.kh.bbang.product.domain.Product;
+import com.kh.bbang.store.domain.Store;
 @Service
 public class OrderServiceImpl implements OrderService{
 	@Autowired
@@ -20,8 +22,8 @@ public class OrderServiceImpl implements OrderService{
 	private OrderStore oStore;
 
 	@Override
-	public List<Order> findOrderByDate(Date date) {
-		List<Order> oList = oStore.selectOrderByDate(session, date);
+	public List<Order> findOrderByDate(String orderDate) {
+		List<Order> oList = oStore.selectOrderByDate(session, orderDate);
 		return oList;
 	}
 
@@ -60,17 +62,7 @@ public class OrderServiceImpl implements OrderService{
 		int result =oStore.deleteOrderRequest(session,orderNo);
 		return result;
 	}
-	@Override
-	public int confirmPay(int orderNo) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
-	@Override
-	public int startDelivary(int orderNo) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 	@Override
 	public List<Product> findAllProduct(int storeNo) {
@@ -85,9 +77,15 @@ public class OrderServiceImpl implements OrderService{
 	}
 
 	@Override
-	public int confirmDelivary(int orderNo) {
-		int result = oStore.confirmDelivary(session, orderNo);
+	public int changeOrdeState(int orderNo) {
+		int result = oStore.changeOrdeState(session, orderNo);
 		return result;
+	}
+
+	@Override
+	public Store findStore(int storeNo) {
+		Store store = oStore.selectStore(session, storeNo);
+		return store;
 	}
 
 
