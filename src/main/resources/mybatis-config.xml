@@ -9,10 +9,10 @@
 	
 </settings>
 <typeAliases>
-	<typeAlias type="com.kh.bbamg.faq.domain.Faq" alias="Faq"/>
+	
 </typeAliases>
 	<mappers>
-	<mapper resource="mappers/faq-mapper.xml"/>
+
 	</mappers>
 
 </configuration>
