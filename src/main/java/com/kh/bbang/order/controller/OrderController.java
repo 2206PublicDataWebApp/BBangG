@@ -1,14 +1,10 @@
 package com.kh.bbang.order.controller;
 
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -21,6 +17,9 @@ import com.kh.bbang.order.domain.Order;
 import com.kh.bbang.order.domain.OrderProduct;
 
 import com.kh.bbang.order.service.OrderService;
+import com.kh.bbang.product.domain.Product;
+import com.kh.bbang.store.domain.Store;
+import com.kh.bbang.user.domain.User;
 
 
 @Controller
@@ -35,9 +34,12 @@ public class OrderController {
 	
 	//주문하기 화면
 	@RequestMapping(value="/order/orderForm.kh", method=RequestMethod.GET)
-	public ModelAndView orderFormView(ModelAndView mv) {
-		int StoreNo = 101; //하드
+	public ModelAndView orderFormView(ModelAndView mv
+			,HttpSession session) {
+		int StoreNo = 35; //하드
 		List<Product> pList = oService.findAllProduct(StoreNo);
+		User user = (User) session.getAttribute("loginUser");
+		mv.addObject("user", user);
 		
 		mv.addObject("pList", pList);
 		return mv;
@@ -74,7 +76,10 @@ public class OrderController {
 	@RequestMapping(value="/order/userOrderList.kh", method=RequestMethod.GET)
 	public ModelAndView allOrderById(ModelAndView mv) {
 		String userId="testId"; //하드
+		
 		List<Order> oList = oService.findOrderById(userId);
+	
+		
 		
 		try {
 			mv.addObject("oList", oList);
@@ -95,8 +100,11 @@ public class OrderController {
 			,@RequestParam("orderNo") Integer orderNo
 			,HttpSession session) {
 		Order order = oService.findOneOrder(orderNo);
-		String delivaryFullAdd=order.getDelivaryAddressFirst()+order.getDelivaryAddressSecond();
+		String delivaryFullAdd=order.getDelivaryAddr()+""+order.getDelivaryAddrDetail();
+		Store store = oService.findStore(order.getStoreNo());
+		System.out.println(delivaryFullAdd);
 		mv.addObject("order", order);
+		mv.addObject("store", store);
 		mv.addObject("delivaryFullAdd",delivaryFullAdd);
 		session.setAttribute("orderNo",order.getOrderNo());
 		
@@ -188,12 +196,12 @@ public class OrderController {
 	//관리자 주문리스트(날짜별)
 	@RequestMapping(value="/admin/adminOrderList.kh", method=RequestMethod.GET)
 	public ModelAndView allOrderByDate(ModelAndView mv
-			,@RequestParam(required = false) @DateTimeFormat(pattern = "yyyyMMdd") Date date
+			,@RequestParam(name="orderDate",required=false) String orderDate
 			) {
+		System.out.println(orderDate);
 		
 		try {
-			System.out.println(date);
-			List<Order> oList=oService.findOrderByDate(date);
+			List<Order> oList=oService.findOrderByDate(orderDate);
 			mv.addObject("oList",oList);
 			
 		} catch (Exception e) {
@@ -203,6 +211,7 @@ public class OrderController {
 		return mv;
 		
 	}
+	
 	
 	
 	

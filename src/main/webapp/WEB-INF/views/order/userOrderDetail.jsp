@@ -85,8 +85,12 @@
 				<tr>
 					<td>${order.totalPrice}원</td>
 				</tr>
-				<tr><th>입금 계좌번호</th><tr>
-				<tr>은행이름 계좌번호 점포명</tr>
+				<tr>
+					<th>${store.storeAccount }</th>
+				</tr>
+				<tr>
+					<td>은행이름  ${store.storeName }  은행명</td>
+				</tr>
 			</table>
 			
 
