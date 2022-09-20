@@ -3,11 +3,35 @@
 <!DOCTYPE html>
 <html>
 <head>
-
+    <!-- 제이쿼리
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous">
+        
+    </script> -->
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>게시글 작성</title>
+    <script>
+        // $(document).ready(function(){
+        //     $('#review-content').keyup(function(){
+        //         if ($(this).val().length > $(this).attr('maxlength')) {
+        //             alert('제한길이 초과');
+        //             $(this).val($(this).val().substr(0, $(this).attr('maxlength')));
+        //         }
+        //     });
+        // });
+
+        $(document).ready(function() {
+            $('#review-content').on('keyup', function() {
+                $('#max').html("("+$(this).val().length+" / 2000)");
+    
+                if($(this).val().length > 2000) {
+                    $(this).val($(this).val().substring(0, 2000));
+                    $('#max').html("(2000 / 2000)");
+                }
+            });
+    });
+    </script>
     <style>
         html, body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, blockquote, th, td, img {
             margin: 0;
@@ -121,7 +145,6 @@
         }
 
     </style>
-    <script src="/resources/js/jquery-3.6.1.min.js"></script>
 </head>
 <body>
     <div class="review-write">
@@ -132,11 +155,11 @@
                     <form class="star-form" name="star-form" id="star-form" method="post">
                         <fieldset>
                             <div class="text-bold">별점을 선택해주세요</div>
-                            <input type="radio" name="reviewStar" value="1" id="rate1"><label for="rate1">★</label>
-                            <input type="radio" name="reviewStar" value="2" id="rate2"><label for="rate2">★</label>
+                            <input type="radio" name="reviewStar" value="5" id="rate1"><label for="rate1">★</label>
+                            <input type="radio" name="reviewStar" value="4" id="rate2"><label for="rate2">★</label>
                             <input type="radio" name="reviewStar" value="3" id="rate3"><label for="rate3">★</label>
-                            <input type="radio" name="reviewStar" value="4" id="rate4"><label for="rate4">★</label>
-                            <input type="radio" name="reviewStar" value="5" id="rate5"><label for="rate5">★</label>
+                            <input type="radio" name="reviewStar" value="2" id="rate4"><label for="rate4">★</label>
+                            <input type="radio" name="reviewStar" value="1" id="rate5"><label for="rate5">★</label>
                         </fieldset>
                     </form>		
                 </div>			
@@ -160,26 +183,6 @@
             </div>
 		</form>
     </div>
-     <script>
-        // $(document).ready(function(){
-        //     $('#review-content').keyup(function(){
-        //         if ($(this).val().length > $(this).attr('maxlength')) {
-        //             alert('제한길이 초과');
-        //             $(this).val($(this).val().substr(0, $(this).attr('maxlength')));
-        //         }
-        //     });
-        // });
-
-        $(document).ready(function() {
-            $('#review-content').on('keyup', function() {
-                $('#max').html("("+$(this).val().length+" / 2000)");
-    
-                if($(this).val().length > 2000) {
-                    $(this).val($(this).val().substring(0, 2000));
-                    $('#max').html("(2000 / 2000)");
-                }
-            });
-    	});
-    </script>
+     
 </body>
 </html>

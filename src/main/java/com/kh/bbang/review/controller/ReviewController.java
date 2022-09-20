@@ -1,7 +1,6 @@
 package com.kh.bbang.review.controller;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,14 +12,11 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.bbang.review.domain.Review;
-import com.kh.bbang.review.service.ReviewService;
 
-// @Contoller 어노테이션을 붙이면 핸들러가 스캔할 수 있는 빈(Bean) 객체가 되어 서블릿용 컨테이너에 생성됩니다
-// (프레젠테이션 레이어, 웹 요청과 응답을 처리
 @Controller
 public class ReviewController {
 	@Autowired
-	private ReviewService rService;
+//	private ReviewService rService;
 	
 	/**
 	 * 게시글 등록 화면
@@ -51,38 +47,5 @@ public class ReviewController {
 		
 		return mv;
 		
-	}
-	/**
-	 * 게시글 상세 조회
-	 * @param mv
-	 * @param reviewNo
-	 * @param session
-	 * @return
-	 * , @RequestParam ("page") ListView에서 넘겨준 것.
-	 *   그런데 pageInfo 테이블을 따로 뒀다. 일단 주석으로 막아둠
-	 */
-	
-	@RequestMapping(value = "/review/deteil", method=RequestMethod.GET)
-	public ModelAndView reviewDetailView(
-			ModelAndView mv
-			, @RequestParam("reviewNo") Integer reviewNo
-			//, @RequestParam("page") Integer page List.jsp에 page있음 
-			, HttpSession session) {
-		try {
-			Review review = rService.printDetailOneByNo(reviewNo);
-			// List<ReviewComment> cList = rService.printAllComment(reivewNo);
-			session.setAttribute("reviewNo", review.getReviewNo());
-			// 세션에 reviewNo 저장 ->
-			// mv.addObject("rList", attributeValue) List.jsp에 page있음 
-			// mv.addObject("cList", cList); //commentList
-			mv.addObject("review", review);
-			// mv.addObject("page", page); List.jsp에 page있음 
-			mv.setViewName("review/detaleView") ;
-		} catch (Exception e) {
-			mv.addObject("msg", e.toString());
-			mv.setViewName("common/errorPage");
-		}
-		
-		return mv;
 	}
 }

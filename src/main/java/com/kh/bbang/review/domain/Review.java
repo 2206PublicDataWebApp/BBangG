@@ -7,25 +7,26 @@ import java.sql.Date;
  *
  */
 public class Review {
-	private int reviewNo; 
-	private String userId;
 	private int storeNo;
+	private String userId;
+	private int reviewNo;
 	private String reviewTitle;
 	private int StarRating;
 	private int ReviewCount;
 	private Date reviewDate;
 	private String reviewContents;
-	private int HeartConut;
+	private int reviewHeartConut;
 	private String reviewStatus;
 	
-	public Review() {}
-
-	public int getReviewNo() {
-		return reviewNo;
+	
+	////////////////////////////////////////////////////////////////////////////////////
+	
+	public int getStoreNo() {
+		return storeNo;
 	}
 
-	public void setReviewNo(int reviewNo) {
-		this.reviewNo = reviewNo;
+	public void setStoreNo(int storeNo) {
+		this.storeNo = storeNo;
 	}
 
 	public String getUserId() {
@@ -36,12 +37,12 @@ public class Review {
 		this.userId = userId;
 	}
 
-	public int getStoreNo() {
-		return storeNo;
+	public int getReviewNo() {
+		return reviewNo;
 	}
 
-	public void setStoreNo(int storeNo) {
-		this.storeNo = storeNo;
+	public void setReviewNo(int reviewNo) {
+		this.reviewNo = reviewNo;
 	}
 
 	public String getReviewTitle() {
@@ -84,12 +85,12 @@ public class Review {
 		this.reviewContents = reviewContents;
 	}
 
-	public int getHeartConut() {
-		return HeartConut;
+	public int getReviewHeartConut() {
+		return reviewHeartConut;
 	}
 
-	public void setHeartConut(int heartConut) {
-		HeartConut = heartConut;
+	public void setReviewHeartConut(int reviewHeartConut) {
+		this.reviewHeartConut = reviewHeartConut;
 	}
 
 	public String getReviewStatus() {
@@ -99,28 +100,39 @@ public class Review {
 	public void setReviewStatus(String reviewStatus) {
 		this.reviewStatus = reviewStatus;
 	}
+	
+	////////////////////////////////////////////////////////////////////////////////////
+	
+	@Override
+	public String toString() {
+		return "Review [storeNo=" + storeNo + ", userId=" + userId + ", reviewNo=" + reviewNo + ", reviewTitle="
+				+ reviewTitle + ", StarRating=" + StarRating + ", ReviewCount=" + ReviewCount + ", reviewDate="
+				+ reviewDate + ", reviewContents=" + reviewContents + ", reviewHeartConut=" + reviewHeartConut
+				+ ", reviewStatus=" + reviewStatus + "]";
+	}
 
-	public Review(int reviewNo, String userId, int storeNo, String reviewTitle, int starRating, int reviewCount,
-			Date reviewDate, String reviewContents, int heartConut, String reviewStatus) {
+	////////////////////////////////////////////////////////////////////////////////////
+	
+	public Review(int storeNo, String userId, int reviewNo, String reviewTitle, int starRating, int reviewCount,
+			Date reviewDate, String reviewContents, int reviewHeartConut, String reviewStatus) {
 		super();
-		this.reviewNo = reviewNo;
-		this.userId = userId;
 		this.storeNo = storeNo;
+		this.userId = userId;
+		this.reviewNo = reviewNo;
 		this.reviewTitle = reviewTitle;
 		StarRating = starRating;
 		ReviewCount = reviewCount;
 		this.reviewDate = reviewDate;
 		this.reviewContents = reviewContents;
-		HeartConut = heartConut;
+		this.reviewHeartConut = reviewHeartConut;
 		this.reviewStatus = reviewStatus;
 	}
 
-	@Override
-	public String toString() {
-		return "Review [reviewNo=" + reviewNo + ", userId=" + userId + ", storeNo=" + storeNo + ", reviewTitle="
-				+ reviewTitle + ", StarRating=" + StarRating + ", ReviewCount=" + ReviewCount + ", reviewDate="
-				+ reviewDate + ", reviewContents=" + reviewContents + ", HeartConut=" + HeartConut + ", reviewStatus="
-				+ reviewStatus + "]";
-	}
+
+
+
+	
+	
+	
 
 }
