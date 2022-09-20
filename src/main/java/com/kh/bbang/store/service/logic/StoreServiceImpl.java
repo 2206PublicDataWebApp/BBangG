@@ -32,9 +32,9 @@ public class StoreServiceImpl implements StoreService {
 	}
 
 	@Override
-	public void modifyStore() {
-		// TODO Auto-generated method stub
-		
+	public int modifyStore(Store store) {
+		int result = sStore.updateStore(session, store);
+		return result;
 	}
 
 	@Override

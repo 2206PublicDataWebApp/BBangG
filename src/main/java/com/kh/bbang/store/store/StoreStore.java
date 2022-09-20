@@ -12,7 +12,7 @@ public interface StoreStore {
 	// deleteStore
 	public int deleteStore(SqlSession session, Integer storeNo);
 	// updateStore
-	public void updateStore();
+	public int updateStore(SqlSession session, Store store);
 	// selectAllStore
 	public List<Store> selectAllStore(SqlSession session);
 	// selectOneStoreById

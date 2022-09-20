@@ -19,11 +19,16 @@
 		<result property="storeStatus" column="STORE_STATUS"/>
 	</resultMap>
 	<insert id="insertStore">
-	INSERT INTO STORE_TBL VALUES(SEQ_STORE_NO.NEXTVAL,#{storeName},#{storeZipCode},#{storeAddr},#{storeAddrDetail},#{storeCeo},#{storeTel},#{storeUrl},#{storeAccount},#{storeFilename},DEFAULT)
+	INSERT INTO STORE_TBL VALUES(SEQ_STORE_NO.NEXTVAL,#{storeName},#{storeZipCode},#{storeAddr},#{storeAddrDetail},#{storeCeo},#{storeTel},#{storeUrl},#{storeAccount},#{storeFilename},#{storeFileRename},#{storeFilepath},DEFAULT)
 	</insert>
 	<delete id="deleteStore">
 	DELETE FROM STORE_TBL WHERE STORE_NO = #{storeNo}
 	</delete>
+	<update id="updateStore">
+	UPDATE STORE_TBL SET STORE_NAME = #{storeName}, STORE_ZIPCODE = #{storeZipCode}, STORE_ADDR = #{storeAddr},
+	STORE_ADDR_DETAIL = #{storeAddrDetail}, STORE_CEO = #{storeCeo}, STORE_TEL = #{storeTel}, STORE_URL = #{storeUrl},
+	STORE_ACCOUNT = #{storeAccount}, STORE_FILENAME = #{storeFilename}, STORE_FILERENAME = #{storeFileRename}, STORE_FILEPATH = #{storeFilepath} WHERE STORE_NO = #{storeNo}
+	</update>
 	<select id="selectAllStore" resultMap="storeResultMap">
 	SELECT * FROM STORE_TBL WHERE STORE_STATUS = 'Y' ORDER BY STORE_NO DESC
 	</select>
