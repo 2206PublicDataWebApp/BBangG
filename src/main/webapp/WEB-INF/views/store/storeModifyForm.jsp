@@ -60,7 +60,20 @@
         </tr>
         <tr>
           <td>계좌번호</td>
-          <td colspan="2"><input type="text" name="storeAccount" value="${store.storeAccount}"/></td>
+          <td>
+          <select name="bank">
+          		<option value="우리">우리</option>
+          		<option value="신한">신한</option>
+          		<option value="농협">농협</option>
+          		<option value="국민">국민</option>
+          		<option value="하나">하나</option>
+          		<option value="기업">기업</option>
+          		<option value="광주">광주</option>
+          		<option value="대구">대구</option>
+          		<option value="우체국">우체국</option>
+          	</select>
+          <input type="text" name="storeAccount" value="${store.storeAccount}"/>
+          </td>
         </tr>
         <tr>
           <td>점포사진</td>

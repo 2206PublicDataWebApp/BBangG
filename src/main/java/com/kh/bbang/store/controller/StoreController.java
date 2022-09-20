@@ -60,8 +60,10 @@ public class StoreController {
 			ModelAndView mv,
 			@ModelAttribute Store store,
 			@RequestParam(value="uploadFile", required=false) MultipartFile uploadFile,
+			@RequestParam(value="bank") String bank,
 			HttpServletRequest request) {
 		try {
+			store.setStoreAccount(bank+","+store.getStoreAccount());
 			String storeFilename = uploadFile.getOriginalFilename();
 			if(!uploadFile.getOriginalFilename().equals("")) {
 				String root = request.getSession().getServletContext().getRealPath("resources");
@@ -134,14 +136,17 @@ public class StoreController {
 		return mv;
 	}
 	
-	// 정보 수정 - 에러남 
+	// 정보 수정 - 기초완료 
 	@RequestMapping(value="/store/storeModify.kh", method=RequestMethod.POST)
 	public ModelAndView modifyStore(
 			ModelAndView mv,
 			@ModelAttribute Store store,
+			@RequestParam(value="bank") String bank,
 			@RequestParam(value="reloadFile", required=false) MultipartFile reloadFile,
+			
 			HttpServletRequest request) {
 		try {
+			store.setStoreAccount(bank+","+store.getStoreAccount());
 			String storeFilename = reloadFile.getOriginalFilename();
 			if(reloadFile != null && !storeFilename.equals("")) {
 				String root = request.getSession().getServletContext().getRealPath("resources");
