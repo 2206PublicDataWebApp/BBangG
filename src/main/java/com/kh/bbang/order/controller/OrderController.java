@@ -2,6 +2,7 @@ package com.kh.bbang.order.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,12 +36,16 @@ public class OrderController {
 	//주문하기 화면
 	@RequestMapping(value="/order/orderForm.kh", method=RequestMethod.GET)
 	public ModelAndView orderFormView(ModelAndView mv
-			,HttpSession session) {
-		int StoreNo = 35; //하드
+			,HttpServletRequest request) {
+	
+		int StoreNo = 101; //하드
 		List<Product> pList = oService.findAllProduct(StoreNo);
-		User user = (User) session.getAttribute("loginUser");
+		//User user = (User) session.getAttribute("loginUser");
+		HttpSession session = request.getSession();
+		User user = (User)session.getAttribute("login");
+		String userId = user.getUserId();
+		System.out.println(userId);
 		mv.addObject("user", user);
-		
 		mv.addObject("pList", pList);
 		return mv;
 	}
@@ -49,22 +54,26 @@ public class OrderController {
 	public ModelAndView orderSend(
 			ModelAndView mv
 			,@ModelAttribute Order order
-			,@ModelAttribute OrderProduct oProduct
+			,@ModelAttribute OrderProduct orderProduct
+			,@RequestParam("userId") String userId
 			) {
 //			Order order = new Order(delivaryName, delivaryPhone, delivaryZipcode, delivaryAddressFirst,
 //					delivaryAddressSecond, delivaryMemo);
 //		
-		int result = oService.registerOrder(order);
-		String tmp[]=new String[oProduct.getOrderProductNm().length];
-		for(int i=0; i<oProduct.getOrderProductNm().length;i++) {
-			tmp[i]=oProduct.getOrderProductNm()[i]+" "+oProduct.getOrderProductCtn()[i]+"개 "+oProduct.getOrderProductPrice()[i]+"원";
+		String tmp[]=new String[orderProduct.getOrderProductNm().length];
+		for(int i=0; i<orderProduct.getOrderProductNm().length;i++) {
+			tmp[i]=orderProduct.getOrderProductNm()[i]+" "+orderProduct.getOrderProductCtn()[i]+"개 "+orderProduct.getOrderProductPrice()[i]+"원";
 		}
 		order.setOrderDetail(String.join("/",tmp));
-//		System.out.println(order.toString());
-//		System.out.println(order.getTotalPrice());
+		order.setUserId(userId);
+		int result = oService.registerOrder(order);
+		
+		//System.out.println(order);
+		//System.out.println(orderProduct.toString());
+		//System.out.println(orderProduct.getTotalPrice());
 		
 		if(result>0) {
-			mv.setViewName("redirect:/order/userOrderList.kh?");
+			mv.setViewName("redirect:/order/userOrderList.kh");
 		}else {
 			mv.addObject("msg","주문실패");
 			mv.setViewName("common/errorPage");
@@ -74,9 +83,12 @@ public class OrderController {
 	}
 	//사용자 주문리스트 출력
 	@RequestMapping(value="/order/userOrderList.kh", method=RequestMethod.GET)
-	public ModelAndView allOrderById(ModelAndView mv) {
-		String userId="testId"; //하드
+	public ModelAndView allOrderById(ModelAndView mv
+			,HttpSession session
+			,@RequestParam(required = false, name="userId") String userId) {
 		List<Order> oList = oService.findOrderById(userId);
+		System.out.println("----------------userId" + userId);
+		
 		try {
 			mv.addObject("oList", oList);
 			mv.setViewName("order/userOrderList");
