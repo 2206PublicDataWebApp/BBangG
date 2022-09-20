@@ -3,35 +3,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <!-- 제이쿼리
-    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous">
-        
-    </script> -->
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>게시글 작성</title>
-    <script>
-        // $(document).ready(function(){
-        //     $('#review-content').keyup(function(){
-        //         if ($(this).val().length > $(this).attr('maxlength')) {
-        //             alert('제한길이 초과');
-        //             $(this).val($(this).val().substr(0, $(this).attr('maxlength')));
-        //         }
-        //     });
-        // });
-
-        $(document).ready(function() {
-            $('#review-content').on('keyup', function() {
-                $('#max').html("("+$(this).val().length+" / 2000)");
-    
-                if($(this).val().length > 2000) {
-                    $(this).val($(this).val().substring(0, 2000));
-                    $('#max').html("(2000 / 2000)");
-                }
-            });
-    });
-    </script>
+<meta charset="UTF-8">
+<title>게시글 수정</title>
     <style>
         html, body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, blockquote, th, td, img {
             margin: 0;
@@ -145,16 +118,16 @@
         }
 
     </style>
+    <script src="/resources/js/jquery-3.6.1.min.js"></script>
 </head>
 <body>
     <div class="review-write">
         <h2 id="store-name">핑퐁베이커리</h2>
-        <form action="/review/registe" enctype="multipart/form-data" class="star-form" name="star-form" id="star-form" method="post">
             <div id="write_area">
                 <div class="star-rating">
                     <form class="star-form" name="star-form" id="star-form" method="post">
                         <fieldset>
-                            <div class="text-bold">별점을 선택해주세요</div>
+                            <div class="text-bold">평가하기</div>
                             <input type="radio" name="reviewStar" value="5" id="rate1"><label for="rate1">★</label>
                             <input type="radio" name="reviewStar" value="4" id="rate2"><label for="rate2">★</label>
                             <input type="radio" name="reviewStar" value="3" id="rate3"><label for="rate3">★</label>
@@ -164,25 +137,30 @@
                     </form>		
                 </div>			
             </div>
-            <div id="review-title">
-                <textarea name="title" id="title" rows="1" cols="55" placeholder="제목을 작성해주세요" maxlength="100" required></textarea>
-            </div>
+            <form action="/review/register" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="page" value="${reviewPage }">
+                <input type="hidden" name="reviewNo" value="${review.reviewNo }">
+                <input type="hidden" name="reviewFileName" value="${review.reviewFileName }">
+                <input type="hidden" name="reviewFileRename" value="${review.reviewFileRename }">
+                <div id="review-title">
+                    <textarea name="title" id="title" rows="1" cols="55" placeholder="제목을 작성해주세요" maxlength="100" value="${review.reviewTitle}" required></textarea>
+                </div>
 
-            <div id="in_content">
-                <textarea id="review-content" rows="20" cols="55" placeholder="내용을 작성해주세요" required></textarea>
-                <div id="max">(0 / 2000)</div>
-            </div>
+                <div id="in_content">
+                    <textarea id="review-content" rows="20" cols="55" placeholder="내용을 작성해주세요" value="${review.reviewContents}" required></textarea>
+                    <div id="max">(0 / 2000)</div>
+                </div>
 
-            <!-- 왼쪽 정렬 -->
-            <input type="file" id="select-file" name="reviewFile" />
-            
+                <!-- 왼쪽 정렬 -->
+                <input type="file" id="select-file" name="SelectFile"/>
+                
 
-            <div>
-                <button class="write-btn-cancel" type="reset">취소</button>
-                <button class="write-btn"type="submit">글 작성</button>
-            </div>
-		</form>
+                <div>
+                    <button class="modify-btn-cancel" type="reset">취소</button>
+                    <button class="modify-btn"type="submit">수정</button>
+                </div>
+            </form>
     </div>
-     
+       
 </body>
 </html>
