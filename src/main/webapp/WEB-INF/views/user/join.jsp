@@ -9,8 +9,8 @@
 <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
 </head>
 <body>
+	<%@ include file="/WEB-INF/views/include/header.jsp" %>
 	<h1 align="center">회원가입</h1>
-	
 		<div class="">
 			<form action="/user/join.kh" method="post">
 					<div class="email_auth">

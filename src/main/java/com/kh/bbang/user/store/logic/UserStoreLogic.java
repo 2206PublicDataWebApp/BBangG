@@ -69,12 +69,22 @@ public class UserStoreLogic implements UserStore{
 	}
 
 	@Override
-	public List<User> findId(SqlSession session, String userId, String userEmail) {
+	public List<User> findId(SqlSession session, String userName, String userEmail) {
 		HashMap<String, String> paramMap = new HashMap<String, String>();
-		paramMap.put("userId", userId);
+		paramMap.put("userName", userName);
 		paramMap.put("userEmail", userEmail);
 		List<User> uList = session.selectList("UserMapper.findId", paramMap);
 		return uList;
+	}
+
+	@Override
+	public int findPwd(SqlSession session, String userId, String userEmail, String userPwd) {
+		HashMap<String, String> paramMap = new HashMap<String, String>();
+		paramMap.put("userId", userId);
+		paramMap.put("userEmail", userEmail);
+		paramMap.put("userPwd", userPwd);
+		int result = session.update("UserMapper.findPwd", paramMap);
+		return result;
 	}
 	
 

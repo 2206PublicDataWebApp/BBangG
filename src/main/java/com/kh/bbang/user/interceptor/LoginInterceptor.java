@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.mindrot.jbcrypt.BCrypt;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.ui.ModelMap;
@@ -22,11 +23,11 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
     		, HttpServletResponse response
     		, Object handler
     		, ModelAndView modelAndView) throws Exception {
-		
     	logger.info("interceptor postHandel");
         HttpSession httpSession = request.getSession();
         ModelMap modelMap = modelAndView.getModelMap();
         Object user =  modelMap.get("user");
+//        System.out.println(request.getSession());
         
         if (user != null) {
             logger.info("new login success");
@@ -35,16 +36,19 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
             if(request.getParameter("useCookie")!=null) {
             	logger.info("remember me...");
             	Cookie loginCookie = new Cookie("loginCookie",httpSession.getId());
-            	loginCookie.setPath("/home.kh");
+            	loginCookie.setPath("/");
             	loginCookie.setMaxAge(60*60*24*7);
             	response.addCookie(loginCookie);
             }
             
          Object destination = httpSession.getAttribute("destination");
          response.sendRedirect(destination != null ? (String) destination : "/home.kh");
+        } else {
+        	response.sendRedirect("/user/loginError");
+    	    }
         }
 
-    }
+
 
     @Override
     public boolean preHandle(
