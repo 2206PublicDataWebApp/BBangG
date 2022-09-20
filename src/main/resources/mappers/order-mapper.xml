@@ -43,6 +43,7 @@
  		<id property="storeNo" column="STORE_NO"/>
  		<result property="storeCeo" column="STORE_CEO"/>
  		<result property="storeName" column="STORE_NAME"/>
+ 		<result property="storeTel" column="STORE_TEL"/>
  		<result property="storeAccount" column="STORE_ACCOUNT"/>
  		<result property="storeStatus" column="STORE_STATUS"/>
  		
@@ -70,8 +71,8 @@
 	<update id="deleteOrderRequest">
 		UPDATE ORDER_TBL SET ORDER_STATE=5 WHERE ORDER_NO=#{orderNo}
 	</update>
-	<update id="confirmDelivary">
-		UPDATE ORDER_TBL SET ORDER_STATE=4 WHERE ORDER_NO=#{orderNo}
+	<update id="changeOrdeState">
+		UPDATE ORDER_TBL SET ORDER_STATE=ORDER_STATE+1 WHERE ORDER_NO=#{orderNo}
 	</update>
 	
 	<select id="selectOrderByDate" resultMap="orderResultMapByDate">

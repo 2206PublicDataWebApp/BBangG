@@ -76,11 +76,7 @@ public class OrderController {
 	@RequestMapping(value="/order/userOrderList.kh", method=RequestMethod.GET)
 	public ModelAndView allOrderById(ModelAndView mv) {
 		String userId="testId"; //하드
-		
 		List<Order> oList = oService.findOrderById(userId);
-	
-		
-		
 		try {
 			mv.addObject("oList", oList);
 			mv.setViewName("order/userOrderList");
@@ -102,7 +98,7 @@ public class OrderController {
 		Order order = oService.findOneOrder(orderNo);
 		String delivaryFullAdd=order.getDelivaryAddr()+""+order.getDelivaryAddrDetail();
 		Store store = oService.findStore(order.getStoreNo());
-		System.out.println(delivaryFullAdd);
+		//System.out.println(delivaryFullAdd);
 		mv.addObject("order", order);
 		mv.addObject("store", store);
 		mv.addObject("delivaryFullAdd",delivaryFullAdd);
@@ -176,18 +172,49 @@ public class OrderController {
 		return mv;
 		
 	}
-	//사용자 구매확정 
-	@RequestMapping(value="/order/orderConfirm.kh",method=RequestMethod.GET)
-	public String orderConfirm(Model model
-			,HttpSession session) {
-		int orderNo=(int) session.getAttribute("orderNo");
-		int result = oService.confirmDelivary(orderNo);
+	/////////////////////////////////////////////////////////////////////////
+	
+	//사용자 배송상태 순차적으로 변경 
+	@RequestMapping(value="/order/userChangeOrdeState.kh",method=RequestMethod.GET)
+	public String userChangeOrdeState(Model model
+			,@RequestParam("orderNo") Integer orderNo) {
+		int result = oService.changeOrdeState(orderNo);
 		if(result>0) {
-			return "redirect:/order/userOrderList.kh";
+			return "redirect:/order/userOrderDetail.kh?orderNo="+orderNo;
 		}else {
-			model.addAttribute("msg","구매확정 실패");
+			model.addAttribute("msg","주문상태 변경실패");
 			return "common/errorPage";
 			
+		}
+		
+	}
+	//관리자  배송상태 순차적으로 변경 
+	@RequestMapping(value="/admin/adminChangeOrderState.kh",method=RequestMethod.GET)
+	public String adminChangeOrdeState(Model model
+			,@RequestParam("orderNo") Integer orderNo) {
+		int result = oService.changeOrdeState(orderNo);
+		if(result>0) {
+			return "redirect:/admin/adminOrderDetail.kh?orderNo="+orderNo;
+		}else {
+			model.addAttribute("msg","주문상태 변경실패");
+			return "common/errorPage";
+			
+		}
+		
+	}
+	//관리자 주문 즉시취소
+	@RequestMapping(value="/admin/adminOrderRemove.kh", method=RequestMethod.GET)
+	public String adminOrderRemove(HttpSession session, Model model
+			,@RequestParam("orderNo") Integer orderNo) {
+		try {
+			int result = oService.removeOrder(orderNo);
+			if(result>0) {
+				session.removeAttribute("orderNo");
+			}
+			return "redirect:/admin/adminOrderList.kh";
+		} catch (Exception e) {
+			model.addAttribute("msg",e.toString());
+			return "common/errorPage";
 		}
 		
 	}
@@ -203,6 +230,7 @@ public class OrderController {
 		try {
 			List<Order> oList=oService.findOrderByDate(orderDate);
 			mv.addObject("oList",oList);
+			mv.setViewName("admin/adminOrderList");
 			
 		} catch (Exception e) {
 			mv.addObject("msg",e.toString());
@@ -211,6 +239,27 @@ public class OrderController {
 		return mv;
 		
 	}
+	
+	//관리자 주문 상세화면
+	@RequestMapping(value="/admin/adminOrderDetail.kh", method=RequestMethod.GET)
+	public ModelAndView adminOrderDetail(ModelAndView mv
+			,@RequestParam("orderNo") Integer orderNo) {
+		try {
+			
+			Order order = oService.findOneOrder(orderNo);
+			String delivaryFullAdd=order.getDelivaryAddr()+""+order.getDelivaryAddrDetail();
+			Store store = oService.findStore(order.getStoreNo());
+			mv.addObject("order", order);
+			mv.addObject("store", store);
+			mv.addObject("delivaryFullAdd", delivaryFullAdd);
+		} catch (Exception e) {
+			mv.addObject("msg",e.toString());
+			mv.setViewName("common/errorPage");
+		}
+		return mv;
+		
+	}
+	
 	
 	
 	

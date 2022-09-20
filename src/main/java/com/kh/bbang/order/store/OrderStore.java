@@ -21,11 +21,9 @@ public interface OrderStore {
 	public int insertOrder(SqlSession session, Order order);
 	public int updateOrder(SqlSession session, Order order);
 	public int deleteOrder(SqlSession session, int orderNo);
-	public int confirmPay(SqlSession session, int orderNo);
-	public int startDelivary(SqlSession session, int orderNo);
-	public int confirmDelivary(SqlSession session, int orderNo);
-	public List<OrderProduct> selectOrderProductList(SqlSession session, int orderNo);
 	public int deleteOrderRequest(SqlSessionTemplate session, int orderNo);
+	public int changeOrdeState(SqlSession session, int orderNo);
+	public List<OrderProduct> selectOrderProductList(SqlSession session, int orderNo);
 	public Store selectStore(SqlSession session, int storeNo);
 	
 }

@@ -62,17 +62,7 @@ public class OrderServiceImpl implements OrderService{
 		int result =oStore.deleteOrderRequest(session,orderNo);
 		return result;
 	}
-	@Override
-	public int confirmPay(int orderNo) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
-	@Override
-	public int startDelivary(int orderNo) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 	@Override
 	public List<Product> findAllProduct(int storeNo) {
@@ -87,8 +77,8 @@ public class OrderServiceImpl implements OrderService{
 	}
 
 	@Override
-	public int confirmDelivary(int orderNo) {
-		int result = oStore.confirmDelivary(session, orderNo);
+	public int changeOrdeState(int orderNo) {
+		int result = oStore.changeOrdeState(session, orderNo);
 		return result;
 	}
 

@@ -40,7 +40,7 @@
 					<c:if test="${order.orderState eq 5}" >취소요청 진행중</c:if>
 				</td>
 			</tr>
-		<table border="1" align="center">
+		<table border="1" >
 			<h3 >배송지 정보</h3>
 				<tr>
 					<th>수령인</th>
@@ -59,7 +59,7 @@
 					<td>${order.delivaryMemo }</td>
 				</tr>
 			</table>
-		<table border="1" align="center">
+		<table border="1" >
 			<h3>주문자 정보</h3>
 				<tr>
 					<td>${userName }</td>
@@ -68,17 +68,24 @@
 					<td>${userPhone }</td>
 				</tr>
 		</table>
-		<table border="1" align="center">
+		<table border="1" >
 			<tr>
-				<td><button id="btn_sendMoney" type="button">입금완료</button></td>
-				<td><button id="btn_orderRemove" type="button">주문취소요청</button></td>
-				<td><button id="btn_orderModify" type="button">주문수정</button></td>
-				<td><button id="btn_orderConfirm" type="button">구매확정</button></td>
-				
+				<td><button id="btn_receiveConfirm" type="button" >입금확인</button></td>
+				<td><button id="btn_delivaryStart" type="button" >배송출발</button></td>
+			</tr>
+			<tr>
+				<td colspan="2" align="left">취소 요정 여부</td>
+			</tr>
+			<tr>
+				<td align="left">
+				 	<c:if test="${order.orderState eq 5 }">Y</c:if>
+				 	<c:if test="${order.orderState ne 5 }">N</c:if>
+				</td>
+				<td><button id="btn_orderCancle" type="button">주문취소</button></td>
 			</tr>
 		</table>
-		<table border="1" align="center">
-			<h3>결제 내역</h3>
+		<table border="1" >
+			<h4>결제 내역</h4>
 			
 				<tr>
 					<td>${order.orderDetail }</td>
@@ -87,76 +94,77 @@
 					<td>${order.totalPrice}원</td>
 				</tr>
 				<tr>
-					<th>${store.storeAccount }</th>
+					<td>${store.storeTel }</td>
 				</tr>
 				<tr>
-					<td>은행이름  ${store.storeName }  은행명</td>
+					<td>${store.storeName }</td>
 				</tr>
 			</table>
 			
+			
 
 	<script type="text/javascript" >
-		$("#btn_sendMoney").click(function(){
+	
+		
+		$("#btn_receiveConfirm").click(function(){
 			if(${order.orderState}==0){
-				if(confirm("입금완료 하셨습니까?")){
-					location.href="/order/userChangeOrdeState.kh?orderNo="+${order.orderNo };
+				event.preventDefault();
+				alert("주문자가 입금 전입니다.");
+			}else if(${order.orderState}==1){
+				if(confirm("입금 확인완료 하시겠습니까?")){
+				location.href="/admin/adminChangeOrderState.kh?orderNo="+${order.orderNo };
 				}
+			}else if(${order.orderState}==2){
+				event.preventDefault();
+				alert("이미 입금 확인완료 상태입니다.");
+			}else if(${order.orderState}==3){
+				event.preventDefault();
+				alert("이미 배송출발 상태입니다.");
+			}else if(${order.orderState}==4){
+				event.preventDefault();
+				alert("이미 구매 확정된 주문입니다.");
 			}else{
 				event.preventDefault();
-				alert("취소 신청중 이거나, 이미 입금 완료된 주문입니다.");
+				alert("주문 취소 진행중입니다.");
+			}
+			
+		});	
+		
+		$("#btn_delivaryStart").click(function(){
+			if(${order.orderState}==0){
+				event.preventDefault();
+				alert("주문자가 입금 전입니다.");
+			}else if(${order.orderState}==1){
+				event.preventDefault();
+				alert("입금 확인완료부터 진행하여 주세요");
+			}else if(${order.orderState}==2){
+				if(confirm("배송출발 상태로 변경 하시겠습니까?")){
+					location.href="/admin/adminChangeOrderState.kh?orderNo="+${order.orderNo };
+					}
+			}else if(${order.orderState}==3){
+				event.preventDefault();
+				alert("이미 배송출발 상태입니다.");
+			}else if(${order.orderState}==4){
+				event.preventDefault();
+				alert("이미 구매 확정된 주문입니다.");
+			}else{
+				event.preventDefault();
+				alert("주문 취소 진행중입니다.");
 			}
 			
 		});
-		$("#btn_orderRemove").click(function(){
-			if(${order.orderState}==0 ){
+		$("#btn_orderCancle").click(function(){
+			if(${order.orderState eq 5}){
 				if(confirm("주문 취소 하시겠습니까?")){
-				location.href="/order/orderRemove.kh?orderNo="+${order.orderNo };
-				}
-			}else if(${order.orderState}==1||${order.orderState}==2){
-				event.preventDefault();
-				if(confirm("입금완료 상태이므로 즉시취소 불가합니다.취소요청 하시겠습니까?")){
-					location.href="/order/orderRemoveRequest.kh?orderNo="+${order.orderNo };
-				}
-			}else if(${order.orderState}==3){
-				event.preventDefault();
-				alert("배송출발 상태이므로 취소요청 불가합니다. 문의바랍니다.");
-			}else if(${order.orderState}==4){
-				event.preventDefault();
-				alert("이미 구매 확정된 주문입니다.");
-			}
-			else{
-				event.preventDefault();
-				alert("이미 취소요청 진행중입니다.");
-			}
-			
-		});
-		$("#btn_orderModify").click(function(){
-			if(${order.orderState}==0||${order.orderState}==1||${order.orderState}==2){
-				location.href="/order/orderModifyView.kh?orderNo="+${order.orderNo };
-			}else if(${order.orderState}==3){
-				event.preventDefault();
-				alert("배송출발 상태이므로 수정 불가합니다.문의바랍니다.");
-			}else if(${order.orderState}==4){
-				event.preventDefault();
-				alert("이미 구매 확정된 주문입니다.");
+					location.href="/admin/adminOrderRemove.kh?orderNo="+${order.orderNo };
+					}
 			}else{
 				event.preventDefault();
-				alert("취소요청 진행중이므로 수정 불가합니다.");
+				alert("취소요청이 없으므로 주문취소 불가합니다.")
 			}
 			
 		});
-		$("#btn_orderConfirm").click(function(){
-			if(${order.orderState}==3){
-				if(confirm("구매확정 하시겠습니까?")){
-					location.href="/order/userChangeOrdeState.kh?orderNo="+${order.orderNo };
-					
-				}
-			}else{
-				event.preventDefault();
-				alert("배송 전이거나 주문 취소요청 중입니다. 현재 구매확정 불가합니다.");
-			}
-			
-		});
+	
 	
 	</script>
 	</body>

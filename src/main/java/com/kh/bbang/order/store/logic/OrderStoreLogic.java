@@ -58,19 +58,6 @@ public class OrderStoreLogic implements OrderStore{
 	}
 
 	@Override
-	public int confirmPay(SqlSession session, int orderNo) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int startDelivary(SqlSession session, int orderNo) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-
-	@Override
 	public List<Product> selectAllProduct(SqlSession session, int storeNo) {
 		List<Product> pList = session.selectList("OrderMapper.selectAllProduct", storeNo);
 		return pList;
@@ -83,8 +70,8 @@ public class OrderStoreLogic implements OrderStore{
 	}
 
 	@Override
-	public int confirmDelivary(SqlSession session, int orderNo) {
-		int result = session.update("OrderMapper.confirmDelivary",orderNo);
+	public int changeOrdeState(SqlSession session, int orderNo) {
+		int result = session.update("OrderMapper.changeOrdeState",orderNo);
 		return result;
 	}
 

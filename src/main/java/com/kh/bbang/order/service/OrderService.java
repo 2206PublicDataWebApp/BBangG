@@ -23,9 +23,7 @@ public interface OrderService {
 	public int modifyOrder(Order order);
 	public int removeOrder(int orderNo);
 	public int removeOrderRequest(int orderNo);
-	public int confirmPay(int orderNo);
-	public int startDelivary(int orderNo);
-	public int confirmDelivary(int orderNo);
+	public int changeOrdeState(int orderNo);
 	public Store findStore(int storeNo);
 	
 
