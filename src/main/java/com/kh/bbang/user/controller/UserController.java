@@ -243,6 +243,7 @@ public class UserController {
 		} catch (Exception e) {
 			mv.addObject("msg", e.getMessage()).setViewName("common/errorPage");
 		}
+		
 		return mv;
 	}
 }
