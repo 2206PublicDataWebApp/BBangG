@@ -163,7 +163,7 @@ public class UserController {
 			, ModelAndView mv) {
 		try {
 			HttpSession session = request.getSession();
-			User user = (User)session.getAttribute("loginUser");
+			User user = (User)session.getAttribute("login");
 			String userId = user.getUserId();
 			
 			User uOne = uService.printOneById(userId);
