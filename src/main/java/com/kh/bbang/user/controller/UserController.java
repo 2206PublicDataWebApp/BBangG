@@ -1,6 +1,7 @@
 package com.kh.bbang.user.controller;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
 
 import javax.mail.internet.MimeMessage;
@@ -177,7 +178,7 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/user/modify.kh", method=RequestMethod.POST)
-	public ModelAndView modifyMember(
+	public ModelAndView modifyUser(
 			@ModelAttribute User user
 			, @RequestParam("zipCode") int zipCode
 			, @RequestParam("address") String address
@@ -185,6 +186,8 @@ public class UserController {
 			, @RequestParam("extra") String extra
 			, ModelAndView mv) {
 		try {
+			String hashedPw = BCrypt.hashpw(user.getUserPwd(), BCrypt.gensalt());
+			user.setUserPwd(hashedPw);
 			user.setUserZipCode(zipCode);
 			user.setAddr(address);
 			user.setAddrDetail(addrDetail + " " + extra);
@@ -202,17 +205,43 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/user/remove.kh", method=RequestMethod.GET)
-	public ModelAndView removeMember(HttpSession session
+	public ModelAndView removeUser(HttpSession session
 			, ModelAndView mv) {
 		try {
-			User user = (User)session.getAttribute("loginUser");
+			User user = (User)session.getAttribute("login");
 			String userId = user.getUserId();
 			int result = uService.removeUser(userId);
-			mv.setViewName("redirect:/user/logout.kh");
+			mv.setViewName("redirect:/user/logout");
 		} catch (Exception e) {
 
 			mv.addObject("msg", e.getMessage());
 			mv.setViewName("common/errorPage");
+		}
+		return mv;
+	}
+	
+	@RequestMapping(value="/user/findView", method=RequestMethod.GET)
+	public String findView() throws Exception{
+		return"/user/findView";
+	}
+	@RequestMapping(value="/user/findid.kh", method=RequestMethod.GET)
+	public ModelAndView searchId(HttpServletRequest request
+			, ModelAndView mv
+			, @RequestParam("userId") String userId
+			, @RequestParam("userEmail") String userEmail) {
+		try {
+			List<User> uList = uService.findId(userId, userEmail);
+			logger.info("userId"+userId+" userEmail"+userEmail);
+			if(!uList.isEmpty()) {
+				mv.addObject("uList", uList);
+			} else {
+				mv.addObject("uList", null);
+			}
+			mv.addObject("uList", uList);
+			mv.setViewName("/user/findId");
+			
+		} catch (Exception e) {
+			mv.addObject("msg", e.getMessage()).setViewName("common/errorPage");
 		}
 		return mv;
 	}

@@ -25,9 +25,6 @@
 			<a href="/user/myPage.kh">관리자페이지</a>
 			<a href="${path}/user/logout">로그아웃</a>
 			</c:if>
-			<c:if test="${login.status == '2' }">
-				
-			</c:if>
 		</ul>
 	</nav>
 <script>

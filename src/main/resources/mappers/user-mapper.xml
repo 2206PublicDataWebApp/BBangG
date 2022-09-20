@@ -48,4 +48,8 @@
 		SELECT * FROM USER_TBL
 		WHERE USER_ID = #{userId}
 	</select>
+	<select id="findId" resultMap="userResultMap">
+		SELECT * FROM USER_TBL
+		WHERE USER_EMAIL = #{userEmail} AND USER_ID = #{userId}
+	</select>
 </mapper>

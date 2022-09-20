@@ -1,6 +1,7 @@
 package com.kh.bbang.user.store;
 
 import java.util.Date;
+import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -23,6 +24,8 @@ public interface UserStore {
 	public int updateUser(SqlSession session, User user);
 	
 	public int deleteUser(SqlSession session, String userId);
+	
+	public List<User> findId(SqlSession session, String userId, String userEmail);
 	
 	
 }

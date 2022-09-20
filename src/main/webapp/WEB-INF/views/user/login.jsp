@@ -23,7 +23,7 @@
 			</div>
 		</div>
 		<div><input type="submit" value="로그인"></div>
-		<div><a href="">ID 찾기</a></div>
+		<div><a href="/user/findView">ID 찾기</a></div>
 		<div><a href="">PW 찾기</a></div>
 		<div><a href="/user/joinView.kh">회원가입</a></div>
 	<c:if test="${not empty login}">

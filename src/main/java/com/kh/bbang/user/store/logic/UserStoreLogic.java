@@ -2,6 +2,7 @@ package com.kh.bbang.user.store.logic;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
@@ -66,6 +67,16 @@ public class UserStoreLogic implements UserStore{
 	public User checkUserWithSessionKey(String value) throws Exception{
 		return sqlsession.selectOne("UserMapper.check", value);
 	}
+
+	@Override
+	public List<User> findId(SqlSession session, String userId, String userEmail) {
+		HashMap<String, String> paramMap = new HashMap<String, String>();
+		paramMap.put("userId", userId);
+		paramMap.put("userEmail", userEmail);
+		List<User> uList = session.selectList("UserMapper.findId", paramMap);
+		return uList;
+	}
+	
 
 
 }

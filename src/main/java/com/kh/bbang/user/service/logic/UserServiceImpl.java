@@ -1,6 +1,7 @@
 package com.kh.bbang.user.service.logic;
 
 import java.util.Date;
+import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,6 +55,12 @@ public class UserServiceImpl implements UserService{
 
 	public User checkLoginBefore(String value) throws Exception{
 		return uStore.checkUserWithSessionKey(value);
+	}
+
+	@Override
+	public List<User> findId(String userId, String userEmail) {
+		List<User> uList = uStore.findId(session, userId, userEmail);
+		return uList;
 	}
 
 }
