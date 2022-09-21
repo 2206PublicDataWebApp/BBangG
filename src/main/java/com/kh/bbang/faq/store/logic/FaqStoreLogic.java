@@ -69,7 +69,7 @@ public class FaqStoreLogic implements FaqStore {
 	@Override
 	public void faqViewCount(SqlSession session, int faqNo) {
 		// TODO Auto-generated method stub
-		//ㅁㄴㅇㄻㄴㅇㄹasdfasdfasdf
+		//ㅁㄴㅇㄻㄴㅇㄹasdfasdfasdfasdf
 	}
 
 }
