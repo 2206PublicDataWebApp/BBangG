@@ -56,5 +56,33 @@
 		SELECT * FROM USER_TBL
 		WHERE USER_EMAIL = #{userEmail} AND USER_NAME = #{userName} AND STATUS IN ('0', '1')
 	</select>
+	<select id="selectAllUser" resultMap="userResultMap">
+		SELECT * FROM USER_TBL WHERE STATUS = '1'
+	</select>
+	<select id="selectTotalCount" resultType="_int">
+		SELECT COUNT(*) FROM USER_TBL
+		<where>
+			<if test="searchCondition.toString() == 'id'">
+				USER_ID LIKE '%'||#{searchValue}||'%'
+			</if>
+			<if test="searchCondition.toString() == 'name'">
+				USER_NAME LIKE '%'||#{searchValue}||'%'
+			</if>
+			<if test="searchCondition.toString() == 'email'">
+				USER_EMAIL LIKE '%'||#{searchValue}||'%'
+			</if>
+			<if test="searchCondition.toString() == 'all'">
+				USER_ID LIKE '%'||#{searchValue}||'%'
+				OR USER_NAME LIKE '%'||#{searchValue}||'%'
+				OR USER_EMAIL LIKE '%'||#{searchValue}||'%'
+				OR USER_GENDER LIKE '%'||#{searchValue}||'%'
+				OR USER_PHONE LIKE '%'||#{searchValue}||'%'
+				OR USER_ZIPCODE LIKE '%'||#{searchValue}||'%'
+				OR ADDR LIKE '%'||#{searchValue}||'%'
+				OR ADDR_DETAIL LIKE '%'||#{searchValue}||'%'
+			</if>
+			AND STATUS = '1'
+		</where>
+	</select>
 	
 </mapper>
