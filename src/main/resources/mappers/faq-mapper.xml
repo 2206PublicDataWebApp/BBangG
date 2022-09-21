@@ -4,32 +4,61 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="FaqMapper">
- <resultMap type="Faq" id="faqResultMap">
-  	<id property="faqNo" 				column="FAQ_NUMBER"/>
-  	<result property="faqWriter" 		column="USER_ID"/>
-  	<result property="faqTitle" 	column="FAQ_TITLE"/>
-  	<result property="faqContent" 		column="FAQ_CONTENT"/>
-  	<result property="faqCreateDate" 	column="FAQ_CREATEDATE"/>
-  	<result property="faqUpdateDate" column="FAQ_UPDATEDATE"/>
-  	<result property="faqFilename" 	column="FAQ_FILENAME"/>
-  	<result property="faqFileRename" 		column="FAQ_FILERENAME"/>
-  	<result property="faqFilepath" 		column="FAQ_FILEPATH"/>
-  	<result property="faqViewCount" 		column="FAQ_VIEWCOUNT"/>
-  </resultMap>
+	<resultMap type="Faq" id="faqResultMap">
+		<id property="faqNo" column="FAQ_NUMBER" />
+		<result property="faqWriter" column="USER_ID" />
+		<result property="faqTitle" column="FAQ_TITLE" />
+		<result property="faqContent" column="FAQ_CONTENT" />
+		<result property="faqCreateDate" column="FAQ_CREATEDATE" />
+		<result property="faqUpdateDate" column="FAQ_UPDATEDATE" />
+		<result property="faqFilename" column="FAQ_FILENAME" />
+		<result property="faqFileRename" column="FAQ_FILERENAME" />
+		<result property="faqFilepath" column="FAQ_FILEPATH" />
+		<result property="faqViewCount" column="FAQ_VIEWCOUNT" />
+	</resultMap>
 
- <select id="selectAllFaq" resultMap="faqResultMap">
-  SELECT * FROM FAQ_TBL ORDER BY FAQ_NUMBER
-   </select>
+	<select id="selectAllFaq" resultMap="faqResultMap">
+		SELECT * FROM FAQ_TBL ORDER BY FAQ_NUMBER
+	</select>
 
-<select id="selectTotalCount" resultType="_int">
-SELECT COUNT(*) FROM FAQ_TBL
-</select>
+	<select id="selectTotalCount" resultType="_int">
+		SELECT COUNT(*) FROM FAQ_TBL
+		<where>
+			<if test="searchCondition.toString() == 'title'">
+				FAQ_TITLE LIKE '%'||#{searchValue}||'%'
+			</if>
+			<if test="searchCondition.toString() == 'content'">
+				FAQ_CONTENT LIKE '%'||#{searchValue}||'%'
+			</if>
+			<if test="searchCondition.toString() == 'writer'">
+				USER_ID LIKE '%'||#{searchValue}||'%'
+			</if>
+			<if test="searchCondition.toString() == 'all'">
+				FAQ_TITLE LIKE '%'||#{searchValue}||'%'
+				OR FAQ_CONTENT LIKE '%'||#{searchValue}||'%'
+				OR USER_ID LIKE '%'||#{searchValue}||'%'
+			</if>
+		</where>
+	</select>
 
-<insert id="insertFaq">
-INSERT INTO FAQ_TBL VALUES(
-SEQ_FAQNO.NEXTVAL, #{faqWriter}, #{faqTitle}, #{faqContent}, #{faqCreateDate},
-#{faqUpdateDate}, #{faqFilename}, #{faqFileRename}, #{faqFilepath}, #{faqViewCount}
-</insert>
+	<insert id="insertFaq">
+		INSERT INTO FAQ_TBL VALUES(
+		SEQ_FAQNO.NEXTVAL, #{faqWriter}, #{faqTitle}, #{faqContent}, #{faqCreateDate},
+		#{faqUpdateDate}, #{faqFilename}, #{faqFileRename}, #{faqFilepath}, #{faqViewCount}
+	</insert>
 
+	<update id="updatefaq">
+		UPDATE FAQ_TBL SET FAQ_TITLE = #{faqTitle},
+		FAQ_CONTENT = #{faqContents},
+		FAQ_FILENAME = #{faqFilename},FAQ_RENAME = #{faqFileRename},
+		FAQ_FILEPATH = #{faqFilepath}, FAQ_UPDATEDATE = DEFAULT
+		WHERE FAQ_NUMBER = #{faqNo}
+	</update>
+	
+	<!-- 조회수증가 -->
+	<update id="faqViewCount">
+	UPDATE FAQ_TBL SET FAQ_VIEWCOUNT = FAQ_VIEWCOUNT + 1
+	WHERE FAQ_NUMBER = #{faqNo}
+	</update>
 
 </mapper>

@@ -48,11 +48,9 @@ public class FaqStoreLogic implements FaqStore {
 		return result;
 	}
 
-
-
 	@Override
-	public List<Faq> selectAllByValue(SqlSession session, String searchCondition, String searchValue, 
-			int currentPage, int faqLimit) {
+	public List<Faq> selectAllByValue(SqlSession session, String searchCondition, String searchValue, int currentPage,
+			int faqLimit) {
 		int offset = (currentPage - 1) * faqLimit;
 		RowBounds rowBounds = new RowBounds(offset, faqLimit);
 		HashMap<String, String> paramMap = new HashMap<String, String>();
@@ -66,6 +64,12 @@ public class FaqStoreLogic implements FaqStore {
 	public int updateFaq(SqlSession session, Faq faq) {
 		int result = session.update("faqMapper.updatefaq", faq);
 		return result;
+	}
+
+	@Override
+	public void faqViewCount(SqlSession session, int faqNo) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -62,14 +63,12 @@ public class FaqController {
 			mv.setViewName("common/errorPage");
 		}
 		return mv;
-		
 	}
 
 	@GetMapping(value = "/faq/list.kh")
 	public ModelAndView faqListView(
 			ModelAndView mv
 			,@RequestParam(value="page", required=false) Integer page) {
-		/////////////////////////////////////////////////////////////////////////
 		int currentPage = (page != null) ? page : 1;
 		int totalCount = faqService.getTotalCount("","");
 		int faqLimit = 10;
@@ -77,7 +76,6 @@ public class FaqController {
 		int maxPage;
 		int startNavi;
 		int endNavi;
-		// 23/5 = 4.8 + 0.9 = 5(.7)
 		maxPage = (int)((double)totalCount/faqLimit + 0.9);
 		startNavi = ((int)((double)currentPage/naviLimit+0.9)-1)*naviLimit+1;
 		endNavi = startNavi + naviLimit - 1;
@@ -151,14 +149,12 @@ public class FaqController {
 		try {
 			String faqFilename = reloadFile.getOriginalFilename();
 			if (reloadFile != null && !faqFilename.equals("")) {
-				// 파일삭제
 				String root = request.getSession().getServletContext().getRealPath("resources");
 				String savedPath = root + "\\faquploadFiles";
 				File file = new File(savedPath + "\\" + faq.getFaqFileRename());
 				if (file.exists()) {
 					file.delete();
 				}
-				// 파일 다시 저장
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
 				String faqFileRename = sdf.format(new Date(System.currentTimeMillis())) + "."
 						+ faqFilename.substring(faqFilename.lastIndexOf(".") + 1);
@@ -217,4 +213,6 @@ public class FaqController {
 		return mv;
 	}
 
+	// 조회수?
+//	@RequestMapping(value="")
 }

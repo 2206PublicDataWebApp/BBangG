@@ -11,7 +11,7 @@ import com.kh.bbang.faq.domain.Faq;
 import com.kh.bbang.faq.service.FaqService;
 import com.kh.bbang.faq.store.FaqStore;
 
-@Service
+@Service("faqService")
 public class FaqServiceImpl implements FaqService {
 
 	@Autowired
@@ -61,5 +61,12 @@ public class FaqServiceImpl implements FaqService {
 			int currentPage, int FaqLimit) {
 		List<Faq> bList = faqStore.selectAllByValue(session, searchCondition, searchValue, currentPage, FaqLimit);
 		return bList;
+	}
+
+	// 조회수?
+	@Override
+	public void faqViewCount(SqlSession session, int faqNo) {
+//		faqMapper.faqViewCount(int faqNo);
+		
 	}
 }
