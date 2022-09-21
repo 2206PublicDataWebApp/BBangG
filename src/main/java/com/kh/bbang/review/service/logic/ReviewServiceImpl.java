@@ -1,5 +1,7 @@
 package com.kh.bbang.review.service.logic;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,7 +21,7 @@ public class ReviewServiceImpl implements ReviewService{
 	private ReviewStore rStore;
 
 	@Override
-	public int registerReview(Review review) {
+	public int registeReview(Review review) {
 //		int result = rStore.
 		return 0;
 	}
@@ -33,6 +35,12 @@ public class ReviewServiceImpl implements ReviewService{
 			
 		}
 		return review;
+	}
+
+	@Override
+	public List<Review> printAllReview() {
+		List<Review> rList = rStore.selectAllReview(session);
+		return rList;
 	}
 
 }
