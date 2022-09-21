@@ -17,9 +17,12 @@
 		<result property="storeFileRename" column="STORE_FILERENAME"/>
 		<result property="storeFilepath" column="STORE_FILEPATH"/>
 		<result property="storeStatus" column="STORE_STATUS"/>
+		<result property="storeBank" column="STORE_BANK"/>
+		<result property="storeUpdateDate" column="STORE_UPDATE_DATE"/>
 	</resultMap>
 	<insert id="insertStore">
-	INSERT INTO STORE_TBL VALUES(SEQ_STORE_NO.NEXTVAL,#{storeName},#{storeZipCode},#{storeAddr},#{storeAddrDetail},#{storeCeo},#{storeTel},#{storeUrl},#{storeAccount},#{storeFilename},#{storeFileRename},#{storeFilepath},DEFAULT)
+	INSERT INTO STORE_TBL VALUES(SEQ_STORE_NO.NEXTVAL,#{storeName},#{storeZipCode},#{storeAddr},
+	#{storeAddrDetail},#{storeCeo},#{storeTel},#{storeUrl},#{storeAccount},#{storeFilename},#{storeFileRename},#{storeFilepath},DEFAULT,#{storeBank},DEFAULT)
 	</insert>
 	<delete id="deleteStore">
 	DELETE FROM STORE_TBL WHERE STORE_NO = #{storeNo}
@@ -27,12 +30,31 @@
 	<update id="updateStore">
 	UPDATE STORE_TBL SET STORE_NAME = #{storeName}, STORE_ZIPCODE = #{storeZipCode}, STORE_ADDR = #{storeAddr},
 	STORE_ADDR_DETAIL = #{storeAddrDetail}, STORE_CEO = #{storeCeo}, STORE_TEL = #{storeTel}, STORE_URL = #{storeUrl},
-	STORE_ACCOUNT = #{storeAccount}, STORE_FILENAME = #{storeFilename}, STORE_FILERENAME = #{storeFileRename}, STORE_FILEPATH = #{storeFilepath} WHERE STORE_NO = #{storeNo}
+	STORE_ACCOUNT = #{storeAccount}, STORE_FILENAME = #{storeFilename}, STORE_FILERENAME = #{storeFileRename}, STORE_FILEPATH = #{storeFilepath}, STORE_BANK =#{storeBank}, 
+	STORE_UPDATE_DATE = DEFAULT WHERE STORE_NO = #{storeNo}
 	</update>
 	<select id="selectAllStore" resultMap="storeResultMap">
 	SELECT * FROM STORE_TBL WHERE STORE_STATUS = 'Y' ORDER BY STORE_NO DESC
 	</select>
 	<select id="selectStoreByNo" resultMap="storeResultMap">
 	SELECT * FROM STORE_TBL WHERE STORE_NO = #{storeNo} AND STORE_STATUS = 'Y'
+	</select>
+	<select id="selectTotalCount" resultType="_int">
+	SELECT COUNT(*) FROM STORE_TBL
+		<where>
+			<if test="searchCondition.toString() == 'all'"></if>
+			<if test="searchCondition.toString() == 'name'">STORE_NAME LIKE '%'||#{storeName}||'%'</if>
+			<if test="searchCondition.toString() == 'region'">STORE_ADDR LIKE '%'||#{storeAddr}||'%'</if>
+	AND STORE_STATUS = 'Y'
+		</where>
+	</select>
+	<select id="selectSearchedList" resultMap="storeResultMap">
+	SELECT * FROM STORE_TBL
+		<where>
+			<if test="searchCondition.toString() == 'all'"></if>
+			<if test="searchCondition.toString() == 'name'">STORE_NAME LIKE '%'||#{storeName}||'%'</if>
+			<if test="searchCondition.toString() == 'region'">STORE_ADDR LIKE '%'||#{storeAddr}||'%'</if>
+	AND STORE_STATUS = 'Y'
+		</where>
 	</select>
 </mapper>

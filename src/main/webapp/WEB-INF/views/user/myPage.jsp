@@ -9,9 +9,11 @@
 <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
 </head>
 <body>
+	<%@ include file="/WEB-INF/views/include/header.jsp" %>
 	<h1 align="center">회원 정보 수정</h1>
 		<div class="">
-			<form action="/user/modify.kh" method="post">
+			<form action="/user/modify.kh" method="post"
+			 onsubmit="modifyUser();">
 					<div class="email_auth">
 						<input type="text" placeholder="이메일" name="userEmail" id="userEmail" class="email"  value="${user.userEmail }">
 						<button type="button" id="email_auth_btn" class="email_auth_btn">인증번호 받기</button>
@@ -43,6 +45,7 @@
 					<div>
 						전화번호
 						<input type="text" name="userPhone" value="${user.userPhone }">
+					</div>
 					<div>
 						우편번호
 						<input type="text" name="zipCode" id="sample6_postcode"
@@ -62,7 +65,7 @@
 							placeholder="참고항목">
 					</div>
 					<div>
-						<button type="button" onclick="removeMember();">탈퇴하기</button>
+						<button type="button" onclick="removeUser();">탈퇴하기</button>
 					</div>
 					<div>
 						<input type="submit" value="수정하기">
@@ -72,7 +75,6 @@
 		</div>
 		<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 		<script>
-		
 		function sample6_execDaumPostcode() {
 	        new daum.Postcode({
 	            oncomplete: function(data) {
@@ -161,10 +163,15 @@
 			}
 		});
 		
-		function removeMember() {
+		function removeUser() {
 			if(confirm("탈퇴하시겠습니까?")) {
 				alert("탈퇴되었습니다.");
 				location.href = "/user/remove.kh";
+			}
+		}
+		function modifyUser() {
+			if(confirm("수정하시겠습니까?")) {
+				alert("수정되었습니다.");
 			}
 		}
 	</script>

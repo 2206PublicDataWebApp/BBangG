@@ -3,52 +3,65 @@
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
+<link rel="stylesheet" type="text/css" href="/resources/css/orderStyle.css">
 </head>
-<script
-	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-<body>
+<body id="userStyle">
+	<header id="header">
+	<div class="titleArea">
 	<h1 align="center">주문</h1>
-	<div class="">
+	</div>
+	</header>
 		<form action="/order/sendOrder.kh" method="post">
+		<section style=" float: left; width: 45%; padding:10px;">
 		<input type="hidden" name="orderShipfee" value=3000>
+		<input type="hidden" name="userId" value="${user.userId}">
 
 			<select id="selGoods" name="selGoods" style="height:40px;">
 			</select>
-			<button id="btnAddGoods" type="button" style="height:40px;">추가</button>	
+			<button id="btnAddGoods" type="button" style="height:40px; float:right">추가</button>	
 			<br><br>	
 			<div id="container">
 			</div>
 			<br>
 			<div>+ 배송비 3000원</div>
-			요금합계 <b><input id="goodsTotAmt" style="border:none;text-align:right;" name="totalPrice" value=0></b>원
+			<div>
+				<div style="width: 30%; float: left;">
+				요금합계 
+				</div>
+				<div style="width: 50%; float: right;">
+					<b><input id="goodsTotAmt" style="border:none;text-align:right; " name="totalPrice" value=0></b>원
+				</div>
+			</div>
+		</section>
+		<section style=" float: right; width: 45%; padding:10px;text-align=left;" class="orderForm_input_right" >
 			<table>
-				<legend>주문자정보</legend>
+				<legend><h4>주문자정보</h4></legend>
 				<tr>
-					<th>주문자 이름</th>
-					<td>${user.userName }</td>
+					<td>주문자 이름</td>
+					<td><input type="text" name="userName" value="${user.userName }"></td>
 				</tr>
 				<tr>
-					<th>주문자 연락처</th>
-					<td>${user.userPhone }</td>
+					<td>주문자 연락처</td>
+					<td><input type="text" name="userPhone" value="${user.userPhone }"></td>
 				</tr>
-			
 			</table>
-			
+			<br>
 			<table>
 				
 				<tr>
-					<legend>배송지 정보</legend>
+					<legend><h4>배송지 정보</h4></legend>
 				</tr>
 				<tr>
 					<td>수령인</td>
-					<td><input type="text" name="delivaryName">
+					<td ><input type="text" name="delivaryName" >
 					</td>
 				</tr>
 				<tr>
@@ -57,11 +70,15 @@
 				</tr>
 				<tr>
 					<td>우편번호</td>
-					<td><input type="text" id="delivaryZipcode" name="delivaryZipcode">
-					<div><button id="btnSearchAddressC" type="Button" onclick="findDaumPostcode()" 
-						value="우편번호 찾기"  >
-						SearchAddress</button>
-					</div>
+					<td>
+						<div style=" float: left; width: 60%;">
+							<input type="text" id="delivaryZipcode" name="delivaryZipcode">
+						</div>
+						<div style=" float: right; width: 38%;">
+							<button id="btnSearchAddressC" type="Button" onclick="findDaumPostcode()" value="우편번호 찾기"  >
+						주소검색</button>
+						
+						</div>
 					</td>
 				</tr>
 				<tr>
@@ -78,14 +95,17 @@
 				</tr>
 			
 				<tr>
-					<td><input type="reset" value="다시입력"></td>
+					<td >
+						
+					</td>
 					<td>
-					<input type="submit" value="주문하기">
+						<input type="reset" value="다시입력" style=" align:left; width: 49%;">
+						<input type="submit" value="주문하기" style=" align:left; width: 49%;">
 					</td>
 				</tr>
 			</table>
+			</section>
 		</form>
-	</div>
 </body>
 <script type="text/javascript">
 	function findDaumPostcode() {
@@ -231,18 +251,13 @@
 				
 	var goods = new Goods();
 		//jstl로 전체 상품 목록 미리 세팅
-		goods.arrAllGoods.push({goodsId:"${pList[0].productCode}",goodsUnprc:"${pList[0].productPrice}",goodsNm:"${pList[0].productName}",cnt:0});
-		goods.arrAllGoods.push({goodsId:"${pList[1].productCode}",goodsUnprc:"${pList[1].productPrice}",goodsNm:"${pList[1].productName}",cnt:0});
-		goods.arrAllGoods.push({goodsId:"${pList[2].productCode}",goodsUnprc:"${pList[2].productPrice}",goodsNm:"${pList[2].productName}",cnt:0});
-		
+		<c:forEach items="${pList}" var="product">
+			goods.arrAllGoods.push({goodsId:"${product.productCode}",goodsUnprc:"${product.productPrice}",goodsNm:"${product.productName}",cnt:0});
+		</c:forEach>
 		//jstl로 셀렉트 박스 옵션 채우기
-		
-
-			
-		$('#selGoods').append('<option id="" value="${pList[0].productCode}">${pList[0].productName}</option>');
-		$('#selGoods').append('<option id="" value="${pList[1].productCode}">${pList[1].productName}</option>');
-		$('#selGoods').append('<option id="" value="${pList[2].productCode}">${pList[2].productName}</option>');
-		
+		<c:forEach items="${pList}" var="product">	
+			$('#selGoods').append('<option id="" value="${product.productCode}">${product.productName}</option>');
+		</c:forEach>
 	
 		
 		$('#btnAddGoods').on('click',function(){

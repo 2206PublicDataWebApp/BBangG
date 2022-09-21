@@ -90,7 +90,7 @@
 					<th>${store.storeAccount }</th>
 				</tr>
 				<tr>
-					<td>은행이름  ${store.storeName }  은행명</td>
+					<td>${store.storeBank }  ${store.storeName }  은행명</td>
 				</tr>
 			</table>
 			

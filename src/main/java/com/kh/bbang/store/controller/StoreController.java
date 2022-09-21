@@ -25,26 +25,74 @@ public class StoreController {
 	@Autowired
 	private StoreService sService;
 	
-	//관리자 점포 리스트 - DB에서 정보 불러오기까지 성공
+	//관리자 점포 리스트 - 페이징완료
 	@RequestMapping(value="/store/adminStoreList.kh", method=RequestMethod.GET)
-	public ModelAndView storeList(ModelAndView mv) {
-		List<Store> sList = sService.showAllStore();
+	public ModelAndView storeList(
+			ModelAndView mv,
+			@RequestParam(value="page", required=false) Integer page) {
+		//페이징처리
+				int currentPage = (page != null) ? page : 1;
+				int totalCount = sService.getTotalCount("","");
+				int storeLimit = 10;
+				int naviLimit = 5;
+				int maxPage;
+				int startNavi;
+				int endNavi;
+				
+				maxPage = (int) ((double)totalCount / storeLimit + 0.9);
+				startNavi = ((int)((double)currentPage / naviLimit + 0.9) -1) * naviLimit + 1;
+				endNavi = startNavi + naviLimit - 1;
+				if(maxPage < endNavi) {
+					endNavi = maxPage;
+				}
+				//
+		List<Store> sList = sService.showAllStore(currentPage, storeLimit);
 		if(!sList.isEmpty()) {
+			mv.addObject("urlVal","adminStoreList");
+			mv.addObject("maxPage", maxPage);
+			mv.addObject("currentPage", currentPage);
+			mv.addObject("startNavi", startNavi);
+			mv.addObject("endNavi", endNavi);
 			mv.addObject("sList", sList);
-			mv.setViewName("store/adminStoreList");
 		}
+		mv.setViewName("store/adminStoreList");
 		return mv;
 	}
 	
 	//사용자 점포 리스트
 	
 	@RequestMapping(value="/store/userStoreList.kh", method=RequestMethod.GET)
-	public ModelAndView userStoreList(ModelAndView mv) {
-		List<Store> sList = sService.showAllStore();
-		if(!sList.isEmpty()) {
-			mv.addObject("sList",sList);
-			mv.setViewName("store/userStoreView");
+	public ModelAndView userStoreList(
+			ModelAndView mv,
+			@RequestParam(value="page", required=false) Integer page) {
+		//페이징처리
+		int currentPage = (page != null) ? page : 1;
+		int totalCount = sService.getTotalCount("","");
+		int storeLimit = 9;
+		int naviLimit = 5;
+		int maxPage;
+		int startNavi;
+		int endNavi;
+		
+		maxPage = (int) ((double)totalCount / storeLimit + 0.9);
+		startNavi = ((int)((double)currentPage / naviLimit + 0.9) -1) * naviLimit + 1;
+		endNavi = startNavi + naviLimit - 1;
+		if(maxPage < endNavi) {
+			endNavi = maxPage;
 		}
+		//
+		
+		List<Store> sList = sService.showAllStore(currentPage, storeLimit);
+		if(!sList.isEmpty()) {
+			mv.addObject("urlVal","userStoreList");
+			mv.addObject("maxPage", maxPage);
+			mv.addObject("currentPage", currentPage);
+			mv.addObject("startNavi", startNavi);
+			mv.addObject("endNavi", endNavi);
+			mv.addObject("sList", sList);
+			
+		}
+		mv.setViewName("store/userStoreView");
 		return mv;
 	}
 	
@@ -60,10 +108,8 @@ public class StoreController {
 			ModelAndView mv,
 			@ModelAttribute Store store,
 			@RequestParam(value="uploadFile", required=false) MultipartFile uploadFile,
-			@RequestParam(value="bank") String bank,
 			HttpServletRequest request) {
 		try {
-			store.setStoreAccount(bank+","+store.getStoreAccount());
 			String storeFilename = uploadFile.getOriginalFilename();
 			if(!uploadFile.getOriginalFilename().equals("")) {
 				String root = request.getSession().getServletContext().getRealPath("resources");
@@ -141,12 +187,10 @@ public class StoreController {
 	public ModelAndView modifyStore(
 			ModelAndView mv,
 			@ModelAttribute Store store,
-			@RequestParam(value="bank") String bank,
 			@RequestParam(value="reloadFile", required=false) MultipartFile reloadFile,
 			
 			HttpServletRequest request) {
 		try {
-			store.setStoreAccount(bank+","+store.getStoreAccount());
 			String storeFilename = reloadFile.getOriginalFilename();
 			if(reloadFile != null && !storeFilename.equals("")) {
 				String root = request.getSession().getServletContext().getRealPath("resources");
@@ -170,6 +214,49 @@ public class StoreController {
 		}
 		return mv;
 	}
-
+	
+	// 검색 구현 중 - 404오류..
+	@RequestMapping(value="store/storeSearch.kh", method=RequestMethod.GET)
+	public ModelAndView storeSearchedList(
+			ModelAndView mv,
+			@RequestParam("searchCondition") String searchCondition,
+			@RequestParam("searchValue") String searchValue,
+			@RequestParam(value="page", required=false) Integer page) {
+		try {
+			//페이징처리
+			int currentPage = (page != null) ? page : 1;
+			int totalCount = sService.getTotalCount(searchCondition,searchValue);
+			int storeLimit = 9;
+			int naviLimit = 5;
+			int maxPage;
+			int startNavi;
+			int endNavi;
+			
+			maxPage = (int) ((double)totalCount / storeLimit + 0.9);
+			startNavi = ((int)((double)currentPage / naviLimit + 0.9) -1) * naviLimit + 1;
+			endNavi = startNavi + naviLimit - 1;
+			if(maxPage < endNavi) {
+				endNavi = maxPage;
+			}
+			
+			List<Store> sList = sService.showSearchedStore(searchCondition, searchValue, currentPage, storeLimit);
+			if(!sList.isEmpty()) {
+				mv.addObject("sList", sList);
+			}else {
+				mv.addObject("sList", null);
+			}
+			mv.addObject("urlVal", "search");
+			mv.addObject("searchCondition", searchCondition);
+			mv.addObject("searchValue",searchValue);
+			mv.addObject("maxPage",maxPage);
+			mv.addObject("currentPage",currentPage);
+			mv.addObject("startNavi",startNavi);
+			mv.addObject("endNavi",endNavi);
+			mv.setViewName("store/userStoreList");
+		}catch(Exception e) {
+			mv.addObject("msg",e.toString()).setViewName("common/errorPage");
+		}
+		return mv;
+	}
 }
 

@@ -1,5 +1,7 @@
 package com.kh.bbang.review.store.logic;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
@@ -9,6 +11,13 @@ import com.kh.bbang.review.store.ReviewStore;
 @Repository
 public class ReviewStoreLogic implements ReviewStore{
 
+	// 리뷰 등록
+	@Override
+	public int insertReview(SqlSession session, Review review) {
+		int result = session.insert("ReviewMapper.insertReview", review);
+		return result;
+	}
+	
 	// 리뷰 검색
 	@Override
 	public Review selectOneByNo(SqlSession session, Integer reviewNo) {
@@ -21,6 +30,12 @@ public class ReviewStoreLogic implements ReviewStore{
 	public int updateReviewCount(SqlSession session, int reviewNo) {
 		int result = session.update("ReviewMapper.updateCount",reviewNo);
 		return result;
+	}
+
+	@Override
+	public List<Review> selectAllReview(SqlSession session) {
+		List<Review> rList = session.selectList("ReviewMapper.selectAllReview");
+		return rList;
 	}
 
 }

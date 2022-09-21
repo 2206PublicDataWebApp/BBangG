@@ -1,6 +1,7 @@
 package com.kh.bbang.review.controller;
 
-import javax.servlet.http.HttpServletRequest;
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +10,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.bbang.review.domain.Review;
@@ -26,7 +26,7 @@ public class ReviewController {
 	 * 게시글 등록 화면
 	 * @return
 	 */
-	@RequestMapping(value = "/review/writeView", method = RequestMethod.GET)
+	@RequestMapping(value = "/review/writeView.kh", method = RequestMethod.GET)
 	public String reviewWrite() {
 		return "review/reviewWriteForm";
 	}
@@ -40,14 +40,23 @@ public class ReviewController {
 	 *  value는 요청받을 url을 설정
 	 *  method는 어떤 요청으로 받을지 정의 (GET, POST, PUT, DELETE 등)
 	 */
-	@RequestMapping(value = "/review/registe", method = RequestMethod.POST)
-	public ModelAndView reviewRegister(
+	@RequestMapping(value = "/review/registe.kh", method = RequestMethod.POST)
+	public ModelAndView reviewRegist(
 			ModelAndView mv
 			, @ModelAttribute Review review
 			// ModelAttribute 1. 파라미터로 넘겨 준 타입의 오브젝트를 자동으로 생성한다. 2. 생성된 오브젝트(test) HTTP로 넘어 온 값들을 자동으로 바인딩한다.
-			, @RequestParam(value="reviewFile", required = false) MultipartFile reviewFile 
+			//, @RequestParam(value="reviewFile", required = false) MultipartFile reviewFile 
 			// 쿼리 스트링 정보를 가져오는 데 사용 // (required=false)로 지정하면 해당 키값이 존재하지 않다고 해서 BadRequest가 발생하지 않는다.
-			, HttpServletRequest request) {
+			//, HttpServletRequest request
+			) {
+		try {
+			int result = rService.registeReview(review);
+			mv.setViewName("redirect:/review/list.kh");
+		} catch (Exception e) {
+			e.printStackTrace();
+			mv.addObject("msg",e.getMessage());
+			mv.setViewName("common/errorPage");
+		}
 		
 		return mv;
 		
@@ -62,7 +71,7 @@ public class ReviewController {
 	 *   그런데 pageInfo 테이블을 따로 뒀다. 일단 주석으로 막아둠
 	 */
 	
-	@RequestMapping(value = "/review/deteil", method=RequestMethod.GET)
+	@RequestMapping(value = "/review/deteil.kh", method=RequestMethod.GET)
 	public ModelAndView reviewDetailView(
 			ModelAndView mv
 			, @RequestParam("reviewNo") Integer reviewNo
@@ -85,4 +94,16 @@ public class ReviewController {
 		
 		return mv;
 	}
+	
+	@RequestMapping(value = "/review/list.kh", method = RequestMethod.GET)
+	public ModelAndView reviewListView(
+			ModelAndView mv) {
+		List<Review> rList= rService.printAllReview();
+		if(!rList.isEmpty()) {
+			mv.addObject("rList", rList);
+		}
+		mv.setViewName("/review/reviewList");
+		return mv;
+	}
+	
 }
