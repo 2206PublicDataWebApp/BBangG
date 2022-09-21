@@ -40,7 +40,7 @@ public class FaqController {
 			String faqFilename = uploadFile.getOriginalFilename();
 			if (!faqFilename.equals("")) {
 				String root = request.getSession().getServletContext().getRealPath("resources");
-				String savePath = root + "\\buploadFiles";
+				String savePath = root + "\\faquploadFiles";
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
 				String faqFileRename = sdf.format(new Date(System.currentTimeMillis())) + "."
 						+ faqFilename.substring(faqFilename.lastIndexOf(".") + 1);
@@ -153,7 +153,7 @@ public class FaqController {
 			if (reloadFile != null && !faqFilename.equals("")) {
 				// 파일삭제
 				String root = request.getSession().getServletContext().getRealPath("resources");
-				String savedPath = root + "\\buploadFiles";
+				String savedPath = root + "\\faquploadFiles";
 				File file = new File(savedPath + "\\" + faq.getFaqFileRename());
 				if (file.exists()) {
 					file.delete();
