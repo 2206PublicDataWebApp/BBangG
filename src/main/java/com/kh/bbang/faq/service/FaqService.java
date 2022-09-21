@@ -11,12 +11,20 @@ public interface FaqService {
 	
 	//printAllFaq
 	
-	public List<Faq> printAllFaq();
+	public List<Faq> printAllFaq(int currentPage, int limit);
 	
 	// getTotalCount
-	public int getTotalCount();
+	public int getTotalCount(String searchCondition, String searchValue);
 	
 	// printOneByNo
-	// removeOneByNo
-	// modifyFaq
+		public Faq printOneByNo(Integer faqNo);
+		
+		//removeOneByNo
+		public int removeOneByNo(int faqNo);
+		
+		// modifyfaq
+		public int modifyFaq(Faq faq);
+		
+		public List<Faq> printAllByValue(String searchCondition, String searchValue, 
+				int currentPage, int faqLimit);
 }

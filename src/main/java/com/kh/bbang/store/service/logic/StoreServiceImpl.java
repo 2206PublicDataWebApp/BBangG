@@ -38,8 +38,8 @@ public class StoreServiceImpl implements StoreService {
 	}
 
 	@Override
-	public List<Store> showAllStore() {
-		List<Store> sList = sStore.selectAllStore(session);
+	public List<Store> showAllStore(int currentPage, int storeLimit) {
+		List<Store> sList = sStore.selectAllStore(session, currentPage, storeLimit);
 		return sList;
 	}
 
@@ -50,9 +50,16 @@ public class StoreServiceImpl implements StoreService {
 	}
 
 	@Override
-	public void showSearchedStore() {
-		// TODO Auto-generated method stub
-		
+	public List<Store> showSearchedStore(String searchCondition, String searchValue, int currentPage, int storeLimit) {
+		List<Store> sList = sStore.selectSearchedStore(session, searchCondition, searchValue, currentPage, storeLimit);
+		return sList;
 	}
+
+	@Override
+	public int getTotalCount(String searchCondition, String searchValue) {
+		int totalCount = sStore.selecTotalCount(session, searchCondition, searchValue);
+		return totalCount;
+	}
+
 	
 }

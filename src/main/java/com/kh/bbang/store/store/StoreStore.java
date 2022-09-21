@@ -14,9 +14,11 @@ public interface StoreStore {
 	// updateStore
 	public int updateStore(SqlSession session, Store store);
 	// selectAllStore
-	public List<Store> selectAllStore(SqlSession session);
+	public List<Store> selectAllStore(SqlSession session, int currentPage, int storeLimit);
 	// selectOneStoreById
 	public Store selectOneStoreById(SqlSession session, Integer storeNo);
 	// selectSearchedStore
-	public void selectSearchedStore();
+	public List<Store> selectSearchedStore(SqlSession session, String searchCondition, String searchValue, int currentPage, int storeLimit);
+	// selectTotalCount
+	public int selecTotalCount(SqlSession session, String searchCondition, String searchValue);
 }

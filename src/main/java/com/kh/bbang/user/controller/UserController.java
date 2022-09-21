@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
+import javax.mail.Session;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -28,6 +29,7 @@ import org.springframework.web.util.WebUtils;
 
 import com.kh.bbang.user.domain.LoginVO;
 import com.kh.bbang.user.domain.User;
+import com.kh.bbang.user.interceptor.LoginInterceptor;
 import com.kh.bbang.user.service.UserService;
 
 @Controller
@@ -119,13 +121,12 @@ public class UserController {
 	
 	@RequestMapping(value="/user/login" , method= RequestMethod.POST)
 	public void loginPost(LoginVO loginVO, HttpSession httpSession,Model model)throws Exception{
-		logger.info("loginVO"+loginVO.getUserId());
+		logger.info("id= "+loginVO.getUserId()+" pwd= "+loginVO.getUserPwd());
 		User user = uService.login(loginVO);
 		logger.info("Pwd"+user);
 		if (user == null || !BCrypt.checkpw(loginVO.getUserPwd(), user.getUserPwd())) {
 	        return;
 	    }
-		
 		model.addAttribute("user", user);
 		
 		if(loginVO.isUseCookie()) {
@@ -134,8 +135,11 @@ public class UserController {
 			uService.keepLogin(user.getUserId(), httpSession.getId(), sessionLimit);
 		}
 	}
-	
-	
+	@RequestMapping(value="/user/loginError", method=RequestMethod.GET)
+	public String useLoginError() {
+		return "/user/loginError";
+	}
+
 	
 	@RequestMapping(value="/user/logout" , method=RequestMethod.GET)
 	public String logout(HttpServletRequest request,
@@ -225,25 +229,48 @@ public class UserController {
 		return"/user/findView";
 	}
 	@RequestMapping(value="/user/findid.kh", method=RequestMethod.GET)
-	public ModelAndView searchId(HttpServletRequest request
+	public ModelAndView findId(HttpServletRequest request
 			, ModelAndView mv
-			, @RequestParam("userId") String userId
+			, @RequestParam("userName") String userName
 			, @RequestParam("userEmail") String userEmail) {
 		try {
-			List<User> uList = uService.findId(userId, userEmail);
-			logger.info("userId"+userId+" userEmail"+userEmail);
+			List<User> uList = uService.findId(userName, userEmail);
+			logger.info("userName"+userName+" userEmail"+userEmail);
 			if(!uList.isEmpty()) {
 				mv.addObject("uList", uList);
 			} else {
-				mv.addObject("uList", null);
+				mv.addObject("msg", "이름 혹은 이메일을 확인해주세요.");
+				mv.setViewName("common/errorPage");
 			}
+			
 			mv.addObject("uList", uList);
 			mv.setViewName("/user/findId");
 			
 		} catch (Exception e) {
 			mv.addObject("msg", e.getMessage()).setViewName("common/errorPage");
 		}
-		
+		return mv;
+	}
+	
+	@RequestMapping(value="/user/findPwd.kh", method=RequestMethod.POST)
+	public ModelAndView findPwd(@ModelAttribute User user
+			, ModelAndView mv
+			, @RequestParam("userId") String userId
+			, @RequestParam("userEmail") String userEmail) {
+		try {
+			user.setUserId(userId);
+			user.setUserEmail(userEmail);
+			int result = uService.findPwd(userId, userEmail);
+			if(result > 0) {
+				mv.addObject("user", user);
+				mv.setViewName("user/findPwd");
+			}else {
+				mv.addObject("msg", "아이디 혹은 이메일을 확인해주세요.");
+				mv.setViewName("common/errorPage");
+			}
+		} catch (Exception e) {
+			mv.addObject("msg", e.getMessage()).setViewName("common/errorPage");
+		}
 		return mv;
 	}
 }
