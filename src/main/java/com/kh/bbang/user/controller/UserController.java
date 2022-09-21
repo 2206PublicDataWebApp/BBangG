@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
+import javax.mail.Session;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -28,6 +29,7 @@ import org.springframework.web.util.WebUtils;
 
 import com.kh.bbang.user.domain.LoginVO;
 import com.kh.bbang.user.domain.User;
+import com.kh.bbang.user.interceptor.LoginInterceptor;
 import com.kh.bbang.user.service.UserService;
 
 @Controller
@@ -125,7 +127,6 @@ public class UserController {
 		if (user == null || !BCrypt.checkpw(loginVO.getUserPwd(), user.getUserPwd())) {
 	        return;
 	    }
-		
 		model.addAttribute("user", user);
 		
 		if(loginVO.isUseCookie()) {
