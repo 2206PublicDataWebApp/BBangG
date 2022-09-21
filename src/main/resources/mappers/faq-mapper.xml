@@ -55,7 +55,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE FAQ_NUMBER = #{faqNo}
 	</update>
 	
-	<!-- 조회수증가 -->
+	<!-- 조회수증가 -->  
 	<update id="faqViewCount">
 	UPDATE FAQ_TBL SET FAQ_VIEWCOUNT = FAQ_VIEWCOUNT + 1
 	WHERE FAQ_NUMBER = #{faqNo}
