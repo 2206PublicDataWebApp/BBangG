@@ -10,7 +10,11 @@ public interface ReviewService {
 
 	public Review printDetailOneByNo(Integer reviewNo);
 	
-	// REVIEW_TBL <- SELECT * FROM REVIEW_TBL WHERE B_STATUS = 'Y'
+	// selectAllReview 리뷰게시판 리스트
+	// REVIEW_TBL <- SELECT * FROM REVIEW_TBL WHERE USE_YN = 'Y'
 	public List<Review> printAllReview();
 	
+	// getTotalCount 페이징
+	// REVIEW_TBL <- SELECT COUNT (*) FROM REVIEW_TBL WHERE USE_YN = 'Y'
+	public int getTotalCount();
 }

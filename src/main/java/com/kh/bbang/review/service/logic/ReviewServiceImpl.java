@@ -43,4 +43,10 @@ public class ReviewServiceImpl implements ReviewService{
 		return rList;
 	}
 
+	@Override
+	public int getTotalCount() {
+		int totalCount = rStore.selectTotalCount(session);
+		return totalCount;
+	}
+
 }
