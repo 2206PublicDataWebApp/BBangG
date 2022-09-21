@@ -16,7 +16,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.bbang.order.domain.Order;
 import com.kh.bbang.order.domain.OrderProduct;
-
 import com.kh.bbang.order.service.OrderService;
 import com.kh.bbang.product.domain.Product;
 import com.kh.bbang.store.domain.Store;
@@ -55,7 +54,6 @@ public class OrderController {
 			ModelAndView mv
 			,@ModelAttribute Order order
 			,@ModelAttribute OrderProduct orderProduct
-			,@RequestParam("userId") String userId
 			) {
 //			Order order = new Order(delivaryName, delivaryPhone, delivaryZipcode, delivaryAddressFirst,
 //					delivaryAddressSecond, delivaryMemo);
@@ -65,7 +63,6 @@ public class OrderController {
 			tmp[i]=orderProduct.getOrderProductNm()[i]+" "+orderProduct.getOrderProductCtn()[i]+"개 "+orderProduct.getOrderProductPrice()[i]+"원";
 		}
 		order.setOrderDetail(String.join("/",tmp));
-		order.setUserId(userId);
 		int result = oService.registerOrder(order);
 		
 		//System.out.println(order);
@@ -73,7 +70,7 @@ public class OrderController {
 		//System.out.println(orderProduct.getTotalPrice());
 		
 		if(result>0) {
-			mv.setViewName("redirect:/order/userOrderList.kh");
+			mv.setViewName("redirect:/order/userOrderList.kh?userId="+order.getUserId()+"");
 		}else {
 			mv.addObject("msg","주문실패");
 			mv.setViewName("common/errorPage");
@@ -88,8 +85,27 @@ public class OrderController {
 			,@RequestParam(required = false, name="userId") String userId) {
 		List<Order> oList = oService.findOrderById(userId);
 		System.out.println("----------------userId" + userId);
-		
+		int payState=0;
+		int delivaryState=0;
+		int cancleState=0;
 		try {
+			if(!oList.isEmpty()) {
+				for(int i=0; i<oList.size(); i++) {
+					switch (oList.get(i).getOrderState()) {
+					case 1:payState+=1;break;
+					case 2:payState+=1;break;
+					case 3:delivaryState+=1;break;
+					case 4:delivaryState+=1;break;
+					case 5:cancleState+=1;break;
+					default: break;
+					}
+				}
+			}
+			mv.addObject("payState",payState);
+			mv.addObject("delivaryState",delivaryState);
+			mv.addObject("cancleState",cancleState);
+//			mv.addObject("orderState", orderState);
+			mv.addObject("userId", userId);
 			mv.addObject("oList", oList);
 			mv.setViewName("order/userOrderList");
 			
