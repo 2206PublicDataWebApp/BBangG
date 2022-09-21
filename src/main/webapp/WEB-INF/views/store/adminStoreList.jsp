@@ -7,9 +7,9 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<body>
+<body align="center">
 <h1 align="center">점포 리스트 </h1>
-	<table border="1">
+	<table border="1" align="center">
 		<tr>
 			<th>등록번호</th>
 			<th>점포명</th>
@@ -22,14 +22,45 @@
 		<tr>
 			<td>${store.storeNo }</td>
 			<td><a href="/store/storeDetail.kh?storeNo=${store.storeNo }">${store.storeName }</a></td>
-			<td>2022-09-16</td>
+			<td>${store.storeUpdateDate }</td>
 			<td><button>이동</button></td>
-			<td><button onclick="modifyStore(${store.storeNo})">수정</button></td>
-			<td><button onclick="removeStore(${store.storeNo})">삭제</button></td>
+			<td><button onclick ="modifyStore(${store.storeNo})">수정</button></td>
+			<td><button onclick ="removeStore(${store.storeNo})">삭제</button></td>
 		</tr>
 		</c:forEach>
 	</table>
 	<br>
+	<form action="/board/storeSearch.kh" method="get">
+	<select>
+		<option value="all">전체</option>
+		<option value="name">이름</option>
+		<option value="region">지역</option>
+	</select>
+	<input type="text" name="searchValue" value="${searchValue }">
+	<input type="submit" value="검색">
+	</form>
+	<table align="center">
+		<tr>
+			<td colspan="6">
+			<c:if test="${currentPage != 1}">
+				<a href="/store/${urlVal }.kh?page=${currentPage - 1 }%searchCondition=${searchCondition }&searchValue=${searchValue }">
+				이전
+				</a>
+			</c:if>
+			<c:forEach var="p" begin="${startNavi }" end="${endNavi }">
+				<c:if test="${currentPage eq p }">
+					<b>${p }</b>
+				</c:if>
+				<c:if test="${currentPage ne p }">
+					<a href="/store/${urlVal }.kh?page=${p}&searchCondition=${searchCondition}&searchValue=${searchValue}">${p }</a>
+				</c:if>
+			</c:forEach>
+			<c:if test="${maxPage > currentPage }">
+				<a href="/store/${urlVal }.kh?page=${endNavi +1}&searchCondition=${searchCondition}&searchValue=${searchValue}">다음</a>
+			</c:if>
+			</td>
+		</tr>
+	</table>
 	<button onclick="registStore();">점포등록</button>
 	<script>
 		function registStore(){

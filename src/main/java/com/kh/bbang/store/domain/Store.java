@@ -1,5 +1,7 @@
 package com.kh.bbang.store.domain;
 
+import java.sql.Date;
+
 public class Store {
 	private int storeNo;
 	private String storeName;
@@ -14,6 +16,9 @@ public class Store {
 	private String storeFileRename;
 	private String storeFilepath;
 	private String storeStatus;
+	private String storeBank;
+	private Date storeUpdateDate;
+	
 	public int getStoreNo() {
 		return storeNo;
 	}
@@ -92,15 +97,27 @@ public class Store {
 	public void setStoreStatus(String storeStatus) {
 		this.storeStatus = storeStatus;
 	}
+	public String getStoreBank() {
+		return storeBank;
+	}
+	public void setStoreBank(String storeBank) {
+		this.storeBank = storeBank;
+	}
+	public Date getStoreUpdateDate() {
+		return storeUpdateDate;
+	}
+	public void setStoreUpdateDate(Date storeUpdateDate) {
+		this.storeUpdateDate = storeUpdateDate;
+	}
 	@Override
 	public String toString() {
 		return "Store [storeNo=" + storeNo + ", storeName=" + storeName + ", storeZipCode=" + storeZipCode
 				+ ", storeAddr=" + storeAddr + ", storeAddrDetail=" + storeAddrDetail + ", storeCeo=" + storeCeo
 				+ ", storeTel=" + storeTel + ", storeUrl=" + storeUrl + ", storeAccount=" + storeAccount
 				+ ", storeFilename=" + storeFilename + ", storeFileRename=" + storeFileRename + ", storeFilepath="
-				+ storeFilepath + ", storeStatus=" + storeStatus + "]";
+				+ storeFilepath + ", storeStatus=" + storeStatus + ", storeBank=" + storeBank + ", storeUpdateDate="
+				+ storeUpdateDate + "]";
 	}
-	
 	
 	
 	
