@@ -36,4 +36,4 @@
   			UPDATE REVIEW_TBL SET REVIEW_COUNT = REVIEW_COUNT +1 WHERE REVIEW_NO = #{reviewNo}
   		</update>
   </mapper>
-  
+ 
