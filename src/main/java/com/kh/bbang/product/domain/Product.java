@@ -1,21 +1,23 @@
 package com.kh.bbang.product.domain;
 
 public class Product {
-	private int storeNo;
-	private String productCode;
+	private int refStoreNo;
+	private int productCode;
 	private String productName;
 	private int productPrice;
 	
-	public int getStoreNo() {
-		return storeNo;
+
+	public int getRefStoreNo() {
+		return refStoreNo;
 	}
-	public void setStoreNo(int storeNo) {
-		this.storeNo = storeNo;
+	public void setRefStoreNo(int refStoreNo) {
+		this.refStoreNo = refStoreNo;
 	}
-	public String getProductCode() {
+	
+	public int getProductCode() {
 		return productCode;
 	}
-	public void setProductCode(String productCode) {
+	public void setProductCode(int productCode) {
 		this.productCode = productCode;
 	}
 	public String getProductName() {
@@ -32,7 +34,7 @@ public class Product {
 	}
 	@Override
 	public String toString() {
-		return "Product [storeNo=" + storeNo + ", productCode=" + productCode + ", productName=" + productName
+		return "Product [refStoreNo=" + refStoreNo + ", productCode=" + productCode + ", productName=" + productName
 				+ ", productPrice=" + productPrice + "]";
 	}
 	

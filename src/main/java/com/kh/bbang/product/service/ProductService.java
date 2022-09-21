@@ -1,5 +1,7 @@
 package com.kh.bbang.product.service;
 
-public interface ProductService {
+import com.kh.bbang.product.domain.Product;
 
+public interface ProductService {
+	public int registProduct(Product product);
 }

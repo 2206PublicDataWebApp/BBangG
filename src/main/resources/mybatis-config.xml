@@ -21,6 +21,7 @@
 	<mappers>
 		<mapper resource="mappers/user-mapper.xml"></mapper>
 		<mapper resource="mappers/store-mapper.xml"/>
+		<mapper resource="mappers/product-mapper.xml"/>
 		<mapper resource="mappers/review-mapper.xml"/>
 		<mapper resource="mappers/order-mapper.xml"/>
 		<mapper resource="mappers/faq-mapper.xml"/>

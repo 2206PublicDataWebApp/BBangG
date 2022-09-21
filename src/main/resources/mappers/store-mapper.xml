@@ -42,19 +42,19 @@
 	<select id="selectTotalCount" resultType="_int">
 	SELECT COUNT(*) FROM STORE_TBL
 		<where>
-			<if test="searchCondition.toString() == 'all'"></if>
-			<if test="searchCondition.toString() == 'name'">STORE_NAME LIKE '%'||#{storeName}||'%'</if>
-			<if test="searchCondition.toString() == 'region'">STORE_ADDR LIKE '%'||#{storeAddr}||'%'</if>
-	AND STORE_STATUS = 'Y'
+			<if test="searchCondition.toString() == 'all'">STORE_NAME LIKE '%'||#{searchValue}||'%' OR STORE_ADDR LIKE '%'||#{searchValue}||'%'</if>
+			<if test="searchCondition.toString() == 'name'">STORE_NAME LIKE '%'||#{searchValue}||'%'</if>
+			<if test="searchCondition.toString() == 'region'">STORE_ADDR LIKE '%'||#{searchValue}||'%'</if>
+	AND STORE_STATUS = 'Y' 
 		</where>
 	</select>
 	<select id="selectSearchedList" resultMap="storeResultMap">
 	SELECT * FROM STORE_TBL
 		<where>
-			<if test="searchCondition.toString() == 'all'"></if>
-			<if test="searchCondition.toString() == 'name'">STORE_NAME LIKE '%'||#{storeName}||'%'</if>
-			<if test="searchCondition.toString() == 'region'">STORE_ADDR LIKE '%'||#{storeAddr}||'%'</if>
-	AND STORE_STATUS = 'Y'
+			<if test="searchCondition.toString() == 'all'">STORE_NAME LIKE '%'||#{searchValue}||'%' OR STORE_ADDR LIKE '%'||#{searchValue}||'%'</if>
+			<if test="searchCondition.toString() == 'name'">STORE_NAME LIKE '%'||#{searchValue}||'%'</if>
+			<if test="searchCondition.toString() == 'region'">STORE_ADDR LIKE '%'||#{searchValue}||'%'</if>
+	AND STORE_STATUS = 'Y' ORDER BY STORE_NO DESC
 		</where>
 	</select>
 </mapper>

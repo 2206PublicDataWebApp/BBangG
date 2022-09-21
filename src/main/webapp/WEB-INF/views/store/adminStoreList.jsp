@@ -8,6 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body align="center">
+	<%@ include file="/WEB-INF/views/include/header.jsp"%>
 <h1 align="center">점포 리스트 </h1>
 	<table border="1" align="center">
 		<tr>
@@ -23,15 +24,15 @@
 			<td>${store.storeNo }</td>
 			<td><a href="/store/storeDetail.kh?storeNo=${store.storeNo }">${store.storeName }</a></td>
 			<td>${store.storeUpdateDate }</td>
-			<td><button>이동</button></td>
-			<td><button onclick ="modifyStore(${store.storeNo})">수정</button></td>
-			<td><button onclick ="removeStore(${store.storeNo})">삭제</button></td>
+			<td><button  onclick="showProduct(${store.storeNo },'${store.storeName }')">이동</button></td>
+			<td><button onclick="modifyStore(${store.storeNo})">수정</button></td>
+			<td><button onclick="removeStore(${store.storeNo})">삭제</button></td>
 		</tr>
 		</c:forEach>
 	</table>
 	<br>
-	<form action="/board/storeSearch.kh" method="get">
-	<select>
+	<form action="/store/storeSearch.kh" method="get">
+	<select name="searchCondition">
 		<option value="all">전체</option>
 		<option value="name">이름</option>
 		<option value="region">지역</option>
@@ -65,6 +66,10 @@
 	<script>
 		function registStore(){
 			location.href="/store/storeRegistForm.kh";
+		}
+		
+		function showProduct(storeNo, storeName){
+			location.href="/product/productRegistForm.kh?storeNo="+storeNo+"&storeName="+storeName;
 		}
 		function removeStore(storeNo){
 			event.preventDefault();

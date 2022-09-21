@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<%@ include file="/WEB-INF/views/include/header.jsp"%>
     <h1 align="center">점포정보수정화면</h1>
     <form action="/store/storeModify.kh" method="post" encType="multipart/form-data">
       <input type="hidden" name="storeNo" value="${store.storeNo }">
