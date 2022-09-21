@@ -69,7 +69,7 @@
 		}
 		
 		function showProduct(storeNo, storeName){
-			location.href="/product/productRegistForm.kh?storeNo="+storeNo+"&storeName="+storeName;
+			location.href="/product/adminProductList.kh?storeNo="+storeNo+"&storeName="+storeName;
 		}
 		function removeStore(storeNo){
 			event.preventDefault();
