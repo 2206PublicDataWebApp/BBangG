@@ -25,7 +25,8 @@ public interface UserStore {
 	
 	public int deleteUser(SqlSession session, String userId);
 	
-	public List<User> findId(SqlSession session, String userId, String userEmail);
+	public List<User> findId(SqlSession session, String userName, String userEmail);
 	
+	public int findPwd(SqlSession session, String userId, String userEmail, String userPwd);
 	
 }

@@ -22,6 +22,8 @@ public interface UserService {
 
 	public User checkLoginBefore(String value) throws Exception;
 	
-	public List<User> findId(String userId, String userEmail);
+	public List<User> findId(String userName, String userEmail);
+	
+	public int findPwd(String userId, String userEmail);
 
 }
