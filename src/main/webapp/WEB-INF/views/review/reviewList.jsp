@@ -95,191 +95,28 @@
 <body>
     <div class="wrap">
         <ul class="review-board board-fixed">
-        <c:forEach items ="#{rList} " var="review" varStatus="i">
-            <li data-href="#" class="review-list">
-                <div class="review_list_inner" data-href="#">       
-                    <p class="no"></p>
-                    <div class="thumb-box">
-                        <div class="thumb"><img src="../resources/image/review-image/bread.jpg"></div>
-                    <div class="description" data-href="#">
-                        <!-- <a href="#"><p class="subject"><a href="#">너무 요새 유명한 만동제과!!!!</p></a> -->
-                        <a href="#"><p class="content">${review.reviewContents }<br>
-				                            마늘바게트가 시그니쳐 메뉴라서 두개 샀어요 <br>
-				                            저는 바삭바삭한 마늘바게트보 다....</p></a>
-                        
-                        <p class="point displaynone">${review.starRating }</p>
-                        <p class="date "> <br><i class="bar"></i>${review.R_CREATE_DATE }</p>
-                    </div>
-                    <div class="review_product_info">
-                        <a href="#">
-                            <span class="rpi_tit">${review.storeNo }</span>
-                        </a>
-                    </div>
-                </div>
-            </li>
-         </c:forEach>
-            <!-- <li data-href="#" class="review-list">
-                <div class="review_list_inner" data-href="#">       
-                    <p class="no"></p>
-                    <div class="thumb-box">
-                        <span class="empty "></span>
-                        <span class="thumb"><img src="//ecudemo221603.cafe24.com/web/product/tiny/202202/c5c236c4567bdeeaa04fe31c4d7dc2f5.jpeg" border="0" alt=""></span>
-                        <span class="thumb-img" style="background:url('//ecudemo221603.cafe24.com/file_data/ecudemo221603/2022/02/14/64b864ed6664f226db51cd1524fa9476.jpg') no-repeat;"></span>
-                        </div>
-                    <div class="description" data-href="#">
-                        <a href="#"><p class="subject"><a href="#">너무 요새 유명한 만동제과!!!!</p></a>
-                        <a href="#"><p class="content">벼르고 벼르다가 맘 먹고 갔어요 ㅎㅎㅎ<br>
-                            마늘바게트가 시그니쳐 메뉴라서 두개 샀어요 <br>
-                            저는 바삭바삭한 마늘바게트보 다....</p></a>
-                        <p class="date ">브래드피트 <i class="bar"></i> 2022-02-14</p>
-                        <p class="point displaynone"><img src="//img.echosting.cafe24.com/skin/base/board/ico_point5.gif" alt="5점"></p>
-                    </div>
-                    <div class="review_product_info">
-                        <a href="#">
-                            <span class="rpi_tit">만동제과</span>
-                        </a>
-                    </div>
-                </div>
-            </li>
-            <li data-href="#" class="review-list">
-                <div class="review_list_inner" data-href="#">       
-                    <p class="no"></p>
-                    <div class="thumb-box">
-                        <span class="empty "></span>
-                        <span class="thumb"><img src="//ecudemo221603.cafe24.com/web/product/tiny/202202/c5c236c4567bdeeaa04fe31c4d7dc2f5.jpeg" border="0" alt=""></span>
-                        <span class="thumb-img" style="background:url('//ecudemo221603.cafe24.com/file_data/ecudemo221603/2022/02/14/64b864ed6664f226db51cd1524fa9476.jpg') no-repeat;"></span>
-                        </div>
-                    <div class="description" data-href="#">
-                        <a href="#"><p class="subject"><a href="#">너무 요새 유명한 만동제과!!!!</p></a>
-                        <a href="#"><p class="content">벼르고 벼르다가 맘 먹고 갔어요 ㅎㅎㅎ<br>
-                            마늘바게트가 시그니쳐 메뉴라서 두개 샀어요 <br>
-                            저는 바삭바삭한 마늘바게트보 다....</p></a>
-                        <p class="date ">브래드피트 <i class="bar"></i> 2022-02-14</p>
-                        <p class="point displaynone"><img src="//img.echosting.cafe24.com/skin/base/board/ico_point5.gif" alt="5점"></p>
-                    </div>
-                    <div class="review_product_info">
-                        <a href="#">
-                            <span class="rpi_tit">만동제과</span>
-                        </a>
-                    </div>
-                </div>
-            </li>
-            <li data-href="#" class="review-list">
-                <div class="review_list_inner" data-href="#">       
-                    <p class="no"></p>
-                    <div class="thumb-box">
-                        <span class="empty "></span>
-                        <span class="thumb"><img src="//ecudemo221603.cafe24.com/web/product/tiny/202202/c5c236c4567bdeeaa04fe31c4d7dc2f5.jpeg" border="0" alt=""></span>
-                        <span class="thumb-img" style="background:url('//ecudemo221603.cafe24.com/file_data/ecudemo221603/2022/02/14/64b864ed6664f226db51cd1524fa9476.jpg') no-repeat;"></span>
-                        </div>
-                    <div class="description" data-href="#">
-                        <a href="#"><p class="subject"><a href="#">너무 요새 유명한 만동제과!!!!</p></a>
-                        <a href="#"><p class="content">벼르고 벼르다가 맘 먹고 갔어요 ㅎㅎㅎ<br>
-				                            마늘바게트가 시그니쳐 메뉴라서 두개 샀어요 <br>
-				                            저는 바삭바삭한 마늘바게트보 다....</p></a>
-                        <p class="date ">브래드피트 <i class="bar"></i> 2022-02-14</p>
-                        <p class="point displaynone"><img src="//img.echosting.cafe24.com/skin/base/board/ico_point5.gif" alt="5점"></p>
-                    </div>
-                    <div class="review_product_info">
-                        <a href="#">
-                            <span class="rpi_tit">만동제과</span>
-                        </a>
-                    </div>
-                </div>
-            </li>
-            2
-                        <li data-href="#" class="review-list">
-                <div class="review_list_inner" data-href="#">       
-                    <p class="no"></p>
-                    <div class="thumb-box">
-                        <span class="empty "></span>
-                        <div class="thumb"><img src="//ecudemo221603.cafe24.com/web/product/tiny/202202/c5c236c4567bdeeaa04fe31c4d7dc2f5.jpeg" border="0" alt=""></div>
-                        <span class="thumb-img" style="background:url('//ecudemo221603.cafe24.com/file_data/ecudemo221603/2022/02/14/64b864ed6664f226db51cd1524fa9476.jpg') no-repeat;"></span>
-                        </div>
-                    <div class="description" data-href="#">
-                        <a href="#"><p class="subject"><a href="#">너무 요새 유명한 만동제과!!!!</p></a>
-                        <a href="#"><p class="content">벼르고 벼르다가 맘 먹고 갔어요 ㅎㅎㅎ<br>
-                            마늘바게트가 시그니쳐 메뉴라서 두개 샀어요 <br>
-                            저는 바삭바삭한 마늘바게트보 다....</p></a>
-                        <p class="date ">브래드피트 <i class="bar"></i> 2022-02-14</p>
-                        <p class="point displaynone"><img src="//img.echosting.cafe24.com/skin/base/board/ico_point5.gif" alt="5점"></p>
-                    </div>
-                    <div class="review_product_info">
-                        <a href="#">
-                            <span class="rpi_tit">만동제과</span>
-                        </a>
-                    </div>
-                </div>
-            </li>
-            <li data-href="#" class="review-list">
-                <div class="review_list_inner" data-href="#">       
-                    <p class="no"></p>
-                    <div class="thumb-box">
-                        <span class="empty "></span>
-                        <span class="thumb"><img src="//ecudemo221603.cafe24.com/web/product/tiny/202202/c5c236c4567bdeeaa04fe31c4d7dc2f5.jpeg" border="0" alt=""></span>
-                        <span class="thumb-img" style="background:url('//ecudemo221603.cafe24.com/file_data/ecudemo221603/2022/02/14/64b864ed6664f226db51cd1524fa9476.jpg') no-repeat;"></span>
-                        </div>
-                    <div class="description" data-href="#">
-                        <a href="#"><p class="subject"><a href="#">너무 요새 유명한 만동제과!!!!</p></a>
-                        <a href="#"><p class="content">벼르고 벼르다가 맘 먹고 갔어요 ㅎㅎㅎ<br>
-                            마늘바게트가 시그니쳐 메뉴라서 두개 샀어요 <br>
-                            저는 바삭바삭한 마늘바게트보 다....</p></a>
-                        <p class="date ">브래드피트 <i class="bar"></i> 2022-02-14</p>
-                        <p class="point displaynone"><img src="//img.echosting.cafe24.com/skin/base/board/ico_point5.gif" alt="5점"></p>
-                    </div>
-                    <div class="review_product_info">
-                        <a href="#">
-                            <span class="rpi_tit">만동제과</span>
-                        </a>
-                    </div>
-                </div>
-            </li>
-            <li data-href="#" class="review-list">
-                <div class="review_list_inner" data-href="#">       
-                    <p class="no"></p>
-                    <div class="thumb-box">
-                        <span class="empty "></span>
-                        <span class="thumb"><img src="//ecudemo221603.cafe24.com/web/product/tiny/202202/c5c236c4567bdeeaa04fe31c4d7dc2f5.jpeg" border="0" alt=""></span>
-                        <span class="thumb-img" style="background:url('//ecudemo221603.cafe24.com/file_data/ecudemo221603/2022/02/14/64b864ed6664f226db51cd1524fa9476.jpg') no-repeat;"></span>
-                        </div>
-                    <div class="description" data-href="#">
-                        <a href="#"><p class="subject"><a href="#">너무 요새 유명한 만동제과!!!!</p></a>
-                        <a href="#"><p class="content">벼르고 벼르다가 맘 먹고 갔어요 ㅎㅎㅎ<br>
-				                            마늘바게트가 시그니쳐 메뉴라서 두개 샀어요 <br>
-				                            저는 바삭바삭한 마늘바게트보 다....</p></a>
-                        <p class="date ">브래드피트 <i class="bar"></i> 2022-02-14</p>
-                        <p class="point displaynone"><img src="//img.echosting.cafe24.com/skin/base/board/ico_point5.gif" alt="5점"></p>
-                    </div>
-                    <div class="review_product_info">
-                        <a href="#">
-                            <span class="rpi_tit">만동제과</span>
-                        </a>
-                    </div>
-                </div>
-            </li>
-            <li data-href="#" class="review-list">
-                <div class="review_list_inner" data-href="#">       
-                    <p class="no"></p>
-                    <div class="thumb-box">
-                        <span class="empty "></span>
-                        <span class="thumb"><img src="//ecudemo221603.cafe24.com/web/product/tiny/202202/c5c236c4567bdeeaa04fe31c4d7dc2f5.jpeg" border="0" alt=""></span>
-                        <span class="thumb-img" style="background:url('//ecudemo221603.cafe24.com/file_data/ecudemo221603/2022/02/14/64b864ed6664f226db51cd1524fa9476.jpg') no-repeat;"></span>
-                        </div>
-                    <div class="description" data-href="#">
-                        <a href="#"><p class="subject"><a href="#">너무 요새 유명한 만동제과!!!!</p></a>
-                        <a href="#"><p class="content">벼르고 벼르다가 맘 먹고 갔어요 ㅎㅎㅎ<br>
-				                            마늘바게트가 시그니쳐 메뉴라서 두개 샀어요 <br>
-				                            저는 바삭바삭한 마늘바게트보 다....</p></a>
-                        <p class="date ">브래드피트 <i class="bar"></i> 2022-02-14</p>
-                        <p class="point displaynone"><img src="//img.echosting.cafe24.com/skin/base/board/ico_point5.gif" alt="5점"></p>
-                    </div>
-                    <div class="review_product_info">
-                        <a href="#">
-                            <span class="rpi_tit">만동제과</span>
-                        </a>
-                    </div>
-                </div>
-            </li> -->
+	        <c:forEach items ="${rList}" var="review" varStatus="i">
+	            <li data-href="#" class="review-list">
+	                <div class="review_list_inner" data-href="#">       
+	                    <p class="no"></p>
+		                    <div class="thumb-box">
+		                        <div class="thumb"><img src="../resources/image/review-image/bread.jpg"></div>
+			                        <div class="content">
+				                        <a href="#">
+				                       	 	${review.reviewContents }<br><br>
+										</a>
+									</div>
+		                        <p class="point displaynone">${review.starRating }</p>
+		                        <p class="date "> <br><i class="bar"></i>${review.rCreateDate }</p>
+		                    </div>
+	                    <div class="review_product_info">
+	                        <a href="#">
+	                            <span class="storeNo">${review.storeNo }</span><!-- 점포명이 들어가야함 -->
+	                        </a>
+	                    </div>
+	                </div>
+	            </li>
+         	</c:forEach>
         </ul>
     </div>
 </body>

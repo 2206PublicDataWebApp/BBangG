@@ -38,4 +38,10 @@ public class ReviewStoreLogic implements ReviewStore{
 		return rList;
 	}
 
+	@Override
+	public int selectTotalCount(SqlSession session) {
+		int totalCount = session.selectOne("ReviewMapper.selectTotalCount");
+		return totalCount;
+	}
+
 }
