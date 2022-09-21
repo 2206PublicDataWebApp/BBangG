@@ -37,6 +37,7 @@ button {
 </head>
 <body>
 <body>
+	<%@ include file="/WEB-INF/views/include/header.jsp"%>
 	<h1 align="center">점포상세정보화면</h1>
 	<div id="detail">
 		<img src="" />

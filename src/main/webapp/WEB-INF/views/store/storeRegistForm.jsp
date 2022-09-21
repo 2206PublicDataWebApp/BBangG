@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<%@ include file="/WEB-INF/views/include/header.jsp"%>
     <h1 align="center">점포등록화면</h1>
     <form action="/store/registStore.kh" method="post" encType="multipart/form-data">
       <table align="center" border="1">
@@ -69,7 +70,7 @@
           		<option value="기업">기업</option>
           		<option value="광주">광주</option>
           		<option value="대구">대구</option>
-          		<option value="우체국">우체국</option>
+          		<option value="우체국">우체국</option>  
           	</select>
           	<input type="text" name="storeAccount"/></td>
         </tr>

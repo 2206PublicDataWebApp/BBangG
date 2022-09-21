@@ -42,9 +42,7 @@ img {
 </style>
 </head>
 <body>
-	<header>
-		<div></div>
-	</header>
+	<%@ include file="/WEB-INF/views/include/header.jsp"%>
 	<section>
 		<h1 align="center">빵집 리스트</h1>
 		<div class="wrapper">
@@ -80,7 +78,7 @@ img {
 					</c:if></td>
 			</tr>
 		</table>
-		<form action="/store/storeSearch.kh" method="get">
+		<form action="/store/userStoreSearch.kh" method="get">
 			<select name="searchCondition">
 				<option value="all">전체</option>
 				<option value="name">이름</option>
