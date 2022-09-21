@@ -14,7 +14,7 @@
 		<typeAlias type="com.kh.bbang.review.domain.Review" alias="Review"/>
 		<typeAlias type="com.kh.bbang.order.domain.Order" alias="Order"/>
 		<typeAlias type="com.kh.bbang.product.domain.Product" alias="Product"/>
-		<typeAlias type="com.kh.bbamg.faq.domain.Faq" alias="Faq"/>
+		<typeAlias type="com.kh.bbang.faq.domain.Faq" alias="Faq"/>
 	</typeAliases>
 
 

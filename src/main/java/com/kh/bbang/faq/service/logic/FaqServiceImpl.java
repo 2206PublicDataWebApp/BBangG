@@ -27,16 +27,39 @@ public class FaqServiceImpl implements FaqService {
 	}
 
 	@Override
-	public List<Faq> printAllFaq() {
-		List<Faq> faqList = faqStore.selectAllFaq(session);
+	public List<Faq> printAllFaq(int currentPage, int limit) {
+		List<Faq> faqList = faqStore.selectAllFaq(session, currentPage, limit);
 		return faqList;
 	}
 
 	@Override
-	public int getTotalCount() {
-		int totalCount = faqStore.selectTotalCount(session);
+	public int getTotalCount(String searchCondition, String searchValue) {
+		int totalCount = faqStore.selectTotalCount(session, searchCondition, searchValue);
 		return totalCount;
 	}
 
-	
+	@Override
+	public Faq printOneByNo(Integer FaqNo) {
+		Faq Faq = faqStore.selectOneByNo(session, FaqNo);
+		return Faq;
+	}
+
+	@Override
+	public int removeOneByNo(int FaqNo) {
+		int result = faqStore.deleteOneByNo(session, FaqNo);
+		return result;
+	}
+
+	@Override
+	public int modifyFaq(Faq Faq) {
+		int result = faqStore.updateFaq(session, Faq);
+		return result;
+	}
+
+	@Override
+	public List<Faq> printAllByValue(String searchCondition, String searchValue, 
+			int currentPage, int FaqLimit) {
+		List<Faq> bList = faqStore.selectAllByValue(session, searchCondition, searchValue, currentPage, FaqLimit);
+		return bList;
+	}
 }
