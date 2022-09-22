@@ -67,4 +67,25 @@ public class StoreStoreLogic implements StoreStore {
 		return sList;
 	}
 
+	@Override
+	public int selectSortCount(SqlSession session, String region1, String region2) {
+		HashMap<String, String> paraMap = new HashMap<String, String>();
+		paraMap.put("region1", region1);
+		paraMap.put("region2", region2);
+		int sortCount = session.selectOne("StoreMapper.selectSortCount", paraMap);
+		return sortCount;
+	}
+
+	@Override
+	public List<Store> selectSortedStore(SqlSession session, String region1, String region2, int currentPage,
+			int storeLimit) {
+		int offset = (currentPage - 1) * storeLimit;
+		RowBounds rowBounds = new RowBounds(offset, storeLimit);
+		HashMap<String, String> paraMap = new HashMap<String, String>();
+		paraMap.put("region1", region1);
+		paraMap.put("region2", region2);
+		List<Store> sList = session.selectList("StoreMapper.selectSortedList", paraMap, rowBounds);
+		return sList;
+	}
+	
 }

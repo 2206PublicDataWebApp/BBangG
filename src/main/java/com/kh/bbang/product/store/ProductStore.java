@@ -12,7 +12,7 @@ public interface ProductStore {
 	
 	public List<Product> selectAllProduct(SqlSession session);
 	
-	public int deleteProduct(SqlSession session, String productCode);
+	public int deleteProduct(SqlSession session, Integer productCode, Integer refStoreNo);
 	
 
 }

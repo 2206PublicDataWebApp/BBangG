@@ -9,5 +9,5 @@ public interface ProductService {
 	
 	public List<Product> printAllProduct();
 	
-	public int removeProduct(String productCode);
+	public int removeProduct(Integer productCode, Integer refStoreNo);
 }

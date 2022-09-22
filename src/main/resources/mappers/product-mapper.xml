@@ -13,7 +13,7 @@
 	INSERT INTO PRODUCT_TBL VALUES(SEQ_PRODUCT_CODE.NEXTVAL, #{refStoreNo}, #{productName}, #{productPrice})
 	</insert>
 	<delete id="deleteProduct">
-	DELETE FROM PRODUCT_TBL WHERE PRODUCT_CODE = #{productCode}
+	DELETE FROM PRODUCT_TBL WHERE PRODUCT_CODE = #{productCode} AND REF_STORE_NO = #{refStoreNo}
 	</delete>
 	<select id="selectAllProduct" resultMap="productResultMap">
 	SELECT * FROM PRODUCT_TBL 

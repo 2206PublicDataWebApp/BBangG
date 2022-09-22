@@ -62,5 +62,17 @@ public class StoreServiceImpl implements StoreService {
 		return totalCount;
 	}
 
+	@Override
+	public int getSortCount(String region1, String region2) {
+		int sortCount = sStore.selectSortCount(session, region1, region2);
+		return sortCount;
+	}
+
+	@Override
+	public List<Store> showSortedStore(String region1, String region2, int currentPage, int storeLimit) {
+		List<Store> sList = sStore.selectSortedStore(session, region1, region2, currentPage, storeLimit);
+		return sList;
+	}
+
 	
 }
