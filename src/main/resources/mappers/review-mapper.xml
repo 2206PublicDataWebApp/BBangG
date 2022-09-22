@@ -16,29 +16,65 @@
   			<result property="rCreateDate" column="R_CREATE_DATE"/>
   			<result property="rUpdateDate" column="R_UPDATE_DATE"/>
   			<result property="useYn" column="USE_YN"/>
+  			<result property="storeName" column="STORE_NAME"/>
+  			<result property="reviewHeart" column="REVIEW_HEART"/>
+  			
   		</resultMap>
   		<!-- <resultMap type="Review" id="reviewHeartResultMap">
   			<id property=""
   		</resultMap> -->
   			
   		<insert id="insertReview">
-  			INSERT INTO REVIEW_TBL(REVIEW_NO, USER_ID, STORE_NO,
-			    STAR_RATING, REVIEW_COUNT, R_CREATE_DATE,
-			    REVIEW_CONTENT, USE_YN, R_UPDATE_DATE)
-			    VALUES(SEQ_REVIEW_NO.NEXTVAL, #{userId}, #{storeNo}, #{starRating}, 0, SYSDATE, #{reviewContents} , 'Y', SYSDATE);
+  			INSERT INTO REVIEW_TBL(REVIEW_NO, STORE_NO, REVIEW_WRITER,
+			    REVIEW_CONTENT, REVIEW_FILENAME, REVIEW_FILERENAME,
+			    REVIEW_FILEPATH, REVIEW_COUNT, STAR_RATING, R_CREATE_DATE, R_UPDATE_DATE, USE_YN)
+			    VALUES(SEQ_REVIEW_NO.NEXTVAL, #{storeNo}, #{reviewWriter}, #{reviewContent}, #{reviewFilename}, #{reviewFileRename}, 
+			    #{reviewFilepath} , 0,#{starRating}, SYSDATE, SYSDATE, 'Y')
+  		</insert>
+  		<insert id="insertHeartCount">
+  			INSERT INTO REVIEW_HEART (HEART_NO, USER_ID, REVIEW_NO)
+    			VALUES (SEQ_HEART_NO.NEXTVAL, #{userId}, #{reviewNo})
   		</insert>
   		<!--  리뷰 검색 -->
-  		<select id="selectOneByNo" resultMap="reviewResultMap">
-  			SELECT * FROM REVIEW_TBL WHERE REVIEW_NO = #{reviewNo}
-  		</select>
   		<select id="selectAllReview" resultMap="reviewResultMap">
-  			SELECT * FROM REVIEW_TBL WHERE USE_YN = 'Y' ORDER BY REVIEW_NO DESC
+  			SELECT * FROM REVIEW_TBL WHERE USE_YN = 'Y' ORDER BY REVIEW_NO ASC
   		</select>
+  		
   		<select id="selectTotalCount" resultType="_int">
-  			SELECT COUNT(*) FROM REVIEW_TBL WHERE USE_YN = 'Y'
+  			SELECT COUNT(*) FROM REVIEW_TBL
+			<where>
+				<if test="searchCondition.toString() == 'contents'">
+					REVIEW_CONTENT LIKE '%'||#{searchValue}||'%'
+				</if>
+				<if test="searchCondition.toString() == 'writer'">
+					REVIEW_WRITER LIKE '%'||#{searchValue}||'%'
+				</if>
+				<if test="searchCondition.toString() == 'all'">
+					OR REVIEW_CONTENT LIKE '%'||#{searchValue}||'%'
+					OR REVIEW_WRITER LIKE '%'||#{searchValue}||'%'
+				</if>
+				AND USE_YN = 'Y'
+			</where>
   		</select>
+  		
+  		<select id="selectOneByNo" resultMap="reviewResultMap">
+  			SELECT R.*,
+  				(SELECT STORE_NAME FROM STORE_TBL WHERE STORE_NO = R.STORE_NO) STORE_NAME,
+  				(SELECT COUNT (HEART_NO) FROM REVIEW_HEART WHERE REVIEW_NO = R.REVIEW_NO) REVIEW_HEART
+  			FROM REVIEW_TBL R 
+  			WHERE REVIEW_NO = #{reviewNo}
+  		</select>
+  		
+  		<select id="selectHeartCount" resultType="_int">
+  			SELECT COUNT (HEART_NO) FROM REVIEW_HEART WHERE REVIEW_NO = #{reviewNo}
+  		</select>
+  		
+  		
+  		
   		<update id="updateCount">
   			UPDATE REVIEW_TBL SET REVIEW_COUNT = REVIEW_COUNT +1 WHERE REVIEW_NO = #{reviewNo}
   		</update>
+  		
+  		
   </mapper>
   

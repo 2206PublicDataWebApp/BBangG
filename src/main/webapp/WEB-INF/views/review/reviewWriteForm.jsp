@@ -39,8 +39,10 @@
            
         }
         #max{
+        	
+        	margin: 10px auto;
             font-size : 10px;
-            /* text-align : right;  */
+            /* text-align : right; */
         }
         #select-file{
             margin: 10px;
@@ -56,17 +58,17 @@
         }
         
 
-        /* #star-wrap fieldset{
+        #star-form fieldset{
             
             display: inline-block;
             direction: rtl;
             border:0;
-        } */
+        }
         
-        /* #myform fieldset legend{
+        #star-form fieldset legend{
             
             text-align: right;
-        } */
+        }
         
         #star-form input[type=radio]{
             
@@ -151,13 +153,13 @@
 	         </div>
 	         <form action="/review/register.kh" method="post" enctype="multipart/form-data">
                 <div id="review-content">
-                	<input type="text" name="userId" value="${review.userId}" placeholder="작성자"/>
-                    <textarea id="in-content" rows="20" cols="55" placeholder="내용을 작성해주세요" required></textarea>
+                	<%-- <input type="hidden" name="userId" value="${review.userId}" placeholder="작성자"/> --%>
+                    <textarea name="reviewContent" id="in-content" rows="20" cols="55" placeholder="내용을 작성해주세요" required></textarea>
                     <div id="max">(0 / 2000)</div>
                 </div>
 
                 <!-- 왼쪽 정렬 -->
-                <input type="file" id="select-file" name="SelectFile" />
+                <input type="file" id="select-file" name="uploadFile" />
                 
 	            <div>
 	                <button class="write-btn-cancel" type="reset">취소</button>
@@ -176,7 +178,7 @@
         // });
 
         $(document).ready(function() {
-            $('#review-content').on('keyup', function() {
+            $('#in-content').on('keyup', function() {
                 $('#max').html("("+$(this).val().length+" / 2000)");
     
                 if($(this).val().length > 2000) {
