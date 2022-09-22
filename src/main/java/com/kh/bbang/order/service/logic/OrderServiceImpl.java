@@ -64,8 +64,8 @@ public class OrderServiceImpl implements OrderService{
 
 
 	@Override
-	public List<Product> findAllProduct(int storeNo) {
-		List<Product> pList = oStore.selectAllProduct(session, storeNo);
+	public List<Product> findAllProduct(int refStoreNo) {
+		List<Product> pList = oStore.selectAllProduct(session, refStoreNo);
 		return pList;
 	}
 
@@ -83,7 +83,7 @@ public class OrderServiceImpl implements OrderService{
 
 	@Override
 	public Store findStore(int storeNo) {
-		Store store = oStore.selectStore(session, storeNo);
+		Store store = oStore.selectStore(session,storeNo);
 		return store;
 	}
 

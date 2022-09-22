@@ -5,7 +5,7 @@
   
  <mapper namespace="OrderMapper">
  	<resultMap type="Product" id="productResultMap">
- 		<id property="storeNo" column="STORE_NO"/>
+ 		<id property="refStoreNo" column="REF_STORE_NO"/>
  		<result property="productCode" column="PRODUCT_CODE"/>
  		<result property="productName" column="PRODUCT_NAME"/>
  		<result property="productPrice" column="PRODUCT_PRICE"/>
@@ -14,13 +14,13 @@
  		<id property="userId" column="USER_ID"/>
  		<result property="orderNo" column="ORDER_NO"/>
  		<result property="orderDetail" column="ORDER_DETAIL"/>
- 		<result property="storeNo" column="STORE_NO"/>
+ 		<result property="refStoreNo" column="REF_STORE_NO"/>
  		<result property="orderState" 				column="ORDER_STATE"/>
  	</resultMap>
  		 <resultMap type="Order" id="orderDetailResultMap">
  		<id property="orderNo" column="ORDER_NO"/>
  		<result property="userId" 					column="USER_ID"/>
- 		<result property="storeNo" 					column="STORE_NO"/>
+ 		<result property="storeNo" 				column="STORE_NO"/>
  		<result property="orderDetail"				column="ORDER_DETAIL"/>
  		<result property="orderShipfee" 			column="ORDER_SHIPFEE"/>
  		<result property="totalPrice" 				column="TOTAL_PRICE"/>
@@ -58,7 +58,7 @@
  		WHERE ORDER_NO=#{orderNo}
  	</update>
  	<select id="selectAllProduct" resultMap="productResultMap">
- 		SELECT*FROM PRODUCT_TBL WHERE STORE_NO =#{storeNo}
+ 		SELECT*FROM PRODUCT_TBL WHERE REF_STORE_NO =#{refStoreNo}
  	</select>
  	<select id="selectOrderById" resultMap="orderResultMapById">
  		SELECT*FROM ORDER_TBL WHERE USER_ID=#{userId}

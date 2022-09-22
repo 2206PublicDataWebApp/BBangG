@@ -15,17 +15,63 @@
 </head>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-<body id="userStyle">
+<style>
+ #title {
+    line-height: 56px;
+    color: #fff;
+    font-size: 15px;
+    font-weight: normal;
+    text-align: center;
+    background: #4a5164;
+    position:relative;
+}
+
+body, code {
+	
+    min-width: 320px;
+    font-size: 16px;
+    font-family: Verdana,"맑은 고딕",Malgun Gothic,AppleSDGothicNeo,"돋움",Dotum;
+    line-height: 1.4em;
+    letter-spacing: -0.4px;
+    color: #666;
+    background: #fff;
+    -webkit-text-size-adjust: none;
+}
+input, select, textarea,Button {
+    font-size: 16px;
+    font-family: Verdana,"맑은 고딕",Malgun Gothic,AppleSDGothicNeo,"돋움",Dotum;
+    color: #333;
+    vertical-align: middle;
+    outline: 0;
+    border-radius: 0;
+    height: 40px;
+
+    padding: 7px;
+    font-weight: inherit;
+    border: 1px solid #d7d5d5;
+    outline-style: none;
+    line-height: 16px;
+    color: #333;
+    box-sizing: border-box;
+}
+input[type="text"]{
+	width: 100%
+}
+</style>
+<div>
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
-	<header id="header">
-	<div class="titleArea">
-	<h1 align="center">주문</h1>
+</div>
+<body id="userStyle">
+	<div id="title" >
+	<h1 align="center">${store.storeName}주문</h1>
+	
 	</div>
-	</header>
+	<br><br><br>
 		<form action="/order/sendOrder.kh" method="post">
 		<section style=" float: left; width: 45%; padding:10px;">
 		<input type="hidden" name="orderShipfee" value=3000>
 		<input type="hidden" name="userId" value="${user.userId}">
+		<input type="hidden" name="storeNo" value="${store.storeNo}">
 
 			<select id="selGoods" name="selGoods" style="height:40px;">
 			</select>

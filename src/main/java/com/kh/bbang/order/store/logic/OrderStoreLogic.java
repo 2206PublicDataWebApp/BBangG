@@ -57,8 +57,8 @@ public class OrderStoreLogic implements OrderStore{
 	}
 
 	@Override
-	public List<Product> selectAllProduct(SqlSession session, int storeNo) {
-		List<Product> pList = session.selectList("OrderMapper.selectAllProduct", storeNo);
+	public List<Product> selectAllProduct(SqlSession session, int refStoreNo) {
+		List<Product> pList = session.selectList("OrderMapper.selectAllProduct", refStoreNo);
 		return pList;
 	}
 
