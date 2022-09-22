@@ -1,5 +1,7 @@
 package com.kh.bbang.product.store.logic;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
@@ -12,6 +14,18 @@ public class ProductStoreLogic implements ProductStore{
 	@Override
 	public int insertProduct(SqlSession session, Product product) {
 		int result = session.insert("ProductMapper.insertProduct", product);
+		return result;
+	}
+
+	@Override
+	public List<Product> selectAllProduct(SqlSession session) {	
+		List<Product> pList = session.selectList("ProductMapper.selectAllProduct");
+		return pList;
+	}
+
+	@Override
+	public int deleteProduct(SqlSession session, String productCode) {
+		int result = session.delete("ProductMapper.deleteProduct", productCode);
 		return result;
 	}
 	
