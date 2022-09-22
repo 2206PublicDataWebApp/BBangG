@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,85 +8,124 @@
 <title>사용자 주문 상세페이지</title>
 </head>
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<style>
+#f_table {
+	width: 80%;
+	border-top: 1px solid #3A2618;
+	border-bottom: 1px solid #3A2618;
+	border-collapse: collapse;
+}
+
+th, td {
+	padding: 10px;
+}
+
+h1 {
+	color: #fff;
+}
+
+#cover {
+	text-align: center;
+	
+	
+}
+
+.menu {
+	text-align: center;
+	display: inline-block; .
+	display: inline;
+}
+ #title {
+    line-height: 56px;
+    color: #fffff;
+    font-size: 15px;
+    font-weight: normal;
+    text-align: center;
+    background: #3A2618;
+    position:relative;
+}
+</style>
 <body>
+	<div id="title" >
 	<h1 align="center">주문 상세정보</h1>
-	<br><br>
-	<table align="center" border="1">
-		<tr>
+	
+	</div>
+	<br>
+	<br>
+	<table align="center"  id="f_table" style="text-align:center">
+		<tr style=" border-bottom: 1px solid  #3A2618;">
 			<th>주문번호</th>
 			<th>주문내역</th>
 			<th>주문점포</th>
 			<th>입금상태</th>
 			<th>배송상태</th>
 		</tr>
-			<tr>
-				<td>${order.orderNo }</td>
-				<td>${order.orderDetail}</td>
-				<td><a href="#">${order.storeNo}</a></td>
-				<td>
-					<c:if test="${order.orderState eq 0 }">입금전</c:if>
-					<c:if test="${order.orderState eq 1 }">입금완료</c:if>
-					<c:if test="${order.orderState eq 2 }">입금확인완료</c:if>
-					<c:if test="${order.orderState eq 3}" >입금확인완료</c:if>
-					<c:if test="${order.orderState eq 4}" >입금확인완료</c:if>
-					<c:if test="${order.orderState eq 5}" >취소요청 진행중</c:if>
-				</td>
-				<td>
-					<c:if test="${order.orderState eq 0 }">배송전</c:if>
-					<c:if test="${order.orderState eq 1 }">배송전</c:if>
-					<c:if test="${order.orderState eq 2 }">배송전</c:if>
-					<c:if test="${order.orderState eq 3}" >배송출발</c:if>
-					<c:if test="${order.orderState eq 4}" >구매확정</c:if>
-					<c:if test="${order.orderState eq 5}" >취소요청 진행중</c:if>
-				</td>
-			</tr>
-		<table border="1" >
-			<h3 >배송지 정보</h3>
+		<tr>
+			<td>${order.orderNo }</td>
+			<td>${order.orderDetail}</td>
+			<td><a href="#">${order.storeNo}</a></td>
+			<td><c:if test="${order.orderState eq 0 }">입금전</c:if> <c:if
+					test="${order.orderState eq 1 }">입금완료</c:if> <c:if
+					test="${order.orderState eq 2 }">입금확인완료</c:if> <c:if
+					test="${order.orderState eq 3}">입금확인완료</c:if> <c:if
+					test="${order.orderState eq 4}">입금확인완료</c:if> <c:if
+					test="${order.orderState eq 5}">취소요청 진행중</c:if></td>
+			<td><c:if test="${order.orderState eq 0 }">배송전</c:if> <c:if
+					test="${order.orderState eq 1 }">배송전</c:if> <c:if
+					test="${order.orderState eq 2 }">배송전</c:if> <c:if
+					test="${order.orderState eq 3}">배송출발</c:if> <c:if
+					test="${order.orderState eq 4}">구매확정</c:if> <c:if
+					test="${order.orderState eq 5}">취소요청 진행중</c:if></td>
+		</tr>
+	</table>
+	<br>
+	<br>
+	<br>
+	<div id="cover" >
+		<div class="menu" style="width: 30%; ">
+				<table  align="center" style="width: 100%;">
+				<h3 >배송지 정보</h3>
+					<tr>
+						<th>수령인</th>
+						<td>${order.delivaryName }</td>
+					</tr>
+					<tr>
+						<th>연락처</th>
+						<td>${order.delivaryPhone }</td>
+					</tr>
+					<tr>
+						<th>배송지</th>
+						<td>${delivaryFullAdd }</td>
+					</tr>
+					<tr>
+						<th>배송메모</th>
+						<td>${order.delivaryMemo }</td>
+					</tr>
+				</table>
+			</div>
+			<div class="menu" style="width: 30%; ">
+				<table  style="width: 100%;">
+				<h3 >주문자 정보</h3>
 				<tr>
-					<th>수령인</th>
-					<td>${order.delivaryName }</td>
+					<td colspan="2"><a href="#">${order.userId }</a></td>
 				</tr>
 				<tr>
-					<th>연락처</th>
-					<td>${order.delivaryPhone }</td>
+					<td><br><br><br><button id="btn_receiveConfirm" type="button">입금확인</button></td>
+					<td><br><br><br><button id="btn_delivaryStart" type="button">배송출발</button></td>
 				</tr>
 				<tr>
-					<th>배송지</th>
-					<td>${delivaryFullAdd }</td>
+					<td colspan="2">취소 요정 여부</td>
 				</tr>
 				<tr>
-					<th>배송메모</th>
-					<td>${order.delivaryMemo }</td>
+					<td><c:if test="${order.orderState eq 5 }">Y</c:if>
+						<c:if test="${order.orderState ne 5 }">N</c:if></td>
+					<td><button id="btn_orderCancle" type="button">주문취소</button></td>
 				</tr>
 			</table>
-		<table border="1" >
-			<h3>주문자 정보</h3>
-				<tr>
-					<td>${userName }</td>
-				</tr>
-				<tr>
-					<td>${userPhone }</td>
-				</tr>
-		</table>
-		<table border="1" >
-			<tr>
-				<td><button id="btn_receiveConfirm" type="button" >입금확인</button></td>
-				<td><button id="btn_delivaryStart" type="button" >배송출발</button></td>
-			</tr>
-			<tr>
-				<td colspan="2" align="left">취소 요정 여부</td>
-			</tr>
-			<tr>
-				<td align="left">
-				 	<c:if test="${order.orderState eq 5 }">Y</c:if>
-				 	<c:if test="${order.orderState ne 5 }">N</c:if>
-				</td>
-				<td><button id="btn_orderCancle" type="button">주문취소</button></td>
-			</tr>
-		</table>
-		<table border="1" >
-			<h4>결제 내역</h4>
-			
+		</div>
+		<div class="menu" style="width: 30%; height:">
+			<table style="width: 100%;">
+				<h3>결제 내역</h3>
 				<tr>
 					<td>${order.orderDetail }</td>
 				</tr>
@@ -100,10 +139,12 @@
 					<td>${store.storeName }</td>
 				</tr>
 			</table>
-			
-			
+		</div>
+	</div>
 
-	<script type="text/javascript" >
+
+
+	<script type="text/javascript">
 	
 		
 		$("#btn_receiveConfirm").click(function(){
@@ -167,5 +208,5 @@
 	
 	
 	</script>
-	</body>
+</body>
 </html>

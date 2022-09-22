@@ -1,9 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
- 
- 
-
 
 
 <!DOCTYPE html>
@@ -12,6 +9,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="/resources/css/orderStyle.css">
+<%@ include file="/WEB-INF/views/include/head.jsp"%>
 </head>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
@@ -58,20 +56,19 @@ input[type="text"]{
 	width: 100%
 }
 </style>
-<div>
-<%@ include file="/WEB-INF/views/include/header.jsp" %>
-</div>
+
 <body id="userStyle">
+<%@ include file="/WEB-INF/views/include/header.jsp"%>
 	<div id="title" >
 	<h1 align="center">${store.storeName}주문</h1>
 	
 	</div>
 	<br><br><br>
-		<form action="/order/sendOrder.kh" method="post">
+		<form action="/order/sendOrder.kh" method="post" enctype="multipart/form-data">
 		<section style=" float: left; width: 45%; padding:10px;">
 		<input type="hidden" name="orderShipfee" value=3000>
 		<input type="hidden" name="userId" value="${user.userId}">
-		<input type="hidden" name="storeNo" value="${store.storeNo}">
+		<input type="hidden" name="storeNo" value="${storeNo}">
 
 			<select id="selGoods" name="selGoods" style="height:40px;">
 			</select>
@@ -95,11 +92,11 @@ input[type="text"]{
 				<legend><h4>주문자정보</h4></legend>
 				<tr>
 					<td>주문자 이름</td>
-					<td><input type="text" name="userName" value="${user.userName }"></td>
+					<td><input type="text" name="orderName" value="${user.userName }"></td>
 				</tr>
 				<tr>
 					<td>주문자 연락처</td>
-					<td><input type="text" name="userPhone" value="${user.userPhone }"></td>
+					<td><input type="text" name="orderPhone" value="${user.userPhone }"></td>
 				</tr>
 			</table>
 			<br>

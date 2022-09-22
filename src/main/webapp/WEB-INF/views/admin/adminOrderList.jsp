@@ -7,9 +7,27 @@
 <head>
 <meta charset="UTF-8">
 <title>관리자페이지 주문 리스트</title>
+<style>
+  table {
+  width : 80%;
+    border-top: 1px solid  #3A2618;
+   
+    border-collapse: collapse;
+  }
+  th, td {
+    border-bottom: 1px solid #3A2618;
+    padding: 10px;
+    
+  }
+ h1{
+ 	    font-weight: bold;
+            color : #3A2618;
+ 	
+ }
+</style>
 </head>
 <body>
-		<h1 align="center">주문 목록</h1>
+		<h1 align="center">날짜별 주문 목록</h1>
 	<br><br>
 	<table align="center" border="1">
 		<tr>
@@ -52,7 +70,7 @@
 		</c:forEach>
 </body>
 <script>
-	document.getElementById('orderDate').valueAsDate = new Date();
+	document.getElementById('orderDate').valueAsDate = document.getElementById('orderDate').value;
 
 </script>
 </html>

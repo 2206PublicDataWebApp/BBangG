@@ -39,11 +39,11 @@ public class OrderController {
 			,@RequestParam("storeNo") Integer refStoreNo) {
 	
 		List<Product> pList = oService.findAllProduct(refStoreNo);
-		//User user = (User) session.getAttribute("loginUser");
 		HttpSession session = request.getSession();
 		User user = (User)session.getAttribute("login");
 		String userId = user.getUserId();
 		System.out.println(userId);
+		mv.addObject("storeNo", refStoreNo);
 		mv.addObject("user", user);
 		mv.addObject("pList", pList);
 		return mv;
@@ -63,6 +63,7 @@ public class OrderController {
 		for(int i=0; i<orderProduct.getOrderProductNm().length;i++) {
 			tmp[i]=orderProduct.getOrderProductNm()[i]+" "+orderProduct.getOrderProductCtn()[i]+"개 "+orderProduct.getOrderProductPrice()[i]+"원";
 		}
+		
 		order.setStoreNo(storeNo);
 		order.setOrderDetail(String.join("/",tmp));
 		int result = oService.registerOrder(order);
@@ -86,6 +87,7 @@ public class OrderController {
 			,HttpSession session
 			,@RequestParam(required = false, name="userId") String userId) {
 		List<Order> oList = oService.findOrderById(userId);
+		
 		System.out.println("----------------userId" + userId);
 		int payState=0;
 		int delivaryState=0;
@@ -131,7 +133,6 @@ public class OrderController {
 		String delivaryFullAdd=order.getDelivaryAddr()+""+order.getDelivaryAddrDetail();
 		Store store = oService.findStore(order.getStoreNo());
 		//System.out.println(delivaryFullAdd);
-		mv.addObject("user",user );
 		mv.addObject("order", order);
 		mv.addObject("store", store);
 		mv.addObject("delivaryFullAdd",delivaryFullAdd);
