@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <style>
 #nav {
-    position: fixed;
+    position: sticky;
     top: 0;
     left: 0;
     width: 100%;

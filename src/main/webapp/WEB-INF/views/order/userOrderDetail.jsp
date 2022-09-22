@@ -38,7 +38,7 @@
 <body>
 	<h1 align="center">주문 상세정보</h1>
 	<br><br>
-	<table id="f_table" align="center">
+	<table id="f_table" align="center" style="text-align:center">
 		<tr style=" border-bottom: 1px solid  #3A2618;">
 			<th>주문번호</th>
 			<th>주문내역</th>
@@ -50,9 +50,9 @@
 				<td>${order.orderNo }</td>
 				<td>${order.orderDetail}</td>
 				<td><a href="#">${order.storeNo}</a></td>
-				<td>
+				<td >
 					<c:if test="${order.orderState eq 0 }">입금전</c:if>
-					<c:if test="${order.orderState eq 1 }">입금완료</c:if>
+					<c:if test="${order.orderState eq 1 }">입금완료(입금확인 대기중)</c:if>
 					<c:if test="${order.orderState eq 2 }">입금확인완료</c:if>
 					<c:if test="${order.orderState eq 3}" >입금확인완료</c:if>
 					<c:if test="${order.orderState eq 4}" >입금확인완료</c:if>
