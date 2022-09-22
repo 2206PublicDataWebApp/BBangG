@@ -1,14 +1,17 @@
 @charset "UTF-8";
 
-#header .titleArea h1 {
+#title {
     line-height: 56px;
     color: #fff;
     font-size: 20px;
     font-weight: normal;
     text-align: center;
     background: #4a5164;
+    position:fixed;
 }
+
 body, code {
+	
     min-width: 320px;
     font-size: 16px;
     font-family: Verdana,"맑은 고딕",Malgun Gothic,AppleSDGothicNeo,"돋움",Dotum;

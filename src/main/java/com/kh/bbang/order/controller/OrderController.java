@@ -35,10 +35,10 @@ public class OrderController {
 	//주문하기 화면
 	@RequestMapping(value="/order/orderForm.kh", method=RequestMethod.GET)
 	public ModelAndView orderFormView(ModelAndView mv
-			,HttpServletRequest request) {
+			,HttpServletRequest request
+			,@RequestParam("storeNo") Integer refStoreNo) {
 	
-		int StoreNo = 101; //하드
-		List<Product> pList = oService.findAllProduct(StoreNo);
+		List<Product> pList = oService.findAllProduct(refStoreNo);
 		//User user = (User) session.getAttribute("loginUser");
 		HttpSession session = request.getSession();
 		User user = (User)session.getAttribute("login");
@@ -47,13 +47,14 @@ public class OrderController {
 		mv.addObject("user", user);
 		mv.addObject("pList", pList);
 		return mv;
-	}
+	}///
 	//사용자 주문입력후 보내기
 	@RequestMapping(value="/order/sendOrder.kh", method=RequestMethod.POST)
 	public ModelAndView orderSend(
 			ModelAndView mv
 			,@ModelAttribute Order order
 			,@ModelAttribute OrderProduct orderProduct
+			,@RequestParam("storeNo") Integer storeNo
 			) {
 //			Order order = new Order(delivaryName, delivaryPhone, delivaryZipcode, delivaryAddressFirst,
 //					delivaryAddressSecond, delivaryMemo);
@@ -62,6 +63,7 @@ public class OrderController {
 		for(int i=0; i<orderProduct.getOrderProductNm().length;i++) {
 			tmp[i]=orderProduct.getOrderProductNm()[i]+" "+orderProduct.getOrderProductCtn()[i]+"개 "+orderProduct.getOrderProductPrice()[i]+"원";
 		}
+		order.setStoreNo(storeNo);
 		order.setOrderDetail(String.join("/",tmp));
 		int result = oService.registerOrder(order);
 		
@@ -122,11 +124,14 @@ public class OrderController {
 	@RequestMapping(value="/order/userOrderDetail.kh", method=RequestMethod.GET)
 	public ModelAndView detailOrderView(ModelAndView mv
 			,@RequestParam("orderNo") Integer orderNo
-			,HttpSession session) {
+			,HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		User user = (User)session.getAttribute("login");
 		Order order = oService.findOneOrder(orderNo);
 		String delivaryFullAdd=order.getDelivaryAddr()+""+order.getDelivaryAddrDetail();
 		Store store = oService.findStore(order.getStoreNo());
 		//System.out.println(delivaryFullAdd);
+		mv.addObject("user",user );
 		mv.addObject("order", order);
 		mv.addObject("store", store);
 		mv.addObject("delivaryFullAdd",delivaryFullAdd);

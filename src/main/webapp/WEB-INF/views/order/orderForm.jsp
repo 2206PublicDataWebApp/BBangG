@@ -15,17 +15,19 @@
 </head>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-<body id="userStyle">
+<div>
+
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
-	<header id="header">
-	<div class="titleArea">
+</div>
+<body id="userStyle">
+	<div id="title" >
 	<h1 align="center">주문</h1>
 	</div>
-	</header>
 		<form action="/order/sendOrder.kh" method="post">
 		<section style=" float: left; width: 45%; padding:10px;">
 		<input type="hidden" name="orderShipfee" value=3000>
 		<input type="hidden" name="userId" value="${user.userId}">
+		<input type="hidden" name="storeNo" value="${store.storeNo}">
 
 			<select id="selGoods" name="selGoods" style="height:40px;">
 			</select>

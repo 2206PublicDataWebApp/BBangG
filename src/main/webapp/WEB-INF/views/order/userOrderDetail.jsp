@@ -9,14 +9,14 @@
 </head>
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 <style>
-  table {
+  #f_table {
   width : 80%;
     border-top: 1px solid  #3A2618;
    
+    border-bottom: 1px solid #3A2618;
     border-collapse: collapse;
   }
   th, td {
-    border-bottom: 1px solid #3A2618;
     padding: 10px;
     
   }
@@ -25,13 +25,21 @@
             color : #3A2618;
  	
  }
+ #cover{
+  text-align:center;
+}
+
+.menu {
+  display:inline-block;.display:inline;
+  
+}
 
 </style>
 <body>
 	<h1 align="center">주문 상세정보</h1>
 	<br><br>
-	<table align="center">
-		<tr>
+	<table id="f_table" align="center">
+		<tr style=" border-bottom: 1px solid  #3A2618;">
 			<th>주문번호</th>
 			<th>주문내역</th>
 			<th>주문점포</th>
@@ -59,44 +67,52 @@
 					<c:if test="${order.orderState eq 5}" >취소요청 진행중</c:if>
 				</td>
 			</tr>
-		
-		<table align="center">
-			<h3 >배송지 정보</h3>
-				<tr>
-					<th>수령인</th>
-					<td>${order.delivaryName }</td>
-				</tr>
-				<tr>
-					<th>연락처</th>
-					<td>${order.delivaryPhone }</td>
-				</tr>
-				<tr>
-					<th>배송지</th>
-					<td>${delivaryFullAdd }</td>
-				</tr>
-				<tr>
-					<th>배송메모</th>
-					<td>${order.delivaryMemo }</td>
-				</tr>
-			</table>
-		<table border="1" >
+		</table>
+		<br><br>
+		<div id="cover">
+		<div class="menu" style="width: 30%; ">
+			<table align="center">
+				<h3 >배송지 정보</h3>
+					<tr>
+						<th>수령인</th>
+						<td>${order.delivaryName }</td>
+					</tr>
+					<tr>
+						<th>연락처</th>
+						<td>${order.delivaryPhone }</td>
+					</tr>
+					<tr>
+						<th>배송지</th>
+						<td>${delivaryFullAdd }</td>
+					</tr>
+					<tr>
+						<th>배송메모</th>
+						<td>${order.delivaryMemo }</td>
+					</tr>
+				</table>
+		</div>
+		<div class="menu" style="width: 30%;">
+		<table  align="center">
 			<h3>주문자 정보</h3>
 				<tr>
-					<td>${userName }</td>
+					<td>${user.userName }</td>
 				</tr>
 				<tr>
-					<td>${userPhone }</td>
+					<td>${user.userPhone }</td>
 				</tr>
 		</table>
-		<table align="center">
-			<tr>
-				<td><button id="btn_sendMoney" type="button">입금완료</button></td>
-				<td><button id="btn_orderRemove" type="button">주문취소요청</button></td>
-				<td><button id="btn_orderModify" type="button">주문수정</button></td>
-				<td><button id="btn_orderConfirm" type="button">구매확정</button></td>
+		<br><br>
+		<table align="center" style="border:none">
+			<div style="margin:10%">
+				<div style="width: 20%; float:left"><button id="btn_sendMoney" type="button">입금완료</button></div>
+				<div style="width: 35%; float:left"><button id="btn_orderRemove" type="button">주문취소요청</button></div>
+				<div style="width: 20%; float:left"><button id="btn_orderModify" type="button">주문수정</button></div>
+				<div style="width: 20%; float:left"><button id="btn_orderConfirm" type="button">구매확정</button></div>
 				
-			</tr>
+			</div>
 		</table>
+		</div>
+		<div class="menu" style="width: 30%; ">
 		<table align="center">
 			<h3>결제 내역</h3>
 			
@@ -113,6 +129,8 @@
 					<td>${store.storeBank }  ${store.storeName }  은행명</td>
 				</tr>
 			</table>
+		</div>
+		</div>
 			
 
 	<script type="text/javascript" >

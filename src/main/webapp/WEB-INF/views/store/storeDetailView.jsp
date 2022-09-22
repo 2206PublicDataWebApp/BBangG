@@ -36,6 +36,7 @@ button {
 </script>
 </head>
 <body>
+<%@ include file="/WEB-INF/views/include/header.jsp" %>
 <body>
 	<%@ include file="/WEB-INF/views/include/header.jsp"%>
 	<h1 align="center">점포상세정보화면</h1>
@@ -90,7 +91,7 @@ button {
 	<br>
 	<hr>
 	<button>리뷰작성 하러가기</button>
-	<button>주문하러 가기</button>
+	<button type="button" onclick="goOrder()">주문하러 가기</button>
 	<div id="review">리뷰 영역</div>
 
 	<script>
@@ -139,6 +140,20 @@ button {
 								map.setCenter(coords);
 							}
 						});
+		
+		
+		function goOrder(){
+		 	if(${login ne null}){
+				location.href="/order/orderForm.kh?storeNo="+${store.storeNo};
+			}else{
+				event.preventDefault();
+				if(confirm("로그인이 필요한 서비스입니다. 로그인 화면으로 이동하시겠습니까?")){
+					location.href="/user/loginView.kh";
+				}
+			} 
+		
+		}
+	
 	</script>
 </body>
 </html>
