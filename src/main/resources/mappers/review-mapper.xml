@@ -5,14 +5,17 @@
   <mapper namespace="ReviewMapper">
   		<resultMap type="Review" id="reviewResultMap">
   			<id property="reviewNo" column="REVIEW_NO"/>
-  			<result property="userId" column="USER_ID"/>
   			<result property="storeNo" column="STORE_NO"/>
-  			<result property="starRating" column="STAR_RATING"/>
+  			<result property="reviewWriter" column="REVIEW_WRITER"/>
+  			<result property="reviewContent" column="REVIEW_CONTENT"/>
+  			<result property="reviewFilename" column="REVIEW_FILENAME"/>
+  			<result property="reviewFileRename" column="REVIEW_FILERENAME"/>
+  			<result property="reviewFilepath" column="REVIEW_FILEPATH"/>
   			<result property="reviewCount" column="REVIEW_COUNT"/> 
+  			<result property="starRating" column="STAR_RATING"/>
   			<result property="rCreateDate" column="R_CREATE_DATE"/>
-  			<result property="reviewContents" column="REVIEW_CONTENT"/>
-  			<result property="useYn" column="USE_YN"/>
   			<result property="rUpdateDate" column="R_UPDATE_DATE"/>
+  			<result property="useYn" column="USE_YN"/>
   		</resultMap>
   		<!-- <resultMap type="Review" id="reviewHeartResultMap">
   			<id property=""

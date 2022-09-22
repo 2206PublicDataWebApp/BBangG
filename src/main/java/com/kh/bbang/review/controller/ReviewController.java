@@ -1,6 +1,8 @@
 package com.kh.bbang.review.controller;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -35,10 +37,13 @@ public class ReviewController {
 	}
 	
 	/**
-	 * 게시글 등록
+	 * 게시글 등록, 첨부 파일 등록
 	 * @param mv
 	 * @param review
+	 * @param uploadFile
+	 * @param request
 	 * @return
+	 * 
 	 *  RequestMapping 특정 메서드와 매핑하기 위해 사용
 	 *  value는 요청받을 url을 설정
 	 *  method는 어떤 요청으로 받을지 정의 (GET, POST, PUT, DELETE 등)
@@ -58,15 +63,17 @@ public class ReviewController {
 			if(!reviewFilename.equals("")) {
 				String root = request.getSession().getServletContext().getRealPath("resources");
 				String savePath = root + "\\image/review-image"; // 이래도 되나 이거맞나 경로 이렇게 해도 되나
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+				String reviewFileRename = sdf.format(new Date(System.currentTimeMillis()))+"."+reviewFilename.substring(reviewFilename.lastIndexOf(".")+1);
 				File file = new File(savePath);
 				if(!file.exists()) {
 					file.mkdir();
 				}
-				uploadFile.transferTo(new File(savePath+"\\"+reviewFilename));
+				uploadFile.transferTo(new File(savePath+"\\"+reviewFileRename));
 				// 파일 review/review-image 경로에 저장 하는 메소드
-				String reviewFilepath = savePath;
+				String reviewFilepath = savePath+"\\"+reviewFileRename;
 				review.setReviewFilename(reviewFilename);
-				//review.setReviewFileRename(reviewFileRename);
+				review.setReviewFileRename(reviewFileRename);
 				review.setReviewFilepath(reviewFilepath);
 				
 			}
@@ -82,40 +89,14 @@ public class ReviewController {
 		return mv;
 		
 	}
+	
+	
 	/**
-	 * 게시글 상세 조회
+	 * 게시글 전체 조회
 	 * @param mv
-	 * @param reviewNo
-	 * @param session
+	 * @param page
 	 * @return
-	 * , @RequestParam ("page") ListView에서 넘겨준 것.
-	 *   그런데 pageInfo 테이블을 따로 뒀다. 일단 주석으로 막아둠
 	 */
-	
-	@RequestMapping(value = "/review/deteil.kh", method=RequestMethod.GET)
-	public ModelAndView reviewDetailView(
-			ModelAndView mv
-			, @RequestParam("reviewNo") Integer reviewNo
-			//, @RequestParam("page") Integer page List.jsp에 page있음 
-			, HttpSession session) {
-		try {
-			Review review = rService.printDetailOneByNo(reviewNo);
-			// List<ReviewComment> cList = rService.printAllComment(reivewNo);
-			session.setAttribute("reviewNo", review.getReviewNo());
-			// 세션에 reviewNo 저장 ->
-			// mv.addObject("rList", attributeValue) List.jsp에 page있음 
-			// mv.addObject("cList", cList); //commentList
-			mv.addObject("review", review);
-			// mv.addObject("page", page); List.jsp에 page있음 
-			mv.setViewName("review/detaleView") ;
-		} catch (Exception e) {
-			mv.addObject("msg", e.toString());
-			mv.setViewName("common/errorPage");
-		}
-		
-		return mv;
-	}
-	
 	@RequestMapping(value = "/review/list.kh", method = RequestMethod.GET)
 	public ModelAndView reviewListView(
 			ModelAndView mv
@@ -143,5 +124,39 @@ public class ReviewController {
 		mv.setViewName("/review/reviewList");
 		return mv;
 	}
+	
+	
+	/**
+	 * 게시글 상세 조회
+	 * 
+	 * @param mv
+	 * @param reviewNo
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping(value = "/review/deteil.kh", method=RequestMethod.GET)
+	public ModelAndView reviewDetailView(
+			ModelAndView mv
+			, @RequestParam("reviewNo") Integer reviewNo
+			//, @RequestParam("page") Integer page List.jsp에 page있음 
+			, HttpSession session) {
+		try {
+			Review review = rService.printDetailOneByNo(reviewNo);
+			// List<ReviewComment> cList = rService.printAllComment(reivewNo);
+			session.setAttribute("reviewNo", review.getReviewNo());
+			// 세션에 reviewNo 저장 ->
+			// mv.addObject("rList", attributeValue) List.jsp에 page있음 
+			// mv.addObject("cList", cList); //commentList
+			mv.addObject("review", review);
+			// mv.addObject("page", page); List.jsp에 page있음 
+			mv.setViewName("review/detaleView") ;
+		} catch (Exception e) {
+			mv.addObject("msg", e.toString());
+			mv.setViewName("common/errorPage");
+		}
+		
+		return mv;
+	}
+
 	
 }
