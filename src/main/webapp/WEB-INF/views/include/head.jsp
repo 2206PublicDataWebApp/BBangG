@@ -7,7 +7,16 @@
 <meta charset="UTF-8">
 <title>빵지순례</title>
 <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 <style>
+
+* {
+	font-family: 'Noto Sans KR', sans-serif;
+
+}
+
 a {
 	text-decoration: none;
 	color: #3A2618;
@@ -26,6 +35,7 @@ a {
     justify-content: space-between;
     margin 0 auto;
     border-bottom: 1px solid #EFEFEF;
+    z-index:10000;
 }
 body{
 	padding-top: 70px;

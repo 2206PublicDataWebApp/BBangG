@@ -1,11 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+<%@ include file="/WEB-INF/views/include/head.jsp"%>
 <style>
 .wrapper {
 	display: grid;
@@ -17,12 +13,12 @@
 	align-content: center;
 }
 
-ul {
+#region {
 	background-color: bisque;
 	text-align: center;
 }
 
-ul a {
+#region a {
 	margin: 0 20px 0 20px;
 	text-decoration: none;
 	color: rgb(177, 171, 171);
@@ -61,7 +57,7 @@ img {
 	<section>
 		<h1 align="center">빵집 리스트</h1>
 		<div id="region">
-			<ul>
+			<ul id="region">
 				<a onclick="getValue(event)">서울/경기</a>
 				<a onclick="getValue(event)">대전/충청</a>
 				<a onclick="getValue(event)">대구/경북</a>

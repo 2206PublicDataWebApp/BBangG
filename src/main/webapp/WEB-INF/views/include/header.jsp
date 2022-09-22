@@ -22,10 +22,10 @@
 	<div class="user">
 		<c:if test="${empty login}">
 			<div id="my">
-				<a href="/user/loginView.kh">LOGIN</a>
-			</div>
-			<div id="my">
-				<a href="/user/joinView.kh">JOIN</a>
+				<ul class="my-ul">
+					<li class="my-li"><a href="/user/loginView.kh">LOGIN</a></li>
+					<li class="my-li"><a href="/user/joinView.kh">JOIN</a></li>
+				</ul>
 			</div>
 		</c:if>
 		<c:if test="${login.status == '1'}">
@@ -38,10 +38,10 @@
 		</c:if>
 		<c:if test="${login.status == '0'}">
 			<div id="my">
-				<a href="/admin/userList">AdminPage</a>
-			</div>
-			<div id="my">
-				<a href="${path}/user/logout">LOGOUT</a>
+				<ul class="my-ul">
+					<li class="my-li"><a href="/admin/userList">AdminPage</a></li>
+					<li class="my-li"><a href="${path}/user/logout">LOGOUT</a></li>
+				</ul>
 			</div>
 		</c:if>
 	</div>
