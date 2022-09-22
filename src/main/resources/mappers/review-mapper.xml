@@ -29,10 +29,10 @@
   			SELECT * FROM REVIEW_TBL WHERE REVIEW_NO = #{reviewNo}
   		</select>
   		<select id="selectAllReview" resultMap="reviewResultMap">
-  				SELECT * FROM REVIEW_TBL WHERE USE_YN = 'Y' ORDER BY REVIEW_NO DESC
+  			SELECT * FROM REVIEW_TBL WHERE USE_YN = 'Y' ORDER BY REVIEW_NO DESC
   		</select>
   		<select id="selectTotalCount" resultType="_int">
-  			SELECT COUNT(*) REVIEW_TBL WHERE USE_YN = 'Y'
+  			SELECT COUNT(*) FROM REVIEW_TBL WHERE USE_YN = 'Y'
   		</select>
   		<update id="updateCount">
   			UPDATE REVIEW_TBL SET REVIEW_COUNT = REVIEW_COUNT +1 WHERE REVIEW_NO = #{reviewNo}

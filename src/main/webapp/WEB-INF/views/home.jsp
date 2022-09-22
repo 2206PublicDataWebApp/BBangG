@@ -8,6 +8,6 @@
 </head>
 <body>
 	<%@ include file="/WEB-INF/views/include/header.jsp" %>
-	<a>HOME</a>
+	
 </body>
 </html>

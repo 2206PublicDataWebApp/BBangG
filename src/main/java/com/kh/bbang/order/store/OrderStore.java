@@ -17,7 +17,7 @@ public interface OrderStore {
 	public List<Order> selectOrderByDate(SqlSession session, String orderDate);
 	public List<Order> selectOrderById(SqlSession session, String userId);
 	public Order selectOneOrder(SqlSession session, int orderNo);
-	public List<Product> selectAllProduct(SqlSession session, int storeNo);
+	public List<Product> selectAllProduct(SqlSession session, int refStoreNo);
 	public int insertOrder(SqlSession session, Order order);
 	public int updateOrder(SqlSession session, Order order);
 	public int deleteOrder(SqlSession session, int orderNo);

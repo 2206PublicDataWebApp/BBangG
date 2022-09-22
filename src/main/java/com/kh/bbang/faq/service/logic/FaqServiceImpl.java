@@ -39,9 +39,13 @@ public class FaqServiceImpl implements FaqService {
 	}
 
 	@Override
-	public Faq printOneByNo(Integer FaqNo) {
-		Faq Faq = faqStore.selectOneByNo(session, FaqNo);
-		return Faq;
+	public Faq printOneByNo(Integer faqNo) {
+		Faq faq = faqStore.selectOneByNo(session, faqNo);
+		int result = 0;
+		if(faq != null) {
+			result = faqStore.updateFaqCount(session, faqNo);
+		}
+		return faq;
 	}
 
 	@Override
@@ -63,10 +67,7 @@ public class FaqServiceImpl implements FaqService {
 		return bList;
 	}
 
-	// 조회수?////
-	@Override
-	public void faqViewCount(SqlSession session, int faqNo) {
-//		faqMapper.faqViewCount(int faqNo);
-		
-	}
+
+
+	
 }

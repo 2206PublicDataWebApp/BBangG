@@ -56,12 +56,12 @@
         }
         
 
-        #star-form fieldset{
+        /* #star-wrap fieldset{
             
-            /* display: inline-block; */
+            display: inline-block;
             direction: rtl;
             border:0;
-        }
+        } */
         /* #myform fieldset legend{
             
             text-align: right;
@@ -106,7 +106,8 @@
             display: inline-block;
             /* position: relative;
             left : 80%; */
-        }.write-btn{
+        }
+        .write-btn{
             width: 80px;
             font-size: 15px;
             border: 2px solid #002954;
@@ -126,39 +127,40 @@
 <body>
     <div class="review-write">
         <h2 id="store-name">핑퐁베이커리</h2>
-        <form action="/review/registe" enctype="multipart/form-data" class="star-form" name="star-form" id="star-form" method="post">
-            <div id="write_area">
-                <div class="star-rating">
-                    <form class="star-form" name="star-form" id="star-form" method="post">
-                        <fieldset>
-                            <div class="text-bold">별점을 선택해주세요</div>
-                            <input type="radio" name="reviewStar" value="1" id="rate1"><label for="rate1">★</label>
-                            <input type="radio" name="reviewStar" value="2" id="rate2"><label for="rate2">★</label>
-                            <input type="radio" name="reviewStar" value="3" id="rate3"><label for="rate3">★</label>
-                            <input type="radio" name="reviewStar" value="4" id="rate4"><label for="rate4">★</label>
-                            <input type="radio" name="reviewStar" value="5" id="rate5"><label for="rate5">★</label>
-                        </fieldset>
-                    </form>		
-                </div>			
-            </div>
-            <div id="review-title">
-                <textarea name="title" id="title" rows="1" cols="55" placeholder="제목을 작성해주세요" maxlength="100" required></textarea>
-            </div>
-
-            <div id="in_content">
-                <textarea id="review-content" rows="20" cols="55" placeholder="내용을 작성해주세요" required></textarea>
-                <div id="max">(0 / 2000)</div>
-            </div>
-
-            <!-- 왼쪽 정렬 -->
-            <input type="file" id="select-file" name="reviewFile" />
-            
-
-            <div>
-                <button class="write-btn-cancel" type="reset">취소</button>
-                <button class="write-btn"type="submit">글 작성</button>
-            </div>
-		</form>
+        <form action="/review/registe.kh" method="post" enctype="multipart/form-data">
+	        <div class="star-form" name="star-form" id="star-form">
+	            <div id="write_area">
+	                <div class="star-rating">
+	                    <form class="star-form" name="star-form" id="star-form" method="post">
+	                        <div class="">
+	                            <div class="text-bold">별점을 선택해주세요</div>
+	                            <input type="radio" name="reviewStar" value="1" id="rate1"><label for="rate1">★</label>
+	                            <input type="radio" name="reviewStar" value="2" id="rate2"><label for="rate2">★</label>
+	                            <input type="radio" name="reviewStar" value="3" id="rate3"><label for="rate3">★</label>
+	                            <input type="radio" name="reviewStar" value="4" id="rate4"><label for="rate4">★</label>
+	                            <input type="radio" name="reviewStar" value="5" id="rate5"><label for="rate5">★</label>
+	                        </div>
+	                    </form>		
+	                </div>			
+	            </div>
+	            <div id="review-title">
+	                <textarea name="title" id="title" rows="1" cols="55" placeholder="제목을 작성해주세요" maxlength="100" required></textarea>
+	            </div>
+	
+	            <div id="in_content">
+	                <textarea id="review-content" rows="20" cols="55" placeholder="내용을 작성해주세요" required></textarea>
+	                <div id="max">(0 / 2000)</div>
+	            </div>
+				<div class="fileup">
+		            <!-- 왼쪽 정렬 -->
+		            <input type="file" id="select-file" name="uploadFile" />
+	            </div>
+	            <div>
+	                <button class="write-btn-cancel" type="reset">취소</button>
+	                <button class="write-btn"type="submit">글 작성</button>
+	            </div>
+	         	</div>
+			</form>
     </div>
      <script>
         // $(document).ready(function(){

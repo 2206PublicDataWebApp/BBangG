@@ -9,7 +9,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1 align="center">게시글 목록</h1>
+	<h1 align="center">회원 목록</h1>
 	<br><br>
 	<table align="center" border="1">
 		<tr>
@@ -20,7 +20,6 @@
 			<th>이메일</th>
 			<th>전화번호</th>
 			<th>주소</th>
-			<th>탈퇴</th>
 		</tr>
 		<c:if test="${!empty uList }">
 			<c:forEach items="${uList }" var="uList" varStatus="i">
@@ -30,9 +29,8 @@
 					<td>${uList.userName }</td>
 					<td>${uList.userGender }</td>
 					<td>${uList.userEmail }</td>
-					<td>${uList.Phone }</td>
-					<td>(${uList.userZipcode }) ${uList.addr } ${uList.addrDetail }</td>
-					<td><button type="button" onclick="removeUser();">탈퇴</button></td>
+					<td>${uList.userPhone }</td>
+					<td>(${uList.userZipCode }) ${uList.addr } ${uList.addrDetail }</td>
 				</tr>
 			</c:forEach>
 			<tr align="center" height="20">
@@ -75,13 +73,5 @@
 			</td>
 		</tr>
 	</table>
-	<script>
-	function removeUser() {
-		if(confirm("탈퇴하시겠습니까?")) {
-			alert("탈퇴되었습니다.");
-			location.href = "/user/remove.kh";
-		}
-	}
-	</script>
 </body>
 </html>

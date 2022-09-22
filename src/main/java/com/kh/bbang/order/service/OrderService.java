@@ -17,8 +17,8 @@ public interface OrderService {
 	public List<Order> findOrderByDate(String orderDate);
 	public List<Order> findOrderById(String userId);
 	public Order findOneOrder(int orderNo);
-	public List<Product> findAllProduct(int storeNo);
-	public List<OrderProduct> findOrderProductList(int orderNo);
+	public List<Product> findAllProduct(int refStoreNo);
+	public List<OrderProduct> findOrderProductList(int refSrderNo);
 	public int registerOrder(Order order);
 	public int modifyOrder(Order order);
 	public int removeOrder(int orderNo);

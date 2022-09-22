@@ -1,15 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>마이페이지</title>
-<script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+<%@ include file="/WEB-INF/views/include/head.jsp"%>
 </head>
 <body>
-	<%@ include file="/WEB-INF/views/include/header.jsp" %>
+	<%@ include file="/WEB-INF/views/include/header.jsp"%>
+	<%-- <jsp:include page = "/WEB-INF/views/include/header.jsp" /> --%>
 	<h1 align="center">회원 정보 수정</h1>
 		<div class="">
 			<form action="/user/modify.kh" method="post"
@@ -70,7 +65,132 @@
 					<div>
 						<input type="submit" value="수정하기">
 					</div>
-				
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
+				<div>a</div>
 			</form>
 		</div>
 		<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>

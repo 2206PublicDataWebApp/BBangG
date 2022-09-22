@@ -19,7 +19,7 @@
 		INSERT INTO USER_TBL(USER_ID, USER_PWD, USER_NAME, USER_GENDER, USER_EMAIL, USER_PHONE, USER_ZIPCODE, ADDR, ADDR_DETAIL)
 		VALUES(#{userId }, #{userPwd }, #{userName }, #{userGender }, #{userEmail }, #{userPhone }, #{userZipCode }, #{addr }, #{addrDetail })
 	</insert>
-	<update id="deleteUser"  parameterType="string">
+	<update id="deleteUser" parameterType="string">
 		UPDATE USER_TBL
 		SET STATUS = 2
 		WHERE USER_ID = #{userId}
@@ -84,5 +84,29 @@
 			AND STATUS = '1'
 		</where>
 	</select>
-	
+	<select id="selectAllByValue" resultMap="userResultMap">
+		SELECT * FROM USER_TBL
+		<where>
+			<if test="searchCondition.toString() == 'id'">
+				USER_ID LIKE '%'||#{searchValue}||'%'
+			</if>
+			<if test="searchCondition.toString() == 'name'">
+				USER_NAME LIKE '%'||#{searchValue}||'%'
+			</if>
+			<if test="searchCondition.toString() == 'email'">
+				USER_EMAIL LIKE '%'||#{searchValue}||'%'
+			</if>
+			<if test="searchCondition.toString() == 'all'">
+				USER_ID LIKE '%'||#{searchValue}||'%'
+				OR USER_NAME LIKE '%'||#{searchValue}||'%'
+				OR USER_EMAIL LIKE '%'||#{searchValue}||'%'
+				OR USER_GENDER LIKE '%'||#{searchValue}||'%'
+				OR USER_PHONE LIKE '%'||#{searchValue}||'%'
+				OR USER_ZIPCODE LIKE '%'||#{searchValue}||'%'
+				OR ADDR LIKE '%'||#{searchValue}||'%'
+				OR ADDR_DETAIL LIKE '%'||#{searchValue}||'%'
+			</if>
+			AND STATUS = '1'
+		</where>
+	</select>
 </mapper>

@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -100,6 +101,7 @@ public class FaqController {
 	public ModelAndView faqDetailView(ModelAndView mv, @RequestParam("faqNo") Integer faqNo,
 			@RequestParam("page") Integer page, HttpSession session) {
 		try {
+			System.out.println("faqNo > " + faqNo);
 			Faq faq = faqService.printOneByNo(faqNo);
 			session.setAttribute("faqNo", faq.getFaqNo());
 			mv.addObject("faq", faq);
@@ -213,6 +215,5 @@ public class FaqController {
 		return mv;
 	}
 
-	// 조회수?
-//	@RequestMapping(value="")
+	
 }

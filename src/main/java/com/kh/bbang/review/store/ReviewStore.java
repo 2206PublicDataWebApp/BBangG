@@ -8,14 +8,17 @@ import com.kh.bbang.review.domain.Review;
 
 public interface ReviewStore {
 	
+	// insert
+	// 리뷰 등록
+		public int insertReview(SqlSession session, Review review);
+		
 	// select
 	// 리뷰 게시판 리스트
-	public List<Review> selectAllReview(SqlSession session);
+	public List<Review> selectAllReview(SqlSession session, int currentPage, int limit);
 	// 페이징
 	public int selectTotalCount(SqlSession session);
 	
-	// 리뷰 등록
-	public int insertReview(SqlSession session, Review review);
+	
 	// 리뷰 검색
 	public Review selectOneByNo(SqlSession session, Integer reviewNo);
 
