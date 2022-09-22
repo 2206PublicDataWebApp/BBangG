@@ -9,7 +9,6 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.bbang.order.domain.Order;
 import com.kh.bbang.order.domain.OrderProduct;
-
 import com.kh.bbang.order.store.OrderStore;
 import com.kh.bbang.product.domain.Product;
 import com.kh.bbang.store.domain.Store;
@@ -80,6 +79,8 @@ public class OrderStoreLogic implements OrderStore{
 		Store store = session.selectOne("OrderMapper.selectStore", storeNo);
 		return store;
 	}
+
+
 
 
 

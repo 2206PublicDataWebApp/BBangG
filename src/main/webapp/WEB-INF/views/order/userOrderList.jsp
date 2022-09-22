@@ -7,13 +7,46 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+  table {
+  width : 80%;
+    border-top: 1px solid  #3A2618;
+   
+    border-collapse: collapse;
+  }
+  th, td {
+    border-bottom: 1px solid #3A2618;
+    padding: 10px;
+    
+  }
+ h1{
+ 	    font-weight: bold;
+            color : #3A2618;
+ 	
+ }
+
+</style>
 </head>
 <body>
 	<input type="hidden" name="userId" value="${login.userId }">
-	<h1 align="center">주문 목록</h1>
+	<h1 align="center">${login.userId }님의 주문 목록</h1>
 	<br><br>
-	<table align="center" border="1">
-		<tr>
+	<table style="width:40%;"  align="center">
+	
+	 <tr>
+	 	<th>결제확인/완료</th>
+	 	<th>배송중/완료</th>
+	 	<th>취소진행중/완료</th>
+	 </tr>
+	 <tr>
+	 	<td>${payState }</td>
+	 	<td>${delivaryState }</td>
+	 	<td>${cancleState }</td>
+	 </tr>
+	</table>
+	<br><br>
+	<table align="center" >
+		<tr style="border-bottom: 3px solid  #3A2618;">
 			<th>주문번호</th>
 			<th>주문내역</th>
 			<th>주문점포</th>
@@ -43,5 +76,6 @@
 				</td>
 			</tr>
 		</c:forEach>
+	</table>
 </body>
 </html>

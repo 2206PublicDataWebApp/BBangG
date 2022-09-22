@@ -14,9 +14,9 @@
   			<result property="useYn" column="USE_YN"/>
   			<result property="rUpdateDate" column="R_UPDATE_DATE"/>
   		</resultMap>
-  		<resultMap type="Review" id="reviewHeartResultMap">
-  		<!-- 	<id property="" -->
-  		</resultMap>
+  		<!-- <resultMap type="Review" id="reviewHeartResultMap">
+  			<id property=""
+  		</resultMap> -->
   			
   		<insert id="insertReview">
   			INSERT INTO REVIEW_TBL(REVIEW_NO, USER_ID, STORE_NO,
@@ -29,9 +29,11 @@
   			SELECT * FROM REVIEW_TBL WHERE REVIEW_NO = #{reviewNo}
   		</select>
   		<select id="selectAllReview" resultMap="reviewResultMap">
-  				SELECT * FROM REVIEW_TBL WHERE USE_YN = 'Y' ORDER BY BOARD_NO
+  				SELECT * FROM REVIEW_TBL WHERE USE_YN = 'Y' ORDER BY REVIEW_NO DESC
   		</select>
-  		
+  		<select id="selectTotalCount" resultType="_int">
+  			SELECT COUNT(*) REVIEW_TBL WHERE USE_YN = 'Y'
+  		</select>
   		<update id="updateCount">
   			UPDATE REVIEW_TBL SET REVIEW_COUNT = REVIEW_COUNT +1 WHERE REVIEW_NO = #{reviewNo}
   		</update>

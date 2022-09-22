@@ -12,4 +12,11 @@
 	<insert id="insertProduct">
 	INSERT INTO PRODUCT_TBL VALUES(SEQ_PRODUCT_CODE.NEXTVAL, #{refStoreNo}, #{productName}, #{productPrice})
 	</insert>
+	<delete id="deleteProduct">
+	DELETE FROM PRODUCT_TBL WHERE PRODUCT_CODE = #{productCode}
+	</delete>
+	<select id="selectAllProduct" resultMap="productResultMap">
+	SELECT * FROM PRODUCT_TBL 
+	</select>
+	
 </mapper>

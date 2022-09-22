@@ -8,10 +8,29 @@
 <title>사용자 주문 상세페이지</title>
 </head>
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<style>
+  table {
+  width : 80%;
+    border-top: 1px solid  #3A2618;
+   
+    border-collapse: collapse;
+  }
+  th, td {
+    border-bottom: 1px solid #3A2618;
+    padding: 10px;
+    
+  }
+ h1{
+ 	    font-weight: bold;
+            color : #3A2618;
+ 	
+ }
+
+</style>
 <body>
 	<h1 align="center">주문 상세정보</h1>
 	<br><br>
-	<table align="center" border="1">
+	<table align="center">
 		<tr>
 			<th>주문번호</th>
 			<th>주문내역</th>
@@ -40,7 +59,8 @@
 					<c:if test="${order.orderState eq 5}" >취소요청 진행중</c:if>
 				</td>
 			</tr>
-		<table border="1" align="center">
+		
+		<table align="center">
 			<h3 >배송지 정보</h3>
 				<tr>
 					<th>수령인</th>
@@ -59,7 +79,7 @@
 					<td>${order.delivaryMemo }</td>
 				</tr>
 			</table>
-		<table border="1" align="center">
+		<table border="1" >
 			<h3>주문자 정보</h3>
 				<tr>
 					<td>${userName }</td>
@@ -68,7 +88,7 @@
 					<td>${userPhone }</td>
 				</tr>
 		</table>
-		<table border="1" align="center">
+		<table align="center">
 			<tr>
 				<td><button id="btn_sendMoney" type="button">입금완료</button></td>
 				<td><button id="btn_orderRemove" type="button">주문취소요청</button></td>
@@ -77,7 +97,7 @@
 				
 			</tr>
 		</table>
-		<table border="1" align="center">
+		<table align="center">
 			<h3>결제 내역</h3>
 			
 				<tr>

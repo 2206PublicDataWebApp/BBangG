@@ -98,6 +98,7 @@ public class ReviewController {
 	@RequestMapping(value = "/review/list.kh", method = RequestMethod.GET)
 	public ModelAndView reviewListView(
 			ModelAndView mv) {
+		
 		List<Review> rList= rService.printAllReview();
 		if(!rList.isEmpty()) {
 			mv.addObject("rList", rList);

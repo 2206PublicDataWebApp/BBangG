@@ -3,7 +3,7 @@ package com.kh.bbang.faq.domain;
 import java.sql.Date;
 
 public class Faq {
-	private int faqNo;
+	private int faqNo;  
 	private String faqWriter;
 	private String faqTitle;
 	private String faqContent;
