@@ -62,7 +62,7 @@
         <tr>
           <td>계좌번호</td>
           <td>
-          <select name="bank">
+          <select name="storeBank">
           		<option value="우리">우리</option>
           		<option value="신한">신한</option>
           		<option value="농협">농협</option>

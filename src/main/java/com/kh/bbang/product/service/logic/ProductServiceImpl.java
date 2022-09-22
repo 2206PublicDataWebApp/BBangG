@@ -32,8 +32,8 @@ public class ProductServiceImpl implements ProductService{
 	}
 
 	@Override
-	public int removeProduct(String productCode) {
-		int result = pStore.deleteProduct(session, productCode);
+	public int removeProduct(Integer productCode, Integer refStoreNo) {
+		int result = pStore.deleteProduct(session, productCode, refStoreNo);
 		return result;
 	}
 }

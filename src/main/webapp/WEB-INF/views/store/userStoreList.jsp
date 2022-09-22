@@ -13,10 +13,25 @@
 	grid-template-columns: repeat(3, 300px);
 	column-gap: 50px;
 	row-gap: 50px;
-	margin-left: 100px;
-	margin-right: 100px;
 	justify-content: center;
 	align-content: center;
+}
+
+ul {
+	background-color: bisque;
+	text-align: center;
+}
+
+ul a {
+	margin: 0 20px 0 20px;
+	text-decoration: none;
+	color: rgb(177, 171, 171);
+	font-weight: bold;
+	font-size: x-large;
+}
+
+a {
+	text-decoration: none;
 }
 
 .item {
@@ -45,6 +60,16 @@ img {
 	<%@ include file="/WEB-INF/views/include/header.jsp"%>
 	<section>
 		<h1 align="center">빵집 리스트</h1>
+		<div id="region">
+			<ul>
+				<a onclick="getValue(event)">서울/경기</a>
+				<a onclick="getValue(event)">대전/충청</a>
+				<a onclick="getValue(event)">대구/경북</a>
+				<a onclick="getValue(event)">광주/전라</a>
+				<a onclick="getValue(event)">부산/경남</a>
+				<a onclick="getValue(event)">강원/기타</a>
+			</ul>
+		</div>
 		<div class="wrapper">
 			<c:forEach items="${sList }" var="store">
 				<div class="item">
@@ -78,7 +103,7 @@ img {
 					</c:if></td>
 			</tr>
 		</table>
-		<form action="/store/userStoreSearch.kh" method="get">
+		<form action="/store/userStoreSearch.kh" method="get" align="center">
 			<select name="searchCondition">
 				<option value="all">전체</option>
 				<option value="name">이름</option>
@@ -88,5 +113,13 @@ img {
 		</form>
 	</section>
 	<footer></footer>
+	<script>
+		function getValue(event) {
+			let regions = event.target.innerText;
+			const region = regions.split('/');
+			location.href = '/store/userStoreSort.kh?region1=' + region[0]
+					+ '&region2=' + region[1];
+		}
+	</script>
 </body>
 </html>

@@ -21,4 +21,8 @@ public interface StoreStore {
 	public List<Store> selectSearchedStore(SqlSession session, String searchCondition, String searchValue, int currentPage, int storeLimit);
 	// selectTotalCount
 	public int selecTotalCount(SqlSession session, String searchCondition, String searchValue);
+	// selectSortCount
+	public int selectSortCount(SqlSession session, String region1, String region2);
+	// selectSortedStore
+	public List<Store> selectSortedStore(SqlSession session, String region1, String region2, int currentPage, int storeLimit);
 }

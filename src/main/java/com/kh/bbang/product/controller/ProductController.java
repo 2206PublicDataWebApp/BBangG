@@ -2,6 +2,8 @@ package com.kh.bbang.product.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -35,11 +37,19 @@ public class ProductController {
 	@RequestMapping(value="/product/registProduct.kh", method=RequestMethod.POST)
 	public ModelAndView registProduct(
 			ModelAndView mv,
-			@ModelAttribute Product product) {
-		
-		int result = pService.registProduct(product);
-		if(result > 0) {
-			mv.setViewName("/store/adminStoreList");
+			@ModelAttribute Product product,
+			@RequestParam("refStoreNo") Integer storeNo,
+			@RequestParam("storeName") String storeName,
+			HttpServletRequest request) {
+		try {
+			request.setCharacterEncoding("utf-8");
+			System.out.println(storeName);
+			int result = pService.registProduct(product);
+			if(result > 0) {
+				mv.setViewName("redirect:/product/adminProductList.kh?storeNo="+storeNo+"&storeName="+storeName);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		
 		return mv;
@@ -68,11 +78,15 @@ public class ProductController {
 	@RequestMapping(value="/product/removeProduct.kh", method=RequestMethod.GET)
 	public ModelAndView removeProduct(
 			ModelAndView mv,
-			@RequestParam("productCode") String productCode) {
-		int result = pService.removeProduct(productCode);
+			@RequestParam("productCode") Integer productCode,
+			@RequestParam("storeNo") Integer refStoreNo,
+			@RequestParam("storeName") String storeName) {
+		
+		System.out.println(storeName);
+
+		int result = pService.removeProduct(productCode, refStoreNo);
 		if(result > 0) {
-			mv.setViewName("/product/adminStoreList");
-			//기존의 수정중이던 점포의 상품리스트로 가게 수정하기 
+			mv.setViewName("redirect:/product/adminProductList.kh?storeNo="+refStoreNo+"&storeName="+storeName);
 		}
 		return mv;
 	}

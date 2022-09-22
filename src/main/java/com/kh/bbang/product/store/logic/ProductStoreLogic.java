@@ -1,5 +1,6 @@
 package com.kh.bbang.product.store.logic;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -24,8 +25,12 @@ public class ProductStoreLogic implements ProductStore{
 	}
 
 	@Override
-	public int deleteProduct(SqlSession session, String productCode) {
-		int result = session.delete("ProductMapper.deleteProduct", productCode);
+	public int deleteProduct(SqlSession session, Integer productCode, Integer refStoreNo) {
+		HashMap<String, Integer> paraMap = new HashMap<String, Integer>();
+		paraMap.put("productCode", productCode);
+		paraMap.put("refStoreNo", refStoreNo);
+		
+		int result = session.delete("ProductMapper.deleteProduct", paraMap);
 		return result;
 	}
 	

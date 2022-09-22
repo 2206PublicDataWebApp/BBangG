@@ -11,6 +11,7 @@
 	<h1>상품등록화면</h1>
 	<h3>${storeName}</h3>
 	<form action="/product/registProduct.kh" method="post">
+	<input type="hidden" name=storeName value="${storeName }">
 		<table border="1">
 			<tr>
 				<td>점포번호</td>

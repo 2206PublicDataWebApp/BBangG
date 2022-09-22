@@ -27,7 +27,7 @@ public class StoreController {
 	
 	//관리자 점포 리스트 - 페이징완료
 	@RequestMapping(value="/store/adminStoreList.kh", method=RequestMethod.GET)
-	public ModelAndView storeList(
+	public ModelAndView adminStoreList(
 			ModelAndView mv,
 			@RequestParam(value="page", required=false) Integer page) {
 		//페이징처리
@@ -45,7 +45,7 @@ public class StoreController {
 				if(maxPage < endNavi) {
 					endNavi = maxPage;
 				}
-				//
+				
 		List<Store> sList = sService.showAllStore(currentPage, storeLimit);
 		if(!sList.isEmpty()) {
 			mv.addObject("urlVal","adminStoreList");
@@ -80,7 +80,7 @@ public class StoreController {
 		if(maxPage < endNavi) {
 			endNavi = maxPage;
 		}
-		//
+		
 		
 		List<Store> sList = sService.showAllStore(currentPage, storeLimit);
 		if(!sList.isEmpty()) {
@@ -92,7 +92,7 @@ public class StoreController {
 			mv.addObject("sList", sList);
 			
 		}
-		mv.setViewName("store/userStoreView");
+		mv.setViewName("store/userStoreList");
 		return mv;
 	}
 	
@@ -115,6 +115,7 @@ public class StoreController {
 				String root = request.getSession().getServletContext().getRealPath("resources");
 				System.out.println(root);
 				String savePath = root + "\\store-images";
+				//시간추가할 수 있도록 추가
 				String storeFileRename = store.getStoreName()+"."+storeFilename.substring(storeFilename.lastIndexOf(".")+1);
 				File file = new File(savePath);
 				if(!file.exists()) {
@@ -215,7 +216,7 @@ public class StoreController {
 		return mv;
 	}
 	
-	// 검색 구현 중 - 관리자 쪽 완료 // 사용자쪽은 새로만들지.. 고민..
+	// 관라자 검색 기능
 	@RequestMapping(value="/store/storeSearch.kh", method=RequestMethod.GET)
 	public ModelAndView storeSearchedList(
 			ModelAndView mv,
@@ -259,7 +260,7 @@ public class StoreController {
 		return mv;
 	}
 	
-	// 검색 구현 중 - 관리자 쪽 완료 // 사용자쪽은 새로만들지.. 고민..
+	// 사용자 검색
 		@RequestMapping(value="/store/userStoreSearch.kh", method=RequestMethod.GET)
 		public ModelAndView userStoreSearchedList(
 				ModelAndView mv,
@@ -267,10 +268,12 @@ public class StoreController {
 				@RequestParam("searchValue") String searchValue,
 				@RequestParam(value="page", required=false) Integer page) {
 			try {
+				System.out.println(searchCondition);
+				System.out.println(searchValue);
 				//페이징처리
 				int currentPage = (page != null) ? page : 1;
 				int totalCount = sService.getTotalCount(searchCondition,searchValue);
-				int storeLimit = 10;
+				int storeLimit = 9;
 				int naviLimit = 5;
 				int maxPage;
 				int startNavi;
@@ -296,7 +299,53 @@ public class StoreController {
 				mv.addObject("currentPage",currentPage);
 				mv.addObject("startNavi",startNavi);
 				mv.addObject("endNavi",endNavi);
-				mv.setViewName("store/userStoreView");
+				mv.setViewName("store/userStoreList");
+			}catch(Exception e) {
+				mv.addObject("msg",e.toString()).setViewName("common/errorPage");
+			}
+			return mv;
+		}
+		
+		// sort
+		@RequestMapping(value="/store/userStoreSort.kh", method=RequestMethod.GET)
+		public ModelAndView userStoreSortByRegion(
+				ModelAndView mv,
+				@RequestParam(value="page", required=false) Integer page,
+				@RequestParam(value="region1") String region1,
+				@RequestParam(value="region2") String region2) {
+			try {
+				System.out.println(region1);
+				System.out.println(region2);
+				//페이징처리
+				int currentPage = (page != null) ? page : 1;
+				int sortCount = sService.getSortCount(region1,region2);
+				int storeLimit = 9;
+				int naviLimit = 5;
+				int maxPage;
+				int startNavi;
+				int endNavi;
+				
+				maxPage = (int) ((double)sortCount / storeLimit + 0.9);
+				startNavi = ((int)((double)currentPage / naviLimit + 0.9) -1) * naviLimit + 1;
+				endNavi = startNavi + naviLimit - 1;
+				if(maxPage < endNavi) {
+					endNavi = maxPage;
+				}
+				System.out.println(sortCount);
+				List<Store> sList = sService.showSortedStore(region1, region2, currentPage, storeLimit);
+				if(!sList.isEmpty()) {
+					mv.addObject("sList", sList);
+				}else {
+					mv.addObject("sList", null);
+				}
+				mv.addObject("urlVal", "userStoreSort");
+				mv.addObject("region1", region1);
+				mv.addObject("region2",region2);
+				mv.addObject("maxPage",maxPage);
+				mv.addObject("currentPage",currentPage);
+				mv.addObject("startNavi",startNavi);
+				mv.addObject("endNavi",endNavi);
+				mv.setViewName("store/userStoreList");
 			}catch(Exception e) {
 				mv.addObject("msg",e.toString()).setViewName("common/errorPage");
 			}

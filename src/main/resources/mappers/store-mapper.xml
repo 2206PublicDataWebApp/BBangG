@@ -57,4 +57,28 @@
 	AND STORE_STATUS = 'Y' ORDER BY STORE_NO DESC
 		</where>
 	</select>
+	<select id="selectSortCount" resultType="_int">
+	SELECT COUNT(*) FROM STORE_TBL
+		<where>
+			<if test="region1.toString() == '서울'">STORE_ADDR LIKE '%'||#{region1}||'%' OR STORE_ADDR LIKE '%'||#{region2}||'%'</if>
+			<if test="region1.toString() == '대전'">STORE_ADDR LIKE '%'||#{region1}||'%' OR STORE_ADDR LIKE '%'||#{region2}||'%'</if>
+			<if test="region1.toString() == '대구'">STORE_ADDR LIKE '%'||#{region1}||'%' OR STORE_ADDR LIKE '%'||#{region2}||'%'</if>
+			<if test="region1.toString() == '광주'">STORE_ADDR LIKE '%'||#{region1}||'%' OR STORE_ADDR LIKE '%'||#{region2}||'%'</if>
+			<if test="region1.toString() == '부산'">STORE_ADDR LIKE '%'||#{region1}||'%' OR STORE_ADDR LIKE '%'||#{region2}||'%'</if>
+			<if test="region1.toString() == '강원'">STORE_ADDR LIKE '%'||#{region1}||'%' OR STORE_ADDR LIKE '%'||#{region2}||'%'</if>
+	AND STORE_STATUS = 'Y'
+		</where>
+	</select>
+	<select id="selectSortedList" resultMap="storeResultMap">
+	SELECT * FROM STORE_TBL
+		<where>
+			<if test="region1.toString() == '서울'">STORE_ADDR LIKE '%'||#{region1}||'%' OR STORE_ADDR LIKE '%'||#{region2}||'%'</if>
+			<if test="region1.toString() == '대전'">STORE_ADDR LIKE '%'||#{region1}||'%' OR STORE_ADDR LIKE '%'||#{region2}||'%'</if>
+			<if test="region1.toString() == '대구'">STORE_ADDR LIKE '%'||#{region1}||'%' OR STORE_ADDR LIKE '%'||#{region2}||'%'</if>
+			<if test="region1.toString() == '광주'">STORE_ADDR LIKE '%'||#{region1}||'%' OR STORE_ADDR LIKE '%'||#{region2}||'%'</if>
+			<if test="region1.toString() == '부산'">STORE_ADDR LIKE '%'||#{region1}||'%' OR STORE_ADDR LIKE '%'||#{region2}||'%'</if>
+			<if test="region1.toString() == '강원'">STORE_ADDR LIKE '%'||#{region1}||'%' OR STORE_ADDR LIKE '%'||#{region2}||'%'</if>
+	AND STORE_STATUS = 'Y' ORDER BY STORE_NO DESC
+		</where>
+	</select>
 </mapper>
