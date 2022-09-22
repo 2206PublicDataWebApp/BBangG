@@ -12,4 +12,7 @@ public interface AdminStore {
 
 	public int selectTotalCount(SqlSession session, String searchCondition, String searchValue);
 
+	public List<User> selectAllbyValue(SqlSession session, String searchCondition, String searchValue,
+			int currentPage, int boardLimit);
+
 }

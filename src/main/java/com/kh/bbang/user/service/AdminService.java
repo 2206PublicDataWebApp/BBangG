@@ -10,4 +10,6 @@ public interface AdminService {
 
 	public int getTotalCount(String searchCondition, String searchValue);
 
+	public List<User> printAllbyValue(String searchCondition, String searchValue, int currentPage, int boardLimit);
+
 }
