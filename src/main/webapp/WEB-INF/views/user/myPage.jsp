@@ -3,10 +3,11 @@
 <%@ include file="/WEB-INF/views/include/head.jsp"%>
 </head>
 <body>
-	<%@ include file="/WEB-INF/views/include/header.jsp"%>
-	<%-- <jsp:include page = "/WEB-INF/views/include/header.jsp" /> --%>
-	<h1 align="center">회원 정보 수정</h1>
-		<div class="">
+	<%-- <%@ include file="/WEB-INF/views/include/header.jsp"%> --%>
+	<jsp:include page = "/WEB-INF/views/include/header.jsp"/>
+
+	<div class="main">
+		<h1 align="center">회원 정보 수정</h1>
 			<form action="/user/modify.kh" method="post"
 			 onsubmit="modifyUser();">
 					<div class="email_auth">

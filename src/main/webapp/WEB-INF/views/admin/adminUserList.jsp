@@ -20,6 +20,7 @@
 			<th>이메일</th>
 			<th>전화번호</th>
 			<th>주소</th>
+			<th>탈퇴</th>
 		</tr>
 		<c:if test="${!empty uList }">
 			<c:forEach items="${uList }" var="uList" varStatus="i">
