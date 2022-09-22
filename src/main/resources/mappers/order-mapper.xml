@@ -14,7 +14,7 @@
  		<id property="userId" column="USER_ID"/>
  		<result property="orderNo" column="ORDER_NO"/>
  		<result property="orderDetail" column="ORDER_DETAIL"/>
- 		<result property="refStoreNo" column="REF_STORE_NO"/>
+ 		<result property="orderDate" column="ORDER_DATE"/>
  		<result property="orderState" 				column="ORDER_STATE"/>
  	</resultMap>
  		 <resultMap type="Order" id="orderDetailResultMap">
@@ -32,6 +32,8 @@
  		<result property="delivaryAddrDetail" 		column="DELIVARY_ADDR_DETAIL"/>
  		<result property="delivaryMemo" 			column="DELIVARY_MEMO"/>
  		<result property="orderState" 				column="ORDER_STATE"/>
+ 		<result property="orderName" 				column="ORDER_NAME"/>
+ 		<result property="orderPhone" 				column="ORDER_PHONE"/>
  	</resultMap>
  	<resultMap type="Order" id="orderResultMapByDate">
  		<id property="orderDate" column="ORDER_DATE"/>
@@ -51,7 +53,7 @@
  	</resultMap>
  	<insert id="insertOrder">
 		INSERT INTO ORDER_TBL
-		VALUES(SEQ_ORDER_NO.NEXTVAL,#{userId},NULL,#{orderDetail},#{orderShipfee},#{totalPrice},DEFAULT,#{delivaryName},#{delivaryPhone},#{delivaryZipcode},#{delivaryAddr},#{delivaryAddrDetail},#{delivaryMemo},DEFAULT)
+		VALUES(SEQ_ORDER_NO.NEXTVAL,#{userId},#{storeNo},#{orderDetail},#{orderShipfee},#{totalPrice},DEFAULT,#{delivaryName},#{delivaryPhone},#{delivaryZipcode},#{delivaryAddr},#{delivaryAddrDetail},#{delivaryMemo},DEFAULT,#{orderName},#{orderPhone})
  	</insert>
  	<update id="updateOrder">
  		UPDATE ORDER_TBL SET DELIVARY_NAME=#{delivaryName},DELIVARY_PHONE=#{delivaryPhone},DELIVARY_ZIPCODE=#{delivaryZipcode},DELIVARY_ADDR=#{delivaryAddr}, DELIVARY_ADDRESS_SECOND=#{delivaryAddrDetail}, DELIVARY_MEMO=#{delivaryMemo}

@@ -9,6 +9,9 @@
 </head>
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 <style>
+*{
+ font-family: Verdana,"맑은 고딕",Malgun Gothic,AppleSDGothicNeo,"돋움",Dotum;
+}
   #f_table {
   width : 80%;
     border-top: 1px solid  #3A2618;
@@ -21,8 +24,8 @@
     
   }
  h1{
- 	    font-weight: bold;
-            color : #3A2618;
+ 	  
+            color : #fff;
  	
  }
  #cover{
@@ -33,12 +36,26 @@
   display:inline-block;.display:inline;
   
 }
+ #title {
+    line-height: 56px;
+    color: #fffff;
+    font-size: 15px;
+    font-weight: normal;
+    text-align: center;
+    background: #3A2618;
+    position:relative;
+}
 
 </style>
 <body>
+	<div id="title" >
 	<h1 align="center">주문 상세정보</h1>
+	
+	</div>
 	<br><br>
 	<table id="f_table" align="center" style="text-align:center">
+	<div style="margin-left: 10%;">주문날짜 ${order.orderDate }</div>
+	<br>
 		<tr style=" border-bottom: 1px solid  #3A2618;">
 			<th>주문번호</th>
 			<th>주문내역</th>
@@ -75,34 +92,32 @@
 				<h3 >배송지 정보</h3>
 					<tr>
 						<th>수령인</th>
-						<td>${order.delivaryName }</td>
+						<td style="text-align:left">${order.delivaryName }</td>
 					</tr>
 					<tr>
 						<th>연락처</th>
-						<td>${order.delivaryPhone }</td>
+						<td style="text-align:left">${order.delivaryPhone }</td>
 					</tr>
 					<tr>
 						<th>배송지</th>
-						<td>${delivaryFullAdd }</td>
+						<td style="text-align:left">${delivaryFullAdd }</td>
 					</tr>
 					<tr>
 						<th>배송메모</th>
-						<td>${order.delivaryMemo }</td>
+						<td style="text-align:left">${order.delivaryMemo }</td>
 					</tr>
 				</table>
 		</div>
 		<div class="menu" style="width: 30%;">
-		<table  align="center">
+		<table  align="center" style="border:none">
 			<h3>주문자 정보</h3>
 				<tr>
-					<td>${user.userName }</td>
+					<td>${order.orderName }</td>
 				</tr>
 				<tr>
-					<td>${user.userPhone }</td>
+					<td>${order.orderPhone }</td>
 				</tr>
-		</table>
-		<br><br>
-		<table align="center" style="border:none">
+	
 			<div style="margin:10%">
 				<div style="width: 20%; float:left"><button id="btn_sendMoney" type="button">입금완료</button></div>
 				<div style="width: 35%; float:left"><button id="btn_orderRemove" type="button">주문취소요청</button></div>
@@ -123,10 +138,10 @@
 					<td>${order.totalPrice}원</td>
 				</tr>
 				<tr>
-					<th>${store.storeAccount }</th>
+					<th>입금계좌 ${store.storeAccount }</th>
 				</tr>
 				<tr>
-					<td>${store.storeBank }  ${store.storeName }  은행명</td>
+					<td>${store.storeBank } ${store.storeName } </td>
 				</tr>
 			</table>
 		</div>
@@ -147,7 +162,7 @@
 		});
 		$("#btn_orderRemove").click(function(){
 			if(${order.orderState}==0 ){
-				if(confirm("주문 취소 하시겠습니까?")){
+				if(confirm("입금 전 이므로 즉시 주문취소 가능합니다. 주문 취소 하시겠습니까?")){
 				location.href="/order/orderRemove.kh?orderNo="+${order.orderNo };
 				}
 			}else if(${order.orderState}==1||${order.orderState}==2){

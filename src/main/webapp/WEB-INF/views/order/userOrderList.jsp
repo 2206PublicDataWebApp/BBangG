@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
  <%@ include file="/WEB-INF/views/home.jsp" %>
+ <%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -38,7 +39,7 @@
 	 	<th>배송중/완료</th>
 	 	<th>취소진행중/완료</th>
 	 </tr>
-	 <tr>
+	 <tr align="center">
 	 	<td>${payState }</td>
 	 	<td>${delivaryState }</td>
 	 	<td>${cancleState }</td>
@@ -49,15 +50,18 @@
 		<tr style="border-bottom: 3px solid  #3A2618;">
 			<th>주문번호</th>
 			<th>주문내역</th>
-			<th>주문점포</th>
+			<th>주문날짜</th>
 			<th>입금상태</th>
 			<th>배송상태</th>
 		</tr>
 		<c:forEach items="${oList}" var="order" varStatus="i">
-			<tr>
+			<tr align="center">
 				<td><a href="/order/userOrderDetail.kh?orderNo=${order.orderNo }">${order.orderNo }</a></td>
 				<td>${order.orderDetail}</td>
-				<td><a href="#">${order.storeNo}</a></td>
+				<c:set var="orderDateOn" value="${order.orderDate}"/>
+				<c:set var="simpleDate" value="${ fn:substring(orderDateOn,0,10)}"/>
+				<td >${simpleDate }</td>
+				
 				<td>
 					<c:if test="${order.orderState eq 0 }">입금전</c:if>
 					<c:if test="${order.orderState eq 1 }">입금완료</c:if>

@@ -6,6 +6,8 @@ package com.kh.bbang.order.domain;
 public class Order {
 	private int orderNo;
 	private String userId;
+	private String orderName;
+	private String orderPhone;
 	private int storeNo;
 	private String orderDetail;
 	private int orderShipfee;
@@ -106,14 +108,27 @@ public class Order {
 	public void setOrderState(int orderState) {
 		this.orderState = orderState;
 	}
+	
+	public String getOrderName() {
+		return orderName;
+	}
+	public void setOrderName(String orderName) {
+		this.orderName = orderName;
+	}
+	public String getOrderPhone() {
+		return orderPhone;
+	}
+	public void setOrderPhone(String orderPhone) {
+		this.orderPhone = orderPhone;
+	}
 	@Override
 	public String toString() {
-		return "Order [orderNo=" + orderNo + ", userId=" + userId + ", storeNo=" + storeNo + ", orderDetail="
-				+ orderDetail + ", orderShipfee=" + orderShipfee + ", totalPrice=" + totalPrice + ", orderDate="
-				+ orderDate + ", delivaryName=" + delivaryName + ", delivaryPhone=" + delivaryPhone
-				+ ", delivaryZipcode=" + delivaryZipcode + ", delivaryAddr=" + delivaryAddr
-				+ ", delivaryAddrDetail=" + delivaryAddrDetail + ", delivaryMemo=" + delivaryMemo
-				+ ", orderState=" + orderState + "]";
+		return "Order [orderNo=" + orderNo + ", userId=" + userId + ", orderName=" + orderName + ", orderPhone="
+				+ orderPhone + ", storeNo=" + storeNo + ", orderDetail=" + orderDetail + ", orderShipfee="
+				+ orderShipfee + ", totalPrice=" + totalPrice + ", orderDate=" + orderDate + ", delivaryName="
+				+ delivaryName + ", delivaryPhone=" + delivaryPhone + ", delivaryZipcode=" + delivaryZipcode
+				+ ", delivaryAddr=" + delivaryAddr + ", delivaryAddrDetail=" + delivaryAddrDetail + ", delivaryMemo="
+				+ delivaryMemo + ", orderState=" + orderState + "]";
 	}
 
 
