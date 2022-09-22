@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 
@@ -101,9 +102,10 @@
 
     </style>
     <script src="/resources/js/jquery-3.6.1.min.js"></script>
+    <%@ include file="/WEB-INF/views/include/head.jsp"%>
 </head>
 <body>
-	
+	<%@ include file="/WEB-INF/views/include/header.jsp"%>
 	    <div>
 	        <a href="#"><button type="submit" id="order-btn">주문하러 가기</button></a>
 	    </div>
@@ -122,7 +124,6 @@
 	    </div>
 	    <!-- 1 -->
 	    <div class="review-detail">
-	        <div class="">
 	            <div>카레빵맨</div>
 	            <div>2022/09/16</div>
 	            <div>★★★★★</div>

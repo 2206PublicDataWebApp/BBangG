@@ -8,22 +8,49 @@ import java.sql.Date;
  */
 public class Review {
 	private int reviewNo;
-	private String userId;
 	private int storeNo;
-	private int starRating;
-	private int reviewCount;
-	private Date rCreateDate;	
-	private String reviewContents;
-	private String useYn;
-	private Date rUpdateDate;
-	
+	private String reviewWriter; 
+	private String reviewContent;
 	private String reviewFilename;
 	private String reviewFileRename;
 	private String reviewFilepath;
+	private int reviewCount;
+	private int starRating;
+	private Date rCreateDate;	
+	private Date rUpdateDate;
+	private String useYn;
 	
 	private int reviewHeart;
 
 	public Review() {}
+
+	@Override
+	public String toString() {
+		return "Review [reviewNo=" + reviewNo + ", storeNo=" + storeNo + ", reviewWriter=" + reviewWriter
+				+ ", reviewContent=" + reviewContent + ", reviewFilename=" + reviewFilename + ", reviewFileRename="
+				+ reviewFileRename + ", reviewFilepath=" + reviewFilepath + ", reviewCount=" + reviewCount
+				+ ", starRating=" + starRating + ", rCreateDate=" + rCreateDate + ", rUpdateDate=" + rUpdateDate
+				+ ", useYn=" + useYn + ", reviewHeart=" + reviewHeart + "]";
+	}
+
+	public Review(int reviewNo, int storeNo, String reviewWriter, String reviewContent, String reviewFilename,
+			String reviewFileRename, String reviewFilepath, int reviewCount, int starRating, Date rCreateDate,
+			Date rUpdateDate, String useYn, int reviewHeart) {
+		super();
+		this.reviewNo = reviewNo;
+		this.storeNo = storeNo;
+		this.reviewWriter = reviewWriter;
+		this.reviewContent = reviewContent;
+		this.reviewFilename = reviewFilename;
+		this.reviewFileRename = reviewFileRename;
+		this.reviewFilepath = reviewFilepath;
+		this.reviewCount = reviewCount;
+		this.starRating = starRating;
+		this.rCreateDate = rCreateDate;
+		this.rUpdateDate = rUpdateDate;
+		this.useYn = useYn;
+		this.reviewHeart = reviewHeart;
+	}
 
 	public int getReviewNo() {
 		return reviewNo;
@@ -31,14 +58,6 @@ public class Review {
 
 	public void setReviewNo(int reviewNo) {
 		this.reviewNo = reviewNo;
-	}
-
-	public String getUserId() {
-		return userId;
-	}
-
-	public void setUserId(String userId) {
-		this.userId = userId;
 	}
 
 	public int getStoreNo() {
@@ -49,52 +68,20 @@ public class Review {
 		this.storeNo = storeNo;
 	}
 
-	public int getStarRating() {
-		return starRating;
+	public String getReviewWriter() {
+		return reviewWriter;
 	}
 
-	public void setStarRating(int starRating) {
-		this.starRating = starRating;
+	public void setReviewWriter(String reviewWriter) {
+		this.reviewWriter = reviewWriter;
 	}
 
-	public int getReviewCount() {
-		return reviewCount;
+	public String getReviewContent() {
+		return reviewContent;
 	}
 
-	public void setReviewCount(int reviewCount) {
-		this.reviewCount = reviewCount;
-	}
-
-	public Date getrCreateDate() {
-		return rCreateDate;
-	}
-
-	public void setrCreateDate(Date rCreateDate) {
-		this.rCreateDate = rCreateDate;
-	}
-
-	public String getReviewContents() {
-		return reviewContents;
-	}
-
-	public void setReviewContents(String reviewContents) {
-		this.reviewContents = reviewContents;
-	}
-
-	public String getUseYn() {
-		return useYn;
-	}
-
-	public void setUseYn(String useYn) {
-		this.useYn = useYn;
-	}
-
-	public Date getrUpdateDate() {
-		return rUpdateDate;
-	}
-
-	public void setrUpdateDate(Date rUpdateDate) {
-		this.rUpdateDate = rUpdateDate;
+	public void setReviewContent(String reviewContent) {
+		this.reviewContent = reviewContent;
 	}
 
 	public String getReviewFilename() {
@@ -121,6 +108,46 @@ public class Review {
 		this.reviewFilepath = reviewFilepath;
 	}
 
+	public int getReviewCount() {
+		return reviewCount;
+	}
+
+	public void setReviewCount(int reviewCount) {
+		this.reviewCount = reviewCount;
+	}
+
+	public int getStarRating() {
+		return starRating;
+	}
+
+	public void setStarRating(int starRating) {
+		this.starRating = starRating;
+	}
+
+	public Date getrCreateDate() {
+		return rCreateDate;
+	}
+
+	public void setrCreateDate(Date rCreateDate) {
+		this.rCreateDate = rCreateDate;
+	}
+
+	public Date getrUpdateDate() {
+		return rUpdateDate;
+	}
+
+	public void setrUpdateDate(Date rUpdateDate) {
+		this.rUpdateDate = rUpdateDate;
+	}
+
+	public String getUseYn() {
+		return useYn;
+	}
+
+	public void setUseYn(String useYn) {
+		this.useYn = useYn;
+	}
+
 	public int getReviewHeart() {
 		return reviewHeart;
 	}
@@ -129,33 +156,6 @@ public class Review {
 		this.reviewHeart = reviewHeart;
 	}
 
-	public Review(int reviewNo, String userId, int storeNo, int starRating, int reviewCount, Date rCreateDate,
-			String reviewContents, String useYn, Date rUpdateDate, String reviewFilename, String reviewFileRename,
-			String reviewFilepath, int reviewHeart) {
-		super();
-		this.reviewNo = reviewNo;
-		this.userId = userId;
-		this.storeNo = storeNo;
-		this.starRating = starRating;
-		this.reviewCount = reviewCount;
-		this.rCreateDate = rCreateDate;
-		this.reviewContents = reviewContents;
-		this.useYn = useYn;
-		this.rUpdateDate = rUpdateDate;
-		this.reviewFilename = reviewFilename;
-		this.reviewFileRename = reviewFileRename;
-		this.reviewFilepath = reviewFilepath;
-		this.reviewHeart = reviewHeart;
-	}
-
-	@Override
-	public String toString() {
-		return "Review [reviewNo=" + reviewNo + ", userId=" + userId + ", storeNo=" + storeNo + ", starRating="
-				+ starRating + ", reviewCount=" + reviewCount + ", rCreateDate=" + rCreateDate + ", reviewContents="
-				+ reviewContents + ", useYn=" + useYn + ", rUpdateDate=" + rUpdateDate + ", reviewFilename="
-				+ reviewFilename + ", reviewFileRename=" + reviewFileRename + ", reviewFilepath=" + reviewFilepath
-				+ ", reviewHeart=" + reviewHeart + "]";
-	}
-
+	
 	
 }

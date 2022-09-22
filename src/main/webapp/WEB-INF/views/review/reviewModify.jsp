@@ -119,8 +119,10 @@
 
     </style>
     <script src="/resources/js/jquery-3.6.1.min.js"></script>
+    <%@ include file="/WEB-INF/views/include/head.jsp"%>
 </head>
 <body>
+<%@ include file="/WEB-INF/views/include/header.jsp"%>
     <div class="review-write">
         <h2 id="store-name">핑퐁베이커리</h2>
             <div id="write_area">

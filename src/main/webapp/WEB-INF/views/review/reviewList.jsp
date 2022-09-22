@@ -116,9 +116,10 @@
             display:inline-block;
         }
     </style>
+<%@ include file="/WEB-INF/views/include/head.jsp"%>
 </head>
 <body>
-
+<%@ include file="/WEB-INF/views/include/header.jsp"%>
     <div class="wrap">
         <ul class="review-board board-fixed">
 	        <c:forEach items ="${rList}" var="review" varStatus="i">
@@ -142,7 +143,7 @@
 	                    	
 	                        <a href="#">
 	                            <span class="storeNo">${review.storeNo }</span><!-- 점포명이 들어가야함 -->
-	                        </a>
+	                        </a>	                       
 	                    </div>
 	                </div>
 	            </li>
