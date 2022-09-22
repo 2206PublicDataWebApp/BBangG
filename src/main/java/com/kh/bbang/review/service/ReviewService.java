@@ -12,7 +12,7 @@ public interface ReviewService {
 	
 	// selectAllReview 리뷰게시판 리스트
 	// REVIEW_TBL <- SELECT * FROM REVIEW_TBL WHERE USE_YN = 'Y'
-	public List<Review> printAllReview();
+	public List<Review> printAllReview(int currentPage, int limit);
 	
 	// getTotalCount 페이징
 	// REVIEW_TBL <- SELECT COUNT (*) FROM REVIEW_TBL WHERE USE_YN = 'Y'

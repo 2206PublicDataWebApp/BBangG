@@ -38,8 +38,8 @@ public class ReviewServiceImpl implements ReviewService{
 	}
 
 	@Override
-	public List<Review> printAllReview() {
-		List<Review> rList = rStore.selectAllReview(session);
+	public List<Review> printAllReview(int currentPage, int limit) {
+		List<Review> rList = rStore.selectAllReview(session, currentPage, limit);
 		return rList;
 	}
 

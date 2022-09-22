@@ -2,6 +2,7 @@ package com.kh.bbang.review.store.logic;
 
 import java.util.List;
 
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
@@ -33,8 +34,13 @@ public class ReviewStoreLogic implements ReviewStore{
 	}
 
 	@Override
-	public List<Review> selectAllReview(SqlSession session) {
-		List<Review> rList = session.selectList("ReviewMapper.selectAllReview");
+	public List<Review> selectAllReview(SqlSession session, int currentPage, int limit) {
+		// offset은 currentPage에 의해서 변경되기 때문에 currentPage가 필요하다.
+		// limit은 한 페이지당 보여지는 게시물 수, limit은 고정값이다.
+		// RowBounds란 쿼리문을 변경하지 않고도 페이징을 처리할 수 있게 해주는 클래스이며 offset과 limit값을 이용해 동작.
+		int offset = (currentPage-1)*limit;
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		List<Review> rList = session.selectList("ReviewMapper.selectAllReview", null, rowBounds);
 		return rList;
 	}
 
