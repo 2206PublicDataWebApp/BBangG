@@ -30,6 +30,12 @@ public class AdminServiceImpl implements AdminService{
 		int totalCount = aStore.selectTotalCount(session, searchCondition, searchValue);
 		return totalCount;
 	}
-	
-	
+
+	@Override
+	public List<User> printAllbyValue(String searchCondition, String searchValue, int currentPage, int boardLimit) {
+		List<User> uList = aStore.selectAllbyValue(session, searchCondition, searchValue, currentPage, boardLimit);
+		return uList;
+	}
+
+
 }

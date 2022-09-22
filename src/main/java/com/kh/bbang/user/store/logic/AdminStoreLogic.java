@@ -30,5 +30,18 @@ public class AdminStoreLogic implements AdminStore{
 		return totalCount;
 	}
 
+	@Override
+	public List<User> selectAllbyValue(SqlSession session, String searchCondition, String searchValue, int currentPage,
+			int boardLimit) {
+		int offset = (currentPage-1)*boardLimit;
+		RowBounds rowBounds = new RowBounds(offset, boardLimit);
+		HashMap<String, String> paramMap = new HashMap<String, String>();
+		paramMap.put("searchCondition", searchCondition);
+		paramMap.put("searchValue", searchValue);
+		List<User> uList = session.selectList("UserMapper.selectAllByValue", paramMap, rowBounds);
+		return uList;
+	}
+
+
 
 }
