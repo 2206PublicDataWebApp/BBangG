@@ -193,7 +193,15 @@
 			<artifactId>junit</artifactId>
 			<version>4.7</version>
 			<scope>test</scope>
-		</dependency>        
+		</dependency> 
+		
+		<!--  log4jdbc 연결 --> 
+	<dependency>
+	    <groupId>org.bgee.log4jdbc-log4j2</groupId>
+	    <artifactId>log4jdbc-log4j2-jdbc4</artifactId>
+	    <version>1.16</version>
+	</dependency>
+		      
 	</dependencies>
     <build>
         <plugins>

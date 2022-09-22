@@ -23,5 +23,5 @@ public interface FaqStore {
 	public List<Faq> selectAllByValue(SqlSession session, String searchCondition, String searchValue, int currentPage, int FaqLimit);
 
 	// 조회수
-		public void faqViewCount(SqlSession session, int faqNo);
+		public int updateFaqCount(SqlSession session, int faqNo);
 }

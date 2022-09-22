@@ -38,13 +38,13 @@ public class FaqStoreLogic implements FaqStore {
 
 	@Override
 	public Faq selectOneByNo(SqlSession session, Integer faqNo) {
-		Faq faq = session.selectOne("faqMapper.selectOneByNo", faqNo);
+		Faq faq = session.selectOne("FaqMapper.selectOneByNo", faqNo);
 		return faq;
 	}
 
 	@Override
 	public int deleteOneByNo(SqlSession session, int faqNo) {
-		int result = session.delete("faqMapper.deleteOneByNo", faqNo);
+		int result = session.delete("FaqMapper.deleteOneByNo", faqNo);
 		return result;
 	}
 
@@ -62,14 +62,14 @@ public class FaqStoreLogic implements FaqStore {
 
 	@Override
 	public int updateFaq(SqlSession session, Faq faq) {
-		int result = session.update("faqMapper.updatefaq", faq);
+		int result = session.update("FaqMapper.updateFaq", faq);
 		return result;
 	}
 
 	@Override
-	public void faqViewCount(SqlSession session, int faqNo) {
-		// TODO Auto-generated method stub
-		//ㅁㄴㅇㄻㄴㅇㄹasdfasdfasdfasdf
+	public int updateFaqCount(SqlSession session, int faqNo) {
+		int result = session.update("FaqMapper.updateFaqCount", faqNo);
+		return result;
 	}
 
 }

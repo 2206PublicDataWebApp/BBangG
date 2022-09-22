@@ -22,6 +22,5 @@ public interface FaqService {
 
 	public List<Faq> printAllByValue(String searchCondition, String searchValue, int currentPage, int faqLimit);
 
-	// 조회수
-	public void faqViewCount(SqlSession session, int faqNo);
+
 }

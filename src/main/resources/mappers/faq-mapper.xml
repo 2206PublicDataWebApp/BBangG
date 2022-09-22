@@ -40,6 +40,31 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			</if>
 		</where>
 	</select>
+	
+	<select id="selectAllByValue" resultMap="faqResultMap">
+		SELECT COUNT(*) FROM FAQ_TBL
+		<where>
+			<if test="searchCondition.toString() == 'title'">
+				FAQ_TITLE LIKE '%'||#{searchValue}||'%'
+			</if>
+			<if test="searchCondition.toString() == 'content'">
+				FAQ_CONTENT LIKE '%'||#{searchValue}||'%'
+			</if>
+			<if test="searchCondition.toString() == 'writer'">
+				USER_ID LIKE '%'||#{searchValue}||'%'
+			</if>
+			<if test="searchCondition.toString() == 'all'">
+				FAQ_TITLE LIKE '%'||#{searchValue}||'%'
+				OR FAQ_CONTENT LIKE '%'||#{searchValue}||'%'
+				OR USER_ID LIKE '%'||#{searchValue}||'%'
+			</if>
+		</where>
+	</select>
+
+<select id="selectOneByNo" resultMap="faqResultMap">
+		SELECT * FROM FAQ_TBL WHERE FAQ_NUMBER = #{faqNo} 
+	</select>
+
 
 	<insert id="insertFaq">
 		INSERT INTO FAQ_TBL VALUES(
@@ -55,10 +80,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE FAQ_NUMBER = #{faqNo}
 	</update>
 	
-	<!-- 조회수증가 -->  
-	<update id="faqViewCount">
+	 <delete id="deleteOneByNo">
+   DELETE FROM FAQ_TBL WHERE FAQ_NO = #{faqNo } 
+   </delete>
+	
+	<update id="updateFaqCount">
 	UPDATE FAQ_TBL SET FAQ_VIEWCOUNT = FAQ_VIEWCOUNT + 1
 	WHERE FAQ_NUMBER = #{faqNo}
 	</update>
+	
+
 
 </mapper>
