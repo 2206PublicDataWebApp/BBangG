@@ -61,7 +61,7 @@ public class ReviewController {
 			String reviewFilename = uploadFile.getOriginalFilename();
 			if(!reviewFilename.equals("")) {
 				String root = request.getSession().getServletContext().getRealPath("resources");
-				String savePath = root + "\\buploadFiles";
+				String savePath = root + "\\reviewUploadFiles";
 				File file = new File(savePath);
 				if(!file.exists()) {
 					file.mkdir();
@@ -119,6 +119,10 @@ public class ReviewController {
 		return mv;
 	}
 	/**
+	 * 게시글 리스트
+	 * @param mv
+	 * @param page
+	 * @return
 	 */
 	@RequestMapping(value = "/review/list.kh", method = RequestMethod.GET)
 	public ModelAndView reviewListView(

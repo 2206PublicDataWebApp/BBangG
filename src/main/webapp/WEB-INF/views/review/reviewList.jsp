@@ -139,11 +139,11 @@
 	        <ul class="review-board board-fixed">
 		        <c:forEach items ="${rList}" var="review" varStatus="i">
 		            <li data-href="#" class="review-list">
-		                <div class="review_list_inner" data-href="#">       
-		                    <p class="no"></p>
+		                <div class="review_list_inner" data-href="#">
+		                    <a href="/review/detail.kh?reviewNo=${review.reviewNo }">
 			                    <div class="thumb-box">
 			                        <div class="thumb">
-			                        	<img src="../resources/image/review-image/bread.jpg">
+			                        	<img src="../resources/reviewUploadFiles/${review.reviewFilename }">
 			                        </div>
 			                        <div class="content">
 				                        <a href="/review/detail.kh?reviewNo=${review.reviewNo }">
@@ -151,15 +151,15 @@
 										</a>
 									</div>
 									<div class="writer">${review.reviewWriter }</div>
-			                        <p class="point displaynone"><%-- ${review.starRating } 별점이미지 or 아이콘--%>★★★★☆</p>
+			                        <p class="point displaynone">${review.starRating }☆☆☆☆☆</p>
 			                        <p class="date "><i class="bar"></i>${review.rCreateDate }</p>
+			                        <div class="review_product_info">
+				                        <a href="/review/detail.kh?reviewNo=${review.reviewNo  }">
+				                            <span class="storeName">${review.storeName }점포명안나오는중</span><!-- 점포명이 들어가야함 -->
+				                        </a>	                       
+				                    </div>
 			                 	</div>
-		                    <div class="review_product_info">
-		                    	
-		                        <a href="#">
-		                            <span class="storeNo">${review.storeNo }</span><!-- 점포명이 들어가야함 -->
-		                        </a>	                       
-		                    </div>
+		                 	</a>
 		                </div>
 		            </li>
 	         	</c:forEach>
@@ -181,16 +181,16 @@
 	                </c:forEach>
 			        <c:if test="${maxPage > currentPage }">
 		                <li id="paging-number">
-		                    <a href="/review/list.kh?page=${endNavi + 1 }"><span>»</span></a> 
+		                    <a href="/review/${urlVal }.kh?page=${currentPage + 1 }"><span>»</span></a> 
 		                </li>
 			        </c:if>
 	            </ul>
             </c:if>
-            <%-- <c:if test="${empty bList }">
+            <c:if test="${empty rList }">
 				<tr>
 					<td colspan="6" align="center"><b>데이터가 존재하지 않습니다.</b></td>
 				</tr>
-			</c:if> --%>
+			</c:if>
 			<div id="search">
 				<form action="/board/search.kh" method="get">
 					<select name="searchCondition">

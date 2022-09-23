@@ -37,7 +37,7 @@
   		</insert>
   		<!--  리뷰 검색 -->
   		<select id="selectAllReview" resultMap="reviewResultMap">
-  			SELECT * FROM REVIEW_TBL WHERE USE_YN = 'Y' ORDER BY REVIEW_NO ASC
+  			SELECT * FROM REVIEW_TBL WHERE USE_YN = 'Y' ORDER BY REVIEW_NO DESC
   		</select>
   		
   		<select id="selectTotalCount" resultType="_int">

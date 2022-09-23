@@ -44,22 +44,18 @@
             font-size : 10px;
             /* text-align : right; */
         }
+        
         #select-file{
             margin: 10px;
             text-decoration: none; 
             position: relative;
             right: 6%;
-            
         }
         .write-btn{
-           
             margin: 10px auto;
-
         }
         
-
         #star-form fieldset{
-            
             display: inline-block;
             direction: rtl;
             border:0;
@@ -71,27 +67,26 @@
         }
         
         #star-form input[type=radio]{
-            
             display: none;
         }
         #star-form label{
-            
             font-size: 20px;
             color: transparent;
             text-shadow: 0 0 0 #c5c5c5;
         }
+        
         #star-form label:hover{
-            
             text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
         }
+        
         #star-form label:hover ~ label{
-            
             text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
         }
+        
         #star-form input[type=radio]:checked ~ label{
-            
             text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
         }
+        
         .star-rating{
             
             margin: 10px auto;
@@ -114,6 +109,7 @@
             /* position: relative;
             left : 80%; */
         }
+        
         .write-btn{
             width: 80px;
             font-size: 15px;

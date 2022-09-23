@@ -10,13 +10,12 @@
 <title>빵지순례 후기</title>
 <script src="/resources/js/jquery-3.6.1.min.js"></script>
 <style>
-
    html, body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, blockquote, th, td, img {
        margin: 0;
        padding: 0;
        padding-left:0px;
        list-style:none;
-       font-family: 'Montserrat','Noto Sans KR',"Malgun Gothic","맑은 고딕",-apple-system,BlinkMacSystemFont,helvetica,"Apple SD Gothic Neo",sans-serif;
+       font-family: 'Noto Sans KR', sans-serif;
        color: #414141;
    }
    a,li,ul{
@@ -33,7 +32,6 @@
        margin: 25px auto;
        box-sizing:border-box ;
        padding : 50px 60px;
-
    }
    .review-title{
        display: flex;
@@ -50,19 +48,6 @@
    .title-btn3-right{
        margin-left: auto;
    } 
-   /* .review-title{
-       display: flex;
-       height: 150px;
-
-   }
-   .title-btn-reft{
-       text-align: center;
-
-   }
-   .title-btn3-right{
-       margin-left: auto;
-       text-align: center;
-   }  */
    .paging-btn{
        margin: 30px;
    }
@@ -123,11 +108,22 @@
        flex-direction: column;
        justify-content: space-evenly;
    }
-   .star{
+   
+   #star{
        margin-bottom: 10px;
    }
    #bbang-img{
        margin-bottom: 10px;
+   }
+   #heart{
+		text-decoration: none;
+   }
+   #storename{
+		display: flex;
+		margin: 25px auto;
+		width: 980px;
+		padding : 30px 40px;
+		box-sizing:border-box ;
    }
 </style>
 </head>
@@ -136,8 +132,8 @@
         <a href="#"><button type="submit" id="order-btn">주문하러 가기</button></a>
     </div>
     
-    <div class="review-title">
-        <h1 class="storname-count">${review.storeName }</h1>
+    <div id="review-title">
+        <h1 id="storename">${review.storeName }</h1>
     </div>
       <!-- 1 -->
       <div class="review-detail">
@@ -147,12 +143,12 @@
                     <div class="user-id">${review.reviewWriter }</div>
                     <div class="date">${review.rCreateDate }</div>
                 </div>
-                <div class="star">
+                <div id="star">
                     <div>${review.starRating }</div>
                 </div>
             </div>
             <div class="heart-count">
-                <div><a href="/review/heartCountUpdate.kh?reviewNo=${review.reviewNo }">♡  ${review.reviewHeart }</a></div>
+                <div id="heart"><a href="/review/heartCountUpdate.kh?reviewNo=${review.reviewNo }">♡  ${review.reviewHeart }</a></div>
             	<div>HIT  ${review.reviewCount } </div>
             </div>
         </div>

@@ -1,16 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <!DOCTYPE html>
 <html>
-
 <head>
 <meta charset="UTF-8">
 <title>리뷰 상세</title>
-
-    <style>
-    
+<style>
         html, body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, blockquote, th, td, img {
             margin: 0;
             padding: 0;
@@ -49,19 +45,6 @@
         .title-btn3-right{
             margin-left: auto;
         } 
-        /* .review-title{
-            display: flex;
-            height: 150px;
-
-        }
-        .title-btn-reft{
-            text-align: center;
-
-        }
-        .title-btn3-right{
-            margin-left: auto;
-            text-align: center;
-        }  */
         .paging-btn{
             margin: 30px;
         }
@@ -244,9 +227,5 @@
 	            
 	    </div>
 	</body>
-	
-<!-- 	<script>
-	
-	</script> -->
 </body>
 </html>
