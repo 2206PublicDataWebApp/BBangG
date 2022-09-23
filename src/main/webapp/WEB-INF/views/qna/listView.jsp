@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>자유게시판</title>
+<title>QNA게시판</title>
 </head>
 <body>
 	<h1 align="center">게시글 목록</h1>
@@ -19,51 +19,44 @@
 			<th>조회수</th>
 			<th>첨부파일</th>
 		</tr>
-		<c:if test="${!empty bList }">
-			<c:forEach items="${bList }" var="board" varStatus="i">
+		<c:if test="${!empty qnaList }">
+			<c:forEach items="${qnaList }" var="qna" varStatus="i">
 				<tr>
 					<td>${i.count }</td>
-					<td><a href="/board/detail.kh?boardNo=${board.boardNo }&page=${currentPage }">${board.boardTitle }</a></td>
-					<td>${board.boardWriter }</td>
-					<td>${board.bCreateDate }</td>
-					<td>${board.boardCount }</td>
-					<td>
-						<c:if test="${!empty board.boardFilename }">
-							O
-						</c:if>
-						<c:if test="${empty board.boardFilename }">
-							X
-						</c:if>
-					</td>
+					<td><a href="/qna/detail.kh?qnaNo=${qna.qnaNo }&page=${currentPage }">${qna.qnaTitle }</a></td>
+					<td>${qna.qnaWriter }</td>
+					<td>${qna.qnaCreateDate }</td>
+					<td>${qna.qnaViewCount }</td>
+					<td></td>
 				</tr>
 			</c:forEach>
 			<tr align="center" height="20">
 			<td colspan="6">
 				<c:if test="${currentPage != 1 }">
-					<a href="/board/${urlVal }.kh?page=${currentPage - 1 }&searchCondition=${searchCondition}&searchValue=${searchValue}">[이전]</a>
+					<a href="/qna/${urlVal }.kh?page=${currentPage - 1 }&searchCondition=${searchCondition}&searchValue=${searchValue}">[이전]</a>
 				</c:if>
 				<c:forEach var="p" begin="${startNavi }" end="${endNavi }">
 					<c:if test="${currentPage eq p }">
 						<b>${p }</b>
 					</c:if>
 					<c:if test="${currentPage ne p }">
-						<a href="/board/${urlVal }.kh?page=${p }&searchCondition=${searchCondition}&searchValue=${searchValue}">${p }</a>
+						<a href="/qna/${urlVal }.kh?page=${p }&searchCondition=${searchCondition}&searchValue=${searchValue}">${p }</a>
 					</c:if>
 				</c:forEach>
 				<c:if test="${maxPage > currentPage }">
-					<a href="/board/${urlVal }.kh?page=${currentPage + 1 }&searchCondition=${searchCondition}&searchValue=${searchValue}">[다음]</a>
+					<a href="/qna/${urlVal }.kh?page=${currentPage + 1 }&searchCondition=${searchCondition}&searchValue=${searchValue}">[다음]</a>
 				</c:if>
 			</td>
 		</tr>
 		</c:if>
-		<c:if test="${empty bList }">
+		<c:if test="${empty qnaList }">
 			<tr>
 				<td colspan="6" align="center"><b>데이터가 존재하지 않습니다.</b></td>
 			</tr>
 		</c:if>
 		<tr>
 			<td colspan="5" align="center">
-				<form action="/board/search.kh" method="get">
+				<form action="/qna/search.kh" method="get">
 					<select name="searchCondition">
 						<option value="all" <c:if test="${searchCondition eq 'all' }">selected</c:if>>전체</option>
 						<option value="writer" <c:if test="${searchCondition eq 'writer' }">selected</c:if>>작성자</option>
@@ -75,7 +68,7 @@
 				</form>
 			</td>
 			<td>
-				<button onclick="location.href='/board/writeView.kh';">글쓰기</button>
+				<button onclick="location.href='/qna/writeView.kh';">글쓰기</button>
 			</td>
 		</tr>
 	</table>
