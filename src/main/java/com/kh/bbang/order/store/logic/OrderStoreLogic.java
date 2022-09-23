@@ -1,8 +1,10 @@
 package com.kh.bbang.order.store.logic;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
@@ -16,8 +18,10 @@ import com.kh.bbang.store.domain.Store;
 public class OrderStoreLogic implements OrderStore{
 
 	@Override
-	public List<Order> selectOrderByDate(SqlSession session, String orderDate) {
-		List<Order> oList = session.selectList("OrderMapper.selectOrderByDate",orderDate);
+	public List<Order> selectOrderByDate(SqlSessionTemplate session, String orderDate,int currentPage,int boardLimit) {
+		int offset=(currentPage-1)*boardLimit;
+		RowBounds rowBounds = new RowBounds(offset, boardLimit);
+		List<Order> oList = session.selectList("OrderMapper.selectOrderByDate",orderDate,rowBounds);
 		return oList;
 	}
 
@@ -78,6 +82,12 @@ public class OrderStoreLogic implements OrderStore{
 	public Store selectStore(SqlSession session, int storeNo) {
 		Store store = session.selectOne("OrderMapper.selectStore", storeNo);
 		return store;
+	}
+
+	@Override
+	public int selectTotalOrderCount(SqlSession session, String orderDate) {
+		int totalOrderCount=session.selectOne("OrderMapper.selectTotalOrderCount",orderDate);
+		return totalOrderCount;
 	}
 
 

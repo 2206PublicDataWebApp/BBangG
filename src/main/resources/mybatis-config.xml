@@ -16,8 +16,8 @@
 		<typeAlias type="com.kh.bbang.product.domain.Product" alias="Product"/>
 		<typeAlias type="com.kh.bbang.faq.domain.Faq" alias="Faq"/>
 		<typeAlias type="com.kh.bbang.qna.domain.Qna" alias="Qna"/>
+		<typeAlias type="com.kh.bbang.qna.domain.Reply" alias="Reply"/>
 	</typeAliases>
-
 
 	<mappers>
 		<mapper resource="mappers/user-mapper.xml"></mapper>

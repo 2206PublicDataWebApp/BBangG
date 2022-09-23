@@ -24,6 +24,7 @@
             color : #3A2618;
  	
  }
+
 </style>
 </head>
 <body>
@@ -50,27 +51,45 @@
 			<th>취소요청</th>
 		</tr>
 		<c:forEach items="${oList}" var="order" varStatus="i">
-		<tr>
-			<td><a href="/admin/adminOrderDetail.kh?orderNo=${order.orderNo }">${order.orderNo }</a></td>
-			<td><a href="#">${order.storeNo}</a></td>
-			<td>${order.orderDate}</td>
-			<td>
-				<c:if test="${order.orderState eq 0 }">입금전</c:if>
-				<c:if test="${order.orderState eq 1 }">입금완료</c:if>
-				<c:if test="${order.orderState eq 2 }">입금완료확인</c:if>
-				<c:if test="${order.orderState eq 3}" >배송출발</c:if>
-				<c:if test="${order.orderState eq 4}" >구매확정</c:if>
-				<c:if test="${order.orderState eq 5}" >취소진행중</c:if>
-			</td>
-			<td>
-				<c:if test="${order.orderState ne 5}" >N</c:if>
-				<c:if test="${order.orderState eq 5}" >Y</c:if>
-			</td>
-		</tr>
+			<tr>
+				<td><a href="/admin/adminOrderDetail.kh?orderNo=${order.orderNo }">${order.orderNo }</a></td>
+				<td><a href="#">${order.storeNo}</a></td>
+				<td>${order.orderDate}</td>
+				<td>
+					<c:if test="${order.orderState eq 0 }">입금전</c:if>
+					<c:if test="${order.orderState eq 1 }">입금완료</c:if>
+					<c:if test="${order.orderState eq 2 }">입금완료확인</c:if>
+					<c:if test="${order.orderState eq 3}" >배송출발</c:if>
+					<c:if test="${order.orderState eq 4}" >구매확정</c:if>
+					<c:if test="${order.orderState eq 5}" >취소진행중</c:if>
+				</td>
+				<td>
+					<c:if test="${order.orderState ne 5}" >N</c:if>
+					<c:if test="${order.orderState eq 5}" >Y</c:if>
+				</td>
+			</tr>
 		</c:forEach>
+		<tr align="center" height="20">
+		<td colspan="6">
+				<c:if test="${currentPage!=1 }">
+					<a href="/admin/adminOrderList.kh?orderDate=${order.orderDate }&page=${currentPage-1 }">[이전]</a>
+				</c:if>
+				<c:forEach var="p" begin="${startNavi }" end="${endNavi }" >
+					<c:if test="${currentPage eq p }" ><b>${p }</b></c:if>
+					<c:if test="${currentPage ne p }">
+						<a href="/admin/adminOrderList.kh?orderDate=${order.orderDate }&page=${p }">${p }</a> 
+					</c:if>
+				</c:forEach>
+				<c:if test="${maxPage>currentPage }">
+					<a href="/admin/adminOrderList.kh?orderDate=${order.orderDate }&page=${currentPage+1 }">[다음]</a>
+				</c:if>
+				
+			</td>
+		</table>
+		
 </body>
 <script>
-	document.getElementById('orderDate').valueAsDate = document.getElementById('orderDate').value;
+	 document.getElementById('orderDate').valueAsDate = ${orderDate};
 
 </script>
 </html>

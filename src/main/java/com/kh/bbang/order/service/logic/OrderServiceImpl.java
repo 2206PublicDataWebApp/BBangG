@@ -21,8 +21,8 @@ public class OrderServiceImpl implements OrderService{
 	private OrderStore oStore;
 
 	@Override
-	public List<Order> findOrderByDate(String orderDate) {
-		List<Order> oList = oStore.selectOrderByDate(session, orderDate);
+	public List<Order> findOrderByDate(String orderDate,int boardLimit,int currentPage) {
+		List<Order> oList = oStore.selectOrderByDate(session, orderDate, currentPage, boardLimit);
 		return oList;
 	}
 
@@ -85,6 +85,12 @@ public class OrderServiceImpl implements OrderService{
 	public Store findStore(int storeNo) {
 		Store store = oStore.selectStore(session,storeNo);
 		return store;
+	}
+
+	@Override
+	public int getTotalOrderCount( String orderDate) {
+		int totalOrderCount = oStore.selectTotalOrderCount(session, orderDate);
+		return totalOrderCount;
 	}
 
 

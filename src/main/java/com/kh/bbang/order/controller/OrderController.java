@@ -258,12 +258,35 @@ public class OrderController {
 	@RequestMapping(value="/admin/adminOrderList.kh", method=RequestMethod.GET)
 	public ModelAndView allOrderByDate(ModelAndView mv
 			,@RequestParam(name="orderDate",required=false) String orderDate
+			,@RequestParam(value="page", required=false) Integer page
 			) {
+		int currentPage=(page!=null) ? page : 1;
 		System.out.println(orderDate);
-		
 		try {
-			List<Order> oList=oService.findOrderByDate(orderDate);
+			int totalOrderCount;
+			if(orderDate==null) {
+				totalOrderCount = oService.getTotalOrderCount("");
+			}else {
+				totalOrderCount = oService.getTotalOrderCount(orderDate);
+			}
+			int boardLimit=10;
+			int naviLimit=5;
+			int maxPage;
+			int startNavi;
+			int endNavi;
+			maxPage=(int)((double)totalOrderCount/boardLimit+0.9);
+			startNavi=((int)((double)currentPage/naviLimit+0.9)-1)*naviLimit+1;
+			endNavi = startNavi+naviLimit -1;
+			if(maxPage < endNavi) {
+				endNavi = maxPage;
+			}
+			List<Order> oList=oService.findOrderByDate(orderDate,currentPage,boardLimit);
 			mv.addObject("oList",oList);
+			mv.addObject("currentPage", currentPage);
+			mv.addObject("maxPage", maxPage);
+			mv.addObject("startNavi", startNavi);
+			mv.addObject("endNavi", endNavi);
+			mv.addObject("orderDate", orderDate);
 			mv.setViewName("admin/adminOrderList");
 			
 		} catch (Exception e) {

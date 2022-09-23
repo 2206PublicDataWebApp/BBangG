@@ -14,7 +14,7 @@ import com.kh.bbang.store.domain.Store;
 
 @Service
 public interface OrderService {
-	public List<Order> findOrderByDate(String orderDate);
+	public List<Order> findOrderByDate(String orderDate,int boardLimit,int currentPage);
 	public List<Order> findOrderById(String userId);
 	public Order findOneOrder(int orderNo);
 	public List<Product> findAllProduct(int refStoreNo);
@@ -25,6 +25,7 @@ public interface OrderService {
 	public int removeOrderRequest(int orderNo);
 	public int changeOrdeState(int orderNo);
 	public Store findStore(int storeNo);
+	public int getTotalOrderCount(String orderDate);
 	
 
 	

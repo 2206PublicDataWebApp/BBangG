@@ -63,7 +63,7 @@
  		SELECT*FROM PRODUCT_TBL WHERE REF_STORE_NO =#{refStoreNo}
  	</select>
  	<select id="selectOrderById" resultMap="orderResultMapById">
- 		SELECT*FROM ORDER_TBL WHERE USER_ID=#{userId}
+ 		SELECT*FROM ORDER_TBL WHERE USER_ID=#{userId} ORDER BY ORDER_DATE DESC
  	</select>
  	<select id="selectOneOrder" resultMap="orderDetailResultMap">
  		SELECT*FROM ORDER_TBL WHERE ORDER_NO=#{orderNo}
@@ -78,12 +78,15 @@
 		UPDATE ORDER_TBL SET ORDER_STATE=ORDER_STATE+1 WHERE ORDER_NO=#{orderNo}
 	</update>
 	
-	<select id="selectOrderByDate" resultMap="orderResultMapByDate">
-		SELECT*FROM ORDER_TBL WHERE TO_CHAR(ORDER_DATE,'YYYY-MM-DD')=#{orderDate}
+	<select id="selectOrderByDate" resultMap="orderResultMapByDate" >
+		SELECT*FROM ORDER_TBL WHERE TO_CHAR(ORDER_DATE,'YYYY-MM-DD')=#{orderDate} 
+		
 	</select>
 	<select id="selectStore" resultMap="storeResultMap">
 		SELECT*FROM STORE_TBL WHERE STORE_NO=#{storeNo}
 	</select>
-	
+	<select id="selectTotalOrderCount" resultType="_int">
+		SELECT COUNT(*) FROM ORDER_TBL WHERE TO_CHAR(ORDER_DATE,'YYYY-MM-DD')=#{orderDate}
+	</select>
  
  </mapper>
