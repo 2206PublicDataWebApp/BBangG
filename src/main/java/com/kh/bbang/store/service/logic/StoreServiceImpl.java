@@ -23,6 +23,8 @@ public class StoreServiceImpl implements StoreService {
 	@Override
 	public int registStore(Store store) {
 		int result = sStore.insertStore(session, store);
+		System.out.println(result);
+		System.out.println(store.getStoreNo());
 		return result;
 	}
 

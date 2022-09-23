@@ -1,14 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+<%@ include file="/WEB-INF/views/include/head.jsp"%>
 <style>
 body {
-	margin-left: 250px;
-	margin-right: 250px;
+	/* margin-left: 250px;
+	margin-right: 250px; */
 	align-items: center;
 	align-content: center;
 }
@@ -35,7 +31,6 @@ button {
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6396a18cfa9668486b16a2ad0a533dd1&libraries=services,clusterer,drawing"></script>
 </script>
 </head>
-<body>
 <body>
 	<%@ include file="/WEB-INF/views/include/header.jsp"%>
 	<h1 align="center">점포상세정보화면</h1>

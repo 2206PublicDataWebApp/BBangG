@@ -32,8 +32,6 @@ public class ProductController {
 			@RequestParam String storeName
 			, HttpServletRequest request) {
 		try {
-			request.setCharacterEncoding("utf-8");
-			storeName = URLEncoder.encode(storeName, "UTF-8");
 			mv.addObject("storeNo", storeNo);
 			mv.addObject("storeName", storeName);
 			mv.setViewName("/product/productRegistForm");
@@ -44,7 +42,7 @@ public class ProductController {
 	}
 	
 	// 상품등록
-	@RequestMapping(value="/product/registProduct.kh", method=RequestMethod.POST)
+	@RequestMapping(value="/product/registProduct.kh", method=RequestMethod.POST) 
 	public ModelAndView registProduct(
 			ModelAndView mv,
 			@ModelAttribute Product product,
@@ -53,11 +51,11 @@ public class ProductController {
 			, HttpServletRequest request) {
 		try {
 			request.setCharacterEncoding("utf-8");
-			storeName = URLEncoder.encode(storeName, "UTF-8");
-			storeName = URLDecoder.decode(storeName, "UTF-8");
 			int result = pService.registProduct(product);
+			String newStoreName = URLEncoder.encode(storeName,"UTF-8");
+			String url ="redirect:/product/adminProductList.kh?storeNo="+storeNo+"&storeName="+newStoreName;
 			if(result > 0) {
-				mv.setViewName("redirect:/product/adminProductList.kh?storeNo="+storeNo+"&storeName="+storeName);
+				mv.setViewName(url);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -68,7 +66,7 @@ public class ProductController {
 	
 	// 상품리스트
 	
-	@RequestMapping(value="/product/adminProductList.kh", method=RequestMethod.GET)
+	@RequestMapping(value="/product/adminProductList.kh", method= RequestMethod.GET)
 	public ModelAndView showProductList(
 			ModelAndView mv,
 			@RequestParam("storeNo") Integer storeNo,
@@ -93,6 +91,7 @@ public class ProductController {
 		return mv;
 	}
 	
+	//삭제
 	@RequestMapping(value="/product/removeProduct.kh", method=RequestMethod.GET)
 	public ModelAndView removeProduct(
 			ModelAndView mv,

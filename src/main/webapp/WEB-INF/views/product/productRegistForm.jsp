@@ -1,17 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+<%@ include file="/WEB-INF/views/include/head.jsp"%>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
 <%@ include file="/WEB-INF/views/include/header.jsp"%>
 	<h1>상품등록화면</h1>
-	<h3>${storeName}</h3>
+	<h3 id=storeName>${storeName }</h3>
 	<form action="/product/registProduct.kh" method="post">
-	<input type="hidden" name=storeName value="${storeName }">
+	<input type="hidden" name=storeName value="${storeName }" >
 		<table border="1">
 			<tr>
 				<td>점포번호</td>
@@ -27,7 +24,7 @@
 				<td><input type="text" name="productPrice" /></td>
 			</tr>
 			<tr>
-				<td><input type="submit" /></td>
+				<td colspan="2"><input type="submit" /></td>
 			</tr>
 		</table>
 	</form>
