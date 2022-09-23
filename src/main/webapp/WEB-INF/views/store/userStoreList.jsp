@@ -14,16 +14,17 @@
 }
 
 #region {
-   background-color: bisque;
-   text-align: center;
+
+	background-color: bisque;
+	text-align: center;
 }
 
 #region a {
-   margin: 0 20px 0 20px;
-   text-decoration: none;
-   color: rgb(177, 171, 171);
-   font-weight: bold;
-   font-size: x-large;
+	margin: 0 20px 0 20px;
+	text-decoration: none;
+	color: rgb(177, 171, 171);
+	font-weight: bold;
+	font-size: x-large;
 }
 
 a {

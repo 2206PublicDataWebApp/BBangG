@@ -29,4 +29,5 @@ public interface UserStore {
 	
 	public int findPwd(SqlSession session, String userId, String userEmail, String userPwd);
 	
+
 }

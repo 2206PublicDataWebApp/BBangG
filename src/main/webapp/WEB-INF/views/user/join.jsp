@@ -1,15 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>회원가입</title>
-<script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
-</head>
+<%@ include file="/WEB-INF/views/include/head.jsp" %>
+
 <body>
-	<%@ include file="/WEB-INF/views/include/header.jsp" %>
+	<jsp:include page = "/WEB-INF/views/include/header.jsp"/>
 	<h1 align="center">회원가입</h1>
 		<div class="">
 			<form action="/user/join.kh" method="post">
@@ -44,6 +38,7 @@
 					<div>
 						전화번호
 						<input type="text" name="userPhone">
+						</div>
 					<div>
 						우편번호
 						<input type="text" name="zipCode" id="sample6_postcode"
@@ -160,6 +155,11 @@
 		}
 	});
 	
+	$('#join').click(function(){
+		if(isCertification==false){ //인증이 완료되지 않았다면
+			alert("메일 인증이 완료되지 않았습니다.");
+		}
+	}
 	</script>
 </body>
 </html>
