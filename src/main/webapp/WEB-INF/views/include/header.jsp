@@ -13,7 +13,7 @@
          <a href="/store/userStoreList.kh">빵집검색</a>
       </div>
       <div id="menu">
-         <a href="#">REVIEW</a>
+         <a href="/review/list.kh">REVIEW</a>
       </div>
       <div id="menu">
          <a href="#">QNA</a>
@@ -21,6 +21,12 @@
    </div>
    <div class="user">
       <c:if test="${empty login}">
+         <div id="my">
+            <a href="/user/loginView.kh">LOGIN</a>
+         </div>
+         <div id="my">
+            <a href="/user/joinView.kh">JOIN</a>
+         </div>
          <div id="my">
             <ul class="my-ul">
                <li class="my-li"><a href="/user/loginView.kh">LOGIN</a></li>

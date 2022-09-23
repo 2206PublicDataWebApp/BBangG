@@ -39,57 +39,54 @@
            
         }
         #max{
+        	
+        	margin: 10px auto;
             font-size : 10px;
-            /* text-align : right;  */
+            /* text-align : right; */
         }
+        
         #select-file{
             margin: 10px;
             text-decoration: none; 
             position: relative;
             right: 6%;
-            
         }
         .write-btn{
-           
             margin: 10px auto;
-
         }
         
-
-        /* #star-wrap fieldset{
-            
+        #star-form fieldset{
             display: inline-block;
             direction: rtl;
             border:0;
-        } */
+        }
         
-        /* #myform fieldset legend{
+        #star-form fieldset legend{
             
             text-align: right;
-        } */
+        }
         
         #star-form input[type=radio]{
-            
             display: none;
         }
         #star-form label{
-            
             font-size: 20px;
             color: transparent;
             text-shadow: 0 0 0 #c5c5c5;
         }
+        
         #star-form label:hover{
-            
             text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
         }
+        
         #star-form label:hover ~ label{
-            
             text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
         }
+        
         #star-form input[type=radio]:checked ~ label{
-            
             text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
         }
+        
         .star-rating{
             
             margin: 10px auto;
@@ -112,6 +109,7 @@
             /* position: relative;
             left : 80%; */
         }
+        
         .write-btn{
             width: 80px;
             font-size: 15px;
@@ -151,13 +149,13 @@
 	         </div>
 	         <form action="/review/register.kh" method="post" enctype="multipart/form-data">
                 <div id="review-content">
-                	<input type="text" name="userId" value="${review.userId}" placeholder="작성자"/>
-                    <textarea id="in-content" rows="20" cols="55" placeholder="내용을 작성해주세요" required></textarea>
+                	<%-- <input type="hidden" name="userId" value="${review.userId}" placeholder="작성자"/> --%>
+                    <textarea name="reviewContent" id="in-content" rows="20" cols="55" placeholder="내용을 작성해주세요" required></textarea>
                     <div id="max">(0 / 2000)</div>
                 </div>
 
                 <!-- 왼쪽 정렬 -->
-                <input type="file" id="select-file" name="SelectFile" />
+                <input type="file" id="select-file" name="uploadFile" />
                 
 	            <div>
 	                <button class="write-btn-cancel" type="reset">취소</button>
@@ -176,7 +174,7 @@
         // });
 
         $(document).ready(function() {
-            $('#review-content').on('keyup', function() {
+            $('#in-content').on('keyup', function() {
                 $('#max').html("("+$(this).val().length+" / 2000)");
     
                 if($(this).val().length > 2000) {

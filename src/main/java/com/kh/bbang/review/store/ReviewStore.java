@@ -10,7 +10,9 @@ public interface ReviewStore {
 	
 	// insert
 	// 리뷰 등록
-		public int insertReview(SqlSession session, Review review);
+	public int insertReview(SqlSession session, Review review);
+	
+	public int insertHeartCount(SqlSession session, Review review);
 		
 	// select
 	// 리뷰 게시판 리스트
@@ -18,13 +20,13 @@ public interface ReviewStore {
 	// 페이징
 	public int selectTotalCount(SqlSession session);
 	
-	
 	// 리뷰 검색
 	public Review selectOneByNo(SqlSession session, Integer reviewNo);
 
 	// 조회수
 	public int updateReviewCount(SqlSession session, int reviewNo);
-	
+
+	public int selectTotalCount(SqlSession session, String searchCondition, String searchValue);
 	
 	
 

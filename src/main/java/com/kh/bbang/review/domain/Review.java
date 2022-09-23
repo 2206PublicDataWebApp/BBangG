@@ -20,8 +20,12 @@ public class Review {
 	private Date rUpdateDate;
 	private String useYn;
 	
+	private String userId;
+	
 	private int reviewHeart;
 
+	private String storeName;
+	
 	public Review() {}
 
 	@Override
@@ -50,6 +54,16 @@ public class Review {
 		this.rUpdateDate = rUpdateDate;
 		this.useYn = useYn;
 		this.reviewHeart = reviewHeart;
+	}
+
+	
+	
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 
 	public int getReviewNo() {
@@ -154,6 +168,14 @@ public class Review {
 
 	public void setReviewHeart(int reviewHeart) {
 		this.reviewHeart = reviewHeart;
+	}
+
+	public String getStoreName() {
+		return storeName;
+	}
+
+	public void setStoreName(String storeName) {
+		this.storeName = storeName;
 	}
 
 	

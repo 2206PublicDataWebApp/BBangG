@@ -1,5 +1,6 @@
 package com.kh.bbang.review.store.logic;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.RowBounds;
@@ -18,8 +19,12 @@ public class ReviewStoreLogic implements ReviewStore{
 		int result = session.insert("ReviewMapper.insertReview", review);
 		return result;
 	}
-	
-	// 리뷰 검색
+	@Override
+	public int insertHeartCount(SqlSession session, Review review) {
+		int result = session.insert("ReviewMapper.insertHeartCount", review);
+		return result;
+	}
+	// 리뷰 상세
 	@Override
 	public Review selectOneByNo(SqlSession session, Integer reviewNo) {
 		Review review = session.selectOne("ReviewMapper.selectOneByNo", reviewNo);
@@ -49,5 +54,17 @@ public class ReviewStoreLogic implements ReviewStore{
 		int totalCount = session.selectOne("ReviewMapper.selectTotalCount");
 		return totalCount;
 	}
+
+	@Override
+	public int selectTotalCount(SqlSession session, String searchCondition, String searchValue) {
+		HashMap<String, String>paramMap = new HashMap<String, String>();
+		paramMap.put("searchCondition", searchCondition);
+		paramMap.put("searchValue", searchValue);
+		int totalCount = session.selectOne("ReviewMapper.selectTotalCount", paramMap);
+		return totalCount;
+
+	}
+
+	
 
 }

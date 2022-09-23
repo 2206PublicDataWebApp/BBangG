@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-
+<link href=”https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap” rel=”stylesheet”>
 <meta charset="UTF-8">
 <title>빵지순례 리뷰</title>
     <style>
@@ -13,7 +13,7 @@
             padding: 0;
             padding-left:0px;
             list-style:none;
-            font-family: 'Montserrat','Noto Sans KR',"Malgun Gothic","맑은 고딕",-apple-system,BlinkMacSystemFont,helvetica,"Apple SD Gothic Neo",sans-serif;
+            font-family: ‘Noto Sans KR’, sans-serif;
             
         }
         a,li,ul{
@@ -115,56 +115,93 @@
             margin: 10px 10px;
             display:inline-block;
         }
+        #review-page{
+        	text-align: center;
+            margin: 40px auto;
+            color:#797979;
+            font-size: 30px;
+        	font-family: ‘Noto Sans KR’, sans-serif;
+        	font-weight: bold;
+        }
+        #search{
+        	margin: 10px auto;
+        	display: flex;
+        	justify-content: center;
+        }
     </style>
 <%@ include file="/WEB-INF/views/include/head.jsp"%>
 </head>
 <body>
 <%@ include file="/WEB-INF/views/include/header.jsp"%>
     <div class="wrap">
-        <ul class="review-board board-fixed">
-	        <c:forEach items ="${rList}" var="review" varStatus="i">
-	            <li data-href="#" class="review-list">
-	                <div class="review_list_inner" data-href="#">       
-	                    <p class="no"></p>
-		                    <div class="thumb-box">
-		                        <div class="thumb">
-		                        	<img src="../resources/image/review-image/bread.jpg">
-		                        </div>
-		                        <div class="content">
-			                        <a href="#">
-			                       	 	${review.reviewContents }<br><br>
-									</a>
-								</div>
-								<div class="writer">${review.userId }</div>
-		                        <p class="point displaynone"><%-- ${review.starRating } 별점이미지 or 아이콘--%>★★★★☆</p>
-		                        <p class="date "><i class="bar"></i>${review.rCreateDate }</p>
-		                 	</div>
-	                    <div class="review_product_info">
-	                    	
-	                        <a href="#">
-	                            <span class="storeNo">${review.storeNo }</span><!-- 점포명이 들어가야함 -->
-	                        </a>	                       
-	                    </div>
-	                </div>
-	            </li>
-         	</c:forEach>
-        </ul>
-        <div class="paging-btn">
-            <ul id="paging-wrap">     
-                <li id="paging-number">      
-                    <a href="#">        
-                        <span>«</span>
-                    </a>
-                </li>
-                <c:forEach var="p" begin="${startNavi }" end="${endNavi }">
-                	<li id="paging-number"><a href="/review/list.kh?page=${p }">${p }</a></li>
-                </c:forEach>
-                <li id="paging-number">
-                    <a href="/review/list.kh?page=${endNavi + 1 }">
-                        <span>»</span>
-                    </a> 
-                </li>
-            </ul>
+    	<div id="review-page">빵지순례 리뷰</div>
+    	<c:if test="${!empty rList }">
+	        <ul class="review-board board-fixed">
+		        <c:forEach items ="${rList}" var="review" varStatus="i">
+		            <li data-href="#" class="review-list">
+		                <div class="review_list_inner" data-href="#">
+		                    <a href="/review/detail.kh?reviewNo=${review.reviewNo }">
+			                    <div class="thumb-box">
+			                        <div class="thumb">
+			                        	<img src="../resources/reviewUploadFiles/${review.reviewFilename }">
+			                        </div>
+			                        <div class="content">
+				                        <a href="/review/detail.kh?reviewNo=${review.reviewNo }">
+				                       	 	${review.reviewContent }<br><br>
+										</a>
+									</div>
+									<div class="writer">${review.reviewWriter }</div>
+			                        <p class="point displaynone">${review.starRating }☆☆☆☆☆</p>
+			                        <p class="date "><i class="bar"></i>${review.rCreateDate }</p>
+			                        <div class="review_product_info">
+				                        <a href="/review/detail.kh?reviewNo=${review.reviewNo  }">
+				                            <span class="storeName">${review.storeName }점포명안나오는중</span><!-- 점포명이 들어가야함 -->
+				                        </a>	                       
+				                    </div>
+			                 	</div>
+		                 	</a>
+		                </div>
+		            </li>
+	         	</c:forEach>
+	        </ul>
+	        <div class="paging-btn">
+	            <ul id="paging-wrap">
+		            <c:if test="currentPage != 1 }">        
+		                <li id="paging-number">
+			                    <a href="/review/${urlVal }.kh?page=${currentPage - 1 }"><span>«</span></a>
+		                </li>
+		            </c:if>
+	                <c:forEach var="p" begin="${startNavi }" end="${endNavi }">
+	                	<c:if test="${currentPage eq p }">
+	                		<b>${p }</b>
+	                	</c:if>
+	                	<c:if test="${currentPage ne p }">
+	                		<li id="paging-number"><a href="/review/${urlVal }.kh?page=${p }&searchCondition=${searchCondition}&searchValue=${searchValue}">${p }</a></li>
+	                	</c:if>
+	                </c:forEach>
+			        <c:if test="${maxPage > currentPage }">
+		                <li id="paging-number">
+		                    <a href="/review/${urlVal }.kh?page=${currentPage + 1 }"><span>»</span></a> 
+		                </li>
+			        </c:if>
+	            </ul>
+            </c:if>
+            <c:if test="${empty rList }">
+				<tr>
+					<td colspan="6" align="center"><b>데이터가 존재하지 않습니다.</b></td>
+				</tr>
+			</c:if>
+			<div id="search">
+				<form action="/board/search.kh" method="get">
+					<select name="searchCondition">
+						<option value="all" <c:if test="${searchCondition eq 'all' }">selected</c:if>>전체</option>
+						<option value="title" <c:if test="${searchCondition eq 'title' }">selected</c:if>>제목</option>
+						<option value="contents" <c:if test="${searchCondition eq 'contents' }">selected</c:if>>내용</option>
+					</select>
+					<input type="text" name="searchValue" value="${searchValue }">
+					<input type="submit" value="검색">
+				</form>
+			</div>
         </div>
     </div>
 </body>

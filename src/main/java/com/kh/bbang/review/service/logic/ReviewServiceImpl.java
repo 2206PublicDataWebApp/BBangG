@@ -22,12 +22,20 @@ public class ReviewServiceImpl implements ReviewService{
 
 	@Override
 	public int registeReview(Review review) {
-//		int result = rStore.
-		return 0;
+		int result = rStore.insertReview(session, review);
+		return result;
 	}
+	
+	@Override
+	public int insertHeartCount(Review review) {
+		int result = rStore.insertHeartCount(session, review);
+		return result;
+	}
+	
+	
 
 	@Override
-	public Review printDetailOneByNo(Integer reviewNo) {
+	public Review printOneByNo(Integer reviewNo) {
 		Review review = rStore.selectOneByNo(session, reviewNo);
 		int result = 0;
 		if (review != null) {
@@ -44,9 +52,19 @@ public class ReviewServiceImpl implements ReviewService{
 	}
 
 	@Override
-	public int getTotalCount() {
-		int totalCount = rStore.selectTotalCount(session);
+	public int getTotalCount(String searchCondition, String searchValue) {
+		int totalCount = rStore.selectTotalCount(session, searchCondition, searchValue);
 		return totalCount;
 	}
 
+	@Override
+	public Review printDetailOneByNo(Integer reviewNo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+
+	
 }
