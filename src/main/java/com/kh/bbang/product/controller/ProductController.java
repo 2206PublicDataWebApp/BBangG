@@ -1,5 +1,8 @@
 package com.kh.bbang.product.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,10 +29,17 @@ public class ProductController {
 	public ModelAndView productRegistForm(
 			ModelAndView mv,
 			@RequestParam Integer storeNo,
-			@RequestParam String storeName) {
-		mv.addObject("storeNo", storeNo);
-		mv.addObject("storeName", storeName);
-		mv.setViewName("/product/productRegistForm");
+			@RequestParam String storeName
+			, HttpServletRequest request) {
+		try {
+			request.setCharacterEncoding("utf-8");
+			storeName = URLEncoder.encode(storeName, "UTF-8");
+			mv.addObject("storeNo", storeNo);
+			mv.addObject("storeName", storeName);
+			mv.setViewName("/product/productRegistForm");
+		} catch (Exception e) {
+			mv.addObject("msg").setViewName("/common/errorPage");
+		}
 		return mv;
 	}
 	
@@ -39,11 +49,12 @@ public class ProductController {
 			ModelAndView mv,
 			@ModelAttribute Product product,
 			@RequestParam("refStoreNo") Integer storeNo,
-			@RequestParam("storeName") String storeName,
-			HttpServletRequest request) {
+			@RequestParam("storeName") String storeName
+			, HttpServletRequest request) {
 		try {
 			request.setCharacterEncoding("utf-8");
-			System.out.println(storeName);
+			storeName = URLEncoder.encode(storeName, "UTF-8");
+			storeName = URLDecoder.decode(storeName, "UTF-8");
 			int result = pService.registProduct(product);
 			if(result > 0) {
 				mv.setViewName("redirect:/product/adminProductList.kh?storeNo="+storeNo+"&storeName="+storeName);
@@ -61,17 +72,24 @@ public class ProductController {
 	public ModelAndView showProductList(
 			ModelAndView mv,
 			@RequestParam("storeNo") Integer storeNo,
-			@RequestParam("storeName") String storeName) {
-		
-		List<Product> pList = pService.printAllProduct();
-		if(!pList.isEmpty()) {
-			mv.addObject("pList", pList);
+			@RequestParam("storeName") String storeName
+			, HttpServletRequest request) {
+		try {
+			request.setCharacterEncoding("utf-8");
+			storeName = URLEncoder.encode(storeName, "UTF-8");
+			storeName = URLDecoder.decode(storeName, "UTF-8");
+			List<Product> pList = pService.printAllProduct(storeNo);
 			mv.addObject("storeNo", storeNo);
 			mv.addObject("storeName", storeName);
-			
+			if(!pList.isEmpty()) {
+				mv.addObject("pList", pList);
+			}
+			mv.setViewName("/product/adminProductList");
+		} catch (Exception e) {
+			mv.addObject("msg", e.toString());
+			mv.setViewName("common/errorPage");
 		}
 	
-		mv.setViewName("/product/adminProductList");
 		return mv;
 	}
 	
@@ -79,14 +97,20 @@ public class ProductController {
 	public ModelAndView removeProduct(
 			ModelAndView mv,
 			@RequestParam("productCode") Integer productCode,
-			@RequestParam("storeNo") Integer refStoreNo,
-			@RequestParam("storeName") String storeName) {
-		
-		System.out.println(storeName);
-
-		int result = pService.removeProduct(productCode, refStoreNo);
-		if(result > 0) {
-			mv.setViewName("redirect:/product/adminProductList.kh?storeNo="+refStoreNo+"&storeName="+storeName);
+			@RequestParam("storeNo") Integer storeNo,
+			@RequestParam("storeName") String storeName
+			, HttpServletRequest request) {
+		try {
+			request.setCharacterEncoding("utf-8");
+			storeName = URLEncoder.encode(storeName, "UTF-8");
+			storeName = URLDecoder.decode(storeName, "UTF-8");
+			int result = pService.removeProduct(productCode, storeNo);
+			if(result > 0) {
+				mv.setViewName("redirect:/product/adminProductList.kh?storeNo="+storeNo+"&storeName="+storeName);
+			}
+		} catch (Exception e) {
+			mv.addObject("msg", e.toString());
+			mv.setViewName("common/errorPage");
 		}
 		return mv;
 	}

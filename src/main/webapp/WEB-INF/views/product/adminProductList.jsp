@@ -26,21 +26,21 @@
 			</tr>
 		</c:forEach>
 	</table>
+	
 	<button onclick="productRegist(${storeNo},'${storeName }')">상품등록</button>
 	<button onclick="productRemove(${storeNo},'${storeName }')">선택삭제</button>
 	<script>
 		var productCode = '';
-		
 		function getValue(event){
 			productCode = event.target.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.innerHTML;
 			return productCode;
 		}
 	
 		function productRegist(storeNo, storeName){
-			location.href="/product/productRegistForm.kh?storeNo="+storeNo+"&storeName="+storeName;
+			location.href="/product/productRegistForm.kh?storeNo="+storeNo+"&storeName="+encodeURI(encodeURIComponent(storeName));
 		}
 		function productRemove(storeNo, storeName){
-			location.href="/product/removeProduct.kh?storeNo="+storeNo+"&storeName="+storeName+"&productCode="+productCode;
+			location.href="/product/removeProduct.kh?storeNo="+storeNo+"&storeName="+encodeURI(encodeURIComponent(storeName))+"&productCode="+productCode;
 		}
 	</script>
 </body>
