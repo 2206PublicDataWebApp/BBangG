@@ -19,8 +19,8 @@ public class ProductStoreLogic implements ProductStore{
 	}
 
 	@Override
-	public List<Product> selectAllProduct(SqlSession session) {	
-		List<Product> pList = session.selectList("ProductMapper.selectAllProduct");
+	public List<Product> selectAllProduct(SqlSession session, Integer refStoreNo) {	
+		List<Product> pList = session.selectList("ProductMapper.selectAllProduct", refStoreNo);
 		return pList;
 	}
 

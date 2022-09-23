@@ -5,7 +5,7 @@
   
 <mapper namespace="qnaMapper">
 	<resultMap type="Qna" id="QnaResultMap">
-		<id 	property="qnaNo" 					column="QNA_NUMBER" />
+		<id 	property="qnaNo" 				column="QNA_NUMBER" />
 		<result property="qnaWriter" 			column="USER_ID"/>
 		<result property="qnaTitle" 			column="QNA_TITLE"/>
 		<result property="qnaContent" 			column="QNA_CONTENT"/>
@@ -104,10 +104,4 @@
 		SELECT * FROM REPLY_TBL 
 		WHERE REF_BOARD_NO = #{refBoardNo} AND R_STATUS = 'Y'
 	</select>
-	
-	
-	
-	
-	
-	
 </mapper>

@@ -1,5 +1,6 @@
 package com.kh.bbang.product.service.logic;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -26,8 +27,8 @@ public class ProductServiceImpl implements ProductService{
 	}
 
 	@Override
-	public List<Product> printAllProduct() {
-		List<Product> pList = pStore.selectAllProduct(session);
+	public List<Product> printAllProduct(Integer refStoreNo) {
+		List<Product> pList = pStore.selectAllProduct(session, refStoreNo);
 		return pList;
 	}
 

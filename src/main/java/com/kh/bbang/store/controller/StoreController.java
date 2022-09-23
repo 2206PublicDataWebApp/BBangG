@@ -114,7 +114,7 @@ public class StoreController {
 			if(!uploadFile.getOriginalFilename().equals("")) {
 				String root = request.getSession().getServletContext().getRealPath("resources");
 				System.out.println(root);
-				String savePath = root + "\\store-images";
+				String savePath = root + "\\image\\store-images";
 				//시간추가할 수 있도록 추가
 				String storeFileRename = store.getStoreName()+"."+storeFilename.substring(storeFilename.lastIndexOf(".")+1);
 				File file = new File(savePath);
@@ -195,7 +195,7 @@ public class StoreController {
 			String storeFilename = reloadFile.getOriginalFilename();
 			if(reloadFile != null && !storeFilename.equals("")) {
 				String root = request.getSession().getServletContext().getRealPath("resources");
-				String savedPath = root + "\\store-images";
+				String savedPath = root + "\\image\\store-images";
 				File file = new File(savedPath + "\\" + store.getStoreFileRename());
 				if(file.exists()) {
 					file.delete();
@@ -314,8 +314,6 @@ public class StoreController {
 				@RequestParam(value="region1") String region1,
 				@RequestParam(value="region2") String region2) {
 			try {
-				System.out.println(region1);
-				System.out.println(region2);
 				//페이징처리
 				int currentPage = (page != null) ? page : 1;
 				int sortCount = sService.getSortCount(region1,region2);
@@ -331,7 +329,6 @@ public class StoreController {
 				if(maxPage < endNavi) {
 					endNavi = maxPage;
 				}
-				System.out.println(sortCount);
 				List<Store> sList = sService.showSortedStore(region1, region2, currentPage, storeLimit);
 				if(!sList.isEmpty()) {
 					mv.addObject("sList", sList);
