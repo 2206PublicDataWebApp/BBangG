@@ -15,7 +15,7 @@ import com.kh.bbang.store.domain.Store;
 
 public interface OrderStore {
 	public List<Order> selectOrderByDate(SqlSessionTemplate session, String orderDate,int currentPage,int boardLimit);
-	public List<Order> selectOrderById(SqlSession session, String userId);
+	public List<Order> selectOrderById(SqlSession session, String userId, String dateFrom, String dateTo);
 	public Order selectOneOrder(SqlSession session, int orderNo);
 	public List<Product> selectAllProduct(SqlSession session, int refStoreNo);
 	public int insertOrder(SqlSession session, Order order);

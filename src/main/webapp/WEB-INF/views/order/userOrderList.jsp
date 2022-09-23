@@ -12,7 +12,7 @@
   table {
   width : 80%;
     border-top: 1px solid  #3A2618;
-   
+   	align:center;
     border-collapse: collapse;
   }
   th, td {
@@ -32,7 +32,7 @@
 	<input type="hidden" name="userId" value="${login.userId }">
 	<h1 align="center">${login.userId }님의 주문 목록</h1>
 	<br><br>
-	<table style="width:40%;"  align="center">
+	<table style="width:40%;">
 	
 	 <tr>
 	 	<th>결제확인/완료</th>
@@ -46,7 +46,21 @@
 	 </tr>
 	</table>
 	<br><br>
-	<table align="center" >
+	<table>
+		<tr>
+			<td colspan="5" align="right">
+				<form action="/order/userOrderList.kh" method="get">
+				 <label>
+				    기간조회  
+				    <input type="date" id="dateFrom" name="dateFrom" >
+				    ~
+				    <input type="date" id="dateTo" name="dateTo" >
+				  </label>
+				 <button type="submit">검색</button>
+				   </form>
+				  
+			</td>
+		</tr>
 		<tr style="border-bottom: 3px solid  #3A2618;">
 			<th>주문번호</th>
 			<th>주문내역</th>
@@ -55,7 +69,7 @@
 			<th>배송상태</th>
 		</tr>
 		<c:forEach items="${oList}" var="order" varStatus="i">
-			<tr align="center">
+			<tr>
 				<td><a href="/order/userOrderDetail.kh?orderNo=${order.orderNo }">${order.orderNo }</a></td>
 				<td>${order.orderDetail}</td>
 				<c:set var="orderDateOn" value="${order.orderDate}"/>
@@ -81,5 +95,8 @@
 			</tr>
 		</c:forEach>
 	</table>
+<script>
+
+</script>
 </body>
 </html>

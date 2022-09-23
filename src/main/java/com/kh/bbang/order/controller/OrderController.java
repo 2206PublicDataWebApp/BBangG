@@ -1,5 +1,7 @@
 package com.kh.bbang.order.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -85,8 +87,26 @@ public class OrderController {
 	@RequestMapping(value="/order/userOrderList.kh", method=RequestMethod.GET)
 	public ModelAndView allOrderById(ModelAndView mv
 			,HttpSession session
-			,@RequestParam(required = false, name="userId") String userId) {
-		List<Order> oList = oService.findOrderById(userId);
+			,@RequestParam(required = false, name="userId") String userId
+			,@RequestParam(required = false, name="dateFrom") String dateFrom
+			,@RequestParam(required = false, name="dateTo") String dateTo
+			) {
+		 SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+	     Calendar c1 = Calendar.getInstance();
+		 String strToday = sdf.format(c1.getTime());
+		 List<Order> oList;
+		if(dateFrom==null&&dateTo==null) {
+			oList = oService.findOrderById(userId,"","");
+		}else if(dateFrom==null||dateTo==null) {
+			if(dateFrom==null) {
+				oList = oService.findOrderById(userId,"1900-00-00",dateTo);
+			}else {
+				oList = oService.findOrderById(userId,dateFrom,strToday);
+			}
+			
+		}else {
+			oList = oService.findOrderById(userId, dateFrom, dateTo);
+		}
 		
 		System.out.println("----------------userId" + userId);
 		int payState=0;
@@ -280,14 +300,20 @@ public class OrderController {
 			if(maxPage < endNavi) {
 				endNavi = maxPage;
 			}
-			List<Order> oList=oService.findOrderByDate(orderDate,currentPage,boardLimit);
+			List<Order> oList;
+			if(orderDate==null) {
+				oList=oService.findOrderByDate("",currentPage,boardLimit);
+			}else {
+				oList=oService.findOrderByDate(orderDate,currentPage,boardLimit);
+			}
+//			List<Order> oList=oService.findOrderByDate(orderDate,currentPage,boardLimit);
+			mv.setViewName("admin/adminOrderList");
+			mv.addObject("orderDate", orderDate);
 			mv.addObject("oList",oList);
 			mv.addObject("currentPage", currentPage);
 			mv.addObject("maxPage", maxPage);
 			mv.addObject("startNavi", startNavi);
 			mv.addObject("endNavi", endNavi);
-			mv.addObject("orderDate", orderDate);
-			mv.setViewName("admin/adminOrderList");
 			
 		} catch (Exception e) {
 			mv.addObject("msg",e.toString());

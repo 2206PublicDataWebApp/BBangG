@@ -22,13 +22,13 @@ public class OrderServiceImpl implements OrderService{
 
 	@Override
 	public List<Order> findOrderByDate(String orderDate,int boardLimit,int currentPage) {
-		List<Order> oList = oStore.selectOrderByDate(session, orderDate, currentPage, boardLimit);
+		List<Order> oList = oStore.selectOrderByDate(session, orderDate, boardLimit,currentPage);
 		return oList;
 	}
 
 	@Override
-	public List<Order> findOrderById(String userId) {
-		List<Order> oList = oStore.selectOrderById(session, userId);
+	public List<Order> findOrderById(String userId, String dateFrom, String dateTo) {
+		List<Order> oList = oStore.selectOrderById(session, userId,dateFrom, dateTo);
 		return oList;
 	}
 

@@ -33,12 +33,12 @@
 	<table align="center" border="1">
 		<tr>
 			<td colspan="5" align="right">
-				<form action="/admin/adminOrderList.kh?orderDate=orderdate">
+				<form action="/admin/adminOrderList.kh" method="get">
 				 <label>
 				    날짜 : 
 				    <input type="date" id="orderDate" name="orderDate" >
 				  </label>
-				  <input type="submit" value="검색">
+				 <button type="submit">검색</button>
 				   </form>
 				  
 			</td>
@@ -70,18 +70,18 @@
 			</tr>
 		</c:forEach>
 		<tr align="center" height="20">
-		<td colspan="6">
+			<td colspan="6">
 				<c:if test="${currentPage!=1 }">
-					<a href="/admin/adminOrderList.kh?orderDate=${order.orderDate }&page=${currentPage-1 }">[이전]</a>
+					<a href="/admin/adminOrderList.kh?orderDate=${orderDate }&page=${currentPage-1 }">[이전]</a>
 				</c:if>
 				<c:forEach var="p" begin="${startNavi }" end="${endNavi }" >
 					<c:if test="${currentPage eq p }" ><b>${p }</b></c:if>
 					<c:if test="${currentPage ne p }">
-						<a href="/admin/adminOrderList.kh?orderDate=${order.orderDate }&page=${p }">${p }</a> 
+						<a href="/admin/adminOrderList.kh?orderDate=${orderDate }&page=${p }">${p }</a> 
 					</c:if>
 				</c:forEach>
 				<c:if test="${maxPage>currentPage }">
-					<a href="/admin/adminOrderList.kh?orderDate=${order.orderDate }&page=${currentPage+1 }">[다음]</a>
+					<a href="/admin/adminOrderList.kh?orderDate=${orderDate }&page=${currentPage+1 }">[다음]</a>
 				</c:if>
 				
 			</td>
@@ -89,7 +89,10 @@
 		
 </body>
 <script>
-	 document.getElementById('orderDate').valueAsDate = ${orderDate};
+/* 	function serch(){
+		consol.log(document.getElementById('orderDate'));
+		
+	} */
 
 </script>
 </html>

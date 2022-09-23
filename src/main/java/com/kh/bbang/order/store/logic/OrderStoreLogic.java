@@ -21,13 +21,20 @@ public class OrderStoreLogic implements OrderStore{
 	public List<Order> selectOrderByDate(SqlSessionTemplate session, String orderDate,int currentPage,int boardLimit) {
 		int offset=(currentPage-1)*boardLimit;
 		RowBounds rowBounds = new RowBounds(offset, boardLimit);
+		System.out.println("offset :"+offset);
+		System.out.println("boardLimit :"+boardLimit);
+		
 		List<Order> oList = session.selectList("OrderMapper.selectOrderByDate",orderDate,rowBounds);
 		return oList;
 	}
 
 	@Override
-	public List<Order> selectOrderById(SqlSession session, String userId) {
-		List<Order> oList = session.selectList("OrderMapper.selectOrderById",userId);
+	public List<Order> selectOrderById(SqlSession session, String userId,String dateFrom, String dateTo) {
+		
+		HashMap<String,String> paramMap = new HashMap<String,String>();
+		paramMap.put("dateFrom", dateFrom);
+		paramMap.put("dateTo",dateTo);
+		List<Order> oList = session.selectList("OrderMapper.selectOrderById",paramMap);
 		return oList;
 	}
 

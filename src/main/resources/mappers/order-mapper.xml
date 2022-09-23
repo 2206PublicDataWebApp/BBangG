@@ -79,7 +79,7 @@
 	</update>
 	
 	<select id="selectOrderByDate" resultMap="orderResultMapByDate" >
-		SELECT*FROM ORDER_TBL WHERE TO_CHAR(ORDER_DATE,'YYYY-MM-DD')=#{orderDate} 
+		SELECT*FROM ORDER_TBL WHERE TO_CHAR(ORDER_DATE,'YYYY-MM-DD')=#{orderDate} ORDER BY ORDER_DATE DESC
 		
 	</select>
 	<select id="selectStore" resultMap="storeResultMap">
