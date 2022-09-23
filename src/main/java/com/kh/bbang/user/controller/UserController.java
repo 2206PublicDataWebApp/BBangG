@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.WebUtils;
 
 import com.kh.bbang.user.domain.LoginVO;
@@ -207,6 +208,7 @@ public class UserController {
 		}
 		return mv;
 	}
+	
 	
 	@RequestMapping(value="/user/remove.kh", method=RequestMethod.GET)
 	public ModelAndView removeUser(HttpSession session

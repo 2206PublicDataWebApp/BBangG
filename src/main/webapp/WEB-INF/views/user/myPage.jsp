@@ -23,8 +23,7 @@
 						<input type="text" id="userId" name="userId" value="${user.userId }" readonly>
 					</div>
 					<div>
-						비밀번호
-						<input type="password" name="userPwd">
+						 <input type="button" onclick="location.href='/pwUpdateView'" value="비밀번호 변경">
 					</div>
 					<div>
 						이름

@@ -86,7 +86,6 @@ public class UserStoreLogic implements UserStore{
 		int result = session.update("UserMapper.findPwd", paramMap);
 		return result;
 	}
-	
 
 
 }

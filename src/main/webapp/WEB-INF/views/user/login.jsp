@@ -14,6 +14,7 @@
 	padding: 0;
 	margin:0;
 	boarder: none;
+	text-color: #3A2618;
 }
     
 body{
@@ -96,7 +97,11 @@ li{
 	margin-right: 10px;
 }
 a{
-	text-decoration-line: none;
+	text-decoration: none;
+}
+a:visited{
+	text-decoration: none;
+	color: #3A2618;
 }
 .login
 </style>
