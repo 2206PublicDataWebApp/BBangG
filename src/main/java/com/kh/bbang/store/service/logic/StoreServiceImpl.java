@@ -1,5 +1,6 @@
 package com.kh.bbang.store.service.logic;
 
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.bbang.store.domain.Store;
+import com.kh.bbang.store.domain.StoreImage;
 import com.kh.bbang.store.service.StoreService;
 import com.kh.bbang.store.store.StoreStore;
 
@@ -23,8 +25,12 @@ public class StoreServiceImpl implements StoreService {
 	@Override
 	public int registStore(Store store) {
 		int result = sStore.insertStore(session, store);
-		System.out.println(result);
-		System.out.println(store.getStoreNo());
+		return result;
+	}
+
+	@Override
+	public int registStoreImage(StoreImage sImage) {
+		int result = sStore.insertStoreImage(session, sImage);
 		return result;
 	}
 
@@ -40,6 +46,12 @@ public class StoreServiceImpl implements StoreService {
 		return result;
 	}
 
+	@Override
+	public int modifyStoreImage(StoreImage sImage) {
+		int result = sStore.updateStoreImage(session, sImage);
+		return result;
+	}
+	
 	@Override
 	public List<Store> showAllStore(int currentPage, int storeLimit) {
 		List<Store> sList = sStore.selectAllStore(session, currentPage, storeLimit);
@@ -76,5 +88,6 @@ public class StoreServiceImpl implements StoreService {
 		return sList;
 	}
 
-	
+
+
 }

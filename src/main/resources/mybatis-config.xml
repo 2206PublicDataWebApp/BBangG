@@ -11,6 +11,7 @@
 	<typeAliases>
 		<typeAlias type="com.kh.bbang.user.domain.User" alias="User" />
 		<typeAlias type="com.kh.bbang.store.domain.Store" alias="Store"/>
+		<typeAlias type="com.kh.bbang.store.domain.StoreImage" alias="StoreImage"/>	
 		<typeAlias type="com.kh.bbang.review.domain.Review" alias="Review"/>
 		<typeAlias type="com.kh.bbang.order.domain.Order" alias="Order"/>
 		<typeAlias type="com.kh.bbang.product.domain.Product" alias="Product"/>

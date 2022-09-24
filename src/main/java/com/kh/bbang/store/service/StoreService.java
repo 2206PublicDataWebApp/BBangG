@@ -3,15 +3,20 @@ package com.kh.bbang.store.service;
 import java.util.List;
 
 import com.kh.bbang.store.domain.Store;
+import com.kh.bbang.store.domain.StoreImage;
 
 public interface StoreService {
 	
 	// registStore
 	public int registStore(Store store);
+	// registStoreImage
+	public int registStoreImage(StoreImage sImage);
 	// removeStore
 	public int removeStore(Integer storeNo);
 	// modifyStore
 	public int modifyStore(Store store);
+	// modifyStoreImage
+	public int modifyStoreImage(StoreImage sImage);
 	// showAllStore
 	public List<Store> showAllStore(int currentPage, int storeLimit);
 	// showOneStoreById

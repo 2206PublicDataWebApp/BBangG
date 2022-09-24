@@ -72,7 +72,7 @@ img {
 	<%@ include file="/WEB-INF/views/include/header.jsp"%>
 	<h1 align="center">점포상세정보화면</h1>
 	<div id="detail">
-		<img src="" />
+		<img src="/resources/image/store-images/${store.sImage.storeFileRename }" />
 	</div>
 	<div id="map" style="width: 350px; height: 350px"></div>
 	<table border="1" height="350px">

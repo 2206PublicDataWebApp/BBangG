@@ -161,7 +161,7 @@
 		if(isCertification==false){ //인증이 완료되지 않았다면
 			alert("메일 인증이 완료되지 않았습니다.");
 		}
-	}
+	});
 	</script>
 </body>
 </html>

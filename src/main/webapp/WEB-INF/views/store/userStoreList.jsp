@@ -72,7 +72,7 @@ img {
             <div class="item">
                <a href="/store/storeDetail.kh?storeNo=${store.storeNo }">
                   <div class="image">
-                     <img src="/resources/store-images/${store.storeFileRename }"
+                     <img src="/resources/store-images/${store.sImage.storeFileRename }"
                         alt="" />
                   </div>
                   <div class="word">${store.storeName }</div>

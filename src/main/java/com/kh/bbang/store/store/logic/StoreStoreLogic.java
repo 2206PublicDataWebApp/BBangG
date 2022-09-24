@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.kh.bbang.store.domain.Store;
+import com.kh.bbang.store.domain.StoreImage;
 import com.kh.bbang.store.store.StoreStore;
 
 @Repository
@@ -16,6 +17,12 @@ public class StoreStoreLogic implements StoreStore {
 	@Override
 	public int insertStore(SqlSession session, Store store) {
 		int result = session.insert("StoreMapper.insertStore", store);
+		return result;
+	}
+	
+	@Override
+	public int insertStoreImage(SqlSession session, StoreImage sImage) {
+		int result = session.insert("StoreMapper.insertStoreImage", sImage);
 		return result;
 	}
 
@@ -28,6 +35,12 @@ public class StoreStoreLogic implements StoreStore {
 	@Override
 	public int updateStore(SqlSession session, Store store) {
 		int result = session.update("StoreMapper.updateStore", store);
+		return result;
+	}
+
+	@Override
+	public int updateStoreImage(SqlSession session, StoreImage sImage) {
+		int result = session.update("StoreMapper.updateStoreImage", sImage);
 		return result;
 	}
 
@@ -87,5 +100,5 @@ public class StoreStoreLogic implements StoreStore {
 		List<Store> sList = session.selectList("StoreMapper.selectSortedList", paraMap, rowBounds);
 		return sList;
 	}
-	
+
 }

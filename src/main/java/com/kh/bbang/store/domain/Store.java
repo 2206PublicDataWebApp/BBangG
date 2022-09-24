@@ -1,6 +1,7 @@
 package com.kh.bbang.store.domain;
 
 import java.sql.Date;
+import com.kh.bbang.store.domain.StoreImage;
 
 public class Store {
 	private int storeNo;
@@ -12,12 +13,11 @@ public class Store {
 	private String storeTel;
 	private String storeUrl;
 	private String storeAccount;
-	private String storeFilename;
-	private String storeFileRename;
-	private String storeFilepath;
 	private String storeStatus;
 	private String storeBank;
 	private Date storeUpdateDate;
+	
+	private StoreImage sImage;
 	
 	public int getStoreNo() {
 		return storeNo;
@@ -73,24 +73,7 @@ public class Store {
 	public void setStoreAccount(String storeAccount) {
 		this.storeAccount = storeAccount;
 	}
-	public String getStoreFilename() {
-		return storeFilename;
-	}
-	public void setStoreFilename(String storeFilename) {
-		this.storeFilename = storeFilename;
-	}
-	public String getStoreFileRename() {
-		return storeFileRename;
-	}
-	public void setStoreFileRename(String storeFileRename) {
-		this.storeFileRename = storeFileRename;
-	}
-	public String getStoreFilepath() {
-		return storeFilepath;
-	}
-	public void setStoreFilepath(String storeFilepath) {
-		this.storeFilepath = storeFilepath;
-	}
+	
 	public String getStoreStatus() {
 		return storeStatus;
 	}
@@ -109,17 +92,22 @@ public class Store {
 	public void setStoreUpdateDate(Date storeUpdateDate) {
 		this.storeUpdateDate = storeUpdateDate;
 	}
+	
+	public StoreImage getsImage() {
+		return sImage;
+	}
+	public void setsImage(StoreImage sImage) {
+		this.sImage = sImage;
+	}
 	@Override
 	public String toString() {
 		return "Store [storeNo=" + storeNo + ", storeName=" + storeName + ", storeZipCode=" + storeZipCode
 				+ ", storeAddr=" + storeAddr + ", storeAddrDetail=" + storeAddrDetail + ", storeCeo=" + storeCeo
 				+ ", storeTel=" + storeTel + ", storeUrl=" + storeUrl + ", storeAccount=" + storeAccount
-				+ ", storeFilename=" + storeFilename + ", storeFileRename=" + storeFileRename + ", storeFilepath="
-				+ storeFilepath + ", storeStatus=" + storeStatus + ", storeBank=" + storeBank + ", storeUpdateDate="
-				+ storeUpdateDate + "]";
+				+ ", storeStatus=" + storeStatus + ", storeBank=" + storeBank + ", storeUpdateDate=" + storeUpdateDate
+				+ ", sImage=" + sImage + "]";
 	}
-	
-	
+
 	
 	
 	
