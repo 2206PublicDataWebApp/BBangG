@@ -58,10 +58,12 @@ public class ReviewServiceImpl implements ReviewService{
 	}
 
 	@Override
-	public Review printDetailOneByNo(Integer reviewNo) {
-		// TODO Auto-generated method stub
-		return null;
+	public int removeOneByNo(int reviewNo) {
+		int result = rStore.deleteOneByNo(session, reviewNo);
+		return result;
 	}
+
+	
 
 
 

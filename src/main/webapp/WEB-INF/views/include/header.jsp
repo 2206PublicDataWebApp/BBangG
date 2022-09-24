@@ -22,12 +22,6 @@
    <div class="user">
       <c:if test="${empty login}">
          <div id="my">
-            <a href="/user/loginView.kh">LOGIN</a>
-         </div>
-         <div id="my">
-            <a href="/user/joinView.kh">JOIN</a>
-         </div>
-         <div id="my">
             <ul class="my-ul">
                <li class="my-li"><a href="/user/loginView.kh">LOGIN</a></li>
                <li class="my-li"><a href="/user/joinView.kh">JOIN</a></li>

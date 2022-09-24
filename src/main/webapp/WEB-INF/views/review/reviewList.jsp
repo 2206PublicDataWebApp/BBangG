@@ -85,7 +85,7 @@
         }
         .wrap{
             width: 1200px;
-            margin: 0 auto;
+            margin: 60px auto;
         }
         .thumb {
             width: 100%;
@@ -117,10 +117,10 @@
         }
         #review-page{
         	text-align: center;
-            margin: 40px auto;
-            color:#797979;
+        	margin-top : 80px;
+            margin: 80px auto;
+            color:#3A2618;
             font-size: 30px;
-        	font-family: ‘Noto Sans KR’, sans-serif;
         	font-weight: bold;
         }
         #search{

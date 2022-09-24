@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -167,5 +168,81 @@ public class ReviewController {
 		mv.setViewName("redirect:/review/detail.kh?reviewNo="+review.getReviewNo());
 		return mv;
 	}
+	
+	/**
+	 *  게시물 삭제 
+	 * @param session
+	 * @param model
+	 * @param page
+	 * @return
+	 */
+	 @RequestMapping(value = "/review/remove.kh", method = RequestMethod.GET)
+	 public String reviewRemove(HttpSession session 
+			 ,Model model
+			 ,@RequestParam("page")Integer page) {
+		  try {
+			int reviewNo = (int)session.getAttribute("reviewNo");
+			int result = rService.removeOneByNo(reviewNo);
+			if(result > 0) {
+				session.removeAttribute("reviewNo");
+			}
+			return "redirect:/review/list.kh?page="+page;
+			
+		} catch (Exception e) {
+			model.addAttribute("msg", e.toString());
+			return "common/errorPage";
+		}
+	 
+	 }
+	 /**
+	  * 게시글 수정 화면
+	  * @param mv
+	  * @param reviewNo
+	  * @param page
+	  * @return
+	  */
+	 @RequestMapping(value = "/review/modifyView.kh", method = RequestMethod.GET)
+	 public ModelAndView reviewModifyView(
+			 ModelAndView mv 
+			 ,@RequestParam("reviewNo") Integer reviewNo
+			 ,@RequestParam("page")int page){
+		 try {
+			 Review review = rService.printOneByNo(reviewNo);
+			 mv.addObject("review", review);
+			 mv.addObject("page", page);
+			 mv.setViewName("review/modifyForm");
+			 }catch (Exception e) {
+				mv.addObject("msg", e.toString());
+				mv.setViewName("common/errorPage");
+			}
+			 return mv;
+			 
+		 }
+		 
+	 
+//	public ModelAndView reviewModifty(
+//			@ModelAttribute Review review
+//			,ModelAndView mv
+//			,@RequestParam(value = "reloadFile", required = false) MultipartFile reloadFile
+//			,@RequestParam("page") Integer page
+//			,HttpServletRequest request) {
+//		try {
+//			String reviewFilename = reloadFile.getOriginalFilename();
+//			if(reloadFile != null && !reviewFilename.equals("")) {
+//				String root = request.getSession().getServletContext().getRealPath("resources");
+//				String savePath = root + "\\reviewUploadFiles";
+//				File file = new File(savePath + "\\" + review.getReviewFileRename());
+//				if(file.exists()) {
+//					file. delete();
+//				}
+//				SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+//				String reviewFileRename = sdf.format(new Date (System.currentTimeMillis())) + "." + reviewFilename.substring(reviewFilename.lastIndexOf(".")+1);
+//				
+//			}
+//		} catch (Exception e) {
+//			// TODO: handle exception
+//		}
+//		return mv;
+//	}
 	
 }
