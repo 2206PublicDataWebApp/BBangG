@@ -63,7 +63,7 @@
  		SELECT*FROM PRODUCT_TBL WHERE REF_STORE_NO =#{refStoreNo}
  	</select>
  	<select id="selectOrderById" resultMap="orderResultMapById">
- 		SELECT*FROM ORDER_TBL WHERE USER_ID=#{userId} ORDER BY ORDER_DATE DESC
+ 		SELECT*FROM ORDER_TBL WHERE USER_ID=#{userId} AND TO_CHAR(ORDER_DATE,'YYYY-MM-DD') BETWEEN #{dateFrom} AND #{dateTo} ORDER BY ORDER_DATE DESC
  	</select>
  	<select id="selectOneOrder" resultMap="orderDetailResultMap">
  		SELECT*FROM ORDER_TBL WHERE ORDER_NO=#{orderNo}

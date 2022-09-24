@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.bbang.order.domain.Order;
 import com.kh.bbang.order.domain.OrderProduct;
+import com.kh.bbang.order.domain.SerchDate;
 import com.kh.bbang.order.service.OrderService;
 import com.kh.bbang.product.domain.Product;
 import com.kh.bbang.store.domain.Store;
@@ -91,24 +92,26 @@ public class OrderController {
 			,@RequestParam(required = false, name="dateFrom") String dateFrom
 			,@RequestParam(required = false, name="dateTo") String dateTo
 			) {
-		 SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+		System.out.println("----------------userId" + userId);
+		
+		 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 	     Calendar c1 = Calendar.getInstance();
 		 String strToday = sdf.format(c1.getTime());
-		 List<Order> oList;
-		if(dateFrom==null&&dateTo==null) {
-			oList = oService.findOrderById(userId,"","");
-		}else if(dateFrom==null||dateTo==null) {
-			if(dateFrom==null) {
-				oList = oService.findOrderById(userId,"1900-00-00",dateTo);
+		 SerchDate sd;
+		if(dateFrom==""&&dateTo=="") {
+			sd=new SerchDate(userId, "1900-00-00", strToday);
+		}else if(dateFrom==""||dateTo=="") {
+			if(dateFrom=="") {
+				sd=new SerchDate(userId, "1900-00-00", dateTo);
 			}else {
-				oList = oService.findOrderById(userId,dateFrom,strToday);
+				sd=new SerchDate(userId, dateFrom, strToday);
 			}
-			
 		}else {
-			oList = oService.findOrderById(userId, dateFrom, dateTo);
+			sd=new SerchDate(userId, dateFrom, dateTo);
 		}
 		
-		System.out.println("----------------userId" + userId);
+		List<Order> oList=oService.findOrderById(sd);
+		
 		int payState=0;
 		int delivaryState=0;
 		int cancleState=0;
@@ -140,6 +143,10 @@ public class OrderController {
 		
 		
 		return mv;
+		
+	}
+	private void SerchDate(String dateFrom, String dateTo, String userId) {
+		// TODO Auto-generated method stub
 		
 	}
 	//사용자 주문상세화면

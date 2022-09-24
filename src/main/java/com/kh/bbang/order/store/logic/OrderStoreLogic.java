@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.bbang.order.domain.Order;
 import com.kh.bbang.order.domain.OrderProduct;
+import com.kh.bbang.order.domain.SerchDate;
 import com.kh.bbang.order.store.OrderStore;
 import com.kh.bbang.product.domain.Product;
 import com.kh.bbang.store.domain.Store;
@@ -29,12 +30,9 @@ public class OrderStoreLogic implements OrderStore{
 	}
 
 	@Override
-	public List<Order> selectOrderById(SqlSession session, String userId,String dateFrom, String dateTo) {
-		
-		HashMap<String,String> paramMap = new HashMap<String,String>();
-		paramMap.put("dateFrom", dateFrom);
-		paramMap.put("dateTo",dateTo);
-		List<Order> oList = session.selectList("OrderMapper.selectOrderById",paramMap);
+	public List<Order> selectOrderById(SqlSession session, SerchDate sd) {
+
+		List<Order> oList = session.selectList("OrderMapper.selectOrderById",sd);
 		return oList;
 	}
 

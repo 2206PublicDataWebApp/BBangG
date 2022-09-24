@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.bbang.order.domain.Order;
 import com.kh.bbang.order.domain.OrderProduct;
+import com.kh.bbang.order.domain.SerchDate;
 import com.kh.bbang.order.service.OrderService;
 import com.kh.bbang.order.store.OrderStore;
 import com.kh.bbang.product.domain.Product;
@@ -27,8 +28,8 @@ public class OrderServiceImpl implements OrderService{
 	}
 
 	@Override
-	public List<Order> findOrderById(String userId, String dateFrom, String dateTo) {
-		List<Order> oList = oStore.selectOrderById(session, userId,dateFrom, dateTo);
+	public List<Order> findOrderById(SerchDate sd) {
+		List<Order> oList = oStore.selectOrderById(session, sd);
 		return oList;
 	}
 
