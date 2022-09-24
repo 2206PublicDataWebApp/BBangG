@@ -1,6 +1,5 @@
 package com.kh.bbang.product.controller;
 
-import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.List;

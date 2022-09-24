@@ -18,12 +18,49 @@ img {
 	float: left;
 }
 
-button {
-	border: none;
-	border-radius: 50px;
-	background-color: bisque;
-	width: 350px;
-	height: 40px;
+.review-detail {
+	border: 1px solid #414141;
+	width: 980px;
+	margin: 25px auto;
+	box-sizing: border-box;
+	padding: 50px 60px;
+}
+
+.review-title {
+	display: flex;
+	margin: 25px auto;
+	width: 980px;
+	padding: 30px 40px;
+	box-sizing: border-box;
+	border: 1px solid white;
+}
+
+#btn-modify {
+	width: 80px;
+	font-size: 15px;
+	border: 1px solid #414141;
+	background-color: #414141;
+	color: rgb(255, 255, 255);
+	/* padding: 15px 25px; */
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	position: relative;
+	left: 80%;
+}
+
+#btn-delete {
+	width: 80px;
+	font-size: 15px;
+	border: 1px solid #414141;
+	background-color: #ffffff;
+	color: #414141;
+	/* padding: 15px 25px; */
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	position: relative;
+	left: 80%;
 }
 </style>
 </style>
@@ -86,9 +123,41 @@ button {
 	<hr>
 	<button>리뷰작성 하러가기</button>
 	<button type="button" onclick="goOrder()">주문하러 가기</button>
-	<div id="review">리뷰 영역</div>
+	<div id="review">
+		<div class="review-detail">
+			<div class="detail-title-wrap">
+				<div class="user-date-star">
+					<div class="user-date">
+						<div class="user-id">${review.reviewWriter }</div>
+						<div class="date">${review.rCreateDate }</div>
+					</div>
+					<div id="star">
+						<div>${review.starRating }</div>
+					</div>
+				</div>
+				<div class="heart-count">
+					<div id="heart">
+						<a href="/review/heartCountUpdate.kh?reviewNo=${review.reviewNo }">♡
+							${review.reviewHeart }</a>
+					</div>
+					<div>HIT ${review.reviewCount }</div>
+				</div>
+			</div>
+			<div class="reivew-content">
+				<div id="bbang-img">
+					<img alt="본문이미지"
+						src="/resources/reviewUploadFiles/${review.reviewFilename }"
+						width="500">
+				</div>
+				<div>${review.reviewContent }</div>
+				<div class="btn-wrap">
+					<a id="btn-modify"
+						href="/review/modifyView.kh?reviewNo=${review.reviewNo }">수정</a> <a
+						id="btn-delete" href="#" onclick="reviewRemove(${page});">삭제하기</a>
+				</div>
+			</div>
 
-	<script>
+			<script>
 		var address = '${store.storeAddr}'
 		var storeName = '${store.storeName}'
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 

@@ -2,7 +2,32 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ include file="/WEB-INF/views/include/head.jsp"%>
-
+<style>
+#btn-modify{
+       width: 80px;
+       font-size: 15px;
+       border: 1px solid #414141;
+       background-color: #414141;
+       color: rgb(255, 255, 255);
+       /* padding: 15px 25px; */
+       text-align: center;
+       text-decoration: none;
+       display: inline-block;
+       left : 80%;
+   }
+   #btn-delete{
+       width: 80px;
+       font-size: 15px;
+       border: 1px solid #414141;
+       background-color: #ffffff;
+       color: #414141;
+       /* padding: 15px 25px; */
+       text-align: center;
+       text-decoration: none;
+       display: inline-block;
+       left : 80%;
+   }
+</style>
 </head>
 <body align="center">
 	<%@ include file="/WEB-INF/views/include/header.jsp"%>
@@ -21,9 +46,9 @@
 			<td>${store.storeNo }</td>
 			<td><a href="/store/storeDetail.kh?storeNo=${store.storeNo }">${store.storeName }</a></td>
 			<td>${store.storeUpdateDate }</td>
-			<td><button  onclick="showProduct(${store.storeNo },'${store.storeName }')">이동</button></td>
-			<td><button onclick="modifyStore(${store.storeNo})">수정</button></td>
-			<td><button onclick="removeStore(${store.storeNo})">삭제</button></td>
+			<td><button onclick="showProduct(${store.storeNo },'${store.storeName }')">이동</button></td>
+			<td><button id="btn-modify" onclick="modifyStore(${store.storeNo},'${store.storeName }')">점포 수정</button></td>
+			<td><button id="btn-delete" onclick="removeStore(${store.storeNo},'${store.storeName }')">점포 삭제</button></td>
 		</tr>
 		</c:forEach>
 	</table>
@@ -68,14 +93,17 @@
 		function showProduct(storeNo, storeName){
 			location.href="/product/adminProductList.kh?storeNo="+storeNo+"&storeName="+storeName;
 		}
-		function removeStore(storeNo){
+		function removeStore(storeNo, storeName){
 			event.preventDefault();
-			if(confirm("게시물을 삭제하시겠습니까?")){
+			if(confirm(storeName+"을 삭제하시겠습니까?")){
 				location.href="/store/removeStore.kh?storeNo="+storeNo;
 			}
 		}
-		function modifyStore(storeNo){
-			location.href="/store/modifyStore.kh?storeNo="+storeNo;
+		function modifyStore(storeNo, storeName){
+			event.preventDefault();
+			if(confirm(storeName+"을 수정하시겠습니까?")){
+				location.href="/store/modifyStore.kh?storeNo="+storeNo;
+			}
 		}
 	</script>
 </body>

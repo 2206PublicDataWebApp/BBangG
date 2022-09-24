@@ -115,8 +115,8 @@ public class StoreController {
 				String root = request.getSession().getServletContext().getRealPath("resources");
 				System.out.println(root);
 				String savePath = root + "\\image\\store-images";
-				//시간추가할 수 있도록 추가
-				String storeFileRename = store.getStoreName()+"."+storeFilename.substring(storeFilename.lastIndexOf(".")+1);
+				SimpleDateFormat sdf = new SimpleDateFormat("yyMMddhhmmss");
+				String storeFileRename = sdf.format(new Date(System.currentTimeMillis()))+store.getStoreName()+"."+storeFilename.substring(storeFilename.lastIndexOf(".")+1);
 				File file = new File(savePath);
 				if(!file.exists()) {
 					file.mkdir();
@@ -130,7 +130,6 @@ public class StoreController {
 			int result = sService.registStore(store);
 			mv.setViewName("redirect:/store/adminStoreList.kh");
 			
-			// 점포등록까지 성공
 			// 첨부파일 입력 코드.. 근데 다른 테이블을 사용함.. 어케하는지 조사..
 			// SEQUENCE 점포코드 부여 방식 조사 할것 -> 001 
 		}catch(Exception e) {

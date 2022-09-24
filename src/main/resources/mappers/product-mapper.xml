@@ -16,7 +16,7 @@
 	DELETE FROM PRODUCT_TBL WHERE PRODUCT_CODE = #{productCode} AND REF_STORE_NO = #{refStoreNo}
 	</delete>
 	<select id="selectAllProduct" resultMap="productResultMap">
-	SELECT * FROM PRODUCT_TBL WHERE REF_STORE_NO = #{refStoreNo}
+	SELECT * FROM PRODUCT_TBL WHERE REF_STORE_NO = #{refStoreNo} ORDER BY PRODUCT_CODE DESC
 	</select>
 	
 </mapper>
