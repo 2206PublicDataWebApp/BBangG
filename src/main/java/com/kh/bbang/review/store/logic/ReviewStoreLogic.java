@@ -37,7 +37,8 @@ public class ReviewStoreLogic implements ReviewStore{
 		int result = session.update("ReviewMapper.updateCount",reviewNo);
 		return result;
 	}
-
+	
+	// 전체게시글 목록
 	@Override
 	public List<Review> selectAllReview(SqlSession session, int currentPage, int limit) {
 		// offset은 currentPage에 의해서 변경되기 때문에 currentPage가 필요하다.
@@ -48,13 +49,8 @@ public class ReviewStoreLogic implements ReviewStore{
 		List<Review> rList = session.selectList("ReviewMapper.selectAllReview", null, rowBounds);
 		return rList;
 	}
-
-	@Override
-	public int selectTotalCount(SqlSession session) {
-		int totalCount = session.selectOne("ReviewMapper.selectTotalCount");
-		return totalCount;
-	}
-
+	
+	// 게시글 조회수
 	@Override
 	public int selectTotalCount(SqlSession session, String searchCondition, String searchValue) {
 		HashMap<String, String>paramMap = new HashMap<String, String>();
@@ -63,6 +59,11 @@ public class ReviewStoreLogic implements ReviewStore{
 		int totalCount = session.selectOne("ReviewMapper.selectTotalCount", paramMap);
 		return totalCount;
 
+	}
+	@Override
+	public int deleteOneByNo(SqlSession session, int reviewNo) {
+		int result = session.delete("ReviewMapper.deleteReview", reviewNo);
+		return result;
 	}
 
 	

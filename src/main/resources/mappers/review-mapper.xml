@@ -23,7 +23,8 @@
   		<!-- <resultMap type="Review" id="reviewHeartResultMap">
   			<id property=""
   		</resultMap> -->
-  			
+  		
+		<!-- 리뷰 등록 -->
   		<insert id="insertReview">
   			INSERT INTO REVIEW_TBL(REVIEW_NO, STORE_NO, REVIEW_WRITER,
 			    REVIEW_CONTENT, REVIEW_FILENAME, REVIEW_FILERENAME,
@@ -37,7 +38,7 @@
   		</insert>
   		<!--  리뷰 검색 -->
   		<select id="selectAllReview" resultMap="reviewResultMap">
-  			SELECT * FROM REVIEW_TBL WHERE USE_YN = 'Y' ORDER BY REVIEW_NO DESC
+  			SELECT * FROM REVIEW_TBL WHERE USE_YN = 'Y' ORDER BY REVIEW_NO ASC
   		</select>
   		
   		<select id="selectTotalCount" resultType="_int">
@@ -68,12 +69,15 @@
   		<select id="selectHeartCount" resultType="_int">
   			SELECT COUNT (HEART_NO) FROM REVIEW_HEART WHERE REVIEW_NO = #{reviewNo}
   		</select>
-  		
-  		
+
   		
   		<update id="updateCount">
   			UPDATE REVIEW_TBL SET REVIEW_COUNT = REVIEW_COUNT +1 WHERE REVIEW_NO = #{reviewNo}
   		</update>
+  		
+  		<delete id="deleteReview">
+  			DELETE FROM REVIEW_TBL WHERE REVIEW_NO = #{review.reviewNo}
+  		</delete>
   		
   		
   </mapper>

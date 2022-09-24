@@ -1,14 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <!DOCTYPE html>
 <html>
-
 <head>
 <meta charset="UTF-8">
 <title>빵지순례 후기</title>
-<script src="/resources/js/jquery-3.6.1.min.js"></script>
 <style>
    html, body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, blockquote, th, td, img {
        margin: 0;
@@ -126,6 +123,7 @@
 		box-sizing:border-box ;
    }
 </style>
+<script src="/resources/js/jquery-3.6.1.min.js"></script>
 </head>
 <body>
     <div><!-- 임시 버튼-->
@@ -160,20 +158,21 @@
         	${review.reviewContent }
         </div>
         <div class="btn-wrap">
-            <a id="btn-modify" href="/review/modifyView.kh?reviewNo=${review.reviewNo }">수정</a>
-            <a id="btn-delete" href="#" onclick="reviewRemove(${page});">삭제하기</a>
+            <a id="btn-modify" href="/review/modifyView.kh?reviewNo=${review.reviewNo }&page=${page }">수정</a>
+            <a id="btn-delete" href="#" onclick="reviewRemove(${reviewNo});">삭제</a>
+
         </div>
     </div>
     
    	<script>
-	function reviewRemove(value){
+   	function reviewRemove(value){
 		event.preventDefault();
 		if(confirm("삭제하시겠습니까?")){
 			location.href="/review/remove.kh?page="+value;
 		}
 	}
 	
-/* 	function modifyView(obj){
+/*  	function modifyView(obj){
 		event.preventDefault();
 		var $tr = $("<tr>");	// 첫번 째 $는 변수 두번 째 $는 제이쿼리
 		$tr.append("<td colspan='3'><input type='text' size='50' value='"+replyContents+"' id='modifyInput'></td>");
@@ -182,5 +181,6 @@
 		// console.log(obj);	// obj는  this를 통해 이벤트가 발생한 태그
 		$(obj).parent().parent().after($tr);	// 버튼을
 	} */
+	</script>
 </body>
 </html>
