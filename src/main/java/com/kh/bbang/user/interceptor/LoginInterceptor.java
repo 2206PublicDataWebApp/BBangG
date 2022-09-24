@@ -32,7 +32,6 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
         if (user != null) {
             logger.info("new login success");
             httpSession.setAttribute(LOGIN, user);
-//            response.sendRedirect("/home.kh");
             if(request.getParameter("useCookie")!=null) {
             	logger.info("remember me...");
             	Cookie loginCookie = new Cookie("loginCookie",httpSession.getId());
@@ -57,7 +56,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
     		, Object handler) throws Exception {
 
         HttpSession httpSession = request.getSession();
-        // 기존의 로그인 정보 제거
+        //기존 로그인 정보 제거
         if (httpSession.getAttribute(LOGIN) != null) {
             logger.info("clear login data before");
             httpSession.removeAttribute(LOGIN);

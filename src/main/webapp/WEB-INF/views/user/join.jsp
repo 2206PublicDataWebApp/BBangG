@@ -1,59 +1,61 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/include/head.jsp" %>
-
+<link rel="stylesheet" href="/resources/css/join.css" />
 <body>
 	<jsp:include page = "/WEB-INF/views/include/header.jsp"/>
 	<h1 align="center">회원가입</h1>
-		<div class="">
+		<div class="join-wrapper">
 			<form action="/user/join.kh" method="post">
+					<div>
+						<span>아이디</span>
+						<input type="text" id="userId" name="userId">
+					</div>
+					<div>
+						<span>비밀번호</span>
+						<input type="password" name="userPwd">
+					</div>
+					<div>
+						<span>이름</span>
+						<input type="text" name="userName">
+					</div>
+					<div>
+						<span>성별</span>
+						<input type="radio" name="userGender" value="여자">여자
+						<input type="radio" name="userGender" value="남자">남자
+					</div>
+					<div class="email-wrapper">
+						<span>이메일</span>
 					<div class="email_auth">
 						<input type="text" placeholder="이메일" name="userEmail" id="userEmail" class="email">
-						<button type="button" id="email_auth_btn" class="email_auth_btn">인증번호 받기</button>
+						<button type="button" id="email_auth_btn" class="email_auth_btn">인증</button>
+					</div>
 					<div class="mail-check-box">
 						<input class="form-control mail-check-input" placeholder="인증번호 6자리를 입력해주세요!" disabled="disabled" maxlength="6">
 					</div>
 					<span id="mail-check-warn"></span>
 					</div>
 					<div>
-						아이디
-						<input type="text" id="userId" name="userId">
-					</div>
-					<div>
-						비밀번호
-						<input type="password" name="userPwd">
-					</div>
-					<div>
-						이름
-						<input type="text" name="userName">
-					</div>
-					<div>
-						성별
-						<input type="radio" name="userGender" value="여자">여자
-						<input type="radio" name="userGender" value="남자">남자
-					</div>
-					<div>
-						이메일
-					</div>
-					<div>
-						전화번호
+						<span>전화번호</span>
 						<input type="text" name="userPhone">
 						</div>
 					<div>
-						우편번호
+						<span>우편번호</span>
 						<input type="text" name="zipCode" id="sample6_postcode"
-							placeholder="우편번호"> <input type="button"
+							placeholder="우편번호">
+						<input type="button"
 							onclick="sample6_execDaumPostcode()" value="검색"><br>
 					</div>
 					<div>
-						주소
+						<span>주소</span>
 						<input type="text" name="address" id="sample6_address"
 							placeholder="주소"><br>
 					</div>
 					<div>
-						상세 주소
+						<span>상세주소</span>
 						<input type="text" name="addrDetail"
-							id="sample6_detailAddress" placeholder="상세주소"> <input
+							id="sample6_detailAddress" placeholder="상세주소">
+						<input
 							type="text" name="extra" id="sample6_extraAddress"
 							placeholder="참고항목">
 					</div>
