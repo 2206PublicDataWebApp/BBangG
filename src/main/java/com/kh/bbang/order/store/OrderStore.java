@@ -9,13 +9,14 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.bbang.order.domain.Order;
 import com.kh.bbang.order.domain.OrderProduct;
+import com.kh.bbang.order.domain.SerchDate;
 import com.kh.bbang.product.domain.Product;
 import com.kh.bbang.store.domain.Store;
 
 
 public interface OrderStore {
 	public List<Order> selectOrderByDate(SqlSessionTemplate session, String orderDate,int currentPage,int boardLimit);
-	public List<Order> selectOrderById(SqlSession session, String userId, String dateFrom, String dateTo);
+	public List<Order> selectOrderById(SqlSession session, SerchDate sd);
 	public Order selectOneOrder(SqlSession session, int orderNo);
 	public List<Product> selectAllProduct(SqlSession session, int refStoreNo);
 	public int insertOrder(SqlSession session, Order order);

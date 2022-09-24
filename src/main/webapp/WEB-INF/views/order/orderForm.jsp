@@ -233,7 +233,7 @@ input[type="text"]{
 			innerHtml += '<tr >';
 			innerHtml += '	<td><div id="div_'+prmtObj.goodsId+'_name">'+prmtObj.goodsNm+'<input type="hidden" name="orderProductNm" value="'+prmtObj.goodsNm+'"></div><br>'+prmtObj.goodsUnprc+'원</td>';
 			innerHtml += '	<td width="100" align="right"><button type="button" id="" class="add" name="" onclick="goods.minus(\''+prmtObj.goodsId+'\');">-</button>'
-			innerHtml += '	<input type="text" style="width:25px" id="input_cnt_'+prmtObj.goodsId+'" name="orderProductCtn" value="0">'
+			innerHtml += '	<input type="text" style="width:37px; text-align:center" id="input_cnt_'+prmtObj.goodsId+'" name="orderProductCtn" value="0">'
 	        innerHtml += '	<button type="button" id="" class="remove" name="" onclick="goods.plus(\''+prmtObj.goodsId+'\');">+</button></td>';
 	        innerHtml += '	<td width="200px" style="text-align:right;">가격 <input type="text" style="width:70px;border: none;text-align:right;" id="input_sumAmt_'+prmtObj.goodsId+'" name="orderProductPrice" value="0"/>원</td>'
 			innerHtml += '	<td><button type="button" id="" class="remove" name="" onclick="goods.deselect(\''+prmtObj.goodsId+'\');">X</button></td>';

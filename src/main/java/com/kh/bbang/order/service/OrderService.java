@@ -9,13 +9,14 @@ import org.springframework.stereotype.Service;
 
 import com.kh.bbang.order.domain.Order;
 import com.kh.bbang.order.domain.OrderProduct;
+import com.kh.bbang.order.domain.SerchDate;
 import com.kh.bbang.product.domain.Product;
 import com.kh.bbang.store.domain.Store;
 
 @Service
 public interface OrderService {
 	public List<Order> findOrderByDate(String orderDate,int boardLimit,int currentPage);
-	public List<Order> findOrderById(String userId, String dateFrom, String dateTo);
+	public List<Order> findOrderById(SerchDate sd);
 	public Order findOneOrder(int orderNo);
 	public List<Product> findAllProduct(int refStoreNo);
 	public List<OrderProduct> findOrderProductList(int refSrderNo);

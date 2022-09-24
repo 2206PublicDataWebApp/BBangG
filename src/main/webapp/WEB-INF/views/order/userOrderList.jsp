@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
- <%@ include file="/WEB-INF/views/home.jsp" %>
+<%@ include file="/WEB-INF/views/include/head.jsp"%>
  <%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <!DOCTYPE html>
 <html>
@@ -10,10 +10,13 @@
 <title>Insert title here</title>
 <style>
   table {
-  width : 80%;
+  	width : 80%;
     border-top: 1px solid  #3A2618;
    	align:center;
+   	text-align:center;
     border-collapse: collapse;
+    margin-left:auto;
+	margin-right:auto;
   }
   th, td {
     border-bottom: 1px solid #3A2618;
@@ -29,11 +32,12 @@
 </style>
 </head>
 <body>
+<jsp:include page = "/WEB-INF/views/include/header.jsp"/>
 	<input type="hidden" name="userId" value="${login.userId }">
 	<h1 align="center">${login.userId }님의 주문 목록</h1>
 	<br><br>
-	<table style="width:40%;">
-	
+	<table style="width:40%; ">
+	<input type="hidden" name="userId" value="${login.userId }">
 	 <tr>
 	 	<th>결제확인/완료</th>
 	 	<th>배송중/완료</th>
@@ -46,21 +50,24 @@
 	 </tr>
 	</table>
 	<br><br>
-	<table>
-		<tr>
-			<td colspan="5" align="right">
-				<form action="/order/userOrderList.kh" method="get">
-				 <label>
+	
+	<div style="text-align:right;padding-right:10%">
+		<div>
+			<form action="/order/userOrderList.kh" method="get">
+				 <label >
 				    기간조회  
 				    <input type="date" id="dateFrom" name="dateFrom" >
 				    ~
 				    <input type="date" id="dateTo" name="dateTo" >
+				    <input type="hidden" name="userId" value="${login.userId }">
 				  </label>
 				 <button type="submit">검색</button>
-				   </form>
-				  
-			</td>
-		</tr>
+			</form>
+		</div>
+	</div>
+	<br>
+		
+		<table>
 		<tr style="border-bottom: 3px solid  #3A2618;">
 			<th>주문번호</th>
 			<th>주문내역</th>
