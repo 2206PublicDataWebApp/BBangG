@@ -17,7 +17,7 @@
 			<th>작성자</th>
 			<th>날짜</th>
 			<th>조회수</th>
-			<th>첨부파일</th>
+			<th>비고</th>
 		</tr>
 		<c:if test="${!empty qnaList }">
 			<c:forEach items="${qnaList }" var="qna" varStatus="i">

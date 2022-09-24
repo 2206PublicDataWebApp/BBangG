@@ -17,7 +17,7 @@
 			</tr>
 			<tr>
 				<td>작성자</td>
-				<td><input type="text" name="qnaWriter" value="${loginUser.userName }" readonly></td>
+				<td><input type="text" name="qnaWriter" value="${login.userName }" readonly></td>
 			</tr>
 			<tr>
 				<td>내용</td>

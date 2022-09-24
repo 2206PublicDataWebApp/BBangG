@@ -42,7 +42,7 @@
 		</tr>
 		<tr>
 			<td colspan="2" align="center">
-				<a href="/qna/modifyView.kh?qnaNo=${qna.qnadNo }&page=${page}">수정 페이지로 이동</a>
+				<a href="/qna/modifyView.kh?qnaNo=${qna.qnaNo }&page=${page}">수정 페이지로 이동</a>
 				<a href="#" onclick="qnaRemove(${page});">삭제하기</a>
 			</td>
 		</tr>

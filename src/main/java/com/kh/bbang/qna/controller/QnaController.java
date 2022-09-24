@@ -240,7 +240,7 @@ public class QnaController {
 			, @ModelAttribute Reply reply
 			, @RequestParam("page") int page
 			, HttpSession session) {
-		User user = (User)session.getAttribute("loginUser");
+		User user = (User)session.getAttribute("login");
 		String replyWriter = user.getUserId();
 		int qnaNo = reply.getRefQnaNo();
 		reply.setQnaReplyWriter(replyWriter);

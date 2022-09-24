@@ -69,7 +69,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="insertFaq">
 		INSERT INTO FAQ_TBL VALUES(
 		SEQ_FAQNO.NEXTVAL, #{faqWriter}, #{faqTitle}, #{faqContent}, #{faqCreateDate},
-		#{faqUpdateDate}, #{faqFilename}, #{faqFileRename}, #{faqFilepath}, #{faqViewCount}
+		#{faqUpdateDate}, #{faqFilename}, #{faqFileRename}, #{faqFilepath}, #{faqViewCount})
 	</insert>
 
 	<update id="updatefaq">

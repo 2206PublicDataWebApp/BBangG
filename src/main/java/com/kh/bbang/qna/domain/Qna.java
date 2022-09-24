@@ -18,7 +18,6 @@ public class Qna {
 	private int qnaIsAnswered;
 	private String qnaAnswerTitle;
 	private String qnaAnswerContent;
-	
 	public int getQnaNo() {
 		return qnaNo;
 	}
@@ -118,6 +117,7 @@ public class Qna {
 				+ ", qnaIsAnswered=" + qnaIsAnswered + ", qnaAnswerTitle=" + qnaAnswerTitle + ", qnaAnswerContent="
 				+ qnaAnswerContent + "]";
 	}
+	
 	
 	
 	

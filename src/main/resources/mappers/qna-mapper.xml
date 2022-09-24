@@ -3,7 +3,7 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="qnaMapper">
+<mapper namespace="QnaMapper">
 	<resultMap type="Qna" id="QnaResultMap">
 		<id property="qnaNo"					column="QNA_NUMBER" />
 		<result property="qnaWriter" 			column="USER_ID" />
@@ -22,31 +22,63 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="qnaAnswerContent" 	column="ANSWER_CONTENT" />
 	</resultMap>
 	<insert id="insertQna">
-		INSERT INTO QNA_TBL
-		VALUES(SEQ_QNANO.NEXTVAL,#{qnaWriter},#{qnaTitle},
-		#{qnaContent},DEFAULT, DEFAULT, #{qnaFilename},
+		INSERT INTO QNA_TBL(
+		QNA_NUMBER,
+		USER_ID,
+		QNA_TITLE,
+		QNA_CONTENT,
+		QNA_CREATEDATE,
+		QNA_UPDATEDATE,
+		QNA_FILENAME,
+		QNA_FILERENAME,
+		QNA_FILEPATH,
+		QNA_VIEWCOUNT,
+		QNA_TYPENUMBER,
+		QNA_SECRET,
+		QNA_ISANSWERED,
+		ANSWER_TITLE,
+		ANSWER_CONTENT
+		)VALUES(
+		SEQ_QNANO.NEXTVAL,
+		#{qnaWriter},
+		#{qnaTitle},
+		#{qnaContent},
+		DEFAULT, 
+		DEFAULT, 
+		#{qnaFilename},
 		#{qnaFileRename},
-		#{qnaFilePath}, DEFAULT, #{"qnaTypeNo"}, #{"qnaSecret"},
-		#{"qnaIsAnswered"}, #{"qnaAnswerTitle"}, #{"qnaAnswerContent"})
+		#{qnaFilePath}, 
+		DEFAULT, 
+		#{"qnaTypeNo"}, 
+		#{"qnaSecret"},
+		#{"qnaIsAnswered"}, 
+		#{"qnaAnswerTitle"}, 
+		#{"qnaAnswerContent"})
 	</insert>
+	
 	<update id="updateQna">
-		UPDATE QNA_TBL SET QNA_TITLE = #{qnaTitle},
-		QNA_CONTENT = #{qnaContent}, QNA_FILENAME = #{qnaFilename },
-		QNA_FILERENAME = #{qnaFileRename}, QNA_FILEPATH = #{qnaFilePath},
+		UPDATE QNA_TBL SET 
+		QNA_TITLE = #{qnaTitle},
+		QNA_CONTENT = #{qnaContent}, 
+		QNA_FILENAME = #{qnaFilename},
+		QNA_FILERENAME = #{qnaFileRename}, 
+		QNA_FILEPATH = #{qnaFilePath},
 		QNA_UPDATEDATE = DEFAULT
 		WHERE QNA_NUMBER = #{qnaNo}
 	</update>
 
 	<delete id="deleteQna">
-		DELETE FROM QNA_TBL WHERE QNA_NUMBER = #{qnaNo}
+		DELETE FROM QNA_TBL 
+		WHERE QNA_NUMBER = #{qnaNo}
 	</delete>
 
 	<update id="updateCount">
-		UPDATE QNA_TBL SET QNA_VIEWCOUNT = QNA_VIEWCOUNT + 1
-		WHEREQNA_VIEWCOUNT = #{qnaNo}
+		UPDATE QNA_TBL SET 
+		QNA_VIEWCOUNT = QNA_VIEWCOUNT + 1
+		WHERE QNA_VIEWCOUNT = #{qnaNo}
 	</update>
 
-	<select id="selectAllQna" resultType="_int">
+	<select id="selectAllQna" resultMap="QnaResultMap">
 		SELECT * FROM QNA_TBL
 	</select>
 
@@ -73,8 +105,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<select id="selectOneByNo" resultMap="QnaResultMap">
 		SELECT * FROM QNA_TBL
-		WHERE QNA_NO = #{faqNo }
+		WHERE QNA_NUMBER = #{qnaNo}
 	</select>
+	
 	<select id="selectAllByValue" resultMap="QnaResultMap">
 		SELECT * FROM QNA_TBL
 		<where>
@@ -108,8 +141,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	</resultMap>
 	<insert id="insertReply">
-		INSERT INTO QNA_REPLY_TBL VALUES(SEQ_QNAREPLYNO.NEXTVAL,
-		#{refQnaNo}, #{qnaReplyContent}, #{qnaReplyWriter}, DEFAULT, DEFAULT)
+		INSERT INTO QNA_REPLY_TBL
+		(
+		QNA_REPLY_NUMBER,
+		REF_QNA_NUMBER,
+		QNA_REPLY_CONTENTS,
+		QNA_REPLY_WRITER,
+		REPLY_CREATE_DATE,
+		REPLY_UPDATE_DATE
+		)VALUES(
+		SEQ_QNAREPLYNO.NEXTVAL,
+		#{refQnaNo}, 
+		#{qnaReplyContent}, 
+		#{qnaReplyWriter}, 
+		DEFAULT, 
+		DEFAULT)
 	</insert>
 	<update id="modifyReply">
 		UPDATE QNA_REPLY_TBL SET QNA_REPLY_CONTENTS =
