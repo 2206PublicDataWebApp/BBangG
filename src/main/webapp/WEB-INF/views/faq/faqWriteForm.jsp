@@ -12,7 +12,7 @@
 	<h1 align="center">작성페이지</h1>
 	<br>
 	<br>
-	<form action="/faq/register.kh" method="post">
+	<form action="/faq/register.kh" method="post" enctype="multipart/form-data">
 		<table align="center" border="1">
 			<tr>
 				<td>제목</td>

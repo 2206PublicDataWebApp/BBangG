@@ -1,107 +1,171 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper
-  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  
-<mapper namespace="qnaMapper">
+
+<mapper namespace="QnaMapper">
 	<resultMap type="Qna" id="QnaResultMap">
-		<id 	property="qnaNo" 				column="QNA_NUMBER" />
-		<result property="qnaWriter" 			column="USER_ID"/>
-		<result property="qnaTitle" 			column="QNA_TITLE"/>
-		<result property="qnaContent" 			column="QNA_CONTENT"/>
-		<result property="qnaCreateDate"		column="QNA_CREATEDATE"/>
-		<result property="qnaUpdateDate" 		column="QNA_UPDATEDATE"/>
-		<result property="qnaFilename" 			column="QNA_FILENAME"/>
-		<result property="qnaFileRename" 		column="QNA_FILERENAME"/>
-		<result property="qnaFilePath" 			column="QNA_FILEPATH"/>
-		<result property="qnaViewCount" 		column="QNA_VIEWCOUNT"/>
-		<result property="qnaTypeNo" 			column="QNA_TYPENUMBER"/>
-		<result property="qnaSecret" 			column="QNA_SECRET"/>
-		<result property="qnaIsAnswered" 		column="QNA_ISANSWERED"/>
-		<result property="qnaAnswerTitle" 		column="ANSWER_TITLE"/>
-		<result property="qnaAnswerContent" 	column="ANSWER_CONTENT"/>
+		<id 	property="qnaNo"				column="QNA_NUMBER" />
+		<result property="qnaWriter" 			column="USER_ID" />
+		<result property="qnaTitle" 			column="QNA_TITLE" />
+		<result property="qnaContent" 			column="QNA_CONTENT" />
+		<result property="qnaCreateDate" 		column="QNA_CREATEDATE" />
+		<result property="qnaUpdateDate" 		column="QNA_UPDATEDATE" />
+		<result property="qnaFilename" 			column="QNA_FILENAME" />
+		<result property="qnaFileRename" 		column="QNA_FILERENAME" />
+		<result property="qnaFilePath" 			column="QNA_FILEPATH" />
+		<result property="qnaViewCount" 		column="QNA_VIEWCOUNT" />
+		<result property="qnaTypeNo" 			column="QNA_TYPENUMBER" />
+		<result property="qnaSecret" 			column="QNA_SECRET" />
+		<result property="qnaIsAnswered" 		column="QNA_ISANSWERED" />
+		<result property="qnaAnswerTitle" 		column="ANSWER_TITLE" />
+		<result property="qnaAnswerContent" 	column="ANSWER_CONTENT" />
 	</resultMap>
 	<insert id="insertQna">
-		INSERT INTO QNA_TBL
-		VALUES(SEQ_QNANO.NEXTVAL,#{qnaTitle},#{boardContents},#{boardWriter},#{boardFilename},#{boardFileRename},#{boardFilepath}, DEFAULT, DEFAULT, DEFAULT, DEFAULT)
+		INSERT INTO QNA_TBL(
+		QNA_NUMBER,
+		USER_ID,
+		QNA_TITLE,
+		QNA_CONTENT,
+		QNA_CREATEDATE,
+		QNA_UPDATEDATE,
+		QNA_FILENAME,
+		QNA_FILERENAME,
+		QNA_FILEPATH,
+		QNA_VIEWCOUNT,
+		QNA_TYPENUMBER,
+		QNA_SECRET,
+		QNA_ISANSWERED,
+		ANSWER_TITLE,
+		ANSWER_CONTENT
+		)VALUES(
+		SEQ_QNANO.NEXTVAL,
+		#{qnaWriter},
+		#{qnaTitle},
+		#{qnaContent},
+		DEFAULT, 
+		DEFAULT, 
+		#{qnaFilename},
+		#{qnaFileRename},
+		#{qnaFilePath}, 
+		DEFAULT, 
+		#{"qnaTypeNo"}, 
+		#{"qnaSecret"},
+		#{"qnaIsAnswered"}, 
+		#{"qnaAnswerTitle"}, 
+		#{"qnaAnswerContent"})
 	</insert>
+	
 	<update id="updateQna">
-		UPDATE BOARD_TBL SET BOARD_TITLE = #{boardTitle}, BOARD_CONTENTS = #{boardContents}, BOARD_FILENAME = #{boardFilename }, BOARD_RENAME = #{boardFileRename}, BOARD_FILEPATH = #{boardFilepath}, B_UPDATE_DATE = DEFAULT
-		WHERE BOARD_NO = #{boardNo}
+		UPDATE QNA_TBL SET 
+		QNA_TITLE = #{qnaTitle},
+		QNA_CONTENT = #{qnaContent}, 
+		QNA_FILENAME = #{qnaFilename},
+		QNA_FILERENAME = #{qnaFileRename}, 
+		QNA_FILEPATH = #{qnaFilePath},
+		QNA_UPDATEDATE = DEFAULT
+		WHERE QNA_NUMBER = #{qnaNo}
 	</update>
+
 	<delete id="deleteQna">
-		DELETE FROM BOARD_TBL WHERE BOARD_NO = #{boardNo}
+		DELETE FROM QNA_TBL 
+		WHERE QNA_NUMBER = #{qnaNo}
 	</delete>
+
 	<update id="updateCount">
-		UPDATE BOARD_TBL SET BOARD_COUNT = BOARD_COUNT + 1 WHERE BOARD_NO = #{boardNo}
+		UPDATE QNA_TBL SET 
+		QNA_VIEWCOUNT = QNA_VIEWCOUNT + 1
+		WHERE QNA_VIEWCOUNT = #{qnaNo}
 	</update>
+
 	<select id="selectAllQna" resultMap="QnaResultMap">
-		SELECT * FROM BOARD_TBL 
+		SELECT * FROM QNA_TBL
 	</select>
-	<select id="selectTotalCount" resultType="_int">
-		SELECT COUNT(*) FROM BOARD_TBL 
-		<where>
-			<if test="searchCondition.toString() == 'title'">
-				BOARD_TITLE LIKE '%'||#{searchValue}||'%'
-			</if>
-			<if test="searchCondition.toString() == 'contents'">
-				BOARD_CONTENTS LIKE '%'||#{searchValue}||'%'
-			</if>
-			<if test="searchCondition.toString() == 'writer'">
-				BOARD_WRITER LIKE '%'||#{searchValue}||'%'
-			</if>
-			<if test="searchCondition.toString() == 'all'">
-				BOARD_TITLE LIKE '%'||#{searchValue}||'%'
-				OR BOARD_CONTENTS LIKE '%'||#{searchValue}||'%'
-				OR BOARD_WRITER LIKE '%'||#{searchValue}||'%'
-			</if>
-			AND B_STATUS = 'Y'
-		</where>
-	</select>
+
+	 <select id="selectTotalCount" resultType="_int">
+   SELECT COUNT(*) FROM QNA_TBL 
+    <where>
+   <if test="searchCondition.toString() == 'title'">
+      QNA_TITLE LIKE '%'||#{searchValue}||'%' 
+   </if>
+   <if test="searchCondition.toString() == 'contents'">
+      QNA_CONTENT LIKE '%'||#{searchValue}||'%' 
+   </if>
+   <if test="searchCondition.toString() == 'writer'">
+      USER_ID LIKE '%'||#{searchValue}||'%' 
+   </if>
+   <if test="searchCondition.toString() == 'all'">
+      QNA_TITLE LIKE '%'||#{searchValue}||'%' 
+      OR QNA_CONTENT LIKE '%'||#{searchValue}||'%' 
+      OR USER_ID LIKE '%'||#{searchValue}||'%' 
+   </if>
+
+   </where>
+   </select>
+
 	<select id="selectOneByNo" resultMap="QnaResultMap">
-		SELECT * FROM BOARD_TBL WHERE BOARD_NO = #{boardNo } 
+		SELECT * FROM QNA_TBL
+		WHERE QNA_NUMBER = #{qnaNo}
 	</select>
+	
 	<select id="selectAllByValue" resultMap="QnaResultMap">
-		SELECT * FROM BOARD_TBL 
+		SELECT * FROM QNA_TBL
 		<where>
 			<if test="searchCondition.toString() == 'title'">
-				BOARD_TITLE LIKE '%'||#{searchValue}||'%'
+				QNA_TITLE LIKE '%'||#{searchValue}||'%'
 			</if>
 			<if test="searchCondition.toString() == 'contents'">
-				BOARD_CONTENTS LIKE '%'||#{searchValue}||'%'
+				QNA_CONTENT LIKE '%'||#{searchValue}||'%'
 			</if>
 			<if test="searchCondition.toString() == 'writer'">
-				BOARD_WRITER LIKE '%'||#{searchValue}||'%'
+				USER_ID LIKE '%'||#{searchValue}||'%'
 			</if>
 			<if test="searchCondition.toString() == 'all'">
-				BOARD_TITLE LIKE '%'||#{searchValue}||'%'
-				OR BOARD_CONTENTS LIKE '%'||#{searchValue}||'%'
-				OR BOARD_WRITER LIKE '%'||#{searchValue}||'%'
+				QNA_TITLE LIKE '%'||#{searchValue}||'%'
+				OR QNA_CONTENT
+				LIKE '%'||#{searchValue}||'%'
+				OR USER_ID LIKE
+				'%'||#{searchValue}||'%'
 			</if>
-			AND B_STATUS = 'Y'
 		</where>
 	</select>
-	<!-- 댓글관리 -->
+	
+	
 	<resultMap type="Reply" id="replyResultMap">
-		<id 	property="qnaReplyNo" 				column="QNA_REPLY_NUMBER" />
-		<result property="refQnaNo" 				column="REF_QNA_NUMBER" />
-		<result property="qnaReplyContent" 			column="QNA_REPLY_CONTENTS" />
-		<result property="qnaReplyWriter" 			column="QNA_REPLY_WRITER" />
-		<result property="qnaReplyCreateDate" 		column="REPLY_CREATE_DATE" />
-		<result property="qnaReplyUpdateDate" 		column="REPLY_UPDATE_DATE" />
-		
+		<id property="qnaReplyNo" 				column="QNA_REPLY_NUMBER" />
+		<result property="refQnaNo" 			column="REF_QNA_NUMBER" />
+		<result property="qnaReplyContent" 		column="QNA_REPLY_CONTENTS" />
+		<result property="qnaReplyWriter" 		column="QNA_REPLY_WRITER" />
+		<result property="qnaReplyCreateDate"	column="REPLY_CREATE_DATE" />
+		<result property="qnaReplyUpdateDate"	column="REPLY_UPDATE_DATE" />
+
 	</resultMap>
 	<insert id="insertReply">
-		INSERT INTO REPLY_TBL VALUES(SEQ_REPLY_NO.NEXTVAL, #{refBoardNo}, #{replyContents}, #{replyWriter}, DEFAULT, DEFAULT, DEFAULT)
+		INSERT INTO QNA_REPLY_TBL
+		(
+		QNA_REPLY_NUMBER,
+		REF_QNA_NUMBER,
+		QNA_REPLY_CONTENTS,
+		QNA_REPLY_WRITER,
+		REPLY_CREATE_DATE,
+		REPLY_UPDATE_DATE
+		)VALUES(
+		SEQ_QNAREPLYNO.NEXTVAL,
+		#{refQnaNo}, 
+		#{qnaReplyContent}, 
+		#{qnaReplyWriter}, 
+		DEFAULT, 
+		DEFAULT)
 	</insert>
 	<update id="modifyReply">
-		UPDATE REPLY_TBL SET REPLY_CONTENTS = #{replyContents}, R_UPDATE_DATE = DEFAULT WHERE REPLY_NO = #{replyNo}
+		UPDATE QNA_REPLY_TBL SET QNA_REPLY_CONTENTS =
+		#{qnaReplyContent}, REPLY_UPDATE_DATE = DEFAULT WHERE REF_QNA_NUMBER = #{refQnaNo}
 	</update>
 	<delete id="deleteReply">
-		DELETE FROM REPLY_TBL WHERE REPLY_NO = #{replyNo }
+		DELETE FROM QNA_REPLY_TBL WHERE QNA_REPLY_NUMBER = #{qnaReplyNo }
 	</delete>
 	<select id="selectAllReply" resultMap="replyResultMap">
-		SELECT * FROM REPLY_TBL 
-		WHERE REF_BOARD_NO = #{refBoardNo} AND R_STATUS = 'Y'
+		SELECT * FROM QNA_REPLY_TBL
+		WHERE REF_QNA_NUMBER = #{refQnaNo} 
 	</select>
 </mapper>
