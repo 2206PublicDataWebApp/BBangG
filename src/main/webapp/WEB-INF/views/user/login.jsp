@@ -98,10 +98,14 @@ li{
 }
 a{
 	text-decoration: none;
+	color: #3A2618;
 }
 a:visited{
 	text-decoration: none;
 	color: #3A2618;
+}
+input:focus{
+	outline: none;
 }
 .login
 </style>
@@ -134,5 +138,6 @@ a:visited{
 			</c:if>
 		</form>
 	</div>
-</body>
+
+ </body>
 </html>

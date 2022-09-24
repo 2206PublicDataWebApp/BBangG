@@ -14,7 +14,6 @@
 
 * {
 	font-family: 'Noto Sans KR', sans-serif;
-
 }
 
 a {
