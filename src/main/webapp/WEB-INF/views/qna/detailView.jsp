@@ -51,7 +51,7 @@
 	
 	<form action="/qna/addReply.kh" method="post">
 		<input type="hidden" name="page" value="${page }">
-		<input type="hidden" name="qnaReplyNo" value="${qna.qnaNo }">
+		<input type="hidden" name="refQnaNo" value="${qna.qnaNo }">
 		<table align="center" width="500" border="1">
 			<tr>
 				<td>
@@ -91,28 +91,26 @@
 				var $delForm = $("<form>");
 				$delForm.attr("action", "/qna/removeReply.kh");
 				$delForm.attr("method", "post");
-				$delForm.append("<input type='hidden' name='qnaReplyNo' value='"+qnaReplyNo+"'>");
+				$delForm.append("<input type='hidden' name='qnaReplyNo' value='"+replyNo+"'>");
 				$delForm.appendTo("body");
 				$delForm.submit();
 			}
 		}
-		function modifyView(obj, qnaReplyContent, refQnaNo) {
+		function modifyView(obj, qnaReplyContent, qnaReplyNo) {
 			event.preventDefault();
 			var $tr = $("<tr>");
-			$tr.append("<td colspan='3'><input type='text' size='50' value='"+replyContents+"'></td>");
+			$tr.append("<td colspan='3'><input type='text' size='50' value='"+qnaReplyContent+"'></td>");
 			$tr.append("<td><button onclick='modifyReply(this, "+qnaReplyNo+");'>수정</button></td>");
 			$(obj).parent().parent().after($tr);
 		}
 		function modifyReply(obj, rNo) {
 			var inputTag = $(obj).parent().prev().children();
-			console.log(inputTag.val());
-			var replyContents = inputTag.val(); 
+			var qnaReplyContent = inputTag.val();
 			var $form = $("<form>");
 			$form.attr("action", "/qna/modifyReply.kh");
 			$form.attr("method", "post");
 			$form.append("<input type='hidden' value='"+qnaReplyContent+"' name='qnaReplyContent'>");
 			$form.append("<input type='hidden' value='"+rNo+"' name='qnaReplyNo'>");
-			console.log($form[0]);
 			$form.appendTo("body");
 			$form.submit();
 		}

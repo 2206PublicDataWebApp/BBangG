@@ -17,7 +17,8 @@
 			</tr>
 			<tr>
 				<td>작성자</td>
-				<td><input type="text" name="qnaWriter" value="${login.userName }" readonly></td>
+				<td><input type="text" name="qnaUserName" value="${login.userName }" readonly></td>
+				<input type="text" name="qnaWriter" value="${login.userId}" style="display: none">
 			</tr>
 			<tr>
 				<td>내용</td>
@@ -26,6 +27,16 @@
 			<tr>
 				<td>첨부파일</td>
 				<td><input type="file" name="uploadFile"></td>
+			</tr>
+			<tr>
+				<td>비밀글 여부</td>
+
+				<td>
+					<select name="qnaSecret">
+						<option value="1">비밀글</option>
+						<option value="0">전체 공개</option>
+					</select>
+				</td>
 			</tr>
 			<tr>
 				<td colspan="2">

@@ -31,8 +31,14 @@ public class QnaController {
 	private QnaService qnaService;
 	
 	@GetMapping(value="/qna/writeView.kh")
-	public String showQnaWrite() {
-		return "qna/qnaWriteForm";
+	public ModelAndView showQnaWrite(HttpSession session, ModelAndView mv) {
+		mv.setViewName("qna/qnaWriteForm");
+		User user = (User) session.getAttribute("login");
+		if(user== null){
+			mv.addObject("needLogin", "글을 작성하기 위해 로그인이 필요합니다.");
+			mv.setViewName("qna/listView");
+		}
+		return mv;
 	}
 	
 	@PostMapping(value="/qna/register.kh")
@@ -177,22 +183,45 @@ public class QnaController {
 			, @RequestParam("page") Integer page
 			, HttpSession session) {
 		try {
-			
+			boolean verified = true;
 			Qna qna = qnaService.printOneByNo(qnaNo);
-			List<Reply> replyList = qnaService.printAllReply(qnaNo);
-			session.setAttribute("qnaNo", qna.getQnaNo());
-			mv.addObject("replyList", replyList);
-			mv.addObject("qna", qna);
-			mv.addObject("page", page);
-			mv.setViewName("qna/detailView");
+
+			int qnaSecret = qna.getQnaSecret();
+			if(qnaSecret==1){
+				verified = checkVerified(session, qna.getQnaWriter());
+			}
+			if(verified){
+				List<Reply> replyList = qnaService.printAllReply(qnaNo);
+				session.setAttribute("qnaNo", qna.getQnaNo());
+				mv.addObject("replyList", replyList);
+				mv.addObject("qna", qna);
+				mv.addObject("page", page);
+				mv.setViewName("qna/detailView");
+				return mv;
+			}
+			mv.addObject("notVerified", "접근 권한이 없습니다.");
+			mv.setViewName("/qna/listView");
+			return mv;
 		} catch (Exception e) {
 			mv.addObject("msg", e.toString());
 			mv.setViewName("common/errorPage");
 		}
-		
+
 		return mv;
 	}
-	
+
+	private boolean checkVerified(HttpSession session, String qnaWriter) {
+		User user = (User) session.getAttribute("login");
+		if(user == null){
+			return false;
+		}
+		if(user.getUserId().equals(qnaWriter) || user.getStatus().equals("0")){
+			return true;
+		}
+		return false;
+	}
+
+
 	@GetMapping(value="/qna/search.kh")
 	public ModelAndView qnaSearchList(
 			ModelAndView mv
@@ -242,8 +271,17 @@ public class QnaController {
 			, HttpSession session) {
 		User user = (User)session.getAttribute("login");
 		String replyWriter = user.getUserId();
+
+		/**
+		 * refNo -> 댓글이 달릴 원 글의 아이디(no)
+		 *refNo
+		 */
+		
 		int qnaNo = reply.getRefQnaNo();
+		System.out.println("qnaNo = " + qnaNo);
+
 		reply.setQnaReplyWriter(replyWriter);
+
 		int result = qnaService.registerReply(reply);
 		if(result > 0) {
 			mv.setViewName(
@@ -261,8 +299,8 @@ public class QnaController {
 	
 	@PostMapping(value="/qna/removeReply.kh")
 	public String removeQnaReply(
-			@RequestParam("replyNo") Integer replyNo) {
-		int result = qnaService.deleteReply(replyNo);
+			@RequestParam("qnaReplyNo") Integer qnaReplyNo) {
+		int result = qnaService.deleteReply(qnaReplyNo);
 		return "redirect:/qna/list.kh";
 	}
 }

@@ -3,8 +3,8 @@ package com.kh.bbang.qna.domain;
 import java.util.Date;
 
 public class Reply {
-	private int qnaReplyNo; 
-	private int refQnaNo;
+	private int qnaReplyNo; // 얘는 Q&A Reply의 ID 값
+	private int refQnaNo; // 얘가 원글 ID값
 	private String qnaReplyContent;
 	private String qnaReplyWriter;
 	private Date qnaReplyCreateDate;
