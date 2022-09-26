@@ -173,7 +173,9 @@ public class UserController {
 			String userId = user.getUserId();
 			
 			User uOne = uService.printOneById(userId);
+			mv.addObject("choiceMenu",true);
 			mv.addObject("user", uOne);
+			mv.addObject("choiceMenu",true);
 			mv.setViewName("user/myPage");
 			
 		} catch (Exception e) {

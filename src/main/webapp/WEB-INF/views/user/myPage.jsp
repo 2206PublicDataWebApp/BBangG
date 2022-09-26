@@ -5,7 +5,7 @@
 <body>
 	<%-- <%@ include file="/WEB-INF/views/include/header.jsp"%> --%>
 	<jsp:include page = "/WEB-INF/views/include/header.jsp"/>
-
+	<jsp:include page="/WEB-INF/views/include/sideBar_user.jsp"/>
 	<div class="main">
 		<h1 align="center">회원 정보 수정</h1>
 			<form action="/user/modify.kh" method="post"

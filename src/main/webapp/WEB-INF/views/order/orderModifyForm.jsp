@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+ <%@ include file="/WEB-INF/views/include/head.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,8 +12,44 @@
 <script
 	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-<%@ include file="/WEB-INF/views/include/header.jsp" %>
+<style>
+#bodyWrapper{
+	padding-left:200px;
+	padding-top:80px;
+	margin-bottom:50px;
+
+}
+h1{
+	padding: 40px;
+	font-size: 30px;
+}
+:root {
+  --padding: 80px;
+}
+
+span{
+	display: inline-block;
+	position:relative;
+	width:80px;
+}
+}
+div input{
+	margin-bottom: 15px;
+	height: 24px;
+}
+.orderForm_input_right input{
+	border: none;
+	border-bottom: 1px solid black;
+	width:250px;
+}
+input:focus{
+	outline: none;
+}
+</style>
 <body>
+<jsp:include page = "/WEB-INF/views/include/header.jsp"/>
+<jsp:include page="/WEB-INF/views/include/sideBar_user.jsp"/>
+<div id="bodyWrapper">
 	<form action="/order/orderModify.kh" method="post">
 	<input type="hidden" name="orderNo" value="${order.orderNo }"> 
 	<header id="header" >
@@ -56,7 +93,7 @@
 				</div>
 				<div style=" float: right; width: 38%;">
 					<button id="btnSearchAddressC" type="Button" onclick="findDaumPostcode()" value="우편번호 찾기"  >
-				주소검색</button>
+				<img src="/resources/image/icon/serch_bt.png" height ="20" width="20" /></button>
 				
 				</div>
 			</td>
@@ -80,6 +117,8 @@
 		</tr>
 	</table>
 	</form>
+</div>
+
 </body>
 <script type="text/javascript">
 	function findDaumPostcode() {

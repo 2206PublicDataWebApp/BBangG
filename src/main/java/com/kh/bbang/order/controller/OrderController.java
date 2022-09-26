@@ -39,7 +39,7 @@ public class OrderController {
 	@RequestMapping(value="/order/orderForm.kh", method=RequestMethod.GET)
 	public ModelAndView orderFormView(ModelAndView mv
 			,HttpServletRequest request
-			,@RequestParam("storeNo") Integer refStoreNo) {
+			,@RequestParam(name="storeNo", required=false) Integer refStoreNo) {
 	
 		List<Product> pList = oService.findAllProduct(refStoreNo);
 		HttpSession session = request.getSession();
@@ -57,7 +57,7 @@ public class OrderController {
 			ModelAndView mv
 			,@ModelAttribute Order order
 			,@ModelAttribute OrderProduct orderProduct
-			,@RequestParam("storeNo") Integer storeNo
+			,@RequestParam(name="storeNo",required=false) Integer storeNo
 			) {
 //			Order order = new Order(delivaryName, delivaryPhone, delivaryZipcode, delivaryAddressFirst,
 //					delivaryAddressSecond, delivaryMemo);
@@ -128,6 +128,8 @@ public class OrderController {
 					}
 				}
 			}
+			mv.addObject("dateFrom", dateFrom);
+			mv.addObject("dateTo", dateTo);
 			mv.addObject("payState",payState);
 			mv.addObject("delivaryState",delivaryState);
 			mv.addObject("cancleState",cancleState);

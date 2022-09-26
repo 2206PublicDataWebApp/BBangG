@@ -8,56 +8,98 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="/resources/css/orderStyle.css">
 <%@ include file="/WEB-INF/views/include/head.jsp"%>
+
 </head>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 <style>
- #title {
-    line-height: 56px;
-    color: #fff;
-    font-size: 15px;
-    font-weight: normal;
-    text-align: center;
-    background: #4a5164;
-    position:relative;
-}
-
-body, code {
-	
-    min-width: 320px;
-    font-size: 16px;
-    font-family: Verdana,"맑은 고딕",Malgun Gothic,AppleSDGothicNeo,"돋움",Dotum;
-    line-height: 1.4em;
-    letter-spacing: -0.4px;
-    color: #666;
-    background: #fff;
-    -webkit-text-size-adjust: none;
-}
-input, select, textarea,Button {
-    font-size: 16px;
-    font-family: Verdana,"맑은 고딕",Malgun Gothic,AppleSDGothicNeo,"돋움",Dotum;
-    color: #333;
-    vertical-align: middle;
-    outline: 0;
-    border-radius: 0;
-    height: 40px;
-
-    padding: 7px;
-    font-weight: inherit;
-    border: 1px solid #d7d5d5;
-    outline-style: none;
-    line-height: 16px;
-    color: #333;
+#bodyWrapper{
+	position: relative;
+    margin: 0 auto;
     box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top:80px;
 }
-input[type="text"]{
-	width: 100%
+h1{
+	padding: 40px;
+	font-size: 30px;
 }
+:root {
+  --padding: 80px;
+}
+
+span{
+	display: inline-block;
+	position:relative;
+	width:80px;
+}
+}
+div input{
+	margin-bottom: 15px;
+	height: 24px;
+}
+.orderForm_input_right input{
+	border: none;
+	border-bottom: 1px solid black;
+	width:250px;
+}
+input:focus{
+	outline: none;
+}
+.orderForm_input_right th, .orderForm_input_right td {
+	padding-top: 5px;
+    padding-bottom: 10px;
+    padding-left: 30px;
+    padding-right: 40ox;
+    }
+#btnSearchAddressC{
+ 	border: none;
+ 	background-color:transparent;
+ }
+ #btnAddGoods{
+ height:40px; 
+ float:right;
+ background-color:#F0F0F0;
+ border: none;
+ }
+ #btnAddGoods:hover{
+ 	background-color:#3A2618;
+ 	color:#ffffff;
+ 	
+ }
+  input[type=reset]{
+ 	background-color:#F0F0F0;
+ 	color:#3A2618;
+ 	border:1px solid;
+ 	border-color:#F0F0F0;
+ }
+   input[type=reset]:hover{
+ 	background-color:#ffffff;
+ 	color:#3A2618;
+ 	border:1px solid;
+ 	border-color:#3A2618;
+ }
+ 
+ input[type=submit]{
+	background-color:#3A2618;
+ 	color:#ffffff;
+ 	border:1px solid;
+ 	border-color:#3A2618;
+
+ }
+ input[type=submit]:hover{
+
+ 	background-color:#ffffff;
+ 	color:#3A2618;
+ 	border:1px solid;
+ 	border-color:#3A2618;
+ 	}
 </style>
 
-<body id="userStyle">
+<body id="bodyWrapper">
 <%@ include file="/WEB-INF/views/include/header.jsp"%>
 	<div id="title" >
 	<h1 align="center">${store.storeName}주문</h1>
@@ -65,92 +107,93 @@ input[type="text"]{
 	</div>
 	<br><br><br>
 		<form action="/order/sendOrder.kh" method="post" enctype="multipart/form-data">
-		<section style=" float: left; width: 45%; padding:10px;">
-		<input type="hidden" name="orderShipfee" value=3000>
-		<input type="hidden" name="userId" value="${user.userId}">
-		<input type="hidden" name="storeNo" value="${storeNo}">
-
-			<select id="selGoods" name="selGoods" style="height:40px;">
-			</select>
-			<button id="btnAddGoods" type="button" style="height:40px; float:right">추가</button>	
-			<br><br>	
-			<div id="container">
-			</div>
-			<br>
-			<div>+ 배송비 3000원</div>
-			<div>
-				<div style="width: 30%; float: left;">
-				요금합계 
+			<input type="hidden" name="orderShipfee" value=3000>
+			<input type="hidden" name="userId" value="${user.userId}">
+			<input type="hidden" name="storeNo" value="${storeNo}">
+		<div >
+			<div style=" float: left; width: 30%;  margin-left:10%;">
+				<select id="selGoods" name="selGoods" style="height:40px;">
+				</select>
+				<button id="btnAddGoods" type="button" >추가</button>	
+				<br><br>	
+				<div id="container">
 				</div>
-				<div style="width: 50%; float: right;">
-					<b><input id="goodsTotAmt" style="border:none;text-align:right; " name="totalPrice" value=0></b>원
+				<br>
+				<div>+ 배송비 3000원</div>
+				<div>
+					<div style="width: 30%; float: left;">
+					요금합계 
+					</div>
+					<div style="width: 50%; float: right;">
+						<b><input id="goodsTotAmt" style="border:none;text-align:right; " name="totalPrice" value=0></b>원
+					</div>
 				</div>
 			</div>
-		</section>
-		<section style=" float: right; width: 45%; padding:10px;text-align=left;" class="orderForm_input_right" >
-			<table>
-				<legend><h4>주문자정보</h4></legend>
-				<tr>
-					<td>주문자 이름</td>
-					<td><input type="text" name="orderName" value="${user.userName }"></td>
-				</tr>
-				<tr>
-					<td>주문자 연락처</td>
-					<td><input type="text" name="orderPhone" value="${user.userPhone }"></td>
-				</tr>
-			</table>
-			<br>
-			<table>
+			<div style=" float: right; margin-right:20%; text-align=left;" class="orderForm_input_right" >
+				<table>
+					<legend><h4>주문자정보</h4></legend>
+					<tr>
+						<td>주문자 이름</td>
+						<td><input type="text" name="orderName" value="${user.userName }"></td>
+					</tr>
+					<tr>
+						<td>주문자 연락처</td>
+						<td><input type="text" name="orderPhone" value="${user.userPhone }"></td>
+					</tr>
+				</table>
+				<br>
+				<table>
+					
+					<tr>
+						<legend><h4>배송지 정보</h4></legend>
+					</tr>
+					<tr>
+						<td>수령인</td>
+						<td ><input type="text" name="delivaryName" >
+						</td>
+					</tr>
+					<tr>
+						<td>수령인 연락처</td>
+						<td><input type="text" name="delivaryPhone"></td>
+					</tr>
+					<tr>
+						<td>우편번호</td>
+						<td>
+							<div style=" float: left; ">
+								<input type="text" id="delivaryZipcode" name="delivaryZipcode" style="width:120px">
+							</div>
+							<div style=" float: left; ">
+								<button id="btnSearchAddressC" type="Button" onclick="findDaumPostcode()" value="우편번호 찾기"  >
+							<img src="/resources/image/icon/serch_bt.png" height ="20" width="20" /></button>
+							
+							</div> 
+						</td>
+					</tr>
+					<tr>
+						<td>상세주소1</td>
+						<td><input type="text" id="delivaryAddr" name="delivaryAddr"></td>
+					</tr>
+					<tr>
+						<td>상세주소2</td>
+						<td><input type="text" id="delivaryAddrDetail" name="delivaryAddrDetail"></td>
+					</tr>
+					<tr>
+						<td>배송메모</td>
+						<td><input type="text" name="delivaryMemo"></td>
+					</tr>
 				
-				<tr>
-					<legend><h4>배송지 정보</h4></legend>
-				</tr>
-				<tr>
-					<td>수령인</td>
-					<td ><input type="text" name="delivaryName" >
-					</td>
-				</tr>
-				<tr>
-					<td>수령인 연락처</td>
-					<td><input type="text" name="delivaryPhone"></td>
-				</tr>
-				<tr>
-					<td>우편번호</td>
-					<td>
-						<div style=" float: left; width: 60%;">
-							<input type="text" id="delivaryZipcode" name="delivaryZipcode">
-						</div>
-						<div style=" float: right; width: 38%;">
-							<button id="btnSearchAddressC" type="Button" onclick="findDaumPostcode()" value="우편번호 찾기"  >
-						주소검색</button>
-						
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td>상세주소1</td>
-					<td><input type="text" id="delivaryAddr" name="delivaryAddr"></td>
-				</tr>
-				<tr>
-					<td>상세주소2</td>
-					<td><input type="text" id="delivaryAddrDetail" name="delivaryAddrDetail"></td>
-				</tr>
-				<tr>
-					<td>배송메모</td>
-					<td><input type="text" name="delivaryMemo"></td>
-				</tr>
-			
-				<tr>
-					<td >
-						
-					</td>
-					<td>
-						<input type="reset" value="다시입력" style=" align:left; width: 49%;">
-						<input type="submit" value="주문하기" style=" align:left; width: 49%;">
-					</td>
-				</tr>
-			</table>
-			</section>
+					<tr>
+						<td >
+							
+						</td>
+						<td>
+							<input type="reset" value="다시입력" style=" align:left; width: 49%;">
+							<input type="submit" value="주문하기" style=" align:left; width: 49%;">
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
 		</form>
 </body>
 <script type="text/javascript">
