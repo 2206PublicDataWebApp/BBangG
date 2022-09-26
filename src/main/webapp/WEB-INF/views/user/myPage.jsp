@@ -11,7 +11,7 @@
 			 onsubmit="modifyUser();">
 					<div>
 						<span>아이디</span>
-						<input type="text" id="userId" name="userId" value="${user.userId }" readonly>
+						<input type="text" id="userId" name="userId" class="userId" value="${user.userId }" readonly>
 					</div>
 					<div>
 						 <span>비밀번호</span>
@@ -28,7 +28,7 @@
 					</div>
 					<div>
 						<span>이메일</span>
-						<input type="text" name="userEmail"  value="${user.userEmail }" readonly>
+						<input type="text" name="userEmail" class="userEmail"  value="${user.userEmail }" readonly>
 					</div>
 					<div>
 						<span>전화번호</span>
