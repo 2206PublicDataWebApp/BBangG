@@ -15,13 +15,11 @@ public class Qna {
 	private int qnaViewCount;
 	private int qnaTypeNo;
 	private int qnaSecret;
-	
 	private int qnaIsAnswered;
-	private String qnaAnswerTitle;
-	private String qnaAnswerContent;
-	private int originNo; // 문의글의 게시글번호(qnaNo)
-	private int groupOrder; 
-	private int groupLayer;
+
+	private int answerNo;
+	private String answerTitle;
+	private String answerContent;
 	
 	public int getQnaNo() {
 		return qnaNo;
@@ -101,35 +99,23 @@ public class Qna {
 	public void setQnaIsAnswered(int qnaIsAnswered) {
 		this.qnaIsAnswered = qnaIsAnswered;
 	}
-	public String getQnaAnswerTitle() {
-		return qnaAnswerTitle;
+	public int getAnswerNo() {
+		return answerNo;
 	}
-	public void setQnaAnswerTitle(String qnaAnswerTitle) {
-		this.qnaAnswerTitle = qnaAnswerTitle;
+	public void setAnswerNo(int answerNo) {
+		this.answerNo = answerNo;
 	}
-	public String getQnaAnswerContent() {
-		return qnaAnswerContent;
+	public String getAnswerTitle() {
+		return answerTitle;
 	}
-	public void setQnaAnswerContent(String qnaAnswerContent) {
-		this.qnaAnswerContent = qnaAnswerContent;
+	public void setAnswerTitle(String answerTitle) {
+		this.answerTitle = answerTitle;
 	}
-	public int getOriginNo() {
-		return originNo;
+	public String getAnswerContent() {
+		return answerContent;
 	}
-	public void setOriginNo(int originNo) {
-		this.originNo = originNo;
-	}
-	public int getGroupOrder() {
-		return groupOrder;
-	}
-	public void setGroupOrder(int groupOrder) {
-		this.groupOrder = groupOrder;
-	}
-	public int getGroupLayer() {
-		return groupLayer;
-	}
-	public void setGroupLayer(int groupLayer) {
-		this.groupLayer = groupLayer;
+	public void setAnswerContent(String answerContent) {
+		this.answerContent = answerContent;
 	}
 	@Override
 	public String toString() {
@@ -137,10 +123,10 @@ public class Qna {
 				+ qnaContent + ", qnaCreateDate=" + qnaCreateDate + ", qnaUpdateDate=" + qnaUpdateDate
 				+ ", qnaFilename=" + qnaFilename + ", qnaFileRename=" + qnaFileRename + ", qnaFilePath=" + qnaFilePath
 				+ ", qnaViewCount=" + qnaViewCount + ", qnaTypeNo=" + qnaTypeNo + ", qnaSecret=" + qnaSecret
-				+ ", qnaIsAnswered=" + qnaIsAnswered + ", qnaAnswerTitle=" + qnaAnswerTitle + ", qnaAnswerContent="
-				+ qnaAnswerContent + ", originNo=" + originNo + ", groupOrder=" + groupOrder + ", groupLayer="
-				+ groupLayer + "]";
+				+ ", qnaIsAnswered=" + qnaIsAnswered + ", answerNo=" + answerNo + ", answerTitle=" + answerTitle
+				+ ", answerContent=" + answerContent + "]";
 	}
+	
 	
 	
 	

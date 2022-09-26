@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -263,6 +264,8 @@ public class QnaController {
 		return mv;
 	}
 	
+	//////////// 댓글 //////////////
+	
 	@PostMapping(value="/qna/addReply.kh")
 	public ModelAndView addQnaReply(
 			ModelAndView mv
@@ -272,8 +275,6 @@ public class QnaController {
 		User user = (User)session.getAttribute("login");
 		String replyWriter = user.getUserId();
 
-	
-		
 		int qnaNo = reply.getRefQnaNo();
 		System.out.println("qnaNo = " + qnaNo);
 
@@ -303,14 +304,9 @@ public class QnaController {
 	
 	
 	
-	/*
-	 * 문의글 바로 아래 답변이 보이게 그룹화?
-	 * 답변글은 글번호가 보이지 않게
-	 * 관리자만 답변 등록 수정 삭제 가능하게
-	 * 
-	 */
-	@PostMapping(value="/qna/writeAnswer.kh")
-	public ModelAndView writeAnswer(
+	/////////////// 답변 //////////////////
+	@PostMapping(value="/qna/registAnswer.kh")
+	public ModelAndView registAnswer(
 			ModelAndView mv
 			, @ModelAttribute Qna qna
 			, @RequestParam(value="uploadFile", required=false) MultipartFile uploadFile
@@ -320,7 +316,7 @@ public class QnaController {
 			String qnaFilename = uploadFile.getOriginalFilename();
 			if(!qnaFilename.equals("")) {
 				String root = request.getSession().getServletContext().getRealPath("resources");
-				String savePath = root + "\\answeruploadFiles";
+				String savePath = root + "\\qnauploadFiles";
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
 				String qnaFileRename 
 				= sdf.format(new Date(System.currentTimeMillis()))+"."
@@ -335,7 +331,7 @@ public class QnaController {
 				qna.setQnaFileRename(qnaFileRename);
 				qna.setQnaFilePath(qnaFilePath);
 			}
-			int result = qnaService.registerQna(qna);
+			int result = qnaService.registAnswer(qna);
 			mv.setViewName("redirect:/qna/list.kh");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -344,6 +340,23 @@ public class QnaController {
 		}
 		return mv;
 	}
+	
+//	@GetMapping(value="/qna/modifyAnswer.kh")
+//	public ModelAndView answerModifyView(
+//			ModelAndView mv
+//			,@RequestParam("answerNo") Integer answerNo
+//			,@RequestParam("page") int page) {
+//		try {
+//			Qna qna = qnaService.printAnswerOneByNo(answerNo);
+//			mv.addObject("qna", qna);
+//			mv.addObject("page", page);
+//			mv.setViewName("qna/modifyForm");
+//		} catch (Exception e) {
+//			mv.addObject("msg", e.toString());
+//			mv.setViewName("common/errorPage");
+//		}
+//		return mv;
+//	}
 	
 	
 	

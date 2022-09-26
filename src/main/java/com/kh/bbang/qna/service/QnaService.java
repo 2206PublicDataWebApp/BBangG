@@ -30,5 +30,7 @@ public interface QnaService {
 		public int deleteReply(Integer replyNo);
 		
 		public List<Reply> printAllReply(int refQnaNo);
+		
+		public int registAnswer(Qna qna);
 	}
 

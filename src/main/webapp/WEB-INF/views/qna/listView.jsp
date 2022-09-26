@@ -36,7 +36,7 @@
 					<td>${i.count }</td>
 					<td><a href="/qna/detail.kh?qnaNo=${qna.qnaNo }&page=${currentPage }">${qna.qnaTitle }</a>
 					<c:if test="${qna.qnaSecret == 1}">
-						[비밀글]
+					<img src="/resources/image/icon/lock.png" height="13" width="13">
 					</c:if>
 					</td>
 					<td>${qna.qnaWriter }</td>
