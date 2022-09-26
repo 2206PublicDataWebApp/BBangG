@@ -37,5 +37,11 @@ public class AdminServiceImpl implements AdminService{
 		return uList;
 	}
 
+	@Override
+	public int removeUser(String userId) {
+		int result = aStore.deleteUser(session, userId);
+		return result;
+	}
+
 
 }

@@ -9,6 +9,21 @@
 	<div class="wrrapper">
 	<h1 align="center">회원 목록</h1>
 	<br><br>
+	<div class="delete">
+		<input type="button" value="탈퇴" onclick="removeUser();">
+	</div>
+	<div class="">
+				<form action="/admin/userSearch" method="get">
+					<select name="searchCondition">
+						<option value="all" <c:if test="${searchCondition eq 'all'}">selected</c:if>>전체</option>
+						<option value="id" <c:if test="${searchCondition eq 'id'}">selected</c:if>>ID</option>
+						<option value="name" <c:if test="${searchCondition eq 'name'}">selected</c:if>>이름</option>
+						<option value="email" <c:if test="${searchCondition eq 'email'}">selected</c:if>>메일</option>
+					</select>
+					<input type="text" name="searchValue" value="${searchValue }">
+					<input type="submit" class="search">
+				</form>
+			</div>
 	<table align="center" border="1">
 		<tr>
 			<th>번호</th>
@@ -18,7 +33,6 @@
 			<th>이메일</th>
 			<th>전화번호</th>
 			<th>주소</th>
-			<th>탈퇴</th>
 		</tr>
 		<c:if test="${!empty uList }">
 			<c:forEach items="${uList }" var="uList" varStatus="i">
@@ -33,20 +47,20 @@
 				</tr>
 			</c:forEach>
 			<tr align="center" height="20">
-			<td colspan="6">
+			<td colspan="8">
 				<c:if test="${currentPage != 1 }">
-					<a href="/admin/${urlVal }.kh?page=${currentPage - 1 }&searchCondition=${searchCondition}$searchValue=${searchValue}">[이전]</a>
+					<a href="/admin/${urlVal }?page=${currentPage - 1 }&searchCondition=${searchCondition}$searchValue=${searchValue}">[이전]</a>
 				</c:if>
 				<c:forEach var="p" begin="${startNavi }" end="${endNavi }">
 					<c:if test="${currentPage eq p }">
 						<b>${p }</b>
 					</c:if>
 					<c:if test="${currentPage ne p }">
-						<a href="/admin/${urlVal }.kh?page=${p }&searchCondition=${searchCondition}$searchValue=${searchValue}">${p }</a>
+						<a href="/admin/${urlVal }?page=${p }&searchCondition=${searchCondition}$searchValue=${searchValue}">${p }</a>
 					</c:if>
 				</c:forEach>
 				<c:if test="${maxPage > currentPage }">
-					<a href="/admin/${urlVal }.kh?page=${currentPage + 1 }&searchCondition=${searchCondition}$searchValue=${searchValue}">[다음]</a>
+					<a href="/admin/${urlVal }?page=${currentPage + 1 }&searchCondition=${searchCondition}$searchValue=${searchValue}">[다음]</a>
 				</c:if>
 			</td>
 		</tr>
@@ -56,22 +70,13 @@
 				<td colspan="6" align="center"><b>데이터가 존재하지 않습니다.</b></td>
 			</tr>
 		</c:if>
-		<tr>
-			<td colspan="5" align="center">
-			${searchCondition }
-				<form action="/admin/userSearch" method="get">
-					<select name="searchCondition">
-						<option value="all" <c:if test="${searchCondition eq 'all'}">selected</c:if>>전체</option>
-						<option value="id" <c:if test="${searchCondition eq 'id'}">selected</c:if>>ID</option>
-						<option value="name" <c:if test="${searchCondition eq 'name'}">selected</c:if>>이름</option>
-						<option value="email" <c:if test="${searchCondition eq 'email'}">selected</c:if>>메일</option>
-					</select>
-					<input type="text" name="searchValue" value="${searchValue }">
-					<input type="submit" value="검색">
-				</form>
-			</td>
-		</tr>
 	</table>
 	</div>
+	<script type="text/javascript">
+	function removeUser() {
+			var id = prompt("탈퇴시킬 아이디를 입력해주세요.");
+			document.location.href="/admin/remove?action=edit&id="+id;
+		}
+	</script>
 </body>
 </html>

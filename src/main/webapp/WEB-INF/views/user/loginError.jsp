@@ -9,7 +9,7 @@
 <body>
  <script type="text/javascript">
 	alert("아이디 혹은 비밀번호를 확인하세요.");
-	self.location = "/home.kh";
+	self.location = "javascript:history.back(-1)";
 </script>
 </body>
 </html>
