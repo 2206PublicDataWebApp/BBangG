@@ -39,6 +39,7 @@
     			VALUES (SEQ_HEART_NO.NEXTVAL, #{userId}, #{reviewNo})
   		</insert>
   		
+  		<!-- 게시글 수정 -->
   		<update id="updateReview">
   			UPDATE REVIEW_TBL
   				SET REVIEW_CONTENT = #{reviewContent},
@@ -49,9 +50,11 @@
   				WHERE REVIEW_NO = #{reviewNo}
   		</update>
   		
+  		<!-- 전체게시글 조회 -->
   		<select id="selectAllReview" resultMap="reviewResultMap">
   			SELECT * FROM REVIEW_TBL WHERE USE_YN = 'Y' ORDER BY REVIEW_NO ASC
   		</select>
+  		
   		<!--  리뷰 검색 -->
   		<select id="selectTotalCount" resultType="_int">
   			SELECT COUNT(*) FROM REVIEW_TBL
@@ -63,7 +66,7 @@
 					REVIEW_WRITER LIKE '%'||#{searchValue}||'%'
 				</if>
 				<if test="searchCondition.toString() == 'all'">
-					OR REVIEW_CONTENT LIKE '%'||#{searchValue}||'%'
+					REVIEW_CONTENT LIKE '%'||#{searchValue}||'%'
 					OR REVIEW_WRITER LIKE '%'||#{searchValue}||'%'
 				</if>
 				AND USE_YN = 'Y'
@@ -78,14 +81,14 @@
   			WHERE REVIEW_NO = #{reviewNo}
   		</select>
   		
-  		<select id="selectStoreReview" resultMap="reviewResultMap">
+<!--수정 중   		<select id="selectStoreReview" resultMap="reviewResultMap">
   			SELECT R.*,
   				(SELECT STORE_NAME FROM STORE_TBL WHERE STORE_NO = R.STORE_NO) STORE_NAME,
   				(SELECT COUNT (HEART_NO) FROM REVIEW_HEART WHERE REVIEW_NO = R.REVIEW_NO) REVIEW_HEART
   			FROM REVIEW_TBL R 
   			WHERE REVIEW_NO = #{reviewNo}
   		</select>
-  		
+  		 -->
   		<select id="selectAllByValue" resultMap="reviewResultMap">
   			SELECT * FROM REVIEW_TBL
 			<where>
