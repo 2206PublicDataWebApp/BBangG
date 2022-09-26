@@ -9,7 +9,7 @@ h1{
 
 .wrrapper{
 	padding-left:200px;
-	text-algin:center;
+	text-align:center;
 }
 
 table {
@@ -35,10 +35,6 @@ th {
 	padding-right: 50px;
 }
 
-a{
-	padding-right: 2px;
-	padding-left: 2px;
-}
 .search{
 	background:url(/resources/image/icon/serch_bt.png);
 	background-repeat: no-repeat;

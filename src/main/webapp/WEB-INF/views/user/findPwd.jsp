@@ -13,8 +13,8 @@
 *{
 	padding: 0;
 	margin:0 auto;
-	boarder: none;
-	text-color: #3A2618;
+	border: none;
+	color: #3A2618;
 }
     
 body{
