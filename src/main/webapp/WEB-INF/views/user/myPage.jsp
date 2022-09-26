@@ -124,7 +124,10 @@
 				alert("수정되었습니다.");
 			}
 		}
-		
+		<c:if test="${empty login}">
+			alert("로그인이 필요한 페이지 입니다. 메인으로 돌아갑니다.");
+			location.href="/home.kh";	
+		</c:if>
 	</script>
 </body>
 </html>

@@ -1,6 +1,10 @@
 package com.kh.bbang.user.controller;
 
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -52,7 +56,7 @@ public class AdminController {
 	public ModelAndView userSearchList(
 			ModelAndView mv
 			, @RequestParam("searchCondition") String searchCondition
-			, @RequestParam("searchValue") String searchValue
+			, @RequestParam(value="searchValue", required=false) String searchValue
 			, @RequestParam(value="page", required=false) Integer page) {
 		try {
 			int currentPage = (page != null) ? page : 1;

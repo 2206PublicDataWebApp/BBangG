@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/include/head.jsp"%>
 <link rel="stylesheet" href="/resources/css/adminUserList.css" />
+<meta charset="UTF-8">
 </head>
 <body>
 <jsp:include page = "/WEB-INF/views/include/header.jsp"/>
@@ -9,11 +10,8 @@
 	<div class="wrrapper">
 	<h1 align="center">회원 목록</h1>
 	<br><br>
-	<div class="delete">
-		<input type="button" value="탈퇴" onclick="removeUser();">
-	</div>
-	<div class="">
-				<form action="/admin/userSearch" method="get">
+	<div class="search-wrapper">
+				<form class="search-form" action="/admin/userSearch" method="get">
 					<select name="searchCondition">
 						<option value="all" <c:if test="${searchCondition eq 'all'}">selected</c:if>>전체</option>
 						<option value="id" <c:if test="${searchCondition eq 'id'}">selected</c:if>>ID</option>
@@ -21,8 +19,11 @@
 						<option value="email" <c:if test="${searchCondition eq 'email'}">selected</c:if>>메일</option>
 					</select>
 					<input type="text" name="searchValue" value="${searchValue }">
-					<input type="submit" class="search">
+				<div class="search-button">
+					<input type="submit" class="search" value="">
+				</div>
 				</form>
+					
 			</div>
 	<table align="center" border="1">
 		<tr>
@@ -48,6 +49,8 @@
 			</c:forEach>
 			<tr align="center" height="20">
 			<td colspan="8">
+				<input type="button" class="remove" value="회원탈퇴" onclick="removeUser();">
+				<div class="index">
 				<c:if test="${currentPage != 1 }">
 					<a href="/admin/${urlVal }?page=${currentPage - 1 }&searchCondition=${searchCondition}$searchValue=${searchValue}">[이전]</a>
 				</c:if>
@@ -62,6 +65,7 @@
 				<c:if test="${maxPage > currentPage }">
 					<a href="/admin/${urlVal }?page=${currentPage + 1 }&searchCondition=${searchCondition}$searchValue=${searchValue}">[다음]</a>
 				</c:if>
+				</div>
 			</td>
 		</tr>
 		</c:if>
@@ -75,8 +79,15 @@
 	<script type="text/javascript">
 	function removeUser() {
 			var id = prompt("탈퇴시킬 아이디를 입력해주세요.");
-			document.location.href="/admin/remove?action=edit&id="+id;
+			if(id !== null){
+				document.location.href="/admin/remove?action=edit&id="+id;
+			}else{
+			}
 		}
+	<c:if test="${empty login}">
+		alert("접근이 제한된 페이지 입니다. 메인으로 돌아갑니다.");
+		location.href="/home.kh";	
+	</c:if>
 	</script>
 </body>
 </html>
