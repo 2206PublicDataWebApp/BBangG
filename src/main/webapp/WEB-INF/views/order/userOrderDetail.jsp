@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ include file="/WEB-INF/views/include/head.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,11 +10,9 @@
 </head>
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 <style>
-*{
- font-family: Verdana,"맑은 고딕",Malgun Gothic,AppleSDGothicNeo,"돋움",Dotum;
-}
+
   #f_table {
-  width : 80%;
+  width : 90%;
     border-top: 1px solid  #3A2618;
    
     border-bottom: 1px solid #3A2618;
@@ -25,7 +24,7 @@
   }
  h1{
  	  
-            color : #fff;
+            color : #3A2618;
  	
  }
  #cover{
@@ -36,25 +35,40 @@
   display:inline-block;.display:inline;
   
 }
- #title {
-    line-height: 56px;
-    color: #fffff;
-    font-size: 15px;
-    font-weight: normal;
-    text-align: center;
-    background: #3A2618;
-    position:relative;
+
+#bodyWrapper{
+	padding-left:200px;
+	padding-top:80px;
+	margin-bottom:50px;
+}
+#btn_orderRemove{
+	background-color:#F0F0F0;
+ 	color:#3A2618;
+ 	border:1px solid;
+ 	border-color:#F0F0F0;
+ 	height:30px;
+ 	font-size:18px;
+
+}
+#btn_orderModify{
+	background-color:#3A2618;
+ 	color:#ffffff;
+ 	border:1px solid;
+ 	border-color:#3A2618;
+ 	 height:30px;
+ 	font-size:18px;
+
 }
 
 </style>
 <body>
-	<div id="title" >
+<jsp:include page = "/WEB-INF/views/include/header.jsp"/>
+<jsp:include page="/WEB-INF/views/include/sideBar_user.jsp"/>
+<div id="bodyWrapper">
 	<h1 align="center">주문 상세정보</h1>
-	
-	</div>
 	<br><br>
 	<table id="f_table" align="center" style="text-align:center">
-	<div style="margin-left: 10%;">주문날짜 ${order.orderDate }</div>
+	<div style="margin-left: 5%;">주문날짜 ${order.orderDate }</div>
 	<br>
 		<tr style=" border-bottom: 1px solid  #3A2618;">
 			<th>주문번호</th>
@@ -68,7 +82,7 @@
 				<td>${order.orderDetail}</td>
 				<td><a href="#">${order.storeNo}</a></td>
 				<td >
-					<c:if test="${order.orderState eq 0 }">입금전</c:if>
+					<c:if test="${order.orderState eq 0 }">입금전 <button id="btn_sendMoney" type="button">입금완료</button></c:if>
 					<c:if test="${order.orderState eq 1 }">입금완료(입금확인 대기중)</c:if>
 					<c:if test="${order.orderState eq 2 }">입금확인완료</c:if>
 					<c:if test="${order.orderState eq 3}" >입금확인완료</c:if>
@@ -79,17 +93,29 @@
 					<c:if test="${order.orderState eq 0 }">배송전</c:if>
 					<c:if test="${order.orderState eq 1 }">배송전</c:if>
 					<c:if test="${order.orderState eq 2 }">배송전</c:if>
-					<c:if test="${order.orderState eq 3}" >배송출발</c:if>
+					<c:if test="${order.orderState eq 3}" >배송출발<button id="btn_orderConfirm" type="button">구매확정</button></c:if>
 					<c:if test="${order.orderState eq 4}" >구매확정</c:if>
 					<c:if test="${order.orderState eq 5}" >취소요청 진행중</c:if>
 				</td>
 			</tr>
 		</table>
 		<br><br>
-		<div id="cover">
-		<div class="menu" style="width: 30%; ">
-			<table align="center">
-				<h3 >배송지 정보</h3>
+	<div style="width:90%; margin-left:8%;">
+		<div style="width:45%; float:left;">
+		<table style="text-align:left">
+			<h2>주문자 정보</h2>
+				<tr>
+					<th>주문자 이름</th>
+					<td>${order.orderName }</td>
+				</tr>
+				<tr>
+					<th>주문자 연락처</th>
+					<td>${order.orderPhone }</td>
+				</tr>
+		</table>
+		<br>
+			<table>
+				<h2 >배송지 정보</h2>
 					<tr>
 						<th>수령인</th>
 						<td style="text-align:left">${order.delivaryName }</td>
@@ -108,34 +134,18 @@
 					</tr>
 				</table>
 		</div>
-		<div class="menu" style="width: 30%;">
-		<table  align="center" style="border:none">
-			<h3>주문자 정보</h3>
-				<tr>
-					<td>${order.orderName }</td>
-				</tr>
-				<tr>
-					<td>${order.orderPhone }</td>
-				</tr>
-	
-			<div style="margin:10%">
-				<div style="width: 20%; float:left"><button id="btn_sendMoney" type="button">입금완료</button></div>
-				<div style="width: 35%; float:left"><button id="btn_orderRemove" type="button">주문취소요청</button></div>
-				<div style="width: 20%; float:left"><button id="btn_orderModify" type="button">주문수정</button></div>
-				<div style="width: 20%; float:left"><button id="btn_orderConfirm" type="button">구매확정</button></div>
-				
-			</div>
-		</table>
-		</div>
-		<div class="menu" style="width: 30%; ">
-		<table align="center">
-			<h3>결제 내역</h3>
-			
+		<div style=" height:500px;width:45%; float:left; text-align:left; padding-left:30px; border-left:1px solid">
+		<table style="width:90%;">
+
+		<h2>결제 내역</h2>
 				<tr>
 					<td>${order.orderDetail }</td>
 				</tr>
 				<tr>
-					<td>${order.totalPrice}원</td>
+					<td>+배송비${order.orderShipfee }원</td>
+				</tr>
+				<tr>
+					<td style="font-size:20px; font-weight:bold; text-align:right">합계${order.totalPrice}원</td>
 				</tr>
 				<tr>
 					<th>입금계좌 ${store.storeAccount }</th>
@@ -143,9 +153,15 @@
 				<tr>
 					<td>${store.storeBank } ${store.storeName } </td>
 				</tr>
-			</table>
+		</table>
 		</div>
-		</div>
+</div>
+<br>
+	<span style="margin-top:30%; margin-left:75%">
+		<button id="btn_orderModify" type="button">주문수정</button>
+		<button id="btn_orderRemove" type="button">주문취소요청</button>
+	</span>
+</div>
 			
 
 	<script type="text/javascript" >

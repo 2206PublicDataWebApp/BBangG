@@ -4,7 +4,8 @@
 <link rel="stylesheet" href="/resources/css/adminUserList.css" />
 </head>
 <body>
-<jsp:include page="/WEB-INF/views/include/header.jsp" />
+<jsp:include page = "/WEB-INF/views/include/header.jsp"/>
+<jsp:include page="/WEB-INF/views/include/sideBar_admin.jsp"/>
 	<div class="wrrapper">
 	<h1 align="center">회원 목록</h1>
 	<br><br>

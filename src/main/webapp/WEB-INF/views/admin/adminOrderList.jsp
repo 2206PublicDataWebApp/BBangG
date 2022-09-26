@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ include file="/WEB-INF/views/include/head.jsp"%>
     
 <!DOCTYPE html>
 <html>
@@ -24,10 +25,20 @@
             color : #3A2618;
  	
  }
-
+#bodyWrapper{
+	padding-left:200px;
+	padding-top:80px;
+}
+.orderNo a,.storeNo a{
+	color: mediumblue;
+	
+}
 </style>
 </head>
 <body>
+<jsp:include page = "/WEB-INF/views/include/header.jsp"/>
+<jsp:include page="/WEB-INF/views/include/sideBar_admin.jsp"/>
+<div id="bodyWrapper">
 		<h1 align="center">날짜별 주문 목록</h1>
 	<br><br>
 	<table align="center" border="1">
@@ -52,8 +63,8 @@
 		</tr>
 		<c:forEach items="${oList}" var="order" varStatus="i">
 			<tr>
-				<td><a href="/admin/adminOrderDetail.kh?orderNo=${order.orderNo }">${order.orderNo }</a></td>
-				<td><a href="#">${order.storeNo}</a></td>
+				<td class="orderNo"><a href="/admin/adminOrderDetail.kh?orderNo=${order.orderNo }">${order.orderNo }</a></td>
+				<td class="storeNo"><a href="#">${order.storeNo}</a></td>
 				<td>${order.orderDate}</td>
 				<td>
 					<c:if test="${order.orderState eq 0 }">입금전</c:if>
@@ -65,7 +76,8 @@
 				</td>
 				<td>
 					<c:if test="${order.orderState ne 5}" >N</c:if>
-					<c:if test="${order.orderState eq 5}" >Y</c:if>
+					<c:if test="${order.orderState eq 5}" >
+					<div style="color:red; font-weight:bold;text-decoration : underline;">Y</div></c:if>
 				</td>
 			</tr>
 		</c:forEach>
@@ -86,7 +98,8 @@
 				
 			</td>
 		</table>
-		
+		<br><br><br><br>
+</div>
 </body>
 <script>
 /* 	function serch(){
