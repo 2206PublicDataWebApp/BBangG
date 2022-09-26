@@ -12,4 +12,6 @@ public interface AdminService {
 
 	public List<User> printAllbyValue(String searchCondition, String searchValue, int currentPage, int boardLimit);
 
+	public int removeUser(String userId);
+
 }

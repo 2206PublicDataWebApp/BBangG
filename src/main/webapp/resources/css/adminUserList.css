@@ -5,12 +5,31 @@ h1{
 	padding-top:80px;
 }
 
+.wrrapper{
+	padding-left:200px;
+}
 
 table {
-    width: 1200px;
+    width: 980px;
     border: 1px solid #3A2618;
     border-collapse: collapse;
+    
   }
   th, td {
     border: 1px solid #3A2618;
+    text-align: center;
   }
+  
+  th {
+  background-color: #F0F0F0;
+  }
+  
+.search{
+	background:url(/resources/image/icon/serch_bt.png);
+	background-repeat: no-repeat;
+	width:10px;
+	height:10px;
+	background-size: cover;
+	border: 0;
+	cursor : pointer;
+}

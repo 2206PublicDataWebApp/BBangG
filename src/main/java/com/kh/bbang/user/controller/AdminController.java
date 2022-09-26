@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -36,7 +37,7 @@ public class AdminController {
 		}
 		List<User> uList = aService.printAllUser(currentPage, boardLimit);
 		if(!uList.isEmpty()) {
-			mv.addObject("urlVal", "list");
+			mv.addObject("urlVal", "userList");
 			mv.addObject("maxPage", maxPage);
 			mv.addObject("currentPage", currentPage);
 			mv.addObject("startNavi", startNavi);
@@ -73,7 +74,7 @@ public class AdminController {
 			}else {
 				mv.addObject("uList", null);
 			}
-			mv.addObject("urlVal", "search");
+			mv.addObject("urlVal", "userSearch");
 			mv.addObject("searchCondition", searchCondition);
 			mv.addObject("searchValue", searchValue);
 			mv.addObject("maxPage", maxPage);
@@ -87,4 +88,23 @@ public class AdminController {
 		return mv;
 	}
 	
+	@RequestMapping(value="/admin/remove", method=RequestMethod.GET)
+	public ModelAndView useRemove(
+			ModelAndView mv
+			, User user
+			, @RequestParam("id") String userId) {
+		try {
+			user.setUserId(userId);
+			int result = aService.removeUser(userId);
+			if(result > 0) {
+				mv.setViewName("admin/adminUserRemove");
+			}else {
+				mv.addObject("msg", "존재하지 않는 아이디 입니다.");
+				mv.setViewName("common/errorPage");
+			}
+		} catch (Exception e) {
+			mv.addObject("msg", e.toString()).setViewName("common/errorPage");
+		}
+		return mv;
+	}
 }
