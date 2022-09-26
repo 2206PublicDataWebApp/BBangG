@@ -13,6 +13,7 @@ import com.kh.bbang.review.store.ReviewStore;
 // @Service : 서비스 레이어, 내부에서 자바 로직을 처리
 @Service
 public class ReviewServiceImpl implements ReviewService{
+	
 	// 의존성을 주입, 필요한 의존 객체의 “타입"에 해당하는 빈을 찾아 주입한다. *생성자* *setter* *필드*
 	@Autowired
 	private SqlSession session;
@@ -26,6 +27,18 @@ public class ReviewServiceImpl implements ReviewService{
 		return result;
 	}
 	
+	@Override
+	public int modifyReview(Review review) {
+		int result = rStore.updateReview(session, review);
+		return result;
+	}
+
+	@Override
+	public int removeOneByNo(int reviewNo) {
+		int result = rStore.deleteOneByNo(session, reviewNo);
+		return result;
+	}
+
 	@Override
 	public int insertHeartCount(Review review) {
 		int result = rStore.insertHeartCount(session, review);
@@ -44,7 +57,17 @@ public class ReviewServiceImpl implements ReviewService{
 		}
 		return review;
 	}
-
+	
+	@Override
+	public Review printStoreReview(Integer reviewNo) {
+		Review review = rStore.selectStoreReview(session, reviewNo);
+		int result = 0;
+		if (review != null) {
+			result = rStore.updateReviewCount(session, reviewNo);
+		}	
+		return review;
+	}
+	
 	@Override
 	public List<Review> printAllReview(int currentPage, int limit) {
 		List<Review> rList = rStore.selectAllReview(session, currentPage, limit);
@@ -58,10 +81,12 @@ public class ReviewServiceImpl implements ReviewService{
 	}
 
 	@Override
-	public int removeOneByNo(int reviewNo) {
-		int result = rStore.deleteOneByNo(session, reviewNo);
-		return result;
+	public List<Review> printAllByValue(String searchCondition, String searchValue, int currentPage, int listLimit) {
+		List<Review> rList = rStore.selectAllByValue(session, searchCondition, searchValue, currentPage, listLimit);
+		return rList;
 	}
+
+	
 
 	
 

@@ -140,13 +140,13 @@
 		        <c:forEach items ="${rList}" var="review" varStatus="i">
 		            <li data-href="#" class="review-list">
 		                <div class="review_list_inner" data-href="#">
-		                    <a href="/review/detail.kh?reviewNo=${review.reviewNo }">
+		                    <a href="/review/detail.kh?reviewNo=${review.reviewNo }&page=${currentPage}">
 			                    <div class="thumb-box">
 			                        <div class="thumb">
 			                        	<img src="../resources/reviewUploadFiles/${review.reviewFilename }">
 			                        </div>
 			                        <div class="content">
-				                        <a href="/review/detail.kh?reviewNo=${review.reviewNo }">
+				                        <%-- <a href="/review/detail.kh?reviewNo=${review.reviewNo }&page=${currentPage}"> --%>
 				                       	 	${review.reviewContent }<br><br>
 										</a>
 									</div>
@@ -171,14 +171,14 @@
 			                    <a href="/review/${urlVal }.kh?page=${currentPage - 1 }"><span>«</span></a>
 		                </li>
 		            </c:if>
-	                <c:forEach var="p" begin="${startNavi }" end="${endNavi }">
-	                	<c:if test="${currentPage eq p }">
-	                		<b>${p }</b>
-	                	</c:if>
-	                	<c:if test="${currentPage ne p }">
-	                		<li id="paging-number"><a href="/review/${urlVal }.kh?page=${p }&searchCondition=${searchCondition}&searchValue=${searchValue}">${p }</a></li>
-	                	</c:if>
-	                </c:forEach>
+		                <c:forEach var="p" begin="${startNavi }" end="${endNavi }">
+		                	<c:if test="${currentPage eq p }">
+		                		<b>${p }</b>
+		                	</c:if>
+		                	<c:if test="${currentPage ne p }">
+		                		<li id="paging-number"><a href="/review/${urlVal }.kh?page=${p }&searchCondition=${searchCondition}&searchValue=${searchValue}">${p }</a></li>
+		                	</c:if>
+		                </c:forEach>
 			        <c:if test="${maxPage > currentPage }">
 		                <li id="paging-number">
 		                    <a href="/review/${urlVal }.kh?page=${currentPage + 1 }"><span>»</span></a> 
@@ -195,8 +195,8 @@
 				<form action="/board/search.kh" method="get">
 					<select name="searchCondition">
 						<option value="all" <c:if test="${searchCondition eq 'all' }">selected</c:if>>전체</option>
-						<option value="title" <c:if test="${searchCondition eq 'title' }">selected</c:if>>제목</option>
-						<option value="contents" <c:if test="${searchCondition eq 'contents' }">selected</c:if>>내용</option>
+						<option value="writer" <c:if test="${searchCondition eq 'writer' }">selected</c:if>>작성자</option>
+						<option value="content" <c:if test="${searchCondition eq 'content' }">selected</c:if>>내용</option>
 					</select>
 					<input type="text" name="searchValue" value="${searchValue }">
 					<input type="submit" value="검색">

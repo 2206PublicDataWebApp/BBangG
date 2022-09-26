@@ -1,6 +1,8 @@
 package com.kh.bbang.review.controller;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -37,7 +39,7 @@ public class ReviewController {
 	}
 	
 	/**
-	 * 게시글 등록
+	 * 게시글, 첨부 파일 등록 ************************* 별점기능 추가 예정 *************************
 	 * @param mv
 	 * @param review
 	 * @return
@@ -63,15 +65,17 @@ public class ReviewController {
 			if(!reviewFilename.equals("")) {
 				String root = request.getSession().getServletContext().getRealPath("resources");
 				String savePath = root + "\\reviewUploadFiles";
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+				String reviewFileRename = sdf.format(new Date(System.currentTimeMillis())) +"."+ reviewFilename.substring(reviewFilename.lastIndexOf(".")+1);
 				File file = new File(savePath);
 				if(!file.exists()) {
 					file.mkdir();
 				}
-				uploadFile.transferTo(new File(savePath+"\\"+reviewFilename));
+				uploadFile.transferTo(new File(savePath+"\\"+reviewFileRename));
 				// 파일 review/review-image 경로에 저장 하는 메소드
-				String reviewFilepath = savePath;
+				String reviewFilepath = savePath+"\\"+reviewFileRename;
 				review.setReviewFilename(reviewFilename);
-				//review.setReviewFileRename(reviewFileRename);
+				review.setReviewFileRename(reviewFileRename);
 				review.setReviewFilepath(reviewFilepath);
 			}
 			int result = rService.registeReview(review);
@@ -85,33 +89,153 @@ public class ReviewController {
 		return mv;
 		
 	}
+	
+	 /**
+	  * 게시글 수정 화면 ************************* 별점기능 추가 예정 *************************
+	  * @param mv
+	  * @param reviewNo
+	  * @param page
+	  * @return
+	  */
+	 @RequestMapping(value = "/review/modifyView.kh", method = RequestMethod.GET)
+	 public ModelAndView reviewModifyView(
+			 ModelAndView mv 
+			 ,@RequestParam("reviewNo") Integer reviewNo
+			 ,@RequestParam("page")int page){
+		 try {
+			 Review review = rService.printOneByNo(reviewNo);
+			 mv.addObject("review", review);
+			 mv.addObject("page", page);
+			 mv.setViewName("review/reviewModify");
+			 }catch (Exception e) {
+				mv.addObject("msg", e.toString());
+				mv.setViewName("common/errorPage");
+			}
+			 return mv;
+			 
+		 }
+		 
+	 /**
+	  * 게시글 수정 ************************* 별점기능 추가 예정 *************************
+	  * @param review
+	  * @param mv
+	  * @param reloadFile
+	  * @param page
+	  * @param request
+	  * @return
+	  */
+	@RequestMapping(value="/review/modify.kh", method = RequestMethod.POST)
+	public ModelAndView reviewModify(
+			@ModelAttribute Review review
+			,ModelAndView mv
+			,@RequestParam(value = "reloadFile", required = false) MultipartFile reloadFile
+			,@RequestParam("page") Integer page
+			,HttpServletRequest request) {
+		try {
+			String reviewFilename = reloadFile.getOriginalFilename();
+			if(reloadFile != null && !reviewFilename.equals("")) {
+				String root = request.getSession().getServletContext().getRealPath("resources");
+				String savePath = root + "\\reviewUploadFiles";
+				File file = new File(savePath + "\\" + review.getReviewFileRename());
+				if(file.exists()) {
+					file. delete();
+				}
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+				String reviewFileRename = sdf.format(new Date (System.currentTimeMillis())) + "." + reviewFilename.substring(reviewFilename.lastIndexOf(".")+1);
+				String reviewFilepath = savePath + "\\" + reviewFileRename;
+				reloadFile.transferTo(new File(reviewFilepath));
+				review.setReviewFilename(reviewFilename);
+				review.setReviewFileRename(reviewFileRename);
+				review.setReviewFilepath(reviewFilepath);
+			}
+			int result = rService.modifyReview(review);
+			mv.setViewName("redirect:/review/list.kh?page="+page);
+		} catch (Exception e) {
+			mv.addObject("msg", e.toString()).setViewName("common/errorPage");
+		}
+		return mv;
+	}
+	
+	/**
+	 *  게시물 삭제 
+	 * @param session
+	 * @param model
+	 * @param page
+	 * @return
+	 */
+	 @RequestMapping(value = "/review/remove.kh", method = RequestMethod.GET)
+	 public String reviewRemove(HttpSession session 
+			 ,Model model
+			 ,@RequestParam("page")Integer page) {
+		  try {
+			int reviewNo = (int)session.getAttribute("reviewNo");
+			int result = rService.removeOneByNo(reviewNo);
+			if(result > 0) {
+				session.removeAttribute("reviewNo");
+			}
+			return "redirect:/review/list.kh?page="+page;
+			
+		} catch (Exception e) {
+			model.addAttribute("msg", e.toString());
+			return "common/errorPage";
+		}
+	 
+	 }
 	/**
 	 * 게시글 상세 조회
 	 * @param mv
 	 * @param reviewNo
 	 * @param session
 	 * @return
-	 * , @RequestParam ("page") ListView에서 넘겨준 것.
-	 *   그런데 pageInfo 테이블을 따로 뒀다. 일단 주석으로 막아둠
 	 */
 	
 	@RequestMapping(value = "/review/detail.kh", method=RequestMethod.GET)
 	public ModelAndView reviewDetailView(
 			ModelAndView mv
 			, @RequestParam("reviewNo") Integer reviewNo
-			//, @RequestParam("page") Integer page List.jsp에 page있음 
+			, @RequestParam("page") Integer page
 			, HttpSession session) {
 		try {
 			System.out.println("reviewNo="+reviewNo);
 			Review review = rService.printOneByNo(reviewNo);
 			// List<ReviewComment> cList = rService.printAllComment(reivewNo);
 			session.setAttribute("reviewNo", review.getReviewNo());
-			// 세션에 reviewNo 저장 ->
 			// mv.addObject("rList", attributeValue) List.jsp에 page있음 
 			// mv.addObject("cList", cList); //commentList
 			mv.addObject("review", review);
-			// mv.addObject("page", page); List.jsp에 page있음 
+			mv.addObject("page", page); 
 			mv.setViewName("review/detail") ;
+		} catch (Exception e) {
+			mv.addObject("msg", e.toString());
+			mv.setViewName("common/errorPage");
+		}
+		
+		return mv;
+	}
+	/**
+	 * 
+	 * @param mv
+	 * @param reviewNo
+	 * @param page
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping(value = "/review/storeDetail.kh", method=RequestMethod.GET)
+	public ModelAndView storeDetileView(
+			ModelAndView mv
+			, @RequestParam("reviewNo") Integer reviewNo
+			, @RequestParam("page") Integer page
+			, HttpSession session) {
+		try {
+			System.out.println("reviewNo="+reviewNo);
+			Review review = rService.printStoreReview(reviewNo);
+			// List<ReviewComment> cList = rService.printAllComment(reivewNo);
+			session.setAttribute("reviewNo", review.getReviewNo());
+			// mv.addObject("rList", attributeValue) List.jsp에 page있음 
+			// mv.addObject("cList", cList); //commentList
+			mv.addObject("review", review);
+			mv.addObject("page", page); 
+			mv.setViewName("review/storeReviewList") ;
 		} catch (Exception e) {
 			mv.addObject("msg", e.toString());
 			mv.setViewName("common/errorPage");
@@ -155,7 +279,13 @@ public class ReviewController {
 		mv.setViewName("/review/reviewList");
 		return mv;
 	}
-	
+	/**
+	 * 게시글 추천 기능 ---------진행중---------
+	 * @param mv
+	 * @param review
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping(value = "/review/heartCountUpdate.kh", method = RequestMethod.GET)
 	public ModelAndView heartCountUpdate(
 			ModelAndView mv
@@ -168,81 +298,53 @@ public class ReviewController {
 		mv.setViewName("redirect:/review/detail.kh?reviewNo="+review.getReviewNo());
 		return mv;
 	}
-	
 	/**
-	 *  게시물 삭제 
-	 * @param session
-	 * @param model
+	 * 게시글 조건 검색
+	 * @param mv
+	 * @param searchCondition
+	 * @param searchValue
 	 * @param page
 	 * @return
 	 */
-	 @RequestMapping(value = "/review/remove.kh", method = RequestMethod.GET)
-	 public String reviewRemove(HttpSession session 
-			 ,Model model
-			 ,@RequestParam("page")Integer page) {
-		  try {
-			int reviewNo = (int)session.getAttribute("reviewNo");
-			int result = rService.removeOneByNo(reviewNo);
-			if(result > 0) {
-				session.removeAttribute("reviewNo");
+	@RequestMapping(value = "/review/search.kh", method = RequestMethod.GET)
+	public ModelAndView reviewSearchList(
+			ModelAndView mv
+			,@RequestParam("searchCondition")String searchCondition
+			,@RequestParam("searchValue") String searchValue
+			,@RequestParam(value = "page", required = false)Integer page) {
+		try {
+			int currentPage = (page != null) ? page : 1;
+			int totalCount = rService.getTotalCount(searchCondition, searchValue);
+			int listLimit = 20;
+			int naviLimit = 5;	
+			int maxPage;	
+			int startNavi;	
+			int endNavi;	
+			maxPage = (int)((double)totalCount/listLimit + 0.9);
+			startNavi = ((int)((double)currentPage/naviLimit+0.9)-1)*naviLimit+1;
+			endNavi = startNavi + naviLimit - 1;
+			if(maxPage < endNavi) {
+				endNavi = maxPage;
 			}
-			return "redirect:/review/list.kh?page="+page;
-			
+			List<Review> rList = rService.printAllByValue(searchCondition, searchValue, currentPage, listLimit);
+			if(!rList.isEmpty()) {
+				mv.addObject("rList", rList);
+			}else {
+				mv.addObject("rList", null);
+			}
+			mv.addObject("urlVal", "serach");
+			mv.addObject("searchCondition", searchCondition);
+			mv.addObject("searchValue", searchValue);
+			mv.addObject("maxPage", maxPage);
+			mv.addObject("currentPage", currentPage);
+			mv.addObject("startNavi", startNavi);
+			mv.addObject("endNavi", endNavi);
+			mv.setViewName("review/reviewList");
 		} catch (Exception e) {
-			model.addAttribute("msg", e.toString());
-			return "common/errorPage";
+			mv.addObject("msg", e.toString()).setViewName("common/errorPage");
 		}
-	 
-	 }
-	 /**
-	  * 게시글 수정 화면
-	  * @param mv
-	  * @param reviewNo
-	  * @param page
-	  * @return
-	  */
-	 @RequestMapping(value = "/review/modifyView.kh", method = RequestMethod.GET)
-	 public ModelAndView reviewModifyView(
-			 ModelAndView mv 
-			 ,@RequestParam("reviewNo") Integer reviewNo
-			 ,@RequestParam("page")int page){
-		 try {
-			 Review review = rService.printOneByNo(reviewNo);
-			 mv.addObject("review", review);
-			 mv.addObject("page", page);
-			 mv.setViewName("review/modifyForm");
-			 }catch (Exception e) {
-				mv.addObject("msg", e.toString());
-				mv.setViewName("common/errorPage");
-			}
-			 return mv;
-			 
-		 }
-		 
-	 
-//	public ModelAndView reviewModifty(
-//			@ModelAttribute Review review
-//			,ModelAndView mv
-//			,@RequestParam(value = "reloadFile", required = false) MultipartFile reloadFile
-//			,@RequestParam("page") Integer page
-//			,HttpServletRequest request) {
-//		try {
-//			String reviewFilename = reloadFile.getOriginalFilename();
-//			if(reloadFile != null && !reviewFilename.equals("")) {
-//				String root = request.getSession().getServletContext().getRealPath("resources");
-//				String savePath = root + "\\reviewUploadFiles";
-//				File file = new File(savePath + "\\" + review.getReviewFileRename());
-//				if(file.exists()) {
-//					file. delete();
-//				}
-//				SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-//				String reviewFileRename = sdf.format(new Date (System.currentTimeMillis())) + "." + reviewFilename.substring(reviewFilename.lastIndexOf(".")+1);
-//				
-//			}
-//		} catch (Exception e) {
-//			// TODO: handle exception
-//		}
-//		return mv;
-//	}
+		return mv;
+	}
+	
 	
 }

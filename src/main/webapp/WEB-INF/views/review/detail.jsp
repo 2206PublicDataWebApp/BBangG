@@ -147,7 +147,7 @@
             </div>
             <div class="heart-count">
                 <div id="heart"><a href="/review/heartCountUpdate.kh?reviewNo=${review.reviewNo }">♡  ${review.reviewHeart }</a></div>
-            	<div>HIT  ${review.reviewCount } </div>
+            	<div>조회 ${review.reviewCount } </div>
             </div>
         </div>
         <div class="reivew-content">
@@ -159,7 +159,7 @@
         </div>
         <div class="btn-wrap">
             <a id="btn-modify" href="/review/modifyView.kh?reviewNo=${review.reviewNo }&page=${page }">수정</a>
-            <a id="btn-delete" href="#" onclick="reviewRemove(${reviewNo});">삭제</a>
+            <a id="btn-delete" href="#" onclick="reviewRemove(${page});">삭제</a>
 
         </div>
     </div>
