@@ -24,10 +24,26 @@ public class ReviewStoreLogic implements ReviewStore{
 		int result = session.insert("ReviewMapper.insertHeartCount", review);
 		return result;
 	}
+	@Override
+	public int updateReview(SqlSession session, Review review) {
+		int result = session.update("ReviewMapper.updateReview", review);
+		return result;
+	}
+	@Override
+	public int deleteOneByNo(SqlSession session, int reviewNo) {
+		int result = session.delete("ReviewMapper.deleteReview", reviewNo);
+		return result;
+	}
 	// 리뷰 상세
 	@Override
 	public Review selectOneByNo(SqlSession session, Integer reviewNo) {
 		Review review = session.selectOne("ReviewMapper.selectOneByNo", reviewNo);
+		return review;
+	}
+	
+	@Override
+	public Review selectStoreReview(SqlSession session, Integer reviewNo) {
+		Review review = session.selectOne("ReviewMapper.selectStoreReview", reviewNo);
 		return review;
 	}
 	
@@ -61,10 +77,16 @@ public class ReviewStoreLogic implements ReviewStore{
 
 	}
 	@Override
-	public int deleteOneByNo(SqlSession session, int reviewNo) {
-		int result = session.delete("ReviewMapper.deleteReview", reviewNo);
-		return result;
+	public List<Review> selectAllByValue(SqlSession session, String searchCondition, String searchValue,int currentPage, int listLimit) {
+		int offset = (currentPage-1) * listLimit;
+		RowBounds rowBounds = new RowBounds(offset, listLimit);
+		HashMap<String, String>paramMap = new HashMap<String, String>();
+		paramMap.put("searchCondition", searchCondition);
+		paramMap.put("searchValue", searchValue);
+		List<Review> rList = session.selectList("ReviewMapper.selectAllByValue", paramMap, rowBounds);
+		return rList;
 	}
+
 
 	
 
