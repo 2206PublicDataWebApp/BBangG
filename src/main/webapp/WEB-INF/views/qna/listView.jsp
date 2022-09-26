@@ -7,6 +7,17 @@
 <meta charset="UTF-8">
 <title>QNA게시판</title>
 </head>
+<script>
+	<c:if test="${not empty notVerified}">
+	     alert("${notVerified}");
+		 location.href="/qna/list.kh";
+	</c:if>
+
+	<c:if test="${not empty needLogin}">
+	alert("${needLogin}");
+	location.href="/qna/list.kh";
+	</c:if>
+</script>
 <body>
 	<h1 align="center">게시글 목록</h1>
 	<br><br>
@@ -23,7 +34,11 @@
 			<c:forEach items="${qnaList }" var="qna" varStatus="i">
 				<tr>
 					<td>${i.count }</td>
-					<td><a href="/qna/detail.kh?qnaNo=${qna.qnaNo }&page=${currentPage }">${qna.qnaTitle }</a></td>
+					<td><a href="/qna/detail.kh?qnaNo=${qna.qnaNo }&page=${currentPage }">${qna.qnaTitle }</a>
+					<c:if test="${qna.qnaSecret == 1}">
+						[비밀글]
+					</c:if>
+					</td>
 					<td>${qna.qnaWriter }</td>
 					<td>${qna.qnaCreateDate }</td>
 					<td>${qna.qnaViewCount }</td>

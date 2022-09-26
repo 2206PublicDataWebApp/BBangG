@@ -16,7 +16,7 @@
          <a href="/review/list.kh">REVIEW</a>
       </div>
       <div id="menu">
-         <a href="#">QNA</a>
+         <a href="/qna/list.kh">QNA</a>
       </div>
    </div>
    <div class="user">

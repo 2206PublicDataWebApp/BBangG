@@ -37,7 +37,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		QNA_SECRET,
 		QNA_ISANSWERED,
 		ANSWER_TITLE,
-		ANSWER_CONTENT
+		ANSWER_CONTENT,
+		ORIGIN_NO,
+		GROUP_ORDER,
+		GROUP_LAYER
 		)VALUES(
 		SEQ_QNANO.NEXTVAL,
 		#{qnaWriter},
@@ -49,11 +52,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		#{qnaFileRename},
 		#{qnaFilePath}, 
 		DEFAULT, 
-		#{"qnaTypeNo"}, 
-		#{"qnaSecret"},
-		#{"qnaIsAnswered"}, 
-		#{"qnaAnswerTitle"}, 
-		#{"qnaAnswerContent"})
+		#{qnaTypeNo},
+		#{qnaSecret},
+		#{qnaIsAnswered},
+		#{qnaAnswerTitle},
+		#{qnaAnswerContent},
+		#{originNo},
+		#{groupOrder},
+		#{groupLayer} )
 	</insert>
 	
 	<update id="updateQna">
@@ -73,13 +79,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</delete>
 
 	<update id="updateCount">
-		UPDATE QNA_TBL SET 
+		UPDATE QNA_TBL
+		SET
 		QNA_VIEWCOUNT = QNA_VIEWCOUNT + 1
-		WHERE QNA_VIEWCOUNT = #{qnaNo}
+		WHERE
+			QNA_NUMBER = #{qnaNo}
 	</update>
 
 	<select id="selectAllQna" resultMap="QnaResultMap">
-		SELECT * FROM QNA_TBL
+		SELECT * FROM QNA_TBL ORDER BY QNA_NUMBER DESC
 	</select>
 
 	 <select id="selectTotalCount" resultType="_int">
@@ -127,6 +135,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				OR USER_ID LIKE
 				'%'||#{searchValue}||'%'
 			</if>
+			ORDER BY QNA_NUMBER DESC
 		</where>
 	</select>
 	
@@ -158,8 +167,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		DEFAULT)
 	</insert>
 	<update id="modifyReply">
-		UPDATE QNA_REPLY_TBL SET QNA_REPLY_CONTENTS =
-		#{qnaReplyContent}, REPLY_UPDATE_DATE = DEFAULT WHERE REF_QNA_NUMBER = #{refQnaNo}
+		UPDATE
+		    QNA_REPLY_TBL
+		SET
+		    QNA_REPLY_CONTENTS =#{qnaReplyContent},
+		    REPLY_UPDATE_DATE = DEFAULT
+		WHERE
+			QNA_REPLY_NUMBER = #{qnaReplyNo}
 	</update>
 	<delete id="deleteReply">
 		DELETE FROM QNA_REPLY_TBL WHERE QNA_REPLY_NUMBER = #{qnaReplyNo }

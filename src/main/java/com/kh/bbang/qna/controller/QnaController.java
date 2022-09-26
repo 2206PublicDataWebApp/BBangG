@@ -31,8 +31,14 @@ public class QnaController {
 	private QnaService qnaService;
 	
 	@GetMapping(value="/qna/writeView.kh")
-	public String showQnaWrite() {
-		return "qna/qnaWriteForm";
+	public ModelAndView showQnaWrite(HttpSession session, ModelAndView mv) {
+		mv.setViewName("qna/qnaWriteForm");
+		User user = (User) session.getAttribute("login");
+		if(user== null){
+			mv.addObject("needLogin", "글을 작성하기 위해 로그인이 필요합니다.");
+			mv.setViewName("qna/listView");
+		}
+		return mv;
 	}
 	
 	@PostMapping(value="/qna/register.kh")
@@ -177,22 +183,45 @@ public class QnaController {
 			, @RequestParam("page") Integer page
 			, HttpSession session) {
 		try {
-			
+			boolean verified = true;
 			Qna qna = qnaService.printOneByNo(qnaNo);
-			List<Reply> replyList = qnaService.printAllReply(qnaNo);
-			session.setAttribute("qnaNo", qna.getQnaNo());
-			mv.addObject("replyList", replyList);
-			mv.addObject("qna", qna);
-			mv.addObject("page", page);
-			mv.setViewName("qna/detailView");
+
+			int qnaSecret = qna.getQnaSecret();
+			if(qnaSecret==1){
+				verified = checkVerified(session, qna.getQnaWriter());
+			}
+			if(verified){
+				List<Reply> replyList = qnaService.printAllReply(qnaNo);
+				session.setAttribute("qnaNo", qna.getQnaNo());
+				mv.addObject("replyList", replyList);
+				mv.addObject("qna", qna);
+				mv.addObject("page", page);
+				mv.setViewName("qna/detailView");
+				return mv;
+			}
+			mv.addObject("notVerified", "접근 권한이 없습니다.");
+			mv.setViewName("/qna/listView");
+			return mv;
 		} catch (Exception e) {
 			mv.addObject("msg", e.toString());
 			mv.setViewName("common/errorPage");
 		}
-		
+
 		return mv;
 	}
-	
+
+	private boolean checkVerified(HttpSession session, String qnaWriter) {
+		User user = (User) session.getAttribute("login");
+		if(user == null){
+			return false;
+		}
+		if(user.getUserId().equals(qnaWriter) || user.getStatus().equals("0")){
+			return true;
+		}
+		return false;
+	}
+
+
 	@GetMapping(value="/qna/search.kh")
 	public ModelAndView qnaSearchList(
 			ModelAndView mv
@@ -242,8 +271,14 @@ public class QnaController {
 			, HttpSession session) {
 		User user = (User)session.getAttribute("login");
 		String replyWriter = user.getUserId();
+
+	
+		
 		int qnaNo = reply.getRefQnaNo();
+		System.out.println("qnaNo = " + qnaNo);
+
 		reply.setQnaReplyWriter(replyWriter);
+
 		int result = qnaService.registerReply(reply);
 		if(result > 0) {
 			mv.setViewName(
@@ -261,8 +296,56 @@ public class QnaController {
 	
 	@PostMapping(value="/qna/removeReply.kh")
 	public String removeQnaReply(
-			@RequestParam("replyNo") Integer replyNo) {
-		int result = qnaService.deleteReply(replyNo);
+			@RequestParam("qnaReplyNo") Integer qnaReplyNo) {
+		int result = qnaService.deleteReply(qnaReplyNo);
 		return "redirect:/qna/list.kh";
 	}
+	
+	
+	
+	/*
+	 * 문의글 바로 아래 답변이 보이게 그룹화?
+	 * 답변글은 글번호가 보이지 않게
+	 * 관리자만 답변 등록 수정 삭제 가능하게
+	 * 
+	 */
+	@PostMapping(value="/qna/writeAnswer.kh")
+	public ModelAndView writeAnswer(
+			ModelAndView mv
+			, @ModelAttribute Qna qna
+			, @RequestParam(value="uploadFile", required=false) MultipartFile uploadFile
+			,HttpServletRequest request
+			) {
+		try {
+			String qnaFilename = uploadFile.getOriginalFilename();
+			if(!qnaFilename.equals("")) {
+				String root = request.getSession().getServletContext().getRealPath("resources");
+				String savePath = root + "\\answeruploadFiles";
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+				String qnaFileRename 
+				= sdf.format(new Date(System.currentTimeMillis()))+"."
+						+qnaFilename.substring(qnaFilename.lastIndexOf(".")+1);
+				File file = new File(savePath);
+				if(!file.exists()) {
+					file.mkdir();
+				}
+				uploadFile.transferTo(new File(savePath+"\\"+qnaFileRename)); 
+				String qnaFilePath = savePath+"\\"+qnaFileRename;
+				qna.setQnaFilename(qnaFilename);
+				qna.setQnaFileRename(qnaFileRename);
+				qna.setQnaFilePath(qnaFilePath);
+			}
+			int result = qnaService.registerQna(qna);
+			mv.setViewName("redirect:/qna/list.kh");
+		} catch (Exception e) {
+			e.printStackTrace();
+			mv.addObject("msg", e.getMessage());
+			mv.setViewName("common/errorPage");
+		}
+		return mv;
+	}
+	
+	
+	
+
 }
