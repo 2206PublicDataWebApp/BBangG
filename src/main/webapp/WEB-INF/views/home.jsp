@@ -36,7 +36,7 @@
 	    <span class="dots" onclick="currentSlide(4)"></span>
 	</section>
 	
-	
+	<br><br><br><br><br><br><br><br><br><br><br><br><br>
 	
 	<div>
 		<div>
