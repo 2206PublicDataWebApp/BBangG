@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>FAQ</title>
 </head>
 <body>
 	<h1 align="center">게시글목록</h1>
@@ -20,7 +20,7 @@
 			<th>작성자</th>
 			<th>날짜</th>
 			<th>조회수</th>
-			<th>첨부파일</th>
+			<th>비고</th>
 		</tr>
 		<c:if test="${!empty faqList }">
 			<c:forEach items="${faqList }" var="faq" varStatus="i">

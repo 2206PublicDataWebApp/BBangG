@@ -272,10 +272,7 @@ public class QnaController {
 		User user = (User)session.getAttribute("login");
 		String replyWriter = user.getUserId();
 
-		/**
-		 * refNo -> 댓글이 달릴 원 글의 아이디(no)
-		 *refNo
-		 */
+	
 		
 		int qnaNo = reply.getRefQnaNo();
 		System.out.println("qnaNo = " + qnaNo);
@@ -303,4 +300,52 @@ public class QnaController {
 		int result = qnaService.deleteReply(qnaReplyNo);
 		return "redirect:/qna/list.kh";
 	}
+	
+	
+	
+	/*
+	 * 문의글 바로 아래 답변이 보이게 그룹화?
+	 * 답변글은 글번호가 보이지 않게
+	 * 관리자만 답변 등록 수정 삭제 가능하게
+	 * 
+	 */
+	@PostMapping(value="/qna/writeAnswer.kh")
+	public ModelAndView writeAnswer(
+			ModelAndView mv
+			, @ModelAttribute Qna qna
+			, @RequestParam(value="uploadFile", required=false) MultipartFile uploadFile
+			,HttpServletRequest request
+			) {
+		try {
+			String qnaFilename = uploadFile.getOriginalFilename();
+			if(!qnaFilename.equals("")) {
+				String root = request.getSession().getServletContext().getRealPath("resources");
+				String savePath = root + "\\answeruploadFiles";
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+				String qnaFileRename 
+				= sdf.format(new Date(System.currentTimeMillis()))+"."
+						+qnaFilename.substring(qnaFilename.lastIndexOf(".")+1);
+				File file = new File(savePath);
+				if(!file.exists()) {
+					file.mkdir();
+				}
+				uploadFile.transferTo(new File(savePath+"\\"+qnaFileRename)); 
+				String qnaFilePath = savePath+"\\"+qnaFileRename;
+				qna.setQnaFilename(qnaFilename);
+				qna.setQnaFileRename(qnaFileRename);
+				qna.setQnaFilePath(qnaFilePath);
+			}
+			int result = qnaService.registerQna(qna);
+			mv.setViewName("redirect:/qna/list.kh");
+		} catch (Exception e) {
+			e.printStackTrace();
+			mv.addObject("msg", e.getMessage());
+			mv.setViewName("common/errorPage");
+		}
+		return mv;
+	}
+	
+	
+	
+
 }

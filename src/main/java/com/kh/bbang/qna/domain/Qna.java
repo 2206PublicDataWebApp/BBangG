@@ -15,9 +15,14 @@ public class Qna {
 	private int qnaViewCount;
 	private int qnaTypeNo;
 	private int qnaSecret;
+	
 	private int qnaIsAnswered;
 	private String qnaAnswerTitle;
 	private String qnaAnswerContent;
+	private int originNo; // 문의글의 게시글번호(qnaNo)
+	private int groupOrder; 
+	private int groupLayer;
+	
 	public int getQnaNo() {
 		return qnaNo;
 	}
@@ -108,6 +113,24 @@ public class Qna {
 	public void setQnaAnswerContent(String qnaAnswerContent) {
 		this.qnaAnswerContent = qnaAnswerContent;
 	}
+	public int getOriginNo() {
+		return originNo;
+	}
+	public void setOriginNo(int originNo) {
+		this.originNo = originNo;
+	}
+	public int getGroupOrder() {
+		return groupOrder;
+	}
+	public void setGroupOrder(int groupOrder) {
+		this.groupOrder = groupOrder;
+	}
+	public int getGroupLayer() {
+		return groupLayer;
+	}
+	public void setGroupLayer(int groupLayer) {
+		this.groupLayer = groupLayer;
+	}
 	@Override
 	public String toString() {
 		return "Qna [qnaNo=" + qnaNo + ", qnaWriter=" + qnaWriter + ", qnaTitle=" + qnaTitle + ", qnaContent="
@@ -115,8 +138,11 @@ public class Qna {
 				+ ", qnaFilename=" + qnaFilename + ", qnaFileRename=" + qnaFileRename + ", qnaFilePath=" + qnaFilePath
 				+ ", qnaViewCount=" + qnaViewCount + ", qnaTypeNo=" + qnaTypeNo + ", qnaSecret=" + qnaSecret
 				+ ", qnaIsAnswered=" + qnaIsAnswered + ", qnaAnswerTitle=" + qnaAnswerTitle + ", qnaAnswerContent="
-				+ qnaAnswerContent + "]";
+				+ qnaAnswerContent + ", originNo=" + originNo + ", groupOrder=" + groupOrder + ", groupLayer="
+				+ groupLayer + "]";
 	}
+	
+	
 	
 	
 	

@@ -58,9 +58,20 @@
 					<textarea rows="3" cols="55" name="qnaReplyContent"></textarea>
 				</td>
 				<td>
+				
+				<c:if test="${!empty sessionScope.user.userId}">
+<!-- 				세션값을 가져오기? -->
 					<input type="submit" value="등록하기">
+				</c:if>
+				
 				</td>
+				
+				
+				
 			</tr>
+			<td>
+					<input type="button" value="답변하기" onCLick="">
+				</td>
 		</table>
 	</form>
 	
