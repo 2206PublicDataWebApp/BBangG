@@ -1,12 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
-<link href=”https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap” rel=”stylesheet”>
 <meta charset="UTF-8">
-<title>빵지순례 리뷰</title>
+<title>관리자 Review</title>
     <style>
         html, body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, blockquote, th, td, img {
             margin: 0;
@@ -128,13 +126,40 @@
         	display: flex;
         	justify-content: center;
         }
+         #btn-modify{
+	       width: 80px;
+	       font-size: 15px;
+	       border: 1px solid #414141;
+	       background-color: #414141;
+	       color: rgb(255, 255, 255);
+	       /* padding: 15px 25px; */
+	       text-align: center;
+	       text-decoration: none;
+	       display: inline-block;
+	       position: relative;
+	       left : 80%;
+	   }
+	   #btn-delete{
+	       width: 80px;
+	       font-size: 15px;
+	       border: 1px solid #414141;
+	       background-color: #ffffff;
+	       color: #414141;
+	       /* padding: 15px 25px; */
+	       text-align: center;
+	       text-decoration: none;
+	       display: inline-block;
+	       position: relative;
+	       left : 80%;
+	   }
     </style>
 <%@ include file="/WEB-INF/views/include/head.jsp"%>
 </head>
 <body>
 <%@ include file="/WEB-INF/views/include/header.jsp"%>
+<jsp:include page="/WEB-INF/views/include/sideBar_admin.jsp"/>
     <div class="wrap">
-    	<div id="review-page">빵지순례 리뷰</div>
+    	<div id="review-page">Review 관리자</div>
     	<c:if test="${!empty rList }">
 	        <ul class="review-board board-fixed">
 		        <c:forEach items ="${rList}" var="review" varStatus="i">
@@ -157,6 +182,10 @@
 				                        <a href="/review/detail.kh?reviewNo=${review.reviewNo  }">
 				                            <span class="storeName">${review.storeName }점포명안나오는중</span><!-- 점포명이 들어가야함 -->
 				                        </a>	                       
+				                    </div>
+				                    <div>
+				                    	<a id="btn-modify" href="#">수정</a>
+                						<a id="btn-delete" href="#" onclick="reviewRemove(${page});">삭제</a>
 				                    </div>
 			                 	</div>
 		                 	</a>

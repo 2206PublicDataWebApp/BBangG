@@ -58,6 +58,43 @@
    .btn-wrap{
    		margin-top:50px;
    }
+   #storename{
+            margin: 60px auto;
+            width: 980px;
+            padding : 10px 40px;
+            box-sizing:border-box ;
+       }
+   #sort{
+    position: relative;
+    left : -2%;
+    font-weight: lighter;
+   }
+   #bestSort{
+       width: 80px;
+       font-size: 15px;
+       border: 1px solid #414141;
+       background-color: #ffffff;
+       color: #414141;
+       /* padding: 15px 25px; */
+       text-align: center;
+       text-decoration: none;
+       display: inline-block;
+       position: relative;
+       left : 80%;
+   }
+    #latestSort{
+        width: 80px;
+        font-size: 15px;
+        border: 1px solid #414141;
+        background-color: #ffffff;
+        color: #414141;
+        /* padding: 15px 25px; */
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        position: relative;
+        left : 80%;
+    }
 
    #btn-modify{
        width: 80px;
@@ -115,13 +152,6 @@
    #heart{
 		text-decoration: none;
    }
-   #storename{
-		display: flex;
-		margin: 25px auto;
-		width: 980px;
-		padding : 30px 40px;
-		box-sizing:border-box ;
-   }
 </style>
 <script src="/resources/js/jquery-3.6.1.min.js"></script>
 </head>
@@ -131,7 +161,12 @@
     </div>
     
     <div id="review-title">
-        <h1 id="storename">${review.storeName }</h1>
+        <div id="review-title">
+            <h1 id="storename">${review.storeName }<div id="sort">
+                <a id="bestSort" href="#">인기순</a>
+                <a id="latestSort" href="#" onclick="">최신순</a>
+            </div></h1>
+        </div>
     </div>
       <!-- 1 -->
       <div class="review-detail">
@@ -142,7 +177,7 @@
                     <div class="date">${review.rCreateDate }</div>
                 </div>
                 <div id="star">
-                    <div>${review.starRating }</div>
+                    <div>${review.starRating }별점</div>
                 </div>
             </div>
             <div class="heart-count">

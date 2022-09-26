@@ -134,7 +134,7 @@ button {
 				<button type="button" onclick="goOrder()">주문하러 가기</button>
 			</div>
 			<div class="item">
-				<div id="review"></div>
+				
 			</div>
 	</section>
 	<script>
