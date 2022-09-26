@@ -1,0 +1,10 @@
+@charset "UTF-8";
+
+
+h1{
+	padding-top:80px;
+}
+
+tr, td, th{
+	border: 1px solid #3A2618;
+}
