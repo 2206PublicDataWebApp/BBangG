@@ -58,7 +58,7 @@
 		<tr>
 			<td colspan="5" align="center">
 			${searchCondition }
-				<form action="/board/search.kh" method="get">
+				<form action="/admin/userSearch" method="get">
 					<select name="searchCondition">
 						<option value="all" <c:if test="${searchCondition eq 'all'}">selected</c:if>>전체</option>
 						<option value="id" <c:if test="${searchCondition eq 'id'}">selected</c:if>>ID</option>
