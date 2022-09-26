@@ -2,67 +2,71 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/include/head.jsp"%>
 <style>
-body {
-	/* margin-left: 250px;
-	margin-right: 250px; */
-	align-items: center;
-	align-content: center;
+section {
+	width: 1200px;
+	margin-left: 20%;
 }
 
 img {
 	width: 100%;
-	height: 300px;
+	height: 800px;
 }
 
-#map {
-	float: left;
+.container {
+	display: grid;
+	justify-content: center;
+	align-content: center;
+	grid-template-columns: repeat(4, 1fr);
+	row-gap: 20px;
 }
 
-.review-detail {
-	border: 1px solid #414141;
-	width: 980px;
-	margin: 25px auto;
-	box-sizing: border-box;
-	padding: 50px 60px;
-}
-
-.review-title {
+.item {
 	display: flex;
-	margin: 25px auto;
-	width: 980px;
-	padding: 30px 40px;
+	justify-content: center;
+	align-items: center;
 	box-sizing: border-box;
-	border: 1px solid white;
+	font-size: 20px;
+	font-weight: 900;
+	border: 1px solid black;
+	grid-column: 1/5;
 }
 
-#btn-modify {
-	width: 80px;
-	font-size: 15px;
-	border: 1px solid #414141;
-	background-color: #414141;
-	color: rgb(255, 255, 255);
-	/* padding: 15px 25px; */
-	text-align: center;
-	text-decoration: none;
-	display: inline-block;
-	position: relative;
-	left: 80%;
+.item:nth-child(1) {
+	grid-column: 1/5;
+	height: 500px;
 }
 
-#btn-delete {
-	width: 80px;
-	font-size: 15px;
-	border: 1px solid #414141;
-	background-color: #ffffff;
-	color: #414141;
-	/* padding: 15px 25px; */
-	text-align: center;
-	text-decoration: none;
-	display: inline-block;
-	position: relative;
-	left: 80%;
+.item:nth-child(2) {
+	grid-column: 1/3;
 }
-</style>
+
+.item:nth-child(3) {
+	grid-column: 3/5;
+}
+
+.item:nth-child(4) {
+	grid-column: 1/5;
+	height: 50px;
+}
+
+.item:nth-child(5) {
+	grid-column: 1/5;
+	height: 50px;
+}
+
+img {
+	width: 100%;
+	height: 100%;
+}
+
+button {
+	color: #fff;
+	font-size: 16px;
+	background-color: #3A2618;
+	margin-top: 10px;
+	height: 50px;
+	width: 600px;
+}
 </style>
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6396a18cfa9668486b16a2ad0a533dd1&libraries=services,clusterer,drawing"></script>
@@ -70,94 +74,70 @@ img {
 </head>
 <body>
 	<%@ include file="/WEB-INF/views/include/header.jsp"%>
-	<h1 align="center">점포상세정보화면</h1>
-	<div id="detail">
-		<img src="" />
-	</div>
-	<div id="map" style="width: 350px; height: 350px"></div>
-	<table border="1" height="350px">
-		<tr>
-			<td>이름</td>
-			<td colspan="2"><input type="text" name="storeName"
-				value="${store.storeName }" /></td>
-		</tr>
-		<tr>
-			<td>우편번호</td>
-			<td><input type="text" placeholder="우편번호" id="sample4_postcode"
-				name="postCode" value="${store.storeZipCode }" /></td>
-		</tr>
-		<tr>
-			<td>주소</td>
-			<td colspan="2"><input type="text" placeholder="주소"
-				id="sample4_roadAddress" name="store_addr"
-				value="${store.storeAddr}" /></td>
-		</tr>
-		<tr>
-			<td>상세주소</td>
-			<td colspan="2"><input type="text" placeholder="상세주소"
-				id="sample4_detailAddress" name="storeAddrDetail"
-				value="${store.storeAddrDetail}" /></td>
-		</tr>
-		<tr>
-			<td>대표자</td>
-			<td colspan="2"><input type="text" name="storeCeo"
-				/ value="${store.storeCeo}"></td>
-		</tr>
-		<tr>
-			<td>전화번호</td>
-			<td colspan="2"><input type="text" name="storeTel"
-				value="${store.storeTel}" /></td>
-		</tr>
-		<tr>
-			<td>대표사이트</td>
-			<td colspan="2"><input type="text" name="storeUrl"
-				value="${store.storeUrl}" /></td>
-		</tr>
-		<tr>
-			<td>계좌번호</td>
-			<td colspan="2"><input type="text" name="storeAccount"
-				value="${store.storeAccount}" /></td>
-		</tr>
-	</table>
-	<br>
-	<hr>
-	<button>리뷰작성 하러가기</button>
-	<button type="button" onclick="goOrder()">주문하러 가기</button>
-	<div id="review">
-		<div class="review-detail">
-			<div class="detail-title-wrap">
-				<div class="user-date-star">
-					<div class="user-date">
-						<div class="user-id">${review.reviewWriter }</div>
-						<div class="date">${review.rCreateDate }</div>
-					</div>
-					<div id="star">
-						<div>${review.starRating }</div>
-					</div>
-				</div>
-				<div class="heart-count">
-					<div id="heart">
-						<a href="/review/heartCountUpdate.kh?reviewNo=${review.reviewNo }">♡
-							${review.reviewHeart }</a>
-					</div>
-					<div>HIT ${review.reviewCount }</div>
-				</div>
+	<section>
+		<h1 align="center">점포상세정보화면</h1>
+		<div class="container">
+			<div class="item" id="detail">
+				<img
+					src="/resources/image/store-images/${store.sImage.storeFileRename }" />
 			</div>
-			<div class="reivew-content">
-				<div id="bbang-img">
-					<img alt="본문이미지"
-						src="/resources/reviewUploadFiles/${review.reviewFilename }"
-						width="500">
-				</div>
-				<div>${review.reviewContent }</div>
-				<div class="btn-wrap">
-					<a id="btn-modify"
-						href="/review/modifyView.kh?reviewNo=${review.reviewNo }">수정</a> <a
-						id="btn-delete" href="#" onclick="reviewRemove(${page});">삭제하기</a>
-				</div>
+			<div class="item" id="map"></div>
+			<div class="item">
+				<table>
+					<tr>
+						<td>이름</td>
+						<td colspan="2"><input type="text" name="storeName"
+							value="${store.storeName }" /></td>
+					</tr>
+					<tr>
+						<td>우편번호</td>
+						<td><input type="text" placeholder="우편번호"
+							id="sample4_postcode" name="postCode"
+							value="${store.storeZipCode }" /></td>
+					</tr>
+					<tr>
+						<td>주소</td>
+						<td colspan="2"><input type="text" placeholder="주소"
+							id="sample4_roadAddress" name="store_addr"
+							value="${store.storeAddr}" /></td>
+					</tr>
+					<tr>
+						<td>상세주소</td>
+						<td colspan="2"><input type="text" placeholder="상세주소"
+							id="sample4_detailAddress" name="storeAddrDetail"
+							value="${store.storeAddrDetail}" /></td>
+					</tr>
+					<tr>
+						<td>대표자</td>
+						<td colspan="2"><input type="text" name="storeCeo"
+							value="${store.storeCeo}"></td>
+					</tr>
+					<tr>
+						<td>전화번호</td>
+						<td colspan="2"><input type="text" name="storeTel"
+							value="${store.storeTel}" /></td>
+					</tr>
+					<tr>
+						<td>대표사이트</td>
+						<td colspan="2"><input type="text" name="storeUrl"
+							value="${store.storeUrl}" /></td>
+					</tr>
+					<tr>
+						<td>계좌번호</td>
+						<td colspan="2"><input type="text" name="storeAccount"
+							value="${store.storeAccount}" /></td>
+					</tr>
+				</table>
 			</div>
-
-			<script>
+			<div class="item">
+				<button>리뷰작성 하러가기</button>
+				<button type="button" onclick="goOrder()">주문하러 가기</button>
+			</div>
+			<div class="item">
+				<div id="review"></div>
+			</div>
+	</section>
+	<script>
 		var address = '${store.storeAddr}'
 		var storeName = '${store.storeName}'
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 

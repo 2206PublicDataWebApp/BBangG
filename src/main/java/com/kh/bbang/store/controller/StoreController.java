@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.bbang.store.domain.Store;
+import com.kh.bbang.store.domain.StoreImage;
 import com.kh.bbang.store.service.StoreService;
 
 @Controller
@@ -106,7 +107,8 @@ public class StoreController {
 	@RequestMapping(value="/store/registStore.kh", method=RequestMethod.POST)
 	public ModelAndView registStore(
 			ModelAndView mv,
-			@ModelAttribute Store store,   
+			@ModelAttribute Store store,
+			@ModelAttribute StoreImage sImage,
 			@RequestParam(value="uploadFile", required=false) MultipartFile uploadFile,
 			HttpServletRequest request) {
 		try {
@@ -123,13 +125,16 @@ public class StoreController {
 				}
 				uploadFile.transferTo(new File(savePath+"\\"+storeFileRename));
 				String storeFilepath = savePath+"\\"+storeFileRename;
-				store.setStoreFilename(storeFilename);
-				store.setStoreFileRename(storeFileRename);
-				store.setStoreFilepath(storeFilepath);
+				sImage.setStoreFilename(storeFilename);
+				sImage.setStoreFileRename(storeFileRename);
+				sImage.setStoreFilepath(storeFilepath);
 			}
 			int result = sService.registStore(store);
-			mv.setViewName("redirect:/store/adminStoreList.kh");
-			
+			sImage.setRefStoreNo(store.getStoreNo());
+			int result2 = sService.registStoreImage(sImage);
+			if(result > 0 && result2 > 0) {
+				mv.setViewName("redirect:/store/adminStoreList.kh");
+			}
 			// 첨부파일 입력 코드.. 근데 다른 테이블을 사용함.. 어케하는지 조사..
 			// SEQUENCE 점포코드 부여 방식 조사 할것 -> 001 
 		}catch(Exception e) {
@@ -187,6 +192,7 @@ public class StoreController {
 	public ModelAndView modifyStore(
 			ModelAndView mv,
 			@ModelAttribute Store store,
+			@ModelAttribute StoreImage sImage,
 			@RequestParam(value="reloadFile", required=false) MultipartFile reloadFile,
 			
 			HttpServletRequest request) {
@@ -195,19 +201,24 @@ public class StoreController {
 			if(reloadFile != null && !storeFilename.equals("")) {
 				String root = request.getSession().getServletContext().getRealPath("resources");
 				String savedPath = root + "\\image\\store-images";
-				File file = new File(savedPath + "\\" + store.getStoreFileRename());
+				File file = new File(savedPath + "\\" + sImage.getStoreFileRename());
 				if(file.exists()) {
 					file.delete();
 				}
 				String storeFileRename = store.getStoreName()+"."+storeFilename.substring(storeFilename.lastIndexOf(".")+1);
 				String storeFilepath = savedPath+"\\"+storeFileRename;
 				reloadFile.transferTo(new File(storeFilepath));
-				store.setStoreFilename(storeFilename);
-				store.setStoreFileRename(storeFileRename);
-				store.setStoreFilepath(storeFilepath);
+				sImage.setRefStoreNo(store.getStoreNo());
+				sImage.setStoreFilename(storeFilename);
+				sImage.setStoreFileRename(storeFileRename);
+				sImage.setStoreFilepath(storeFilepath);
 			}
 			int result = sService.modifyStore(store);
-			mv.setViewName("redirect:/store/adminStoreList.kh");
+			int result2 = sService.modifyStoreImage(sImage);
+			if(result > 0 && result2 > 0) {
+				mv.setViewName("redirect:/store/adminStoreList.kh");
+				
+			}
 		}catch(Exception e) {
 			mv.addObject("msg",e.toString());
 			mv.setViewName("common/errorPage");
@@ -267,8 +278,6 @@ public class StoreController {
 				@RequestParam("searchValue") String searchValue,
 				@RequestParam(value="page", required=false) Integer page) {
 			try {
-				System.out.println(searchCondition);
-				System.out.println(searchValue);
 				//페이징처리
 				int currentPage = (page != null) ? page : 1;
 				int totalCount = sService.getTotalCount(searchCondition,searchValue);

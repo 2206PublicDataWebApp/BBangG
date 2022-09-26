@@ -32,7 +32,7 @@
 <body align="center">
 	<%@ include file="/WEB-INF/views/include/header.jsp"%>
 <h1 align="center">점포 리스트 </h1>
-	<table border="1" align="center">
+	<table align="center">
 		<tr>
 			<th>등록번호</th>
 			<th>점포명</th>
