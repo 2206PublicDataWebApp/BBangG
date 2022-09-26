@@ -58,19 +58,13 @@
 					<textarea rows="3" cols="55" name="qnaReplyContent"></textarea>
 				</td>
 				<td>
-				
-				<c:if test="${!empty sessionScope.user.userId}">
-<!-- 				세션값을 가져오기? -->
+				<c:if test="${!empty sessionScope.login.userId}">
 					<input type="submit" value="등록하기">
 				</c:if>
-				
 				</td>
-				
-				
-				
 			</tr>
 			<td>
-					<input type="button" value="답변하기" onCLick="">
+					<input type="button" value="답변하기" onCLick="answerForm${isLogOn}; ${contextPath }/qna/writeAnswer.kh; ${article.articleNO } )">
 				</td>
 		</table>
 	</form>
@@ -124,6 +118,26 @@
 			$form.append("<input type='hidden' value='"+rNo+"' name='qnaReplyNo'>");
 			$form.appendTo("body");
 			$form.submit();
+		}
+		
+		function answerForm(isLogOn, url, parentNO){
+			if(isLogOn != && isLogOn != 'false'){
+				var from = document.createElement("form");
+				form.setAttribute("method", "post");
+				form.setAttribute("action", url);
+				var parentNOInput = document.createElement("input");
+				parentNOInput.setAttribute("type", "hidden");
+				parentNOInput.setAttribute("name", "parentNO");
+				parentNOInput.setAttribute("value", parentNO);
+				
+				form.appendChild(parentNOInput);
+				document.body.appendChild(form);
+				form.submit();
+			} else {
+				alert("관리자만 답변이 가능합니다.");
+				
+			}
+			
 		}
 	</script>
 </body>

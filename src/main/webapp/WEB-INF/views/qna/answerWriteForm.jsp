@@ -8,7 +8,7 @@
 <title>게시글 작성</title>
 </head>
 <body>
-	<h1 align="center">질문 등록</h1>
+	<h1 align="center">답변 등록</h1>
 	<br><br>
 	<form action="#" method="post" enctype="multipart/form-data">
 		<table align="center" border="1">

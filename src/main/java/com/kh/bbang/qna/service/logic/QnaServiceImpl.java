@@ -91,4 +91,14 @@ public class QnaServiceImpl implements QnaService {
 		return replyList;
 	}
 
+	@Override
+	public int registAnswer(Qna qna) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	
+
+	
+
 }
