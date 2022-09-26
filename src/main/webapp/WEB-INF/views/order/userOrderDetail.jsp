@@ -47,7 +47,7 @@
  	border:1px solid;
  	border-color:#F0F0F0;
  	height:30px;
- 	font-size:18px;
+ 	font-size:16px;
 
 }
 #btn_orderModify{
@@ -56,10 +56,20 @@
  	border:1px solid;
  	border-color:#3A2618;
  	 height:30px;
- 	font-size:18px;
-
+ 	font-size:16px;
 }
-
+#btn_orderRemove:hover{
+	background-color:#ffffff;
+ 	color:#3A2618;
+ 	border:1px solid;
+ 	border-color:#3A2618;
+}
+#btn_orderModify:hover{
+ 	background-color:#ffffff;
+ 	color:#3A2618;
+ 	border:1px solid;
+ 	border-color:#3A2618;
+}
 </style>
 <body>
 <jsp:include page = "/WEB-INF/views/include/header.jsp"/>
@@ -126,7 +136,7 @@
 					</tr>
 					<tr>
 						<th>배송지</th>
-						<td style="text-align:left">${delivaryFullAdd }</td>
+						<td style="text-align:left">${order.delivaryZipcode} ${delivaryFullAdd }</td>
 					</tr>
 					<tr>
 						<th>배송메모</th>
