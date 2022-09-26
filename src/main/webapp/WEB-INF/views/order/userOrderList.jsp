@@ -49,7 +49,7 @@ border-bottom:1px solid #3A2618;
 </head>
 <body>
 <jsp:include page = "/WEB-INF/views/include/header.jsp"/>
-<jsp:include page="/WEB-INF/views/include/sideBar_user.jsp"/>
+<jsp:include page="/WEB-INF/views/include/sideBar_admin.jsp"/>
 	<div id="bodyWrapper">
 		<input type="hidden" name="userId" value="${login.userId }">
 		<h1 align="center">${login.userId }님의 주문 목록</h1>

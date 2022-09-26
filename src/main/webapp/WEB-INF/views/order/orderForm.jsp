@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
- <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 
 <!DOCTYPE html>
@@ -11,190 +11,222 @@
 <%@ include file="/WEB-INF/views/include/head.jsp"%>
 
 </head>
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script
+	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 <style>
-#bodyWrapper{
+#bodyWrapper {
 	position: relative;
-    margin: 0 auto;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding-top:80px;
+	margin: 0 auto;
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	padding-top: 80px;
 }
-h1{
+
+h1 {
 	padding: 40px;
 	font-size: 30px;
 }
-:root {
-  --padding: 80px;
+
+h2 {
+	align: right;
+}
+
+table th {
+	text-align: right;
+	padding-right: 10px;
+}
+
+div input {
+	height: 24px;
+}
+
+.orderForm_input_right input {
+	border: none;
+	border-bottom: 1px solid black;
+	width: 250px;
+}
+
+input:focus {
+	outline: none;
+}
+
+.orderForm_input_right th, .orderForm_input_right td {
+	padding-top: 5px;
+	padding-bottom: 10px;
+	padding-left: 30px;
+	padding-right: 40ox;
+}
+
+#btnSearchAddressC {
+	border: none;
+	background-color: transparent;
+}
+
+#btnAddGoods {
+	height: 40px;
+	float: right;
+	background-color: #F0F0F0;
+	border: none;
+}
+
+#btnAddGoods:hover {
+	background-color: #3A2618;
+	color: #ffffff;
+}
+
+input[type=reset] {
+	height: 30px;
+	width: 80px;
+	background-color: #F0F0F0;
+	color: #3A2618;
+	border: 1px solid;
+	border-color: #F0F0F0;
+}
+
+input[type=reset]:hover {
+	background-color: #ffffff;
+	color: #3A2618;
+	border: 1px solid;
+	border-color: #3A2618;
+}
+
+input[type=submit] {
+	height: 30px;
+	width: 80px;
+	background-color: #3A2618;
+	color: #ffffff;
+	border: 1px solid;
+	border-color: #3A2618;
+}
+
+input[type=submit]:hover {
+	background-color: #ffffff;
+	color: #3A2618;
+	border: 1px solid;
+	border-color: #3A2618;
+}
+input[type=checkbox]{
+	height:20px;
+	width:20px;
+	margin:6px;
+
 }
 
 span{
-	display: inline-block;
-	position:relative;
-	width:80px;
-}
-}
-div input{
-	margin-bottom: 15px;
-	height: 24px;
-}
-.orderForm_input_right input{
-	border: none;
-	border-bottom: 1px solid black;
-	width:250px;
-}
-input:focus{
-	outline: none;
-}
-.orderForm_input_right th, .orderForm_input_right td {
-	padding-top: 5px;
-    padding-bottom: 10px;
-    padding-left: 30px;
-    padding-right: 40ox;
-    }
-#btnSearchAddressC{
- 	border: none;
- 	background-color:transparent;
- }
- #btnAddGoods{
- height:40px; 
- float:right;
- background-color:#F0F0F0;
- border: none;
- }
- #btnAddGoods:hover{
- 	background-color:#3A2618;
- 	color:#ffffff;
- 	
- }
-  input[type=reset]{
- 	background-color:#F0F0F0;
- 	color:#3A2618;
- 	border:1px solid;
- 	border-color:#F0F0F0;
- }
-   input[type=reset]:hover{
- 	background-color:#ffffff;
- 	color:#3A2618;
- 	border:1px solid;
- 	border-color:#3A2618;
- }
- 
- input[type=submit]{
-	background-color:#3A2618;
- 	color:#ffffff;
- 	border:1px solid;
- 	border-color:#3A2618;
+margin-left:60%;
 
- }
- input[type=submit]:hover{
-
- 	background-color:#ffffff;
- 	color:#3A2618;
- 	border:1px solid;
- 	border-color:#3A2618;
- 	}
+}
 </style>
 
 <body id="bodyWrapper">
-<%@ include file="/WEB-INF/views/include/header.jsp"%>
-	<div id="title" >
-	<h1 align="center">${store.storeName}주문</h1>
-	
+	<%@ include file="/WEB-INF/views/include/header.jsp"%>
+	<div id="title">
+		<h1 align="center">${store.storeName}주문</h1>
+
 	</div>
-	<br><br><br>
-		<form action="/order/sendOrder.kh" method="post" enctype="multipart/form-data">
-			<input type="hidden" name="orderShipfee" value=3000>
-			<input type="hidden" name="userId" value="${user.userId}">
-			<input type="hidden" name="storeNo" value="${storeNo}">
-		<div >
-			<div style=" float: left; width: 30%;  margin-left:10%;">
-				<select id="selGoods" name="selGoods" style="height:40px;">
+	<br>
+	<br>
+	<br>
+	<form action="/order/sendOrder.kh" method="post"
+		enctype="multipart/form-data">
+		<input type="hidden" name="orderShipfee" value=3000> <input
+			type="hidden" name="userId" value="${user.userId}"> <input
+			type="hidden" name="storeNo" value="${storeNo}">
+		<div>
+			<div style="float: left; width: 30%; margin-left: 15%;">
+				<select id="selGoods" name="selGoods" style="height: 40px;">
 				</select>
-				<button id="btnAddGoods" type="button" >추가</button>	
-				<br><br>	
-				<div id="container">
-				</div>
+				<button id="btnAddGoods" type="button">추가</button>
+				<br>
+				<br>
+				<div id="container"></div>
 				<br>
 				<div>+ 배송비 3000원</div>
 				<div>
-					<div style="width: 30%; float: left;">
-					요금합계 
-					</div>
+					<div style="width: 30%; float: left;">요금합계</div>
 					<div style="width: 50%; float: right;">
-						<b><input id="goodsTotAmt" style="border:none;text-align:right; " name="totalPrice" value=0></b>원
+						<b><input id="goodsTotAmt"
+							style="border: none; text-align: right;" name="totalPrice"
+							value=0></b>원
 					</div>
 				</div>
 			</div>
-			<div style=" float: right; margin-right:20%; text-align=left;" class="orderForm_input_right" >
+			<div style="float: right; margin-right: 20%;"
+				class="orderForm_input_right">
+				<h2>주문자정보</h2>
+				<br>
 				<table>
-					<legend><h4>주문자정보</h4></legend>
 					<tr>
-						<td>주문자 이름</td>
-						<td><input type="text" name="orderName" value="${user.userName }"></td>
+						<th>주문자 이름</th>
+						<td><input type="text" name="orderName"
+							value="${user.userName }"></td>
 					</tr>
 					<tr>
-						<td>주문자 연락처</td>
-						<td><input type="text" name="orderPhone" value="${user.userPhone }"></td>
+						<th>주문자 연락처</th>
+						<td><input type="text" name="orderPhone"
+							value="${user.userPhone }"></td>
 					</tr>
 				</table>
 				<br>
+				<span>주문자 정보와 동일
+				<input type="checkbox"  id="copy">
+				<h2 >배송지 정보</h2>
+				<br>
 				<table>
-					
+
+
+
 					<tr>
-						<legend><h4>배송지 정보</h4></legend>
+						<th>수령인</th>
+						<td><input type="text" id="delivaryName" name="delivaryName"></td>
 					</tr>
 					<tr>
-						<td>수령인</td>
-						<td ><input type="text" name="delivaryName" >
-						</td>
+						<th>수령인 연락처</th>
+						<td><input type="text" id="delivaryPhone" name="delivaryPhone"></td>
 					</tr>
 					<tr>
-						<td>수령인 연락처</td>
-						<td><input type="text" name="delivaryPhone"></td>
-					</tr>
-					<tr>
-						<td>우편번호</td>
+						<th>우편번호</th>
 						<td>
-							<div style=" float: left; ">
-								<input type="text" id="delivaryZipcode" name="delivaryZipcode" style="width:120px">
+							<div style="float: left;">
+								<input type="text" id="delivaryZipcode" name="delivaryZipcode"
+									style="width: 120px">
 							</div>
-							<div style=" float: left; ">
-								<button id="btnSearchAddressC" type="Button" onclick="findDaumPostcode()" value="우편번호 찾기"  >
-							<img src="/resources/image/icon/serch_bt.png" height ="20" width="20" /></button>
-							
-							</div> 
+							<div style="float: left;">
+								<button id="btnSearchAddressC" type="Button"
+									onclick="findDaumPostcode()" value="우편번호 찾기">
+									<img src="/resources/image/icon/serch_bt.png" height="20"
+										width="20" />
+								</button>
+
+							</div>
 						</td>
 					</tr>
 					<tr>
-						<td>상세주소1</td>
+						<th>상세주소1</th>
 						<td><input type="text" id="delivaryAddr" name="delivaryAddr"></td>
 					</tr>
 					<tr>
-						<td>상세주소2</td>
-						<td><input type="text" id="delivaryAddrDetail" name="delivaryAddrDetail"></td>
+						<th>상세주소2</th>
+						<td><input type="text" id="delivaryAddrDetail"
+							name="delivaryAddrDetail"></td>
 					</tr>
 					<tr>
-						<td>배송메모</td>
+						<th>배송메모</th>
 						<td><input type="text" name="delivaryMemo"></td>
 					</tr>
-				
+
 					<tr>
-						<td >
-							
-						</td>
-						<td>
-							<input type="reset" value="다시입력" style=" align:left; width: 49%;">
-							<input type="submit" value="주문하기" style=" align:left; width: 49%;">
-						</td>
+						<td></td>
+						<td align="right"><input type="reset" value="다시입력">
+							<input type="submit" value="주문하기"></td>
 					</tr>
 				</table>
 			</div>
 		</div>
-		</form>
+	</form>
 </body>
 <script type="text/javascript">
 	function findDaumPostcode() {
@@ -354,6 +386,19 @@ input:focus{
 		
 			goods.select($('#selGoods option:selected').val());
 		
+		});
+
+		
+		    $("#copy").change(function(){
+		        if($("#copy").is(":checked")){
+					$("#delivaryName").val(${user.userName});
+					$("#delivaryPhone").val(${user.userPhone});
+			 		$("#delivaryZipcode").val(${user.userZipCode});
+				 	$("#delivaryAddr").val('${user.addr}');
+			 		$("#delivaryAddrDetail").val('${user.addrDetail}'); 
+					 
+		        }
+			
 		});
 	
 			

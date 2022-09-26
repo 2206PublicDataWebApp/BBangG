@@ -62,24 +62,28 @@ public class OrderController {
 //			Order order = new Order(delivaryName, delivaryPhone, delivaryZipcode, delivaryAddressFirst,
 //					delivaryAddressSecond, delivaryMemo);
 //		
-		String tmp[]=new String[orderProduct.getOrderProductNm().length];
-		for(int i=0; i<orderProduct.getOrderProductNm().length;i++) {
-			tmp[i]=orderProduct.getOrderProductNm()[i]+" "+orderProduct.getOrderProductCtn()[i]+"개 "+orderProduct.getOrderProductPrice()[i]+"원";
-		}
-		
-		order.setStoreNo(storeNo);
-		order.setOrderDetail(String.join("/",tmp));
-		int result = oService.registerOrder(order);
-		
-		//System.out.println(order);
-		//System.out.println(orderProduct.toString());
-		//System.out.println(orderProduct.getTotalPrice());
-		
-		if(result>0) {
-			mv.setViewName("redirect:/order/userOrderList.kh?userId="+order.getUserId()+"");
-		}else {
-			mv.addObject("msg","주문실패");
+		try {
+			
+			String tmp[]=new String[orderProduct.getOrderProductNm().length];
+			for(int i=0; i<orderProduct.getOrderProductNm().length;i++) {
+				tmp[i]=orderProduct.getOrderProductNm()[i]+" "+orderProduct.getOrderProductCtn()[i]+"개 "+orderProduct.getOrderProductPrice()[i]+"원";
+			}
+			
+			order.setStoreNo(storeNo);
+			order.setOrderDetail(String.join("/",tmp));
+			int result = oService.registerOrder(order);
+			
+			//System.out.println(order);
+			//System.out.println(orderProduct.toString());
+			//System.out.println(orderProduct.getTotalPrice());
+			
+			if(result>0) {
+				mv.setViewName("redirect:/order/userOrderList.kh?userId="+order.getUserId()+"");
+			}
+		} catch (Exception e) {
+			mv.addObject("msg",e.toString());
 			mv.setViewName("common/errorPage");
+		
 		}
 		return mv;
 		
