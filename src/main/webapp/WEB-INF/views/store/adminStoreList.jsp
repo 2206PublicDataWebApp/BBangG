@@ -27,12 +27,25 @@
        display: inline-block;
        left : 80%;
    }
+   #btn-move{
+       width: 80px;
+       font-size: 15px;
+       border: 1px solid #414141;
+       background-color: #ffffff;
+       color: #414141;
+       /* padding: 15px 25px; */
+       text-align: center;
+       text-decoration: none;
+       display: inline-block;
+       left : 80%;
+   }
 </style>
 </head>
 <body align="center">
 	<%@ include file="/WEB-INF/views/include/header.jsp"%>
+	<jsp:include page="/WEB-INF/views/include/sideBar_admin.jsp"/>
 <h1 align="center">점포 리스트 </h1>
-	<table align="center">
+	<table align="center" border="1">
 		<tr>
 			<th>등록번호</th>
 			<th>점포명</th>
@@ -46,7 +59,7 @@
 			<td>${store.storeNo }</td>
 			<td><a href="/store/storeDetail.kh?storeNo=${store.storeNo }">${store.storeName }</a></td>
 			<td>${store.storeUpdateDate }</td>
-			<td><button onclick="showProduct(${store.storeNo },'${store.storeName }')">이동</button></td>
+			<td><button id="btn-move" onclick="showProduct(${store.storeNo },'${store.storeName }')">이동</button></td>
 			<td><button id="btn-modify" onclick="modifyStore(${store.storeNo},'${store.storeName }')">점포 수정</button></td>
 			<td><button id="btn-delete" onclick="removeStore(${store.storeNo},'${store.storeName }')">점포 삭제</button></td>
 		</tr>

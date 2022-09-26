@@ -13,7 +13,7 @@
         <li><a href="/admin/adminOrderList.kh">주문 관리</a></li>
         <li><a href="">후기 관리</a></li>
         <li><a href="">Q&A 관리</a></li>
-        <li><a href="">점포 관리</a></li>
+        <li><a href="/store/adminStoreList.kh">점포 관리</a></li>
     </ul>
 </nav>
 <style>

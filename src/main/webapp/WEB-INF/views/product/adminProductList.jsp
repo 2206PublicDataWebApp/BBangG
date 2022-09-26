@@ -5,8 +5,8 @@
 </head>
 <body>
 <%@ include file="/WEB-INF/views/include/header.jsp"%>
-	<h1>${storeName }</h1>
-	<table border="1">
+	<h1 align="center">${storeName }</h1>
+	<table border="1" align="center">
 		<tr>
 			<th>상품코드</th>
 			<th>상품명</th>

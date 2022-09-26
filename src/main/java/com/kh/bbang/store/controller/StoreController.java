@@ -1,11 +1,15 @@
 package com.kh.bbang.store.controller;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kh.bbang.store.domain.Store;
 import com.kh.bbang.store.domain.StoreImage;
 import com.kh.bbang.store.service.StoreService;
+import com.kh.bbang.user.domain.User;
 
 @Controller
 public class StoreController {
@@ -30,7 +35,12 @@ public class StoreController {
 	@RequestMapping(value="/store/adminStoreList.kh", method=RequestMethod.GET)
 	public ModelAndView adminStoreList(
 			ModelAndView mv,
-			@RequestParam(value="page", required=false) Integer page) {
+			@RequestParam(value="page", required=false) Integer page,
+			HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		User user = (User)session.getAttribute("login");
+		if(user.getStatus().equals("0")) {
+			
 		//페이징처리
 				int currentPage = (page != null) ? page : 1;
 				int totalCount = sService.getTotalCount("","");
@@ -57,6 +67,9 @@ public class StoreController {
 			mv.addObject("sList", sList);
 		}
 		mv.setViewName("store/adminStoreList");
+		}else {
+			mv.setViewName("common/alert");
+		}
 		return mv;
 	}
 	
@@ -99,8 +112,14 @@ public class StoreController {
 	
 	// 점포 등록 페이지
 	@RequestMapping(value="/store/storeRegistForm.kh", method=RequestMethod.GET)
-	public String storeRegistForm() {
-		return "store/storeRegistForm";
+	public String storeRegistForm(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		User user = (User)session.getAttribute("login");
+		if(user.getStatus().equals("0")) {
+			return "store/storeRegistForm";
+		}else {
+			return "common/alert";
+		}
 	}
 	
 	// 점포 등록
@@ -144,7 +163,7 @@ public class StoreController {
 		return mv;
 	}
 	
-	// 점포 상세 조회 - 기초 완료 
+	// 점포 상세 조회 
 	@RequestMapping(value="/store/storeDetail.kh", method=RequestMethod.GET)
 	public ModelAndView showStoreDetail(
 			ModelAndView mv,
@@ -158,7 +177,7 @@ public class StoreController {
 		return mv;
 	}
 	
-	// 점포 삭제 - 기초 완료
+	// 점포 삭제
 	@RequestMapping(value="/store/removeStore.kh", method=RequestMethod.GET)
 	public ModelAndView removeStore(
 			ModelAndView mv,
@@ -176,18 +195,25 @@ public class StoreController {
 		return mv;
 	}
 	
-	// 점포 수정 화면 - 기초 완료
+	// 점포 수정 화면
 	@RequestMapping(value="/store/modifyStore.kh", method=RequestMethod.GET)
 	public ModelAndView storeModifyView(
 			ModelAndView mv,
-			@RequestParam Integer storeNo) {
-		Store store = sService.showOneStoreById(storeNo);
-		mv.addObject("store", store);
-		mv.setViewName("/store/storeModifyForm");
+			@RequestParam Integer storeNo,
+			HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		User user = (User)session.getAttribute("login");
+		if(user.getStatus().equals("0")) {
+			Store store = sService.showOneStoreById(storeNo);
+			mv.addObject("store", store);
+			mv.setViewName("/store/storeModifyForm");
+		}else {
+			mv.setViewName("/common/alert");
+		}
 		return mv;
 	}
 	
-	// 정보 수정 - 기초완료 
+	// 정보 수정 
 	@RequestMapping(value="/store/storeModify.kh", method=RequestMethod.POST)
 	public ModelAndView modifyStore(
 			ModelAndView mv,
@@ -356,5 +382,6 @@ public class StoreController {
 			}
 			return mv;
 		}
+
 }
 
