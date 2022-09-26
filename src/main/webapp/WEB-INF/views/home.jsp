@@ -45,6 +45,8 @@
 			</div>
 		</div>
 	</div>
+	
+	
   <script type="text/javascript">
   var slides = document.getElementsByClassName('slides');
   var dots =  document.getElementsByClassName('dots');

@@ -1,197 +1,67 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/include/head.jsp"%>
+<link rel="stylesheet" href="/resources/css/myPage.css" />
 </head>
 <body>
-	<%-- <%@ include file="/WEB-INF/views/include/header.jsp"%> --%>
 	<jsp:include page = "/WEB-INF/views/include/header.jsp"/>
-
 	<div class="main">
 		<h1 align="center">회원 정보 수정</h1>
 			<form action="/user/modify.kh" method="post"
 			 onsubmit="modifyUser();">
-					<div class="email_auth">
-						<input type="text" placeholder="이메일" name="userEmail" id="userEmail" class="email"  value="${user.userEmail }">
-						<button type="button" id="email_auth_btn" class="email_auth_btn">인증번호 받기</button>
-					<div class="mail-check-box">
-						<input class="form-control mail-check-input" placeholder="인증번호 6자리를 입력해주세요!" disabled="disabled" maxlength="6">
-					</div>
-					<span id="mail-check-warn"></span>
-					</div>
 					<div>
-						아이디
+						<span>아이디</span>
 						<input type="text" id="userId" name="userId" value="${user.userId }" readonly>
 					</div>
 					<div>
-						 <input type="button" onclick="location.href='/pwUpdateView'" value="비밀번호 변경">
+						 <span>비밀번호</span>
+						 <input type="password" name="userPwd">
 					</div>
 					<div>
-						이름
+						<span>이름</span>
 						<input type="text" name="userName"  value="${user.userName }">
 					</div>
 					<div>
-						성별
+						<span>성별</span>
 						<input type="radio" name="userGender" value="여자" ${user.userGender eq '여자' ? "checked" : '' }/>여자
 						<input type="radio" name="userGender" value="남자" ${user.userGender eq '남자' ? "checked" : '' }/>남자
 					</div>
 					<div>
-						이메일
+						<span>이메일</span>
+						<input type="text" name="userEmail"  value="${user.userEmail }" readonly>
 					</div>
 					<div>
-						전화번호
+						<span>전화번호</span>
 						<input type="text" name="userPhone" value="${user.userPhone }">
 					</div>
 					<div>
-						우편번호
+						<span>우편번호</span>
 						<input type="text" name="zipCode" id="sample6_postcode"
 							placeholder="우편번호" value="${user.userZipCode }"> <input type="button"
 							onclick="sample6_execDaumPostcode()" value="검색"><br>
 					</div>
 					<div>
-						주소
+						<span>주소</span>
 						<input type="text" name="address" id="sample6_address"
 							placeholder="주소" value="${user.addr }"><br>
 					</div>
 					<div>
-						상세 주소
+						<span>상세주소</span>
 						<input type="text" name="addrDetail"
 							id="sample6_detailAddress" placeholder="상세주소" value="${user.addrDetail }"> <input
 							type="text" name="extra" id="sample6_extraAddress"
 							placeholder="참고항목">
 					</div>
-					<div>
+					<div class="wrrapper">
+					<div class="click">
 						<button type="button" onclick="removeUser();">탈퇴하기</button>
 					</div>
 					<div>
 						<input type="submit" value="수정하기">
 					</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-				<div>a</div>
-			</form>
+					</div>
+				
+				</form>
 		</div>
 		<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 		<script>
@@ -242,47 +112,6 @@
 	            }
 	        }).open();
 	    }
-		
-		$(".email_auth_btn").click(function(){	     
-				 const checkInput = $('.mail-check-input')
-		    	 var email = $('#userEmail').val();
-		    	 
-		    	 if(email == ''){
-		    	 	alert("이메일을 입력해주세요.");
-		    	 	return false;
-		    	 }
-		    	 
-		    	 $.ajax({
-					type : "POST",
-					url : "/emailAuth",
-					data : {email : email},
-					success: function(data){
-						checkInput.attr('disabled',false);
-						alert("인증번호가 발송되었습니다.");
-						email_auth_cd = data;
-					},
-					error: function(data){
-						alert("메일 발송에 실패했습니다.");
-					}
-				});
-			});
-	
-		// 인증번호 비교 
-		$('.mail-check-input').blur(function () {
-			const inputCode = $(this).val();
-			const $resultMsg = $('#mail-check-warn');
-			
-			if(inputCode === email_auth_cd){
-				$resultMsg.html('인증번호가 일치합니다.');
-				$resultMsg.css('color','green');
-				$('#email_auth_btn').attr('disabled',true);
-				$('#userEmail').attr('readonly',true);
-			}else{
-				$resultMsg.html('인증번호가 불일치 합니다. 다시 확인해주세요!.');
-				$resultMsg.css('color','red');
-			}
-		});
-		
 		function removeUser() {
 			if(confirm("탈퇴하시겠습니까?")) {
 				alert("탈퇴되었습니다.");
@@ -294,6 +123,7 @@
 				alert("수정되었습니다.");
 			}
 		}
+		
 	</script>
 </body>
 </html>

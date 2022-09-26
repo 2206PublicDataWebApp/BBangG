@@ -1,0 +1,86 @@
+@charset "UTF-8";
+
+*{
+	color:#3A2618;
+	font-size: 15px;
+}
+
+.main{
+	position: relative;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10px;
+    width:450px;
+    margin: 0 auto;
+    padding-left:35px;
+}
+
+div{
+	display: inline-block;
+}
+:root {
+  --padding: 80px;
+}
+
+h1{
+	padding: 70px;
+	font-size: 30px;
+	color:#3A2618;
+}
+
+.click{
+	margin-left: 90px;
+}
+
+.wrrapper{
+	margin-top:20px;
+}
+
+input:focus{
+	outline: none;
+}
+
+input[type='text'], input[type='password']{
+	margin-bottom: 15px;
+	height: 24px;
+	border: none;
+	border-bottom: 1px solid #3A2618;
+	width:250px;
+}
+
+span{
+	display: inline-block;
+	position:relative;
+	width: 100px;
+	text-align: left;
+}
+
+#sample6_extraAddress{
+	margin-left:103px;
+}
+
+#sample6_postcode{
+	width: 80px;
+}
+
+input[type='radio']{
+	width:20px;
+	height:15px;
+	margin:10px;
+	margin-bottom: 20px;
+}
+button, input[type='button'], input[type='submit']{
+	display: inline-block;
+	border: 1px solid #3A2618;
+	padding-left: 6px;
+	padding-right: 6px;
+	background-color: #3A2618;
+	color: #ffffff;
+	margin:10px;
+	cursor : pointer;
+}
+input[type='submit']{
+	margin-left: 30px;
+}

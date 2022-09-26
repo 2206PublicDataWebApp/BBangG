@@ -26,7 +26,7 @@
 	</update>
 	<update id="updateUser" parameterType="User">
 		UPDATE USER_TBL
-		SET USER_PWD = #{userPwd}, USER_NAME = #{userName}, USER_GENDER=#{userGender}, USER_EMAIL = #{userEmail}, USER_PHONE = #{userPhone}
+		SET USER_PWD = #{userPwd}, USER_NAME = #{userName}, USER_GENDER=#{userGender}, USER_PHONE = #{userPhone}
 		, USER_ZIPCODE = #{userZipCode}, ADDR = #{addr}, ADDR_DETAIL = #{addrDetail}
 		WHERE USER_ID = #{userId}
 	</update>

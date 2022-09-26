@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>LOGIN</title>
+<title>빵지순례</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
@@ -18,7 +18,7 @@
 }
     
 body{
-	font-size: 14px;
+	font-size: 16px;
 	font-family: 'Noto Sans KR', sans-serif;
 	}
 	
@@ -68,6 +68,7 @@ img{
     background-color: #3A2618;
     margin-top: 10px;
     height: 50px;
+    cursor : pointer;
 }
 #login-form > input[type="checkbox"]{
     display: none;
@@ -107,7 +108,6 @@ a:visited{
 input:focus{
 	outline: none;
 }
-.login
 </style>
 </head>
 <body>
