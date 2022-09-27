@@ -51,6 +51,17 @@ img {
 	height: 100%;
 	object-fit: contain;
 }
+
+#search {
+	width: 20px;
+	height: 20px;
+	cursor: pointer;
+}
+
+#searchBtn{
+	background-color: white;
+	border: none;
+}
 </style>
 </head>
 <body>
@@ -107,7 +118,8 @@ img {
 				<option value="name">이름</option>
 				<option value="region">지역</option>
 			</select> <input type="text" name="searchValue" value="${searchValue }">
-			<input type="submit" value="검색">
+			<button type="submit" id="searchBtn"><img id="search" alt="" src="/resources/image/icon/serch_bt.png"></button>
+			<!-- <input type="submit" value="검색"> -->
 		</form>
 	</section>
 	<footer></footer>

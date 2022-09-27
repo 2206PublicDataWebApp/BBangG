@@ -2,9 +2,39 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ include file="/WEB-INF/views/include/head.jsp"%>
+<style>
+#buttons {
+	text-align: center;
+}
+
+#btn-delete {
+	margin: auto;
+	width: 100px;
+	font-size: 16px;
+	border: 1px solid #414141;
+	background-color: #ffffff;
+	color: #414141;
+	/* padding: 15px 25px; */
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	left: 80%;
+
+}
+
+#submitBtn {
+	margin: auto;
+	color: #fff;
+	font-size: 16px;
+	background-color: #3A2618;
+	margin-top: 10px;
+	width: 100px;
+	display: inline-block;
+}
+</style>
 </head>
 <body>
-<%@ include file="/WEB-INF/views/include/header.jsp"%>
+	<%@ include file="/WEB-INF/views/include/header.jsp"%>
 	<h1 align="center">${storeName }</h1>
 	<table border="1" align="center">
 		<tr>
@@ -23,9 +53,13 @@
 			</tr>
 		</c:forEach>
 	</table>
-	
-	<button onclick="productRegist(${storeNo},'${storeName }')">상품등록</button>
-	<button onclick="productRemove(${storeNo},'${storeName }')">선택삭제</button>
+	<div id="buttons">
+		<button id="submitBtn"
+			onclick="productRegist(${storeNo},'${storeName }')">상품등록</button>
+		<button id="btn-delete"
+			onclick="productRemove(${storeNo},'${storeName }')">선택삭제</button>
+
+	</div>
 	<script>
 		var productCode = '';
 		function getValue(event){

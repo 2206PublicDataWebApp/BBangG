@@ -2,7 +2,6 @@ package com.kh.bbang.store.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -37,10 +36,10 @@ public class StoreController {
 			ModelAndView mv,
 			@RequestParam(value="page", required=false) Integer page,
 			HttpServletRequest request) {
-		HttpSession session = request.getSession();
-		User user = (User)session.getAttribute("login");
-		if(user.getStatus().equals("0")) {
 			
+			HttpSession session = request.getSession();
+			User user = (User)session.getAttribute("login");
+			if(user.getStatus().equals("0")) {
 		//페이징처리
 				int currentPage = (page != null) ? page : 1;
 				int totalCount = sService.getTotalCount("","");
@@ -66,10 +65,10 @@ public class StoreController {
 			mv.addObject("endNavi", endNavi);
 			mv.addObject("sList", sList);
 		}
-		mv.setViewName("store/adminStoreList");
-		}else {
-			mv.setViewName("common/alert");
-		}
+			mv.setViewName("store/adminStoreList");
+			}else {
+				mv.setViewName("common/alert");
+			}
 		return mv;
 	}
 	
@@ -112,14 +111,17 @@ public class StoreController {
 	
 	// 점포 등록 페이지
 	@RequestMapping(value="/store/storeRegistForm.kh", method=RequestMethod.GET)
-	public String storeRegistForm(HttpServletRequest request) {
+	public ModelAndView storeRegistForm(
+			HttpServletRequest request,
+			ModelAndView mv) {
 		HttpSession session = request.getSession();
 		User user = (User)session.getAttribute("login");
 		if(user.getStatus().equals("0")) {
-			return "store/storeRegistForm";
+			mv.setViewName("/store/storeRegistForm");
 		}else {
-			return "common/alert";
+			mv.setViewName("common/alert");
 		}
+		return mv;
 	}
 	
 	// 점포 등록
@@ -132,9 +134,9 @@ public class StoreController {
 			HttpServletRequest request) {
 		try {
 			String storeFilename = uploadFile.getOriginalFilename();
+			System.out.println(storeFilename+"asdasddsasda");
 			if(!uploadFile.getOriginalFilename().equals("")) {
 				String root = request.getSession().getServletContext().getRealPath("resources");
-				System.out.println(root);
 				String savePath = root + "\\image\\store-images";
 				SimpleDateFormat sdf = new SimpleDateFormat("yyMMddhhmmss");
 				String storeFileRename = sdf.format(new Date(System.currentTimeMillis()))+store.getStoreName()+"."+storeFilename.substring(storeFilename.lastIndexOf(".")+1);
@@ -157,8 +159,7 @@ public class StoreController {
 			// 첨부파일 입력 코드.. 근데 다른 테이블을 사용함.. 어케하는지 조사..
 			// SEQUENCE 점포코드 부여 방식 조사 할것 -> 001 
 		}catch(Exception e) {
-			mv.addObject("msg",e.getMessage());
-			mv.setViewName("/common/errorPage");
+			mv.addObject("msg",e.toString()).setViewName("common/errorPage");
 		}
 		return mv;
 	}
@@ -177,7 +178,7 @@ public class StoreController {
 		return mv;
 	}
 	
-	// 점포 삭제
+	// 점포 삭제 -> FK 때문에 sImage.먼저 삭제 아니면 N으로 
 	@RequestMapping(value="/store/removeStore.kh", method=RequestMethod.GET)
 	public ModelAndView removeStore(
 			ModelAndView mv,
@@ -189,7 +190,6 @@ public class StoreController {
 			}
 		}catch(Exception e) {
 			mv.addObject("msg",e.toString());
-			
 			mv.setViewName("/common/errorPage");
 		}
 		return mv;
@@ -208,7 +208,7 @@ public class StoreController {
 			mv.addObject("store", store);
 			mv.setViewName("/store/storeModifyForm");
 		}else {
-			mv.setViewName("/common/alert");
+			mv.setViewName("common/alert");
 		}
 		return mv;
 	}

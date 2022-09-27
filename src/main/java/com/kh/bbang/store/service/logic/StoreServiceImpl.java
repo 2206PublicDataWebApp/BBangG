@@ -24,12 +24,14 @@ public class StoreServiceImpl implements StoreService {
 	
 	@Override
 	public int registStore(Store store) {
+		System.out.println(store);
 		int result = sStore.insertStore(session, store);
 		return result;
 	}
 
 	@Override
 	public int registStoreImage(StoreImage sImage) {
+		System.out.println(sImage);
 		int result = sStore.insertStoreImage(session, sImage);
 		return result;
 	}

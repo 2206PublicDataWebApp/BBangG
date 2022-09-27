@@ -35,9 +35,9 @@
 	<insert id="insertStoreImage">
 	INSERT INTO STORE_IMAGE_TBL VALUES(#{refStoreNo}, #{storeFilename}, #{storeFileRename}, #{storeFilepath})
 	</insert>
-	<delete id="deleteStore">
-	DELETE FROM STORE_TBL WHERE STORE_NO = #{storeNo}
-	</delete>
+	<update id="deleteStore">
+	UPDATE STORE_TBL SET STORE_STATUS = 'N' WHERE STORE_NO = #{storeNo}
+	</update>
 	<update id="updateStore">
 	UPDATE STORE_TBL SET STORE_NAME = #{storeName}, STORE_ZIPCODE = #{storeZipCode}, STORE_ADDR = #{storeAddr},
 	STORE_ADDR_DETAIL = #{storeAddrDetail}, STORE_CEO = #{storeCeo}, STORE_TEL = #{storeTel}, STORE_URL = #{storeUrl},
@@ -48,10 +48,10 @@
 	WHERE REF_STORE_NO = #{refStoreNo}
 	</update>
 	<select id="selectAllStore" resultMap="storeResultMap">
-	SELECT * FROM STORE_TBL JOIN STORE_IMAGE_TBL ON STORE_NO = REF_STORE_NO WHERE STORE_STATUS = 'Y' ORDER BY STORE_NO DESC
+	SELECT * FROM STORE_TBL LEFT JOIN STORE_IMAGE_TBL ON STORE_NO = REF_STORE_NO WHERE STORE_STATUS = 'Y' ORDER BY STORE_NO DESC
 	</select>
 	<select id="selectStoreByNo" resultMap="storeResultMap">
-	SELECT * FROM STORE_TBL JOIN STORE_IMAGE_TBL ON STORE_NO = REF_STORE_NO WHERE STORE_NO = #{storeNo} AND STORE_STATUS = 'Y'
+	SELECT * FROM STORE_TBL LEFT JOIN STORE_IMAGE_TBL ON STORE_NO = REF_STORE_NO WHERE STORE_NO = #{storeNo} AND STORE_STATUS = 'Y'
 	</select>
 	<select id="selectTotalCount" resultType="_int">
 	SELECT COUNT(*) FROM STORE_TBL
@@ -63,7 +63,7 @@
 		</where>
 	</select>
 	<select id="selectSearchedList" resultMap="storeResultMap">
-	SELECT * FROM STORE_TBL JOIN STORE_IMAGE_TBL ON STORE_NO = REF_STORE_NO
+	SELECT * FROM STORE_TBL LEFT JOIN STORE_IMAGE_TBL ON STORE_NO = REF_STORE_NO
 		<where>
 			<if test="searchCondition.toString() == 'all'">STORE_NAME LIKE '%'||#{searchValue}||'%' OR STORE_ADDR LIKE '%'||#{searchValue}||'%'</if>
 			<if test="searchCondition.toString() == 'name'">STORE_NAME LIKE '%'||#{searchValue}||'%'</if>
@@ -84,7 +84,7 @@
 		</where>
 	</select>
 	<select id="selectSortedList" resultMap="storeResultMap">
-	SELECT * FROM STORE_TBL JOIN STORE_IMAGE_TBL ON STORE_NO = REF_STORE_NO
+	SELECT * FROM STORE_TBL LEFT JOIN STORE_IMAGE_TBL ON STORE_NO = REF_STORE_NO
 		<where>
 			<if test="region1.toString() == '서울'">STORE_ADDR LIKE '%'||#{region1}||'%' OR STORE_ADDR LIKE '%'||#{region2}||'%'</if>
 			<if test="region1.toString() == '대전'">STORE_ADDR LIKE '%'||#{region1}||'%' OR STORE_ADDR LIKE '%'||#{region2}||'%'</if>
