@@ -22,7 +22,7 @@
 		</tr>
 		<tr>
 			<td>작성날짜</td>
-			<td>${faq.faqCreateDate }</td>
+			<td>${faq.faqCreateDate }</td> 
 		</tr>
 		<tr>
 			<td>조회수</td>
