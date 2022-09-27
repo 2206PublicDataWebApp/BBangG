@@ -33,4 +33,6 @@ public interface QnaStore {
 	public int deleteReply(SqlSession session, Integer replyNo);
 
 	public List<Reply> selectAllReply(SqlSession session, int refQnaNo);
+	
+	public int insertAnswer(SqlSession session, Qna qna);
 }

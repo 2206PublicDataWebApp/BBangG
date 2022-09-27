@@ -304,14 +304,26 @@ public class QnaController {
 	
 	
 	
-	/////////////// 답변 //////////////////
+	
+	@GetMapping(value="/qna/writeAnswer.kh")
+	public ModelAndView showAnswerWrite(HttpSession session, ModelAndView mv) {
+		mv.setViewName("qna/qnaWriteForm");
+		User user = (User) session.getAttribute("login");
+		if(user== null){
+			mv.addObject("needLogin", "글을 작성하기 위해 로그인이 필요합니다.");
+			mv.setViewName("qna/listView");
+		}
+		return mv;
+	}
+	
+	
 	@PostMapping(value="/qna/registAnswer.kh")
 	public ModelAndView registAnswer(
 			ModelAndView mv
 			, @ModelAttribute Qna qna
 			, @RequestParam(value="uploadFile", required=false) MultipartFile uploadFile
-			,HttpServletRequest request
-			) {
+			,HttpServletRequest request) {
+		
 		try {
 			String qnaFilename = uploadFile.getOriginalFilename();
 			if(!qnaFilename.equals("")) {
@@ -341,24 +353,61 @@ public class QnaController {
 		return mv;
 	}
 	
-//	@GetMapping(value="/qna/modifyAnswer.kh")
-//	public ModelAndView answerModifyView(
-//			ModelAndView mv
-//			,@RequestParam("answerNo") Integer answerNo
-//			,@RequestParam("page") int page) {
+//	@PostMapping(value="/qna/answerModify.kh")
+//	public ModelAndView answerModify(
+//			@ModelAttribute Qna qna
+//			, ModelAndView mv
+//			,@RequestParam(value="reloadFile", required=false) MultipartFile reloadFile
+//			,@RequestParam("page") Integer page
+//			,HttpServletRequest request) {
 //		try {
-//			Qna qna = qnaService.printAnswerOneByNo(answerNo);
-//			mv.addObject("qna", qna);
-//			mv.addObject("page", page);
-//			mv.setViewName("qna/modifyForm");
+//			String qnaFilename = reloadFile.getOriginalFilename();
+//			if(reloadFile != null && !qnaFilename.equals("")) {
+//				
+//				String root = request.getSession().getServletContext().getRealPath("resources");
+//				String savedPath = root + "\\qnauploadFiles";
+//				File file = new File(savedPath + "\\" + qna.getQnaFileRename());
+//				if(file.exists()) {
+//					file.delete();
+//				}
+//				
+//				SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+//				String qnaFileRename = sdf.format(new Date(System.currentTimeMillis()))
+//						+ "." + qnaFilename.substring(qnaFilename.lastIndexOf(".")+1);
+//				String qnaFilePath = savedPath + "\\" + qnaFileRename;
+//				reloadFile.transferTo(new File(qnaFilePath));
+//				qna.setQnaFilename(qnaFilename);
+//				qna.setQnaFileRename(qnaFileRename);
+//				qna.setQnaFilePath(qnaFilePath);
+//			}
+//			int result = qnaService.modifyAnswer(qna);
+//			mv.setViewName("redirect:/qna/list.kh?page="+page);
 //		} catch (Exception e) {
-//			mv.addObject("msg", e.toString());
-//			mv.setViewName("common/errorPage");
+//			mv.addObject("msg", e.toString()).setViewName("common/errorPage");
 //		}
 //		return mv;
 //	}
-	
-	
+//	
+//	
+//	@GetMapping(value="/qna/remove.kh")
+//	public String answerRemove(
+//			HttpSession session
+//			, Model model
+//			, @RequestParam("page") Integer page) {
+//		try {
+//			int qnaNo = (int)session.getAttribute("aNo");
+//			int result = qnaService.removeOneByNo(qnaNo);
+//			if(result > 0) {
+//				session.removeAttribute("qnaNo");
+//			}
+//			return "redirect:/qna/list.kh?page="+page;
+//		} catch (Exception e) {
+//			model.addAttribute("msg", e.toString());
+//			return "common/errorPage";
+//		}
+//	}
+//	
+//	
 	
 
 }

@@ -184,8 +184,8 @@
 				</td>
 			</tr>
 			<td>
-					<input type="button" value="답변하기" onCLick="answerForm${isLogOn}; ${contextPath }/qna/writeAnswer.kh; ${article.articleNO } )">
-				</td>
+			<button onclick="location.href='/qna/writeAnswer.kh';">답변하기</button>
+			</td>
 		</table>
 	</form>
 	

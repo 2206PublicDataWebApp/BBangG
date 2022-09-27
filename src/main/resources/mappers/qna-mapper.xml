@@ -137,6 +137,49 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</where>
 	</select>
 	
+	<!-- 답변 입력 -->
+	<insert id="insertAnswer">
+	INSERT INTO QNA_TBL(
+		QNA_NUMBER,
+		USER_ID,
+		QNA_TITLE,
+		QNA_CONTENT,
+		QNA_CREATEDATE,
+		QNA_UPDATEDATE,
+		QNA_FILENAME,
+		QNA_FILERENAME,
+		QNA_FILEPATH,
+		QNA_VIEWCOUNT,
+		QNA_TYPENUMBER,
+		QNA_SECRET,
+		QNA_ISANSWERED,
+		ANSWER_NUMBER,
+		ANSWER_TITLE,
+		ANSWER_CONTENT
+		)
+	 VALUES(
+		#{qnaNo},
+		#{qnaWriter},
+		#{qnaTitle},
+		#{qnaContent},
+		DEFAULT, 
+		DEFAULT, 
+		NULL,
+		NULL,
+		NULL, 
+		DEFAULT, 
+		NULL,
+		NULL,
+		NULL,
+		SEQ_ANSWERNO.NEXTVAL,
+		#{answerTitle},
+		#{answerContent}
+	)
+	</insert>
+	
+	<!-- 답변 조회 -->
+	
+	
 	
 	<resultMap type="Reply" id="replyResultMap">
 		<id property="qnaReplyNo" 				column="QNA_REPLY_NUMBER" />
@@ -180,4 +223,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT * FROM QNA_REPLY_TBL
 		WHERE REF_QNA_NUMBER = #{refQnaNo} 
 	</select>
+	
+	
 </mapper>
