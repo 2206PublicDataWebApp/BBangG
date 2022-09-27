@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>문의 등록</title>
+    <title>문의 수정</title>
     <style>
         html, body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, blockquote, th, td, img {
             margin: 0;
@@ -20,7 +20,7 @@
             text-decoration: none;
         }
 
-        .qna-write{
+        .review-write{
             width: 980px;
             margin: 25px auto;
             box-sizing:border-box ;
@@ -128,45 +128,52 @@
 </head>
 <body>
 <%@ include file="/WEB-INF/views/include/header.jsp"%>
-    <h1 align="center">질문 등록</h1>
-	<br><br>
-	<form action="/qna/register.kh" method="post" enctype="multipart/form-data">
-		<table align="center" border="1">
-			<tr>
-				<td>제목</td>
-				<td><input type="text" name="qnaTitle"></td>
-			</tr>
-			<tr>
-				<td>작성자</td>
-				<td><input type="text" name="qnaUserName" value="${login.userName }" readonly></td>
-				<input type="text" name="qnaWriter" value="${login.userId}" style="display: none">
-			</tr>
-			<tr>
-				<td>내용</td>
-				<td><textarea cols="50" rows="10" name="qnaContent"></textarea></td>
-			</tr>
-			<tr>
-				<td>첨부파일</td>
-				<td><input type="file" name="uploadFile"></td>
-			</tr>
-			<tr>
-				<td>비밀글 여부</td>
+    <div class="review-write">
+        <h2 id="store-name"> 답변 수정</h2>
+            <div id="write_area">
+                		
+	         </div>
+	         <form action="/qna/answerModify.kh" method="post" enctype="multipart/form-data">
+	         	<input type="hidden" name="page" value="${page }">
+				<input type="hidden" name="answerNo" value="${qna.answerNo }">
+				<input type="hidden" name="qnaFilename" value="${qna.qnaFilename }">
+				<input type="hidden" name="qnaFileRename" value="${qna.qnaFileRename }">
+				
+                	<input type="text" name="answerTitle" value="${qna.answerTitle }">
+                	<br><br>
+                <div id="qna-content">
+                    <textarea name="qnaContent" id="in-content" rows="20" cols="55" placeholder="내용을 작성해주세요" required>${qna.answerContent}</textarea>
+                    <div id="max">(0 / 2000)</div>
+                </div>
 
-				<td>
-					<select name="qnaSecret">
-						<option value="1">비밀글</option>
-						<option value="0">전체 공개</option>
-					</select>
-				</td>
-			</tr>
-			<tr>
-				<td colspan="2">
-					<input type="submit" value="등록">
-					<input type="reset" value="취소">
-				</td>
+                <input type="file" id="select-file" name="reloadFile" value="${qna.qnaFilename }"/>
+                
+	            <div>
+	                <a  href = "/qna/list.kh"><button class="write-btn-cancel" type="reset">취소</button></a>
+	                <button class="write-btn" type="submit">수정</button>
+	                <br>
+	                <a href="/qna/list.kh" >목록</a>
+					<a href="javascript:history.go(-1);">이전 페이지로</a>
+	          
+	          
+				
+			</form>
+    </div>
+     <script>
 
-			</tr>
-		</table>
-	</form>
+     
+        $(document).ready(function() {
+            $('#in-content').on('keyup', function() {
+                $('#max').html("("+$(this).val().length+" / 2000)");
+    
+                if($(this).val().length > 2000) {
+                    $(this).val($(this).val().substring(0, 2000));
+                    $('#max').html("(2000 / 2000)");
+                }
+            });
+    	});
+
+     
+    </script>
 </body>
 </html>

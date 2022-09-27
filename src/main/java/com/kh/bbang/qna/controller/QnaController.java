@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -263,6 +264,8 @@ public class QnaController {
 		return mv;
 	}
 	
+	//////////// 댓글 //////////////
+	
 	@PostMapping(value="/qna/addReply.kh")
 	public ModelAndView addQnaReply(
 			ModelAndView mv
@@ -272,11 +275,6 @@ public class QnaController {
 		User user = (User)session.getAttribute("login");
 		String replyWriter = user.getUserId();
 
-		/**
-		 * refNo -> 댓글이 달릴 원 글의 아이디(no)
-		 *refNo
-		 */
-		
 		int qnaNo = reply.getRefQnaNo();
 		System.out.println("qnaNo = " + qnaNo);
 
@@ -302,5 +300,87 @@ public class QnaController {
 			@RequestParam("qnaReplyNo") Integer qnaReplyNo) {
 		int result = qnaService.deleteReply(qnaReplyNo);
 		return "redirect:/qna/list.kh";
+	}
+	
+	
+	
+	
+	@GetMapping(value="/qna/writeAnswer.kh")
+	public ModelAndView showAnswerWrite(HttpSession session, ModelAndView mv) {
+		mv.setViewName("qna/qnaWriteForm");
+		User user = (User) session.getAttribute("login");
+		if(user== null){
+			mv.addObject("needLogin", "글을 작성하기 위해 로그인이 필요합니다.");
+			mv.setViewName("qna/listView");
+		}
+		return mv;
+	}
+	
+	@PostMapping(value="/qna/registAnswer.kh")
+	public ModelAndView registAnswer(
+			ModelAndView mv
+			, @ModelAttribute Qna qna
+			, @RequestParam(value="uploadFile", required=false) MultipartFile uploadFile
+			,HttpServletRequest request) {
+		
+		try {
+			String qnaFilename = uploadFile.getOriginalFilename();
+			if(!qnaFilename.equals("")) {
+				String root = request.getSession().getServletContext().getRealPath("resources");
+				String savePath = root + "\\qnauploadFiles";
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+				String qnaFileRename 
+				= sdf.format(new Date(System.currentTimeMillis()))+"."
+						+qnaFilename.substring(qnaFilename.lastIndexOf(".")+1);
+				File file = new File(savePath);
+				if(!file.exists()) {
+					file.mkdir();
+				}
+				uploadFile.transferTo(new File(savePath+"\\"+qnaFileRename)); 
+				String qnaFilePath = savePath+"\\"+qnaFileRename;
+				qna.setQnaFilename(qnaFilename);
+				qna.setQnaFileRename(qnaFileRename);
+				qna.setQnaFilePath(qnaFilePath);
+			}
+			int result = qnaService.registAnswer(qna);
+			mv.setViewName("redirect:/qna/list.kh");
+		} catch (Exception e) {
+			e.printStackTrace();
+			mv.addObject("msg", e.getMessage());
+			mv.setViewName("common/errorPage");
+		}
+		return mv;
+	}
+
+	//관리자페이지
+	@GetMapping(value="/admin/adminQnaList.kh")
+	public ModelAndView adminQnaListView(
+			ModelAndView mv
+			,@RequestParam(value="page", required=false) Integer page) {
+		int currentPage = (page != null) ? page : 1;
+		int totalCount = qnaService.getTotalCount("","");
+		int qnaLimit = 10;
+		int naviLimit = 5;
+		int maxPage;
+		int startNavi;
+		int endNavi;
+		maxPage = (int)((double)totalCount/qnaLimit + 0.9);
+		startNavi = ((int)((double)currentPage/naviLimit+0.9)-1)*naviLimit+1;
+		endNavi = startNavi + naviLimit - 1;
+		if(maxPage < endNavi) {
+			endNavi = maxPage;
+		}
+		List<Qna> qnaList = qnaService.printAllQna(currentPage, qnaLimit);
+		if(!qnaList.isEmpty()) {
+			mv.addObject("urlVal", "list");
+			mv.addObject("maxPage", maxPage);
+			mv.addObject("currentPage", currentPage);
+			mv.addObject("startNavi", startNavi);
+			mv.addObject("endNavi", endNavi);
+			mv.addObject("qnaList", qnaList);
+		}
+		mv.setViewName("qna/listView");
+		return mv;
+	
 	}
 }

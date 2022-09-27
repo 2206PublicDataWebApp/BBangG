@@ -91,4 +91,20 @@ public class QnaServiceImpl implements QnaService {
 		return replyList;
 	}
 
+	@Override
+	public int registAnswer(Qna qna) {
+		int result = qnaStore.insertAnswer(session, qna);
+		return result;
+	}
+
+	@Override
+	public int modifyAnswer(Qna qna) {
+		int result = qnaStore.modifyAnswer(session, qna);
+		return result;
+	}
+
+	
+
+	
+
 }

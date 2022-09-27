@@ -18,8 +18,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="qnaTypeNo" 			column="QNA_TYPENUMBER" />
 		<result property="qnaSecret" 			column="QNA_SECRET" />
 		<result property="qnaIsAnswered" 		column="QNA_ISANSWERED" />
-		<result property="qnaAnswerTitle" 		column="ANSWER_TITLE" />
-		<result property="qnaAnswerContent" 	column="ANSWER_CONTENT" />
+		<result property="answerNo" 			column="ANSWER_NUMBER" />
+		<result property="answerTitle" 			column="ANSWER_TITLE" />
+		<result property="answerContent" 		column="ANSWER_CONTENT" />
 	</resultMap>
 	<insert id="insertQna">
 		INSERT INTO QNA_TBL(
@@ -36,6 +37,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		QNA_TYPENUMBER,
 		QNA_SECRET,
 		QNA_ISANSWERED,
+		ANSWER_NUMBER,
 		ANSWER_TITLE,
 		ANSWER_CONTENT
 		)VALUES(
@@ -52,8 +54,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		#{qnaTypeNo},
 		#{qnaSecret},
 		#{qnaIsAnswered},
-		#{qnaAnswerTitle},
-		#{qnaAnswerContent})
+		#{answerNo},
+		#{answerTitle},
+		#{answerContent}
+		 )
 	</insert>
 	
 	<update id="updateQna">
@@ -129,8 +133,52 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				OR USER_ID LIKE
 				'%'||#{searchValue}||'%'
 			</if>
+			ORDER BY QNA_NUMBER DESC
 		</where>
 	</select>
+	
+	<!-- 답변 입력 -->
+	<insert id="insertAnswer">
+	INSERT INTO QNA_TBL(
+		QNA_NUMBER,
+		USER_ID,
+		QNA_TITLE,
+		QNA_CONTENT,
+		QNA_CREATEDATE,
+		QNA_UPDATEDATE,
+		QNA_FILENAME,
+		QNA_FILERENAME,
+		QNA_FILEPATH,
+		QNA_VIEWCOUNT,
+		QNA_TYPENUMBER,
+		QNA_SECRET,
+		QNA_ISANSWERED,
+		ANSWER_NUMBER,
+		ANSWER_TITLE,
+		ANSWER_CONTENT
+		)
+	 VALUES(
+		#{qnaNo},
+		#{qnaWriter},
+		#{qnaTitle},
+		#{qnaContent},
+		DEFAULT, 
+		DEFAULT, 
+		NULL,
+		NULL,
+		NULL, 
+		DEFAULT, 
+		1,
+		NULL,
+		NULL,
+		SEQ_ANSWERNO.NEXTVAL,
+		#{answerTitle},
+		#{answerContent}
+	)
+	</insert>
+	
+	<!-- 답변 조회 -->
+	
 	
 	
 	<resultMap type="Reply" id="replyResultMap">
@@ -175,4 +223,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT * FROM QNA_REPLY_TBL
 		WHERE REF_QNA_NUMBER = #{refQnaNo} 
 	</select>
+	
+	
 </mapper>

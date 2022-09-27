@@ -44,6 +44,11 @@
 			<a href="#" onclick="faqRemove(${page});">삭제 </a>
 			</td>
 		</tr>
+		<tr>
+		<td>
+	
+		</td>
+		</tr>
 	</table>
 
 	<script>
