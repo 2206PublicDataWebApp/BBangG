@@ -58,6 +58,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				OR FAQ_CONTENT LIKE '%'||#{searchValue}||'%'
 				OR USER_ID LIKE '%'||#{searchValue}||'%'
 			</if>
+			ORDER BY FAQ_NUMBER DESC
 		</where>
 	</select>
 

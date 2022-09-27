@@ -1,41 +1,142 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
-
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
+<link href=”https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap” rel=”stylesheet”>
+
+<%@ include file="/WEB-INF/views/include/sideBar.Qna.jsp"%>
+<%@ include file="/WEB-INF/views/include/head.jsp"%>
 <meta charset="UTF-8">
-<title>FAQ</title>
+<title>FAQ게시판</title>
+<style>
+.qna-board {
+            display: flex;
+            padding: 30px 0 0;
+            width: 1200px;
+            margin: 25px auto;
+            flex-wrap: wrap;
+    		justify-content: space-between;
+        }
+        
+        #common #contents {
+            margin-top: 140px;
+            max-width: var(--width);
+            padding: 0 20px;
+        }
+        
+         #qna-page{
+        	text-align: center;
+        	margin-top : 80px;
+            margin: 80px auto;
+            color:#3A2618;
+            font-size: 30px;
+        	font-weight: bold;
+        }
+        
+         a,li,ul{
+            text-decoration: none;
+            color : dimgray;
+        }
+        div {
+            display: block;
+            list-style-type: disc;
+            margin-block-start: 1em;
+            margin-block-end: 2em;
+            margin-inline-start: 0px;
+            margin-inline-end: 0px;
+            padding-inline-start: 40px;
+            margin-top: 0px;
+        }
+        
+        .paging-btn{
+            margin: 30px;
+        }
+        #paging-wrap  {
+            text-align:center;
+        }
+        #paging-number {
+            margin: 10px 10px;
+            display:inline-block;
+
+        }
+      
+        #faq-page{
+        	text-align: center;
+        	margin-top : 80px;
+            margin: 80px auto;
+            color:#3A2618;
+            font-size: 30px;
+        	font-weight: bold;
+        	}
+        	
+        	div {
+            display: block;
+            list-style-type: disc;
+            margin-block-start: 1em;
+            margin-block-end: 2em;
+            margin-inline-start: 0px;
+            margin-inline-end: 0px;
+            padding-inline-start: 40px;
+        }
+        
+         .accordion {
+            background-color: #eee;
+            color: #444;
+            cursor: pointer;
+            padding: 18px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 15px;
+            transition: 0.4s;
+        }
+
+        .active,
+        .accordion:hover {
+            background-color: #ccc;
+        }
+
+        .panel {
+            padding: 0 18px;
+            background-color: white;
+            overflow: hidden;
+        }
+       
+ 
+</style>
 </head>
+<script>
+	<c:if test="${not empty notVerified}">
+	     alert("${notVerified}");
+		 location.href="/qna/list.kh";
+	</c:if>
+
+	<c:if test="${not empty needLogin}">
+	alert("${needLogin}");
+	location.href="/qna/list.kh";
+	</c:if>
+	
+	
+</script>
+<%@ include file="/WEB-INF/views/include/header.jsp"%>
+
 <body>
-	<h1 align="center">게시글목록</h1>
-	<br>
-	<br>
-	<table align="center" border="1">
-		<tr>
-			<th>번호</th>
-			<th>제목</th>
-			<th>작성자</th>
-			<th>날짜</th>
-			<th>조회수</th>
-			<th>비고</th>
-		</tr>
+<div id="all" style="padding:0px 300px 0px 300px"]>
+	<div id="faq-page">빵지순례 FAQ</div>
+	<table align="center" border="0">
+		    <div class="panel">
 		<c:if test="${!empty faqList }">
 			<c:forEach items="${faqList }" var="faq" varStatus="i">
-				<tr>
-					<td>${i.count }</td>
-					<td><a href="/faq/detail.kh?faqNo=${faq.faqNo }&page=${currentPage }">${faq.faqTitle }</a></td>
-					<td>${faq.faqWriter }</td>
-					<td>${faq.faqCreateDate }</td>
-					<td>${faq.faqViewCount }</td>
-					<td><c:if test="${!empty faq.faqFilename }">
-					O
-					</c:if> <c:if test="${empty faq.faqFilename }">
-					X
-					</c:if></td>
-				</tr>
+			</div>
+			<button class="accordion">${faq.faqTitle }</button>
+        <p>${faq.faqContent}</p>
+        
+    <div class="panel">
+    </div>
+					
 			</c:forEach>
 
 			<tr align="center" height="20">
@@ -77,8 +178,25 @@
 			</td>
 			<td>
 				<button onclick="location.href='/faq/writeView.kh';">글쓰기</button>
+				
 			</td>
+			
 		</tr>
 	</table>
+	</div>
+	<script>
+        $(".panel").css('display', 'none');
+        $(".accordion").click(function (event) {
+            var selector = $(this).next();
+            console.log(selector);
+            var display_ys = selector.css('display');
+            if (display_ys != 'block') {
+               
+                selector.css("display", "block");
+            } else {
+                selector.css("display", "none");
+            }
+        });
+    </script>
 </body>
 </html>
