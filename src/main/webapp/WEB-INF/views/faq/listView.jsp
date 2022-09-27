@@ -132,7 +132,7 @@
 			<c:forEach items="${faqList }" var="faq" varStatus="i">
 			</div>
 			<button class="accordion">${faq.faqTitle }</button>
-        <p>${faq.faqContent}</p>
+        <p style="display:none;">${faq.faqContent}</p>
         
     <div class="panel">
     </div>
@@ -176,6 +176,7 @@
 					<input type="submit" value="검색">
 				</form>
 			</td>
+		
 			<td>
 				<button onclick="location.href='/faq/writeView.kh';">글쓰기</button>
 				

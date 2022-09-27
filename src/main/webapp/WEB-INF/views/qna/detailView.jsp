@@ -196,8 +196,10 @@
 				<td>${reply.qnaReplyContent }</td>
 				<td>${reply.qnaReplyUpdateDate }</td>
 				<td>
+				<c:if test="${!empty sessionScope.login.userId}">
 					<a href="#" onclick="modifyView(this,'${reply.qnaReplyContent }', ${reply.qnaReplyNo });">수정</a> 
 					<a href="#" onclick="removeReply(${reply.qnaReplyNo });">삭제</a>
+					</c:if>
 				</td>
 			</tr>
 
