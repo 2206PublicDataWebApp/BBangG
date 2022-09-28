@@ -179,7 +179,6 @@
 				</div>
 				<br>
 				<br><br><br><br><br>
-					</div id="wrapper"><jsp:include page="/WEB-INF/views/include/footer.jsp" /></div>
-				
+							
 </body>
 </html>
