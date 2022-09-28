@@ -24,7 +24,7 @@
            display:block;
        }
        .review-detail{ 
-           border : 1px solid #414141 ;
+           border : 1px solid #e7e7e7 ;
            width: 980px;
            margin: 25px auto;
            box-sizing:border-box ;
@@ -77,6 +77,7 @@
             width: 980px;
             padding : 10px 40px;
             box-sizing:border-box ;
+            color : #3A2618
        }
        #sort{
         position: relative;
@@ -152,7 +153,9 @@
        #heart{
             text-decoration: none;
        }
-       
+       .love{
+       		color : #3A2618;
+       }
 </style>
 <script src="/resources/js/jquery-3.6.1.min.js"></script>
 <%@ include file="/WEB-INF/views/include/head.jsp"%>
@@ -163,7 +166,7 @@
 <input type="hidden" name="userId" value="${login.userId }">
     <div id="review-title">
         <div id="review-title">
-            <h1 id="storename">${review.storeName } 리뷰</h1>
+            <h1 id="storename"><span class="love">♥</span> ${review.storeName }</h1>
         </div>
     </div>
       <!-- 1 -->
@@ -183,8 +186,8 @@
                 </div>
             </div>
             <div class="heart-count">
-                <div id="heart"><a href="javascript:void(0);" onclick="clickHeart('${review.reviewNo}', 0);">♡  ${review.reviewHeart }</a></div>
-            	<div>조회 ${review.reviewCount } </div>
+                <div id="heart"><a href="javascript:void(0);" onclick="clickHeart('${review.reviewNo}', 0);">♥&nbsp&nbsp&nbsp&nbsp  ${review.reviewHeart }</a></div>
+            	<div>조회&nbsp${review.reviewCount } </div>
             </div>
         </div>
         <div class="reivew-content">
