@@ -131,7 +131,7 @@
 <body>
 <%@ include file="/WEB-INF/views/include/header.jsp"%>
     <div class="review-write">
-        <h2 id="store-name">${review.storeNo } 에서 작성한 리뷰를 수정합니다</h2>
+        <h2 id="store-name">${review.storeName }에서 작성한 리뷰를 수정합니다</h2>
             <div id="write_area">
                 <div class="star-rating">
                     <form class="star-form" name="star-form" id="star-form" method="post">

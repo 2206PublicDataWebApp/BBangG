@@ -124,7 +124,10 @@
 		    cursor:pointer;
 		    background-color:transparent;
         }
-       
+       .content{
+            width: 270px;
+            height: 115px;
+        }
     </style>
 
     <div class="wrap">
