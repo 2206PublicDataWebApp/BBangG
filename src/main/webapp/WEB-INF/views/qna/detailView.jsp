@@ -9,6 +9,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>QNA게시판 상세 정보</title>
     <style>
+    
+   
+      
         html, body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, blockquote, th, td, img {
             margin: 0;
             padding: 0;
@@ -51,48 +54,8 @@
             position: relative;
             right: 6%;
         }
-        .write-btn{
-            margin: 10px auto;
-        }
-        
-        #star-form fieldset{
-            display: inline-block;
-            direction: rtl;
-            border:0;
-        }
-        
-        #star-form fieldset legend{
-            
-            text-align: right;
-        }
-        
-        #star-form input[type=radio]{
-            display: none;
-        }
-        #star-form label{
-            font-size: 20px;
-            color: transparent;
-            text-shadow: 0 0 0 #c5c5c5;
-        }
-        
-        #star-form label:hover{
-            text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
-        }
-        
-        #star-form label:hover ~ label{
-            text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
-        }
-        
-        #star-form input[type=radio]:checked ~ label{
-            text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
-        }
-        
-        .star-rating{
-            
-            margin: 10px auto;
-            box-sizing:border-box ;
-            padding : 10px ;
-        }
+
+      
         #myform input[type=radio]:checked ~ label{
 		    text-shadow: 0 0 0 #a00; 
 		}
@@ -137,7 +100,7 @@
 	       padding : 50px 60px;
 	       }
 	       
-	        .detail-title-wrap{
+	   .detail-title-wrap{
        display: flex;
        justify-content: space-between;
        }
@@ -150,19 +113,17 @@
    		margin-top:50px;
 	       }
 	       
-	   #btn-modify{
-       width: 80px;
-       font-size: 15px;
-       border: 1px solid #414141;
-       background-color: #414141;
-       color: rgb(255, 255, 255);
-       /* padding: 15px 25px; */
-       text-align: center;
-       text-decoration: none;
-       display: inline-block;
-       position: relative;
-       left : 80%;
-       }
+	    #btn-modify{
+	       width: 80px;
+	       font-size: 15px;
+	       border: 1px solid #414141;
+	       background-color: #414141;
+	       color: rgb(255, 255, 255);
+	       text-align: center;
+	       text-decoration: none;
+	       display: inline-block;
+	       position: relative;
+	       left : 80%;
        
         #btn-delete{
        width: 80px;
@@ -170,7 +131,6 @@
        border: 1px solid #414141;
        background-color: #ffffff;
        color: #414141;
-       /* padding: 15px 25px; */
        text-align: center;
        text-decoration: none;
        display: inline-block;
@@ -180,7 +140,7 @@
        #qna-page{
         	text-align: center;
         	margin-top : 80px;
-            margin: 80px auto;
+            margin: 60px auto;
             color:#3A2618;
             font-size: 30px;
         	font-weight: bold;
@@ -195,7 +155,7 @@
 <%@ include file="/WEB-INF/views/include/header.jsp"%>
 <div id="all" style="padding:0px 300px 0px 300px"]>
 <br><br><br>
-    <div id="qna-page" padding="300px" align="center">
+    <div id="qna-page" padding="150px" align="center">
     <h1>${qna.qnaWriter }님의 질문 상세보기</h1></div> <br><br>
 	
 	<div class="qna-detail">
@@ -204,27 +164,22 @@
                 <div class="user-date">
                     <div class="user-id" >${qna.qnaWriter }</div><br>
                     <div class="date" style="border-top:1px solid brown";>${qna.qnaCreateDate }</div>
-                </div><br>
-		<div>
-                    <div></div>
-                </div>
-               </div>
-                <div></div>
-            	<div></div>
-            </div>
-             </div>
+                </div></div><br></div></div>
+                
         <div class="qna-content">
             <div id="qna-img" style="border-top:1px solid brown";>
-                <img alt="image" style="width:200px"; height="200px" src="/resources/qnauploadFiles/${qna.qnaFileRename }" 
+                <img alt="image" style="width:100px"; "height="100px" src="/resources/qnauploadFiles/${qna.qnaFileRename }" 
 				width="300" height="300">
             </div><br><br>
-        <div style="border-top:1px solid brown";>
+        <div style="border-top:1px solid brown" >
         	${qna.qnaContent }
-        </div> <br><br>
-        <div class="btn-wrap">
-            <a id="btn-modify" href="/qna/modifyView.kh?qnaNo=${qna.qnaNo }&page=${page}">수정</a>
+        </div> 
+        <br><br>
+        <div>
+        <c:if test="${login.userId eq qna.qnaWriter || login.status eq '0'}">
+            <a id="btn-modify" href="/qna/modifyView.kh?qnaNo=${qna.qnaNo }&page=${page}">수정</a>&nbsp
             <a id="btn-delete" href="#" onclick="qnaRemove(${page});">삭제</a>
-
+		</c:if>
         </div>
     </div>   
   
@@ -242,9 +197,14 @@
 				</c:if>
 				</td>
 			</tr>
+			<td>
+			</td>
 		</table>
 	</form>
+	
+	<c:if test="${sessionScope.login.status == 0}">
 			<button type="button" onclick="location.href='/qna/writeAnswer.kh';">답변하기</button>
+	</c:if>
 	
 	<table align="center" width="500" border="1">
 		<c:forEach items="${replyList }" var="reply">
@@ -253,7 +213,7 @@
 				<td>${reply.qnaReplyContent }</td>
 				<td>${reply.qnaReplyUpdateDate }</td>
 				<td>
-				<c:if test="${!empty sessionScope.login.userId}">
+				<c:if test="${login.userId eq reply.qnaReplyWriter || login.status eq '0'}">
 					<a href="#" onclick="modifyView(this,'${reply.qnaReplyContent }', ${reply.qnaReplyNo });">수정</a> 
 					<a href="#" onclick="removeReply(${reply.qnaReplyNo });">삭제</a>
 					</c:if>
@@ -298,27 +258,9 @@
 			$form.appendTo("body");
 			$form.submit();
 		}
-		
-		function answerForm(isLogOn, url, parentNO){
-			if(isLogOn != && isLogOn != 'false'){
-				var from = document.createElement("form");
-				form.setAttribute("method", "post");
-				form.setAttribute("action", url);
-				var parentNOInput = document.createElement("input");
-				parentNOInput.setAttribute("type", "hidden");
-				parentNOInput.setAttribute("name", "parentNO");
-				parentNOInput.setAttribute("value", parentNO);
-				
-				form.appendChild(parentNOInput);
-				document.body.appendChild(form);
-				form.submit();
-			} else {
-				alert("관리자만 답변이 가능합니다.");
-				
-			}
-			
-		}
 	</script>
+	
 	</div>
+		
 </body>
 </html>

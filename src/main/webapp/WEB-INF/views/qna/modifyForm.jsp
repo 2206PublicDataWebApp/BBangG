@@ -51,9 +51,7 @@
             position: relative;
             right: 6%;
         }
-        .write-btn{
-            margin: 10px auto;
-        }
+        
         
         #star-form fieldset{
             display: inline-block;
@@ -149,7 +147,8 @@
                 <input type="file" id="select-file" name="reloadFile" value="${qna.qnaFilename }"/>
                 
 	            <div>
-	                <a  href = "/qna/list.kh"><button class="write-btn-cancel" type="reset">취소</button></a>
+	                <a  href = "/qna/list.kh">
+	                <button class="write-btn-cancel" type="reset">취소</button></a>
 	                <button class="write-btn" type="submit">수정</button>
 	                <br>
 	                <a href="/qna/list.kh" >목록</a>

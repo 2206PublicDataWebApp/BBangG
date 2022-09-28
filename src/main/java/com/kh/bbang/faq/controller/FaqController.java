@@ -167,7 +167,7 @@ public class FaqController {
 				faq.setFaqFilepath(faqFilepath);
 			}
 			int result = faqService.modifyFaq(faq);
-			mv.setViewName("redirect:/faq/list.kh?page=" + page);
+			mv.setViewName("redirect:/admin/adminFaqList.kh");
 		} catch (Exception e) {
 			mv.addObject("msg", e.toString()).setViewName("common/errorPage");
 		}
@@ -216,7 +216,7 @@ public class FaqController {
 	}
 
 	//관리자페이지 
-	@GetMapping(value = "/admin/faqList.kh")
+	@GetMapping(value = "/admin/adminFaqList.kh")
 	public ModelAndView adminFaqListView(
 			ModelAndView mv
 			,@RequestParam(value="page", required=false) Integer page) {
@@ -243,9 +243,8 @@ public class FaqController {
 			mv.addObject("endNavi", endNavi);
 			mv.addObject("faqList", faqList);
 		}
-		mv.setViewName("faq/listView");
+		mv.setViewName("admin/adminFaqList");
 		return mv;
 	}
-	
 	
 }

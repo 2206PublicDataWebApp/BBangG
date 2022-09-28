@@ -380,7 +380,7 @@ public class QnaController {
 			mv.addObject("endNavi", endNavi);
 			mv.addObject("qnaList", qnaList);
 		}
-		mv.setViewName("qna/listView");
+		mv.setViewName("admin/adminQnaList");
 		return mv;
 	
 	}

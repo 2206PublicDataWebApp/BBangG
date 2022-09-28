@@ -51,9 +51,6 @@
             position: relative;
             right: 6%;
         }
-        .write-btn{
-            margin: 10px auto;
-        }
         
         #star-form fieldset{
             display: inline-block;
@@ -172,12 +169,16 @@
 			</tr>
 		</table>
 			</div>
+			<br>
 				<div align="center">
-					<input type="submit" value="등록">
-					<input type="reset" value="취소">
+					<button class="write-btn" type="submit">등록</button>
+					<button class="write-btn-cancel" type="reset">취소</button></a>
 				
 	</form>
 				</div>
 				</div>
+				<br>
+				<br><br><br><br><br>
+							
 </body>
 </html>
