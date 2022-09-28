@@ -40,7 +40,7 @@ public interface ReviewStore {
 	public List<Review> heartCountBest(SqlSession session);
 
 	// 스토어 리뷰 목록
-	public List<Review> storeReviewPrint(SqlSession session, int storeNo, int currentPage, int listLimit);
+	public List<Review> storeReviewPrint(SqlSession session, int storeNo);
 	
 	
 	

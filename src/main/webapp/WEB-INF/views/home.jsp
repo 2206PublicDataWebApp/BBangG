@@ -30,7 +30,7 @@
 	</section>
 
 	<section id="pager">
-	    <span class="dots on" onclick="currentSlide(1)"></span>
+	    <span class="dots on" onclick="currentSlide(1)"></span>A
 	    <span class="dots" onclick="currentSlide(2)"></span>
 	    <span class="dots" onclick="currentSlide(3)"></span>
 	    <span class="dots" onclick="currentSlide(4)"></span>
@@ -40,6 +40,7 @@
 	<div style="margin-top:50px;">
 		<jsp:include page="/WEB-INF/views/include/mainReviewList.jsp"/>
 	</div>
+
 	
   <script type="text/javascript">
   var slides = document.getElementsByClassName('slides');

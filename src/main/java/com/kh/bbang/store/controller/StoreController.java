@@ -1,13 +1,11 @@
 package com.kh.bbang.store.controller;
 
 import java.io.File;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,10 +35,14 @@ public class StoreController {
 	@Autowired
 	private ProductService pService;
 	
+	//관리자 점포 리스트
+	
+	// 220928 장은선 스토어 리뷰 기능 추가
 	@Autowired
 	private ReviewService rService;
 	
-	//관리자 점포 리스트
+	//관리자 점포 리스트 - 페이징완료
+
 	@RequestMapping(value="/store/adminStoreList.kh", method=RequestMethod.GET)
 	public ModelAndView adminStoreList(
 			ModelAndView mv,
@@ -83,7 +85,6 @@ public class StoreController {
 	}
 	
 	//사용자 점포 리스트
-	
 	@RequestMapping(value="/store/userStoreList.kh", method=RequestMethod.GET)
 	public ModelAndView userStoreList(
 			ModelAndView mv,
@@ -182,9 +183,13 @@ public class StoreController {
 		Product product1 = pList.get(0);
 		Product product2 = pList.get(1);
 		Product product3 = pList.get(2);
-		Review review = rService.printOneByNo(9);
-		System.out.println(review);
+
+		//  220928 장은선 스토어 리뷰 기능 추가
+		List<Review> review = rService.storeReviewPrint(storeNo);
+
 		if(store != null) {
+			//  220928 장은선 스토어 리뷰 기능 추가
+			mv.addObject("rList", review);
 			mv.addObject("store",store);
 			mv.addObject("product1", product1);
 			mv.addObject("product2", product2);

@@ -166,7 +166,9 @@
 	                <button class="write-btn" type="submit">수정</button>
 	            </div>
 			</form>
+	
     </div>
+
      <script>
 
      

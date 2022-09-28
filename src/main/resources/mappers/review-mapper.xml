@@ -55,10 +55,10 @@
   		<select id="selectAllReview" resultMap="reviewResultMap">
 			SELECT R.*, (SELECT STORE_NAME FROM STORE_TBL WHERE STORE_NO = R.STORE_NO) STORE_NAME
 			FROM REVIEW_TBL R
-			WHERE USE_YN = 'Y' ORDER BY REVIEW_NO ASC
+			WHERE USE_YN = 'Y' ORDER BY R_CREATE_DATE DESC
   		</select>
   		
-  		<!--  리뷰 검색 -->
+ 
   		<select id="selectTotalCount" resultType="_int">
   			SELECT COUNT(*) FROM REVIEW_TBL
 			<where>
@@ -85,11 +85,16 @@
   		</select>
   		
 		<select id="storeReviewPrint" resultMap="reviewResultMap">
-  			SELECT R.*,
-  				(SELECT STORE_NAME FROM STORE_TBL WHERE STORE_NO = R.STORE_NO) STORE_NAME,
-  				(SELECT COUNT (HEART_NO) FROM REVIEW_HEART WHERE REVIEW_NO = R.REVIEW_NO) REVIEW_HEART
-  			FROM REVIEW_TBL R 
-  			WHERE STORE_NO = #{storeNo}
+  			SELECT A.*,(SELECT STORE_NAME FROM STORE_TBL WHERE STORE_NO = A.STORE_NO) STORE_NAME
+			FROM (SELECT R.*,
+			    NVL((SELECT COUNT(REVIEW_NO)
+			        FROM REVIEW_HEART
+			        WHERE REVIEW_NO = R.REVIEW_NO
+			        GROUP BY REVIEW_NO),0) REVIEW_HEART
+					FROM REVIEW_TBL R 
+					WHERE STORE_NO = #{storeNo}
+					ORDER BY REVIEW_HEART DESC) A
+			<![CDATA[WHERE ROWNUM <= 5]]>
   		</select>
   		
   		<select id="selectAllByValue" resultMap="reviewResultMap">
@@ -106,6 +111,7 @@
 					OR REVIEW_WRITER LIKE '%'||#{searchValue}||'%'
 				</if>
 					AND USE_YN = 'Y'
+					ORDER BY R_CREATE_DATE DESC
 			</where>
   		</select>
   		<select id="selectHeartCount" resultType="_int">

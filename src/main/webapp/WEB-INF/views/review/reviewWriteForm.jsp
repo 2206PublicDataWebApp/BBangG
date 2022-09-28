@@ -131,50 +131,42 @@
 <body>
 <%@ include file="/WEB-INF/views/include/header.jsp"%>
     <div class="review-write">
-        <h2 id="store-name">${review.storeNo }</h2>
+    <%-- <input type="hidden" name="storeNo" value="${review.storeNo}" placeholder="스토어"/> --%>
+        <h2 id="store-name">${review.storeName }</h2>
+        <form action="/review/register.kh" method="post" enctype="multipart/form-data">
             <div id="write_area">
                 <div class="star-rating">
-                    <form class="star-form" name="star-form" id="star-form" method="post">
+                    <div class="star-form" name="star-form" id="star-form">
                         <fieldset>
                             <div class="text-bold">평가하기</div>
 	                            <div class="text-bold">별점을 선택해주세요</div>
-	                            <input type="radio" name="reviewStar" value="5" id="rate1"><label for="rate1">★</label>
-	                            <input type="radio" name="reviewStar" value="4" id="rate2"><label for="rate2">★</label>
-	                            <input type="radio" name="reviewStar" value="3" id="rate3"><label for="rate3">★</label>
-	                            <input type="radio" name="reviewStar" value="2" id="rate4"><label for="rate4">★</label>
-	                            <input type="radio" name="reviewStar" value="1" id="rate5"><label for="rate5">★</label>
+	                            <input type="radio" name="starRating" value="5" id="rate1"><label for="rate1">★</label>
+	                            <input type="radio" name="starRating" value="4" id="rate2"><label for="rate2">★</label>
+	                            <input type="radio" name="starRating" value="3" id="rate3"><label for="rate3">★</label>
+	                            <input type="radio" name="starRating" value="2" id="rate4"><label for="rate4">★</label>
+	                            <input type="radio" name="starRating" value="1" id="rate5"><label for="rate5">★</label>
 	                       </fieldset>
-	                 </form>		
+	                 </div>		
 	            </div>			
 	         </div>
-	         <form action="/review/register.kh" method="post" enctype="multipart/form-data">
-				<input type="hidden" name="reviewNo" value="${review.reviewNo }">
-				<input type="hidden" name="reviewWriter" value="${review.reviewWriter}" placeholder="작성자"/>
-		         <div id="review-content">
-                	
-                    <textarea name="reviewContent" id="in-content" rows="20" cols="55" placeholder="내용을 작성해주세요" required></textarea>
-                    <div id="max">(0 / 2000)</div>
-                </div>
+	         <input type="hidden" name="storeNo" value="${storeNo }"/>
+             <div id="review-content">
+               	
+                   <textarea name="reviewContent" id="in-content" rows="20" cols="55" placeholder="내용을 작성해주세요" required></textarea>
+                   <div id="max">(0 / 2000)</div>
+             </div>
 
-                <!-- 왼쪽 정렬 -->
-                <input type="file" id="select-file" name="uploadFile" />
-                
-	            <div>
-	                <button class="write-btn-cancel" type="reset">취소</button>
-	                <button class="write-btn"type="submit">글 작성</button>
-	            </div>
-			</form>
+               <!-- 왼쪽 정렬 -->
+               <input type="file" id="select-file" name="uploadFile" />
+               
+            <div>
+                <button class="write-btn-cancel" type="reset">취소</button>
+                <button class="write-btn"type="submit">글 작성</button>
+            </div>
+		</form>
     </div>
-     <script>
-        //  $(document).ready(function(){
-        //     $('#review-content').keyup(function(){
-        //         if ($(this).val().length > $(this).attr('maxlength')) {
-        //             alert('제한길이 초과');
-        //             $(this).val($(this).val().substr(0, $(this).attr('maxlength')));
-        //         }
-        //     });
-        // });
 
+     <script>
         $(document).ready(function() {
             $('#in-content').on('keyup', function() {
                 $('#max').html("("+$(this).val().length+" / 2000)");

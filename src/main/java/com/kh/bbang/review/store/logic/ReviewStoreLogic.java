@@ -98,10 +98,8 @@ public class ReviewStoreLogic implements ReviewStore{
 	
 	// 스토어 리뷰
 	@Override
-	public List<Review> storeReviewPrint(SqlSession session, int storeNo, int currentPage, int limit) {
-			int offset = (currentPage-1)*limit;
-			RowBounds rowBounds = new RowBounds(offset, limit);
-			List<Review> rList = session.selectList("ReviewMapper.storeReviewPrint");
+	public List<Review> storeReviewPrint(SqlSession session, int storeNo) {
+			List<Review> rList = session.selectList("ReviewMapper.storeReviewPrint",storeNo);
 			return rList;
 	}
  

@@ -85,8 +85,8 @@ public class ReviewServiceImpl implements ReviewService{
 	}
 	// 스토어 페이지 리뷰
 	@Override
-	public List<Review> storeReviewPrint(int storeNo, int currentPage, int listLimit) {
-		List<Review> rList = rStore.storeReviewPrint(session, storeNo, currentPage, listLimit);
+	public List<Review> storeReviewPrint(int storeNo) {
+		List<Review> rList = rStore.storeReviewPrint(session, storeNo);
 		return rList;
 	}
 

@@ -29,18 +29,26 @@ public class Review {
 	
 	public Review() {}
 
+	
+
 	@Override
 	public String toString() {
 		return "Review [reviewNo=" + reviewNo + ", storeNo=" + storeNo + ", reviewWriter=" + reviewWriter
 				+ ", reviewContent=" + reviewContent + ", reviewFilename=" + reviewFilename + ", reviewFileRename="
 				+ reviewFileRename + ", reviewFilepath=" + reviewFilepath + ", reviewCount=" + reviewCount
 				+ ", starRating=" + starRating + ", rCreateDate=" + rCreateDate + ", rUpdateDate=" + rUpdateDate
-				+ ", useYn=" + useYn + ", reviewHeart=" + reviewHeart + "]";
+				+ ", useYn=" + useYn + ", heartCount=" + heartCount + ", userId=" + userId + ", reviewHeart="
+				+ reviewHeart + ", storeName=" + storeName + "]";
 	}
 
+
+	
+
+	
+	
 	public Review(int reviewNo, int storeNo, String reviewWriter, String reviewContent, String reviewFilename,
 			String reviewFileRename, String reviewFilepath, int reviewCount, int starRating, Date rCreateDate,
-			Date rUpdateDate, String useYn, int reviewHeart) {
+			Date rUpdateDate, String useYn, int heartCount, String userId, int reviewHeart, String storeName) {
 		super();
 		this.reviewNo = reviewNo;
 		this.storeNo = storeNo;
@@ -54,11 +62,14 @@ public class Review {
 		this.rCreateDate = rCreateDate;
 		this.rUpdateDate = rUpdateDate;
 		this.useYn = useYn;
+		this.heartCount = heartCount;
+		this.userId = userId;
 		this.reviewHeart = reviewHeart;
+		this.storeName = storeName;
 	}
 
-	
-	
+
+
 	public int getHeartCount() {
 		return heartCount;
 	}
