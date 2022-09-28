@@ -122,7 +122,7 @@ img {
 			<!-- <input type="submit" value="검색"> -->
 		</form>
 	</section>
-	<footer></footer>
+	
 	<script>
 		function getValue(event) {
 			let regions = event.target.innerText;
