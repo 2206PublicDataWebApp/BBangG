@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.bbang.product.domain.Product;
+import com.kh.bbang.product.service.ProductService;
 import com.kh.bbang.store.domain.Store;
 import com.kh.bbang.store.domain.StoreImage;
 import com.kh.bbang.store.service.StoreService;
@@ -178,7 +180,7 @@ public class StoreController {
 		return mv;
 	}
 	
-	// 점포 삭제 -> FK 때문에 sImage.먼저 삭제 아니면 N으로 
+	// 점포 삭제
 	@RequestMapping(value="/store/removeStore.kh", method=RequestMethod.GET)
 	public ModelAndView removeStore(
 			ModelAndView mv,

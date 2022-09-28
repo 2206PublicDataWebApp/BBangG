@@ -46,6 +46,16 @@ td {
 	margin-top: 10px;
 	width: 200px
 }
+#previewDiv{
+	width: 200px;
+	height: 200px;
+	display: block;
+}
+#preview{
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+}
 </style>
 <body>
 	<%@ include file="/WEB-INF/views/include/header.jsp"%>
@@ -115,9 +125,18 @@ td {
 				<td colspan="2"><input type="file" name="reloadFile" /></td>
 			</tr>
 			<tr>
+				<td class="th">미리보기</td>
+				<td>
+					<div id="previewDiv">
+						<img id="preview" src="/resources/image/store-images/${store.sImage.storeFileRename }"/>
+					</div>
+
+				</td>
+			</tr>
+			<tr>
 				<td colspan="3" align="center">
 					<input type="submit" value="등록" id="submitBtn"/>
-					<button type="button" id="backBtn" onclick="goBack()">이전화면 돌아가기</button></td>
+					<button type="button" id="backBtn" onclick="goBack();">이전화면 돌아가기</button></td>
 			</tr>
 		</table>
 	</form>
@@ -177,6 +196,18 @@ td {
 				
 			}
 		}
+
+		function readFile(input){
+	  		if(input.files && input.files[0]){
+	  			var reader = new FileReader();
+	  			reader.onload = function(e){
+	  				document.getElementById('preview').src = e.target.result;
+	  			};
+	  			reader.readAsDataURL(input.files[0]);
+	  		}else{
+	  			document.getElementById('preview').src = '';
+	  		}
+	  	}
 	</script>
 </body>
 </html>
