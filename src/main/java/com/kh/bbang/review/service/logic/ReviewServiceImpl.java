@@ -57,17 +57,9 @@ public class ReviewServiceImpl implements ReviewService{
 		}
 		return review;
 	}
+
 	
-	@Override
-	public Review printStoreReview(Integer reviewNo) {
-		Review review = rStore.selectStoreReview(session, reviewNo);
-		int result = 0;
-		if (review != null) {
-			result = rStore.updateReviewCount(session, reviewNo);
-		}	
-		return review;
-	}
-	
+
 	@Override
 	public List<Review> printAllReview(int currentPage, int limit) {
 		List<Review> rList = rStore.selectAllReview(session, currentPage, limit);
@@ -85,6 +77,20 @@ public class ReviewServiceImpl implements ReviewService{
 		List<Review> rList = rStore.selectAllByValue(session, searchCondition, searchValue, currentPage, listLimit);
 		return rList;
 	}
+
+	@Override
+	public List<Review> heartCountBest() {
+		List<Review> rList = rStore.heartCountBest(session);
+		return rList;
+	}
+	// 스토어 페이지 리뷰
+	@Override
+	public List<Review> storeReviewPrint(int storeNo, int currentPage, int listLimit) {
+		List<Review> rList = rStore.storeReviewPrint(session, storeNo, currentPage, listLimit);
+		return rList;
+	}
+
+
 
 	
 

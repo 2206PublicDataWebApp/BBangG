@@ -99,9 +99,9 @@
         .write-btn-cancel{
             width: 80px;
             font-size: 15px;
-            border: 2px solid #002954;
+            border: 1px solid #767676;
             background-color: #ffffff;
-            color: #002954;
+            color: #767676;
             /* padding: 15px 25px; */
             text-align: center;
             text-decoration: none;
@@ -113,8 +113,8 @@
         .write-btn{
             width: 80px;
             font-size: 15px;
-            border: 2px solid #002954;
-            background-color: #002954;
+            border: 1px solid #767676;
+            background-color: #767676;
             color: #ffffff;
             /* padding: 15px 25px; */
             text-align: center;
@@ -148,8 +148,10 @@
 	            </div>			
 	         </div>
 	         <form action="/review/register.kh" method="post" enctype="multipart/form-data">
-                <div id="review-content">
-                	<%-- <input type="hidden" name="userId" value="${review.userId}" placeholder="작성자"/> --%>
+				<input type="hidden" name="reviewNo" value="${review.reviewNo }">
+				<input type="hidden" name="reviewWriter" value="${review.reviewWriter}" placeholder="작성자"/>
+		         <div id="review-content">
+                	
                     <textarea name="reviewContent" id="in-content" rows="20" cols="55" placeholder="내용을 작성해주세요" required></textarea>
                     <div id="max">(0 / 2000)</div>
                 </div>

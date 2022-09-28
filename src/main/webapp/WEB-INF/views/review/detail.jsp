@@ -24,11 +24,12 @@
        display:block;
    }
    .review-detail{ 
-       border : 1px solid #414141 ;
+       border : 1px solid #e7e7e7 ;
        width: 980px;
        margin: 25px auto;
        box-sizing:border-box ;
        padding : 50px 60px;
+       margin-bottom : 120px;
    }
    .review-title{
        display: flex;
@@ -64,43 +65,11 @@
             padding : 10px 40px;
             box-sizing:border-box ;
        }
-   #sort{
-    position: relative;
-    left : -2%;
-    font-weight: lighter;
-   }
-   #bestSort{
-       width: 80px;
-       font-size: 15px;
-       border: 1px solid #414141;
-       background-color: #ffffff;
-       color: #414141;
-       /* padding: 15px 25px; */
-       text-align: center;
-       text-decoration: none;
-       display: inline-block;
-       position: relative;
-       left : 80%;
-   }
-    #latestSort{
-        width: 80px;
-        font-size: 15px;
-        border: 1px solid #414141;
-        background-color: #ffffff;
-        color: #414141;
-        /* padding: 15px 25px; */
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        position: relative;
-        left : 80%;
-    }
-
    #btn-modify{
        width: 80px;
        font-size: 15px;
-       border: 1px solid #414141;
-       background-color: #414141;
+       border: 1px solid #767676;
+       background-color: #767676;
        color: rgb(255, 255, 255);
        /* padding: 15px 25px; */
        text-align: center;
@@ -112,9 +81,9 @@
    #btn-delete{
        width: 80px;
        font-size: 15px;
-       border: 1px solid #414141;
+       border: 1px solid #767676;
        background-color: #ffffff;
-       color: #414141;
+       color: #767676;
        /* padding: 15px 25px; */
        text-align: center;
        text-decoration: none;
@@ -154,18 +123,13 @@
    }
 </style>
 <script src="/resources/js/jquery-3.6.1.min.js"></script>
+<%@ include file="/WEB-INF/views/include/head.jsp"%>
 </head>
 <body>
-    <div><!-- 임시 버튼-->
-        <a href="#"><button type="submit" id="order-btn">주문하러 가기</button></a>
-    </div>
-    
+<%@ include file="/WEB-INF/views/include/header.jsp"%>
     <div id="review-title">
         <div id="review-title">
-            <h1 id="storename">${review.storeName }<div id="sort">
-                <a id="bestSort" href="#">인기순</a>
-                <a id="latestSort" href="#" onclick="">최신순</a>
-            </div></h1>
+            <h1 id="storename">${review.storeName }</h1>
         </div>
     </div>
       <!-- 1 -->
@@ -181,7 +145,7 @@
                 </div>
             </div>
             <div class="heart-count">
-                <div id="heart"><a href="/review/heartCountUpdate.kh?reviewNo=${review.reviewNo }">♡  ${review.reviewHeart }</a></div>
+                <div id="heart"><a href="javascript:void(0);" onclick="clickHeart('${review.reviewNo}');">♡  ${review.reviewHeart }</a></div>
             	<div>조회 ${review.reviewCount } </div>
             </div>
         </div>
@@ -189,33 +153,42 @@
             <div id="bbang-img">
                 <img alt="본문이미지" src="/resources/reviewUploadFiles/${review.reviewFilename }" width="500">
             </div>
-        <div>
+        <div id="content">
         	${review.reviewContent }
         </div>
-        <div class="btn-wrap">
-            <a id="btn-modify" href="/review/modifyView.kh?reviewNo=${review.reviewNo }&page=${page }">수정</a>
-            <a id="btn-delete" href="#" onclick="reviewRemove(${page});">삭제</a>
-
-        </div>
+        
     </div>
     
+    <div class="btn-wrap">
+            <a id="btn-modify" href="/review/modifyView.kh?reviewNo=${review.reviewNo }">수정</a>
+           <%--  <a id="btn-modify" href="/review/modifyView.kh?reviewNo=${review.reviewNo }&page=${page }">수정</a> --%>
+            <a id="btn-delete" href="#" onclick="reviewRemove('${review.reviewNo}');">삭제</a>
+<%--             <a id="btn-delete" href="#" onclick="reviewRemove(${page});">삭제</a> --%>
+
+     </div>
+    
    	<script>
-   	function reviewRemove(value){
+   	
+   	function clickHeart(reviewNo){
+   		var userId = '${login.userId}';
+   		if('${empty login}' == 'true'){
+   			alert('로그인을 해주세요');
+   			
+   		}else{
+	   		location.href='/review/heartCountUpdate.kh?reviewNo='+reviewNo;   			
+   		}
+   	}
+   	
+   	
+   	function reviewRemove(reviewNo){
 		event.preventDefault();
 		if(confirm("삭제하시겠습니까?")){
-			location.href="/review/remove.kh?page="+value;
+			location.href="/review/remove.kh?reviewNo="+reviewNo;
+/* 			location.href="/review/remove.kh?page="+value; */
 		}
 	}
 	
-/*  	function modifyView(obj){
-		event.preventDefault();
-		var $tr = $("<tr>");	// 첫번 째 $는 변수 두번 째 $는 제이쿼리
-		$tr.append("<td colspan='3'><input type='text' size='50' value='"+replyContents+"' id='modifyInput'></td>");
-		$tr.append("<td><button onclick='modifyReply(this, "+replyNo+");'>수정</button></td>");
-		// console.log($tr[0]);
-		// console.log(obj);	// obj는  this를 통해 이벤트가 발생한 태그
-		$(obj).parent().parent().after($tr);	// 버튼을
-	} */
+
 	</script>
 </body>
 </html>

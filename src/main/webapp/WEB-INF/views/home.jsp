@@ -36,14 +36,9 @@
 	    <span class="dots" onclick="currentSlide(4)"></span>
 	</section>
 	
-	<br><br><br><br><br><br><br><br><br><br><br><br><br>
 	
-	<div>
-		<div>
-			<div>
-			
-			</div>
-		</div>
+	<div style="margin-top:50px;">
+		<jsp:include page="/WEB-INF/views/include/mainReviewList.jsp"/>
 	</div>
 	
 	

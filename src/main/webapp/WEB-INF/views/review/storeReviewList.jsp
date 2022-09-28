@@ -160,16 +160,14 @@
             <a href="#"><button type="submit" id="order-btn">주문하러 가기</button></a>
         </div>
         <div id="review-title">
-            <h1 id="storename">${review.storeName }<div id="sort">
-                <a id="bestSort" href="#">인기순</a>
-                <a id="latestSort" href="#" onclick="">최신순</a>
-            </div></h1>
-            <!-- <div id="sort">
-                <a id="bestSort" href="#">인기순</a>
-                <a id="latestSort" href="#" onclick="">최신순</a>
-            </div> -->
+            <h1 id="storename">${review.storeName }
+	            <div id="sort">
+	                <a id="bestSort" href="#">인기순</a>
+	                <a id="latestSort" href="#" onclick="">최신순</a>
+	            </div>
+            </h1>
         </div>
-        <c:forEach items="{rList}" value="storeReview">
+        <c:forEach items="${rList}" value="storeReview">
           <!-- 1 -->
           <div class="review-detail">
             <div class="detail-title-wrap">
