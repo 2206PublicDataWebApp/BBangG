@@ -103,6 +103,14 @@
             background-color: white;
             overflow: hidden;
         }
+        
+        #search-icon{
+        	width : 15px;
+	       	border: none;
+		    margin-right:5px;
+		    cursor:pointer;
+		    background-color:transparent;
+        }
        
  
 </style>
@@ -173,12 +181,13 @@
 						<option value="content" <c:if test="${searchCondition eq 'contents' }">selected</c:if>>내용</option>
 					</select>
 					<input type="text" name="searchValue" value="${searchValue }">
-					<input type="submit" value="검색">
+					<input id="search-icon" type="image" src="/resources/image/icon/serch_bt.png" alt="검색">
+
 			</td>
 		
 		<div>
 			<td>
-			<c:if test="${sessionScope.login.userZipCode == 0}">
+			<c:if test="${sessionScope.login.status == 0}">
 				<button onclick="location.href='/faq/writeView.kh';">글쓰기</button>
 				</c:if>
 			</td>

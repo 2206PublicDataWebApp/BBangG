@@ -34,9 +34,6 @@
             margin-inline-start: 0px;
             margin-inline-end: 0px;
             padding-inline-start: 30px;
-           
-       	 	
-  			
         }
         
         .paging-btn{
@@ -50,6 +47,13 @@
             display:inline-block;
         }
       
+      #search-icon{
+        	width : 15px;
+	       	border: none;
+		    margin-right:5px;
+		    cursor:pointer;
+		    background-color:transparent;
+        }
         
 </style>
 </head>
@@ -126,12 +130,13 @@
 				<form action="/qna/search.kh" method="get">
 					<select name="searchCondition">
 						<option value="all" <c:if test="${searchCondition eq 'all' }">selected</c:if>>전체</option>
-<%-- 						<option value="writer" <c:if test="${searchCondition eq 'writer' }">selected</c:if>>작성자</option> --%>
+						<option value="writer" <c:if test="${searchCondition eq 'writer' }">selected</c:if>>작성자</option>
 						<option value="title" <c:if test="${searchCondition eq 'title' }">selected</c:if>>제목</option>
 						<option value="contents" <c:if test="${searchCondition eq 'contents' }">selected</c:if>>내용</option>
 					</select>
 					<input type="text" name="searchValue" value="${searchValue }">
-					<input type="submit"  value="검색">
+					<input id="search-icon" type="image" src="/resources/image/icon/serch_bt.png" alt="검색">
+<!-- 					<input type="submit"  value="검색"> -->
 				</form>
 				<br>
 					<button onclick="location.href='/qna/writeView.kh';">문의글 작성</button>
