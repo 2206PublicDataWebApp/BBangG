@@ -136,7 +136,7 @@
 	                    <a href="/review/detail.kh?reviewNo=${review.reviewNo }">
 		                    <div class="thumb-box">
 		                        <div class="thumb">
-		                        	<img src="../resources/reviewUploadFiles/${review.reviewFilename }">
+		                        	<img src="../resources/reviewUploadFiles/${review.reviewFileRename }">
 		                        </div>
 		                        <div class="content">
 			                       	 	${review.reviewContent }<br><br>

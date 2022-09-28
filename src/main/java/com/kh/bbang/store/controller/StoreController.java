@@ -78,7 +78,6 @@ public class StoreController {
 	}
 	
 	//사용자 점포 리스트
-	
 	@RequestMapping(value="/store/userStoreList.kh", method=RequestMethod.GET)
 	public ModelAndView userStoreList(
 			ModelAndView mv,
@@ -176,12 +175,15 @@ public class StoreController {
 			@RequestParam Integer storeNo) {
 		
 		Store store = sService.showOneStoreById(storeNo);
+		
+		//  220928 장은선 스토어 리뷰 기능 추가
 		List<Review> review = rService.storeReviewPrint(storeNo);
+		//  220928 장은선 스토어 리뷰 기능 추가
 		
 		if(store != null) {
-			// 리뷰 목록
+			//  220928 장은선 스토어 리뷰 기능 추가
 			mv.addObject("rList", review);
-			// 리뷰 목록
+			//  220928 장은선 스토어 리뷰 기능 추가
 			mv.addObject("store",store);
 			mv.setViewName("/store/storeDetailView");
 		}

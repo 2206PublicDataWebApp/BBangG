@@ -165,7 +165,7 @@
 			                        <p class="date "><i class="bar"></i>${review.rCreateDate }</p>
 			                        <div class="review_product_info">
 				                        <a href="/review/detail.kh?reviewNo=${review.reviewNo  }">
-				                            <span class="storeName">${review.storeNo }</span>
+				                            <span class="storeName">${review.storeName }</span>
 				                        </a>	                       
 				                    </div>
 			                 	</div>
@@ -216,8 +216,6 @@
 			</div>
         </div>
     </div>
-    <div>
-		<jsp:include page="/WEB-INF/views/include/footer.jsp"/>
-	</div>
+
 </body>
 </html>
