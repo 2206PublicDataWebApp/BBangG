@@ -98,4 +98,16 @@ public class QnaStoreLogic implements QnaStore {
 		return qnaList;
 	}
 
+	@Override
+	public int insertAnswer(SqlSession session, Qna qna) {
+		int result = session.insert("QnaMapper.insertAnswer", qna);
+		return result;
+	}
+
+	@Override
+	public int modifyAnswer(SqlSession session, Qna qna) {
+		int result = session.update("QnaMapper.modifyAnswer", qna);
+		return result;
+	}
+
 }

@@ -93,8 +93,14 @@ public class QnaServiceImpl implements QnaService {
 
 	@Override
 	public int registAnswer(Qna qna) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result = qnaStore.insertAnswer(session, qna);
+		return result;
+	}
+
+	@Override
+	public int modifyAnswer(Qna qna) {
+		int result = qnaStore.modifyAnswer(session, qna);
+		return result;
 	}
 
 	

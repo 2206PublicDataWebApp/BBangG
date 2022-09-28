@@ -69,6 +69,7 @@ public class QnaController {
 				qna.setQnaFilePath(qnaFilePath);
 			}
 			int result = qnaService.registerQna(qna);
+			
 			mv.setViewName("redirect:/qna/list.kh");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -304,14 +305,25 @@ public class QnaController {
 	
 	
 	
-	/////////////// 답변 //////////////////
+	
+	@GetMapping(value="/qna/writeAnswer.kh")
+	public ModelAndView showAnswerWrite(HttpSession session, ModelAndView mv) {
+		mv.setViewName("qna/answerWriteForm");
+		User user = (User) session.getAttribute("login");
+		if(user== null){
+			mv.addObject("needLogin", "글을 작성하기 위해 로그인이 필요합니다.");
+			mv.setViewName("qna/listView");
+		}
+		return mv;
+	}
+	
 	@PostMapping(value="/qna/registAnswer.kh")
 	public ModelAndView registAnswer(
 			ModelAndView mv
 			, @ModelAttribute Qna qna
 			, @RequestParam(value="uploadFile", required=false) MultipartFile uploadFile
-			,HttpServletRequest request
-			) {
+			,HttpServletRequest request) {
+		
 		try {
 			String qnaFilename = uploadFile.getOriginalFilename();
 			if(!qnaFilename.equals("")) {
@@ -340,25 +352,36 @@ public class QnaController {
 		}
 		return mv;
 	}
-	
-//	@GetMapping(value="/qna/modifyAnswer.kh")
-//	public ModelAndView answerModifyView(
-//			ModelAndView mv
-//			,@RequestParam("answerNo") Integer answerNo
-//			,@RequestParam("page") int page) {
-//		try {
-//			Qna qna = qnaService.printAnswerOneByNo(answerNo);
-//			mv.addObject("qna", qna);
-//			mv.addObject("page", page);
-//			mv.setViewName("qna/modifyForm");
-//		} catch (Exception e) {
-//			mv.addObject("msg", e.toString());
-//			mv.setViewName("common/errorPage");
-//		}
-//		return mv;
-//	}
-	
-	
-	
 
+//	관리자페이지
+	@GetMapping(value="/admin/adminQnaList.kh")
+	public ModelAndView adminQnaListView(
+			ModelAndView mv
+			,@RequestParam(value="page", required=false) Integer page) {
+		int currentPage = (page != null) ? page : 1;
+		int totalCount = qnaService.getTotalCount("","");
+		int qnaLimit = 10;
+		int naviLimit = 5;
+		int maxPage;
+		int startNavi;
+		int endNavi;
+		maxPage = (int)((double)totalCount/qnaLimit + 0.9);
+		startNavi = ((int)((double)currentPage/naviLimit+0.9)-1)*naviLimit+1;
+		endNavi = startNavi + naviLimit - 1;
+		if(maxPage < endNavi) {
+			endNavi = maxPage;
+		}
+		List<Qna> qnaList = qnaService.printAllQna(currentPage, qnaLimit);
+		if(!qnaList.isEmpty()) {
+			mv.addObject("urlVal", "list");
+			mv.addObject("maxPage", maxPage);
+			mv.addObject("currentPage", currentPage);
+			mv.addObject("startNavi", startNavi);
+			mv.addObject("endNavi", endNavi);
+			mv.addObject("qnaList", qnaList);
+		}
+		mv.setViewName("qna/listView");
+		return mv;
+	
+	}
 }

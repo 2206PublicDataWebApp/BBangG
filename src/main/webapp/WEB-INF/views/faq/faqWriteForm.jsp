@@ -16,7 +16,7 @@
 		<table align="center" border="1">
 			<tr>
 				<td>제목</td>
-				<td><input type="text" name="faqTitle"></td>
+				<td><input type="text" name="faqTitle" required></td>
 			</tr>
 			<tr>
 				<td>작성자</td>
@@ -24,7 +24,7 @@
 			</tr>
 			<tr>
 				<td>내용</td>
-				<td><textarea name="faqContent"></textarea></td>
+				<td><textarea name="faqContent" required></textarea></td>
 			</tr>
 			<tr>
 				<td>첨부파일</td>
