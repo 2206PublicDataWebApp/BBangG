@@ -171,15 +171,13 @@ public class UserController {
 			HttpSession session = request.getSession();
 			User user = (User)session.getAttribute("login");
 			String userId = user.getUserId();
-			
 			User uOne = uService.printOneById(userId);
 			mv.addObject("choiceMenu",true);
 			mv.addObject("user", uOne);
-			mv.addObject("choiceMenu",true);
 			mv.setViewName("user/myPage");
 			
 		} catch (Exception e) {
-			mv.addObject("msg", e.getMessage()).setViewName("common/errorPage");
+			mv.setViewName("common/alert");
 		}
 		return mv;
 	}

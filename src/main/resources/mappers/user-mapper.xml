@@ -75,11 +75,6 @@
 				USER_ID LIKE '%'||#{searchValue}||'%'
 				OR USER_NAME LIKE '%'||#{searchValue}||'%'
 				OR USER_EMAIL LIKE '%'||#{searchValue}||'%'
-				OR USER_GENDER LIKE '%'||#{searchValue}||'%'
-				OR USER_PHONE LIKE '%'||#{searchValue}||'%'
-				OR USER_ZIPCODE LIKE '%'||#{searchValue}||'%'
-				OR ADDR LIKE '%'||#{searchValue}||'%'
-				OR ADDR_DETAIL LIKE '%'||#{searchValue}||'%'
 			</if>
 			AND STATUS = '1'
 		</where>
@@ -100,11 +95,6 @@
 				USER_ID LIKE '%'||#{searchValue}||'%'
 				OR USER_NAME LIKE '%'||#{searchValue}||'%'
 				OR USER_EMAIL LIKE '%'||#{searchValue}||'%'
-				OR USER_GENDER LIKE '%'||#{searchValue}||'%'
-				OR USER_PHONE LIKE '%'||#{searchValue}||'%'
-				OR USER_ZIPCODE LIKE '%'||#{searchValue}||'%'
-				OR ADDR LIKE '%'||#{searchValue}||'%'
-				OR ADDR_DETAIL LIKE '%'||#{searchValue}||'%'
 			</if>
 			AND STATUS = '1'
 		</where>

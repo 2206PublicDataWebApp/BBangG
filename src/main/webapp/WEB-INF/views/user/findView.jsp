@@ -12,8 +12,8 @@
 <style type="text/css">
 *{
 	padding: 0;
-	boarder: none;
-	text-color: #3A2618;
+	border: none;
+	color: #3A2618;
 	margin-top:5px;
 	margin-bottom:5px;
 }

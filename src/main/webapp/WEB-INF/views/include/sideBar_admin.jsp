@@ -9,7 +9,7 @@
 <body>
 <nav id="sideBar">
     <ul class="menu">
-        <li><a href="">회원 관리</a></li>
+        <li><a href="/admin/userList">회원 관리</a></li>
         <li><a href="/admin/adminOrderList.kh">주문 관리</a></li>
         <li><a href="">후기 관리</a></li>
         <li><a href="">Q&A 관리</a></li>

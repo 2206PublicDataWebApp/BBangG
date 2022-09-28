@@ -3,33 +3,76 @@
 
 h1{
 	padding-top:80px;
+	margin: 0 auto;
+	width: 980px;
 }
 
 .wrrapper{
 	padding-left:200px;
+	text-align:center;
 }
 
 table {
     width: 980px;
     border: 1px solid #3A2618;
     border-collapse: collapse;
-    
   }
-  th, td {
+  
+.search-form{
+	padding-bottom: 10px;
+  }
+th, td {
     border: 1px solid #3A2618;
     text-align: center;
+    padding:5px;
   }
   
-  th {
+th {
   background-color: #F0F0F0;
   }
-  
+
+.index{
+	padding-right: 50px;
+}
+
 .search{
 	background:url(/resources/image/icon/serch_bt.png);
 	background-repeat: no-repeat;
-	width:10px;
-	height:10px;
-	background-size: cover;
-	border: 0;
+	background-size: contain;
+	width:20px;
+	height:20px;
+	border: none;
 	cursor : pointer;
+	vertical-align:middle;
+}
+input[type='text']{
+	width: 130px;
+	margin-right: 5px;
+	margin-left: 5px;
+	border: none;
+	border-bottom: 1px solid #3A2618;
+}
+input:focus, select:focus{
+	outline: none;
+}
+.search-button{
+	float: right;
+}
+.search-wrapper{
+	margin:0 auto;
+	text-align:right;
+	width: 980px;
+}
+
+.remove{
+	float:left;
+	padding:3px;
+	border: 1px solid #3A2618;
+	background-color: #3A2618;
+	color: #ffffff;
+}
+
+select, option{
+	border: 1px solid #3A2618;
+	color: #3A2618;
 }
