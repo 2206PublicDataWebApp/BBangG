@@ -4,6 +4,12 @@
 <link rel="stylesheet" href="/resources/css/myPage.css" />
 </head>
 <body>
+	<script type="text/javascript">
+		<c:if test="${empty login}">
+			location.href="/home.kh";	
+			alert("로그인이 필요한 페이지 입니다. 메인으로 돌아갑니다.");
+		</c:if>
+	</script>
 	<jsp:include page = "/WEB-INF/views/include/header.jsp"/>
 	<jsp:include page="/WEB-INF/views/include/sideBar_user.jsp"/>
 	<div class="main">
@@ -124,10 +130,6 @@
 				alert("수정되었습니다.");
 			}
 		}
-		<c:if test="${empty login}">
-			alert("로그인이 필요한 페이지 입니다. 메인으로 돌아갑니다.");
-			location.href="/home.kh";	
-		</c:if>
 	</script>
 </body>
 </html>

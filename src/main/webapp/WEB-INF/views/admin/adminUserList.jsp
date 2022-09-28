@@ -7,6 +7,12 @@
 <body>
 <jsp:include page = "/WEB-INF/views/include/header.jsp"/>
 <jsp:include page="/WEB-INF/views/include/sideBar_admin.jsp"/>
+	<script type="text/javascript">
+		<c:if test="${login.status != '0'}">
+			alert("접근이 제한된 페이지 입니다. 메인으로 돌아갑니다.");
+			location.href="/home.kh";	
+		</c:if>
+	</script>
 	<div class="wrrapper">
 	<h1 align="center">회원 목록</h1>
 	<br><br>
@@ -84,10 +90,6 @@
 			}else{
 			}
 		}
-	<c:if test="${empty login}">
-		alert("접근이 제한된 페이지 입니다. 메인으로 돌아갑니다.");
-		location.href="/home.kh";	
-	</c:if>
 	</script>
 </body>
 </html>

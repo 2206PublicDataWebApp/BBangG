@@ -101,7 +101,7 @@ public class UserController {
             
             MimeMessage message = mailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(message, true, "utf-8");
-            helper.setFrom(setFrom);
+            helper.setFrom(setFrom, "빵지순례");
             helper.setTo(toMail);
             helper.setSubject(title);
             helper.setText(content,true);

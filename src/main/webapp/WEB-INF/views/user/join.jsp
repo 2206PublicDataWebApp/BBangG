@@ -72,9 +72,17 @@
 				
 			</form>
 		</div>
+		<%-- <div>
+      		<jsp:include page="/WEB-INF/views/include/footer.jsp"/>
+   		</div> --%>
 		<script
 			src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 		<script>
+		<c:if test="${!empty login}">
+			alert("이미 로그인한 회원입니다.");
+			location.href="/home.kh";	
+		</c:if>
+		
 		 /* 유효성 검사 통과유무 변수 */
 		 var idCheck = false;            // 아이디
 		 var pwCheck = false;            // 비번
