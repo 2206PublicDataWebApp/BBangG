@@ -38,7 +38,7 @@ public class OrderController {
 			@RequestParam(name = "storeNo", required = false) Integer refStoreNo) {
 
 		List<Product> pList = oService.findAllProduct(refStoreNo);
-		if(!pList.isEmpty()) {
+		if (!pList.isEmpty()) {
 			HttpSession session = request.getSession();
 			User user = (User) session.getAttribute("login");
 			String userId = user.getUserId();
@@ -46,7 +46,7 @@ public class OrderController {
 			mv.addObject("storeNo", refStoreNo);
 			mv.addObject("user", user);
 			mv.addObject("pList", pList);
-		}else {
+		} else {
 			mv.addObject("msg", "해당점포에 등록된 빵이 없습니다.");
 			mv.setViewName("common/errorPage");
 		}
@@ -58,7 +58,7 @@ public class OrderController {
 	public ModelAndView orderSend(ModelAndView mv, @ModelAttribute Order order,
 			@ModelAttribute OrderProduct orderProduct, @RequestParam(name = "storeNo", required = false) Integer storeNo
 
-	) {	
+	) {
 		try {
 
 			String tmp[] = new String[orderProduct.getOrderProductNm().length];
@@ -85,7 +85,8 @@ public class OrderController {
 	}
 
 	@RequestMapping(value = "/order/orderSuccess.kh", method = RequestMethod.GET)
-	public ModelAndView orderSuccess(ModelAndView mv, @RequestParam("orderNo") Integer orderNo) {
+	public ModelAndView orderSuccess(ModelAndView mv
+			, @RequestParam("orderNo") Integer orderNo) {
 		try {
 			Order order = oService.findOneOrder(orderNo);
 			Store store = oService.findStore(order.getStoreNo());
@@ -171,10 +172,6 @@ public class OrderController {
 
 	}
 
-	private void SerchDate(String dateFrom, String dateTo, String userId) {
-		// TODO Auto-generated method stub
-
-	}
 
 	// 사용자 주문상세화면
 	@RequestMapping(value = "/order/userOrderDetail.kh", method = RequestMethod.GET)
@@ -214,7 +211,8 @@ public class OrderController {
 
 	// 사용자 주문취소요청
 	@RequestMapping(value = "/order/orderRemoveRequest.kh", method = RequestMethod.GET)
-	public String orderRemoveRequest(Model model, @RequestParam("orderNo") Integer orderNo) {
+	public String orderRemoveRequest(Model model
+			, @RequestParam("orderNo") Integer orderNo) {
 		try {
 			int result = oService.removeOrderRequest(orderNo);
 			return "redirect:/order/userOrderDetail.kh?orderNo=" + orderNo;
@@ -226,7 +224,8 @@ public class OrderController {
 
 	// 사용자 주문 수정화면
 	@RequestMapping(value = "/order/orderModifyView.kh", method = RequestMethod.GET)
-	public ModelAndView modifyOrderView(ModelAndView mv, @RequestParam("orderNo") Integer orderNo) {
+	public ModelAndView modifyOrderView(ModelAndView mv
+			, @RequestParam("orderNo") Integer orderNo) {
 		try {
 
 			Order order = oService.findOneOrder(orderNo);
@@ -244,8 +243,9 @@ public class OrderController {
 
 	// 사용자 주문 수정 보내기
 	@RequestMapping(value = "/order/orderModify.kh", method = RequestMethod.POST)
-	public ModelAndView modifyOrderSend(ModelAndView mv, @ModelAttribute Order order,
-			@RequestParam("orderNo") Integer orderNo) {
+	public ModelAndView modifyOrderSend(ModelAndView mv
+			, @ModelAttribute Order order
+			, @RequestParam("orderNo") Integer orderNo) {
 		order.setOrderNo(orderNo);
 		int result = oService.modifyOrder(order);
 		if (result > 0) {
@@ -261,7 +261,8 @@ public class OrderController {
 
 	// 사용자 배송상태 순차적으로 변경
 	@RequestMapping(value = "/order/userChangeOrdeState.kh", method = RequestMethod.GET)
-	public String userChangeOrdeState(Model model, @RequestParam("orderNo") Integer orderNo) {
+	public String userChangeOrdeState(Model model
+			, @RequestParam("orderNo") Integer orderNo) {
 		int result = oService.changeOrdeState(orderNo);
 		if (result > 0) {
 			return "redirect:/order/userOrderDetail.kh?orderNo=" + orderNo;
@@ -289,7 +290,8 @@ public class OrderController {
 
 	// 관리자 주문 즉시취소
 	@RequestMapping(value = "/admin/adminOrderRemove.kh", method = RequestMethod.GET)
-	public String adminOrderRemove(HttpSession session, Model model, @RequestParam("orderNo") Integer orderNo) {
+	public String adminOrderRemove(HttpSession session, Model model
+			, @RequestParam("orderNo") Integer orderNo) {
 		try {
 			int result = oService.removeOrder(orderNo);
 			if (result > 0) {
@@ -352,7 +354,8 @@ public class OrderController {
 
 	// 관리자 주문 상세화면
 	@RequestMapping(value = "/admin/adminOrderDetail.kh", method = RequestMethod.GET)
-	public ModelAndView adminOrderDetail(ModelAndView mv, @RequestParam("orderNo") Integer orderNo) {
+	public ModelAndView adminOrderDetail(ModelAndView mv
+			, @RequestParam(name="orderNo", required = false) Integer orderNo) {
 		try {
 
 			Order order = oService.findOneOrder(orderNo);

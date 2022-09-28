@@ -139,7 +139,7 @@ select{
 		</table>
 		
 	</section>
-	<footer></footer>
+	
 	<script>
 		function getValue(event) {
 			let regions = event.target.innerText;
