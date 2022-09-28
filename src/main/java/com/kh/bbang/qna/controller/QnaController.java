@@ -69,6 +69,7 @@ public class QnaController {
 				qna.setQnaFilePath(qnaFilePath);
 			}
 			int result = qnaService.registerQna(qna);
+			
 			mv.setViewName("redirect:/qna/list.kh");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -307,7 +308,7 @@ public class QnaController {
 	
 	@GetMapping(value="/qna/writeAnswer.kh")
 	public ModelAndView showAnswerWrite(HttpSession session, ModelAndView mv) {
-		mv.setViewName("qna/qnaWriteForm");
+		mv.setViewName("qna/answerWriteForm");
 		User user = (User) session.getAttribute("login");
 		if(user== null){
 			mv.addObject("needLogin", "글을 작성하기 위해 로그인이 필요합니다.");
@@ -352,7 +353,7 @@ public class QnaController {
 		return mv;
 	}
 
-	//관리자페이지
+//	관리자페이지
 	@GetMapping(value="/admin/adminQnaList.kh")
 	public ModelAndView adminQnaListView(
 			ModelAndView mv

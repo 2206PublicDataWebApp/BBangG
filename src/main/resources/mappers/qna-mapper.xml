@@ -158,10 +158,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		ANSWER_CONTENT
 		)
 	 VALUES(
-		#{qnaNo},
+		SEQ_ORIGINANSWERNO.NEXTVAL,
 		#{qnaWriter},
-		#{qnaTitle},
-		#{qnaContent},
+		#{answerTitle},
+		#{answerContent},
 		DEFAULT, 
 		DEFAULT, 
 		NULL,
@@ -169,18 +169,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		NULL, 
 		DEFAULT, 
 		1,
-		NULL,
-		NULL,
+		#{qnaSecret},
+		1,
 		SEQ_ANSWERNO.NEXTVAL,
 		#{answerTitle},
 		#{answerContent}
 	)
 	</insert>
-	
-	<!-- 답변 조회 -->
-	
-	
-	
+
 	<resultMap type="Reply" id="replyResultMap">
 		<id property="qnaReplyNo" 				column="QNA_REPLY_NUMBER" />
 		<result property="refQnaNo" 			column="REF_QNA_NUMBER" />
@@ -207,6 +203,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		DEFAULT, 
 		DEFAULT)
 	</insert>
+	
 	<update id="modifyReply">
 		UPDATE
 		    QNA_REPLY_TBL
@@ -216,6 +213,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE
 			QNA_REPLY_NUMBER = #{qnaReplyNo}
 	</update>
+	
 	<delete id="deleteReply">
 		DELETE FROM QNA_REPLY_TBL WHERE QNA_REPLY_NUMBER = #{qnaReplyNo }
 	</delete>
@@ -223,6 +221,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT * FROM QNA_REPLY_TBL
 		WHERE REF_QNA_NUMBER = #{refQnaNo} 
 	</select>
+	
+	
 	
 	
 </mapper>

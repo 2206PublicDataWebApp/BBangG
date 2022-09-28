@@ -119,8 +119,16 @@
             text-align: center;
             text-decoration: none;
             display: inline-block;
-          
         }
+        
+        textarea {
+    width: 100%;
+    height: 20em;
+    border: none;
+    resize: none;
+  }
+  
+  
 
     </style>
     <script src="/resources/js/jquery-3.6.1.min.js"></script>
@@ -128,29 +136,31 @@
 </head>
 <body>
 <%@ include file="/WEB-INF/views/include/header.jsp"%>
+<div id="all" style="padding:0px 300px 0px 300px"]>
     <h1 align="center">질문 등록</h1>
+    <div align="center">
 	<br><br>
 	<form action="/qna/register.kh" method="post" enctype="multipart/form-data">
 		<table align="center" border="1">
 			<tr>
-				<td>제목</td>
-				<td><input type="text" name="qnaTitle"></td>
+				<td align=center>제목</td>
+				<td><input type="text" name="qnaTitle" placeholder="제목을 입력하세요" style="width:100%; border:0"; required></td>
 			</tr>
 			<tr>
-				<td>작성자</td>
-				<td><input type="text" name="qnaUserName" value="${login.userName }" readonly></td>
+				<td align=center>작성자</td>
+				<td><input type="text" name="qnaUserName" value="${login.userName }" style="width:100%" readonly></td>
 				<input type="text" name="qnaWriter" value="${login.userId}" style="display: none">
 			</tr>
 			<tr>
-				<td>내용</td>
-				<td><textarea cols="50" rows="10" name="qnaContent"></textarea></td>
+				<td align=center>내용</td>
+				<td><textarea cols="50" rows="10" name="qnaContent" placeholder="내용을 입력하세요" required></textarea></td>
 			</tr>
 			<tr>
-				<td>첨부파일</td>
+				<td align=center>첨부파일</td>
 				<td><input type="file" name="uploadFile"></td>
 			</tr>
 			<tr>
-				<td>비밀글 여부</td>
+				<td align=center>비밀글 여부</td>
 
 				<td>
 					<select name="qnaSecret">
@@ -158,15 +168,16 @@
 						<option value="0">전체 공개</option>
 					</select>
 				</td>
-			</tr>
-			<tr>
-				<td colspan="2">
-					<input type="submit" value="등록">
-					<input type="reset" value="취소">
-				</td>
-
+			
 			</tr>
 		</table>
+			</div>
+				<div align="center">
+					<input type="submit" value="등록">
+					<input type="reset" value="취소">
+				
 	</form>
+				</div>
+				</div>
 </body>
 </html>

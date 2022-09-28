@@ -120,55 +120,114 @@
             text-decoration: none;
             display: inline-block;
           
-        }
 
+		.qna-title{
+	       display: flex;
+	       margin: 25px auto;
+	       width: 980px;
+	       padding : 30px 40px;
+	       box-sizing:border-box ;
+	       border : 1px solid white ;
+		       
+		.qna-detail{ 
+	       border : 1px solid #414141 ;
+	       width: 980px;
+	       margin: 25px auto;
+	       box-sizing:border-box ;
+	       padding : 50px 60px;
+	       }
+	       
+	        .detail-title-wrap{
+       display: flex;
+       justify-content: space-between;
+       }
+       
+       .user-date{
+       display: flex;
+       align-items: center;
+       
+       .btn-wrap{
+   		margin-top:50px;
+	       }
+	       
+	   #btn-modify{
+       width: 80px;
+       font-size: 15px;
+       border: 1px solid #414141;
+       background-color: #414141;
+       color: rgb(255, 255, 255);
+       /* padding: 15px 25px; */
+       text-align: center;
+       text-decoration: none;
+       display: inline-block;
+       position: relative;
+       left : 80%;
+       }
+       
+        #btn-delete{
+       width: 80px;
+       font-size: 15px;
+       border: 1px solid #414141;
+       background-color: #ffffff;
+       color: #414141;
+       /* padding: 15px 25px; */
+       text-align: center;
+       text-decoration: none;
+       display: inline-block;
+       position: relative;
+       left : 80%;
+       
+       #qna-page{
+        	text-align: center;
+        	margin-top : 80px;
+            margin: 80px auto;
+            color:#3A2618;
+            font-size: 30px;
+        	font-weight: bold;
+        }
+   }
+           
     </style>
     <script src="/resources/js/jquery-3.6.1.min.js"></script>
     <%@ include file="/WEB-INF/views/include/head.jsp"%>
 </head>
 <body>
 <%@ include file="/WEB-INF/views/include/header.jsp"%>
-    
-    <h1 align="center">${qna.qnaNo }번 게시글 상세 보기</h1>
-	<br><br>
-	<table align="center" width="600" border="1">
-		<tr>
-			<td>제목</td>
-			<td>${qna.qnaTitle }</td>
-		</tr>
-		<tr>
-			<td>작성자</td>
-			<td>${qna.qnaWriter }</td>
-		</tr>
-		<tr>
-			<td>작성날짜</td>
-			<td>${qna.qnaCreateDate }</td>
-		</tr>
-		<tr>
-			<td>조회수</td>
-			<td>${qna.qnaViewCount }</td>
-		</tr>
-		<tr height="300">
-			<td>내용</td>
-			<td>${qna.qnaContent }
-			</td>
-		</tr>
-		<tr>
-			<td>첨부파일</td>
-			<td>
-				<img alt="본문이미지" src="/resources/qnauploadFiles/${qna.qnaFileRename }" 
+<div id="all" style="padding:0px 300px 0px 300px"]>
+<br><br><br>
+    <div id="qna-page" padding="300px" align="center">
+    <h1>${qna.qnaWriter }님의 질문 상세보기</h1></div> <br><br>
+	
+	<div class="qna-detail">
+        <div class="detail-title-wrap">
+            <div class="user-date-star">
+                <div class="user-date">
+                    <div class="user-id" >${qna.qnaWriter }</div><br>
+                    <div class="date" style="border-top:1px solid brown";>${qna.qnaCreateDate }</div>
+                </div><br>
+		<div>
+                    <div></div>
+                </div>
+               </div>
+                <div></div>
+            	<div></div>
+            </div>
+             </div>
+        <div class="qna-content">
+            <div id="qna-img" style="border-top:1px solid brown";>
+                <img alt="image" style="width:200px"; height="200px" src="/resources/qnauploadFiles/${qna.qnaFileRename }" 
 				width="300" height="300">
-			</td>
-		</tr>
-		<tr>
-			<td colspan="2" align="center">
-				<a href="/qna/modifyView.kh?qnaNo=${qna.qnaNo }&page=${page}">수정 페이지로 이동</a>
-				<a href="#" onclick="qnaRemove(${page});">삭제하기</a>
-			</td>
-		</tr>
-	</table>
-	
-	
+            </div><br><br>
+        <div style="border-top:1px solid brown";>
+        	${qna.qnaContent }
+        </div> <br><br>
+        <div class="btn-wrap">
+            <a id="btn-modify" href="/qna/modifyView.kh?qnaNo=${qna.qnaNo }&page=${page}">수정</a>
+            <a id="btn-delete" href="#" onclick="qnaRemove(${page});">삭제</a>
+
+        </div>
+    </div>   
+  
 	<form action="/qna/addReply.kh" method="post">
 		<input type="hidden" name="page" value="${page }">
 		<input type="hidden" name="refQnaNo" value="${qna.qnaNo }">
@@ -184,12 +243,12 @@
 				</td>
 			</tr>
 			<td>
-			<button type="button" onclick="location.href='/qna/writeAnswer.kh';">답변하기</button>
 			</td>
 		</table>
 	</form>
+			<button type="button" onclick="location.href='/qna/writeAnswer.kh';">답변하기</button>
 	
-	<table align="center" width="600" border="1">
+	<table align="center" width="500" border="1">
 		<c:forEach items="${replyList }" var="reply">
 			<tr>
 				<td width="100">${reply.qnaReplyWriter }</td>
@@ -202,12 +261,9 @@
 					</c:if>
 				</td>
 			</tr>
-
 		</c:forEach>
 	</table>
-    
-   
-    
+
      <script>
 		function qnaRemove(value) {
 			event.preventDefault(); 
@@ -245,5 +301,6 @@
 			$form.submit();
 		}
 	</script>
+	</div>
 </body>
 </html>

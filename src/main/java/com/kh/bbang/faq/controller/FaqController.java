@@ -215,5 +215,37 @@ public class FaqController {
 		return mv;
 	}
 
+	//관리자페이지 
+	@GetMapping(value = "/admin/faqList.kh")
+	public ModelAndView adminFaqListView(
+			ModelAndView mv
+			,@RequestParam(value="page", required=false) Integer page) {
+		int currentPage = (page != null) ? page : 1;
+		int totalCount = faqService.getTotalCount("","");
+		int faqLimit = 10;
+		int naviLimit = 5;
+		int maxPage;
+		int startNavi;
+		int endNavi;
+		maxPage = (int)((double)totalCount/faqLimit + 0.9);
+		startNavi = ((int)((double)currentPage/naviLimit+0.9)-1)*naviLimit+1;
+		endNavi = startNavi + naviLimit - 1;
+		if(maxPage < endNavi) {
+			endNavi = maxPage;
+		}
+		
+		List<Faq> faqList = faqService.printAllFaq(currentPage, faqLimit);
+		if(!faqList.isEmpty()) {
+			mv.addObject("urlValue", "list");
+			mv.addObject("maxPage", maxPage);
+			mv.addObject("currentPage", currentPage);
+			mv.addObject("startNavi", startNavi);
+			mv.addObject("endNavi", endNavi);
+			mv.addObject("faqList", faqList);
+		}
+		mv.setViewName("faq/listView");
+		return mv;
+	}
+	
 	
 }

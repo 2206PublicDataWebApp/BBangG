@@ -7,7 +7,6 @@
 <link href=”https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap” rel=”stylesheet”>
 
 <%@ include file="/WEB-INF/views/include/sideBar.Qna.jsp"%>
-<%@ include file="/WEB-INF/views/include/head.jsp"%>
 <meta charset="UTF-8">
 <title>FAQ게시판</title>
 <style>
@@ -121,6 +120,7 @@
 	
 	
 </script>
+<%@ include file="/WEB-INF/views/include/head.jsp"%>
 <%@ include file="/WEB-INF/views/include/header.jsp"%>
 
 <body>
@@ -168,20 +168,21 @@
 				<form action="/faq/search.kh" method="get">
 					<select name="searchCondition">
 						<option value="all" <c:if test="${searchCondition eq 'all' }">selected</c:if>>전체</option>
-						<option value="writer" <c:if test="${searchCondition eq 'writer' }">selected</c:if>>작성자</option>
+<%-- 						<option value="writer" <c:if test="${searchCondition eq 'writer' }">selected</c:if>>작성자</option> --%>
 						<option value="title" <c:if test="${searchCondition eq 'title' }">selected</c:if>>제목</option>
 						<option value="content" <c:if test="${searchCondition eq 'contents' }">selected</c:if>>내용</option>
 					</select>
 					<input type="text" name="searchValue" value="${searchValue }">
 					<input type="submit" value="검색">
-				</form>
 			</td>
 		
+		<div>
 			<td>
+			<c:if test="${sessionScope.login.userZipCode == 0}">
 				<button onclick="location.href='/faq/writeView.kh';">글쓰기</button>
-				
+				</c:if>
 			</td>
-			
+			</div>
 		</tr>
 	</table>
 	</div>
