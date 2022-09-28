@@ -68,6 +68,12 @@ img {
 	width: 600px;
 }
 
+#goOrder:hover{
+	cursor: pointer;
+	background-color: #fff;
+	color: #3A2618;
+}
+
 #goReview {
 	color: #3A2618;
 	font-size: 16px;
@@ -75,6 +81,13 @@ img {
 	margin-top: 10px;
 	height: 50px;
 	width: 600px;
+
+}
+
+#goReview:hover{
+	cursor: pointer;
+	background-color: #3A2618;
+	color: #fff;
 }
 
 html, body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre,
@@ -114,6 +127,9 @@ a, li, ul {
 	padding: 30px 40px;
 	box-sizing: border-box;
 	border: 1px solid white;
+}
+td{
+	border-bottom: 1px solid grey;
 }
 
 .review-title-btn {
@@ -269,7 +285,7 @@ li {
 					</tr>
 					<tr>
 						<td>우편번호</td>
-						<td><p>${store.storeZipCode } </p></td>
+						<td colspan="2"><p>${store.storeZipCode } </p></td>
 					</tr>
 					<tr>
 						<td>주소</td>
@@ -292,8 +308,32 @@ li {
 						<td colspan="2"><p>${store.storeUrl} </p></td>
 					</tr>
 					<tr>
-						<td>계좌번호</td>
-						<td colspan="2"><p>${store.storeAccount} </p></td>
+						<td rowspan="3">대표메뉴</td>
+						<td >
+							<p>${product1.productName} </p>
+						</td>
+						<td>
+							<p>${product1.productPrice }원
+						</td>
+						
+					</tr>
+					<tr>
+						<td >
+							<p>${product2.productName} </p>
+						</td>
+						<td>
+							<p>${product2.productPrice }원
+						</td>
+						
+					</tr>
+					<tr>
+						<td >
+							<p>${product3.productName} </p>
+						</td>
+						<td>
+							<p>${product3.productPrice }원
+						</td>
+						
 					</tr>
 				</table>
 			</div>
@@ -410,5 +450,12 @@ li {
 		}
 	
 	</script>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+	<%@ include file="/WEB-INF/views/include/footer.jsp"%>
 </body>
 </html>

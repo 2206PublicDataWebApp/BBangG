@@ -21,6 +21,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.bbang.product.domain.Product;
 import com.kh.bbang.product.service.ProductService;
+import com.kh.bbang.review.domain.Review;
+import com.kh.bbang.review.service.ReviewService;
 import com.kh.bbang.store.domain.Store;
 import com.kh.bbang.store.domain.StoreImage;
 import com.kh.bbang.store.service.StoreService;
@@ -32,7 +34,13 @@ public class StoreController {
 	@Autowired
 	private StoreService sService;
 	
-	//관리자 점포 리스트 - 페이징완료
+	@Autowired
+	private ProductService pService;
+	
+	@Autowired
+	private ReviewService rService;
+	
+	//관리자 점포 리스트
 	@RequestMapping(value="/store/adminStoreList.kh", method=RequestMethod.GET)
 	public ModelAndView adminStoreList(
 			ModelAndView mv,
@@ -83,13 +91,13 @@ public class StoreController {
 		//페이징처리
 		int currentPage = (page != null) ? page : 1;
 		int totalCount = sService.getTotalCount("","");
-		int storeLimit = 9;
+		int storeLimit = 12;
 		int naviLimit = 5;
 		int maxPage;
 		int startNavi;
 		int endNavi;
 		
-		maxPage = (int) ((double)totalCount / storeLimit + 0.9);
+		maxPage = (int) ((double)totalCount / storeLimit + 1);
 		startNavi = ((int)((double)currentPage / naviLimit + 0.9) -1) * naviLimit + 1;
 		endNavi = startNavi + naviLimit - 1;
 		if(maxPage < endNavi) {
@@ -136,7 +144,6 @@ public class StoreController {
 			HttpServletRequest request) {
 		try {
 			String storeFilename = uploadFile.getOriginalFilename();
-			System.out.println(storeFilename+"asdasddsasda");
 			if(!uploadFile.getOriginalFilename().equals("")) {
 				String root = request.getSession().getServletContext().getRealPath("resources");
 				String savePath = root + "\\image\\store-images";
@@ -158,8 +165,6 @@ public class StoreController {
 			if(result > 0 && result2 > 0) {
 				mv.setViewName("redirect:/store/adminStoreList.kh");
 			}
-			// 첨부파일 입력 코드.. 근데 다른 테이블을 사용함.. 어케하는지 조사..
-			// SEQUENCE 점포코드 부여 방식 조사 할것 -> 001 
 		}catch(Exception e) {
 			mv.addObject("msg",e.toString()).setViewName("common/errorPage");
 		}
@@ -173,9 +178,18 @@ public class StoreController {
 			@RequestParam Integer storeNo) {
 		
 		Store store = sService.showOneStoreById(storeNo);
-		
+		List<Product> pList = pService.printAllProduct(storeNo);
+		Product product1 = pList.get(0);
+		Product product2 = pList.get(1);
+		Product product3 = pList.get(2);
+		Review review = rService.printOneByNo(9);
+		System.out.println(review);
 		if(store != null) {
 			mv.addObject("store",store);
+			mv.addObject("product1", product1);
+			mv.addObject("product2", product2);
+			mv.addObject("product3", product3);
+			mv.addObject("review",review);
 			mv.setViewName("/store/storeDetailView");
 		}
 		return mv;
@@ -310,13 +324,13 @@ public class StoreController {
 				//페이징처리
 				int currentPage = (page != null) ? page : 1;
 				int totalCount = sService.getTotalCount(searchCondition,searchValue);
-				int storeLimit = 9;
+				int storeLimit = 12;
 				int naviLimit = 5;
 				int maxPage;
 				int startNavi;
 				int endNavi;
 				
-				maxPage = (int) ((double)totalCount / storeLimit + 0.9);
+				maxPage = (int) ((double)totalCount / storeLimit + 1);
 				startNavi = ((int)((double)currentPage / naviLimit + 0.9) -1) * naviLimit + 1;
 				endNavi = startNavi + naviLimit - 1;
 				if(maxPage < endNavi) {
@@ -354,13 +368,13 @@ public class StoreController {
 				//페이징처리
 				int currentPage = (page != null) ? page : 1;
 				int sortCount = sService.getSortCount(region1,region2);
-				int storeLimit = 9;
+				int storeLimit = 12;
 				int naviLimit = 5;
 				int maxPage;
 				int startNavi;
 				int endNavi;
 				
-				maxPage = (int) ((double)sortCount / storeLimit + 0.9);
+				maxPage = (int) ((double)sortCount / storeLimit + 1);
 				startNavi = ((int)((double)currentPage / naviLimit + 0.9) -1) * naviLimit + 1;
 				endNavi = startNavi + naviLimit - 1;
 				if(maxPage < endNavi) {

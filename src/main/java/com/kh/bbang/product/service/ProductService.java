@@ -10,4 +10,5 @@ public interface ProductService {
 	public List<Product> printAllProduct(Integer refStoreNo);
 	
 	public int removeProduct(Integer productCode, Integer refStoreNo);
+	
 }

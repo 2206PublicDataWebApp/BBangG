@@ -15,5 +15,4 @@ public interface ProductStore {
 	
 	public int deleteProduct(SqlSession session, Integer productCode, Integer refStoreNo);
 	
-
 }

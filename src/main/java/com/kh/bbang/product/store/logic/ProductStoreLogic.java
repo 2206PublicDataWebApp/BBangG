@@ -33,6 +33,8 @@ public class ProductStoreLogic implements ProductStore{
 		int result = session.delete("ProductMapper.deleteProduct", paraMap);
 		return result;
 	}
+
+	
 	
 
 }
