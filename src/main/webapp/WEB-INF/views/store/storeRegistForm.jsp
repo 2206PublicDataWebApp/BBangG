@@ -204,7 +204,5 @@ td {
   		}
   	}
     </script>
-    <br><br><br><br><br><br>
-    <%@ include file="/WEB-INF/views/include/footer.jsp"%>
   </body>
 </html>
