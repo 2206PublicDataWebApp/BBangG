@@ -170,6 +170,7 @@ public class StoreController {
 			@RequestParam Integer storeNo) {
 		
 		Store store = sService.showOneStoreById(storeNo);
+		
 		if(store != null) {
 			mv.addObject("store",store);
 			mv.setViewName("/store/storeDetailView");

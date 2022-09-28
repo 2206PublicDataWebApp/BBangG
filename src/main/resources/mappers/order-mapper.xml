@@ -2,72 +2,97 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  
- <mapper namespace="OrderMapper">
- 	<resultMap type="Product" id="productResultMap">
- 		<id property="refStoreNo" column="REF_STORE_NO"/>
- 		<result property="productCode" column="PRODUCT_CODE"/>
- 		<result property="productName" column="PRODUCT_NAME"/>
- 		<result property="productPrice" column="PRODUCT_PRICE"/>
- 	</resultMap>
- 	 <resultMap type="Order" id="orderResultMapById">
- 		<id property="userId" column="USER_ID"/>
- 		<result property="orderNo" column="ORDER_NO"/>
- 		<result property="orderDetail" column="ORDER_DETAIL"/>
- 		<result property="orderDate" column="ORDER_DATE"/>
- 		<result property="orderState" 				column="ORDER_STATE"/>
- 	</resultMap>
- 		 <resultMap type="Order" id="orderDetailResultMap">
- 		<id property="orderNo" column="ORDER_NO"/>
- 		<result property="userId" 					column="USER_ID"/>
- 		<result property="storeNo" 				column="STORE_NO"/>
- 		<result property="orderDetail"				column="ORDER_DETAIL"/>
- 		<result property="orderShipfee" 			column="ORDER_SHIPFEE"/>
- 		<result property="totalPrice" 				column="TOTAL_PRICE"/>
- 		<result property="orderDate" 				column="ORDER_DATE"/>
- 		<result property="delivaryName" 			column="DELIVARY_NAME"/>
- 		<result property="delivaryPhone" 			column="DELIVARY_PHONE"/>
- 		<result property="delivaryZipcode" 			column="DELIVARY_ZIPCODE"/>
- 		<result property="delivaryAddr" 			column="DELIVARY_ADDR"/>
- 		<result property="delivaryAddrDetail" 		column="DELIVARY_ADDR_DETAIL"/>
- 		<result property="delivaryMemo" 			column="DELIVARY_MEMO"/>
- 		<result property="orderState" 				column="ORDER_STATE"/>
- 		<result property="orderName" 				column="ORDER_NAME"/>
- 		<result property="orderPhone" 				column="ORDER_PHONE"/>
- 	</resultMap>
- 	<resultMap type="Order" id="orderResultMapByDate">
- 		<id property="orderDate" column="ORDER_DATE"/>
- 		<result property="orderNo" column="ORDER_NO"/>
- 		<result property="storeNo" column="STORE_NO"/>
- 		<result property="orderState" 			column="ORDER_STATE"/>
- 	</resultMap>
- 	<resultMap type="Store" id="storeResultMap">
- 		<id property="storeNo" column="STORE_NO"/>
- 		<result property="storeCeo" column="STORE_CEO"/>
- 		<result property="storeName" column="STORE_NAME"/>
- 		<result property="storeTel" column="STORE_TEL"/>
- 		<result property="storeBank" column="STORE_BANK"/>
- 		<result property="storeAccount" column="STORE_ACCOUNT"/>
- 		<result property="storeStatus" column="STORE_STATUS"/>
- 		
- 	</resultMap>
- 	<insert id="insertOrder">
-		INSERT INTO ORDER_TBL
-		VALUES(SEQ_ORDER_NO.NEXTVAL,#{userId},#{storeNo},#{orderDetail},#{orderShipfee},#{totalPrice},DEFAULT,#{delivaryName},#{delivaryPhone},#{delivaryZipcode},#{delivaryAddr},#{delivaryAddrDetail},#{delivaryMemo},DEFAULT,#{orderName},#{orderPhone})
- 	</insert>
- 	<update id="updateOrder">
- 		UPDATE ORDER_TBL SET DELIVARY_NAME=#{delivaryName},DELIVARY_PHONE=#{delivaryPhone},DELIVARY_ZIPCODE=#{delivaryZipcode},DELIVARY_ADDR=#{delivaryAddr}, DELIVARY_ADDRESS_SECOND=#{delivaryAddrDetail}, DELIVARY_MEMO=#{delivaryMemo}
- 		WHERE ORDER_NO=#{orderNo}
- 	</update>
- 	<select id="selectAllProduct" resultMap="productResultMap">
- 		SELECT*FROM PRODUCT_TBL WHERE REF_STORE_NO =#{refStoreNo}
- 	</select>
- 	<select id="selectOrderById" resultMap="orderResultMapById">
- 		SELECT*FROM ORDER_TBL WHERE USER_ID=#{userId} AND TO_CHAR(ORDER_DATE,'YYYY-MM-DD') BETWEEN #{dateFrom} AND #{dateTo} ORDER BY ORDER_DATE DESC
- 	</select>
- 	<select id="selectOneOrder" resultMap="orderDetailResultMap">
+
+<mapper namespace="OrderMapper">
+	<resultMap type="Product" id="productResultMap">
+		<id property="refStoreNo" column="REF_STORE_NO" />
+		<result property="productCode" column="PRODUCT_CODE" />
+		<result property="productName" column="PRODUCT_NAME" />
+		<result property="productPrice" column="PRODUCT_PRICE" />
+	</resultMap>
+	<resultMap type="Order" id="orderResultMapById">
+		<id property="userId" column="USER_ID" />
+		<result property="orderNo" column="ORDER_NO" />
+		<result property="orderDetail" column="ORDER_DETAIL" />
+		<result property="orderDate" column="ORDER_DATE" />
+		<result property="orderState" column="ORDER_STATE" />
+	</resultMap>
+	<resultMap type="Order" id="orderDetailResultMap">
+		<id property="orderNo" column="ORDER_NO" />
+		<result property="userId" column="USER_ID" />
+		<result property="storeNo" column="STORE_NO" />
+		<result property="orderDetail" column="ORDER_DETAIL" />
+		<result property="orderShipfee" column="ORDER_SHIPFEE" />
+		<result property="totalPrice" column="TOTAL_PRICE" />
+		<result property="orderDate" column="ORDER_DATE" />
+		<result property="delivaryName" column="DELIVARY_NAME" />
+		<result property="delivaryPhone" column="DELIVARY_PHONE" />
+		<result property="delivaryZipcode" column="DELIVARY_ZIPCODE" />
+		<result property="delivaryAddr" column="DELIVARY_ADDR" />
+		<result property="delivaryAddrDetail"
+			column="DELIVARY_ADDR_DETAIL" />
+		<result property="delivaryMemo" column="DELIVARY_MEMO" />
+		<result property="orderState" column="ORDER_STATE" />
+		<result property="orderName" column="ORDER_NAME" />
+		<result property="orderPhone" column="ORDER_PHONE" />
+	</resultMap>
+	<resultMap type="Order" id="orderResultMapLite">
+		<id property="orderDate" column="ORDER_DATE" />
+		<result property="userId" column="USER_ID" />
+		<result property="orderNo" column="ORDER_NO" />
+		<result property="storeNo" column="STORE_NO" />
+		<result property="orderState" column="ORDER_STATE" />
+	</resultMap>
+	<resultMap type="Store" id="storeResultMap">
+		<id property="storeNo" column="STORE_NO" />
+		<result property="storeCeo" column="STORE_CEO" />
+		<result property="storeName" column="STORE_NAME" />
+		<result property="storeTel" column="STORE_TEL" />
+		<result property="storeBank" column="STORE_BANK" />
+		<result property="storeAccount" column="STORE_ACCOUNT" />
+		<result property="storeStatus" column="STORE_STATUS" />
+
+	</resultMap>
+	<select id="selectOrderById" resultMap="orderResultMapById">
+		SELECT*FROM ORDER_TBL WHERE USER_ID=#{userId} AND
+		TO_CHAR(ORDER_DATE,'YYYY-MM-DD') BETWEEN #{dateFrom} AND #{dateTo}
+		ORDER BY ORDER_DATE DESC
+	</select>
+	<select id="selectAllProduct" resultMap="productResultMap">
+		SELECT*FROM PRODUCT_TBL WHERE REF_STORE_NO =#{refStoreNo}
+	</select><select id="selectAllByValue" parameterType="Order" resultMap="orderResultMapLite">
+		SELECT * FROM ORDER_TBL
+		<where>
+			<if test="searchCondition == 'uId' &amp; searchValue!=''">
+				USER_ID LIKE '%'||#{searchValue}||'%' 
+			</if>
+			<if test="searchCondition == 'oNo'">
+				ORDER_NO=#{searchValue} 
+			</if>
+			 	OR TO_CHAR(ORDER_DATE,'YYYY-MM-DD')=#{orderDate}
+		</where>
+	</select><select id="selectOneOrder" resultMap="orderDetailResultMap">
  		SELECT*FROM ORDER_TBL WHERE ORDER_NO=#{orderNo}
- 	</select>
+ 	</select><select id="selectStore" resultMap="storeResultMap">
+		SELECT * FROM STORE_TBL WHERE STORE_NO=#{storeNo}
+	</select><insert id="insertOrder" parameterType="Order">
+		<selectKey resultType="int" keyProperty="orderNo"
+			order="BEFORE">
+			SELECT SEQ_ORDER_NO.NEXTVAL FROM DUAL
+		</selectKey>
+		INSERT INTO ORDER_TBL
+		VALUES(#{orderNo},#{userId},#{storeNo},#{orderDetail},#{orderShipfee},#{totalPrice},DEFAULT,#{delivaryName},#{delivaryPhone},#{delivaryZipcode},#{delivaryAddr},#{delivaryAddrDetail},#{delivaryMemo},DEFAULT,#{orderName},#{orderPhone})
+	</insert>
+	<update id="updateOrder">
+		UPDATE ORDER_TBL SET
+		DELIVARY_NAME=#{delivaryName},DELIVARY_PHONE=#{delivaryPhone},DELIVARY_ZIPCODE=#{delivaryZipcode},DELIVARY_ADDR=#{delivaryAddr},
+		DELIVARY_ADDR_DETAIL=#{delivaryAddrDetail},
+		DELIVARY_MEMO=#{delivaryMemo}
+		WHERE ORDER_NO=#{orderNo}
+	</update>
+	
+ 	
+ 	
 	<delete id="deleteOrder">
 		DELETE FROM ORDER_TBL WHERE ORDER_NO=#{orderNo}
 	</delete>
@@ -78,15 +103,19 @@
 		UPDATE ORDER_TBL SET ORDER_STATE=ORDER_STATE+1 WHERE ORDER_NO=#{orderNo}
 	</update>
 	
-	<select id="selectOrderByDate" resultMap="orderResultMapByDate" >
-		SELECT*FROM ORDER_TBL WHERE TO_CHAR(ORDER_DATE,'YYYY-MM-DD')=#{orderDate} ORDER BY ORDER_DATE DESC
-		
+	<select id="selectTotalOrderCountByValue" parameterType="Order" resultType="_int">
+		SELECT COUNT(*) FROM ORDER_TBL
+		<where>
+			<if test="searchCondition == 'uId' &amp; searchValue!=''">
+				USER_ID LIKE '%'||#{searchValue}||'%' 
+			</if>
+			<if test="searchCondition == 'oNo'">
+				ORDER_NO=#{searchValue}
+			</if>
+				OR TO_CHAR(ORDER_DATE,'YYYY-MM-DD')=#{orderDate}
+		</where>
 	</select>
-	<select id="selectStore" resultMap="storeResultMap">
-		SELECT*FROM STORE_TBL WHERE STORE_NO=#{storeNo}
-	</select>
-	<select id="selectTotalOrderCount" resultType="_int">
-		SELECT COUNT(*) FROM ORDER_TBL WHERE TO_CHAR(ORDER_DATE,'YYYY-MM-DD')=#{orderDate}
-	</select>
- 
+	
+ 	
+	
  </mapper>

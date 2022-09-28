@@ -116,7 +116,7 @@ input[type=checkbox]{
 }
 
 span{
-margin-left:60%;
+margin-left:55%;
 
 }
 </style>
@@ -130,11 +130,11 @@ margin-left:60%;
 	<br>
 	<br>
 	<br>
-	<form action="/order/sendOrder.kh" method="post"
+	<form action="/order/orderSend.kh" method="post"
 		enctype="multipart/form-data">
-		<input type="hidden" name="orderShipfee" value=3000> <input
-			type="hidden" name="userId" value="${user.userId}"> <input
-			type="hidden" name="storeNo" value="${storeNo}">
+		<input type="hidden" name="orderShipfee" value=3000> 
+		<input type="hidden" name="userId" value="${user.userId}"> 
+		<input type="hidden" name="storeNo" value="${storeNo}">
 		<div>
 			<div style="float: left; width: 30%; margin-left: 15%;">
 				<select id="selGoods" name="selGoods" style="height: 40px;">
@@ -391,7 +391,7 @@ margin-left:60%;
 		
 		    $("#copy").change(function(){
 		        if($("#copy").is(":checked")){
-					$("#delivaryName").val(${user.userName});
+					$("#delivaryName").val('${user.userName}');
 					$("#delivaryPhone").val(${user.userPhone});
 			 		$("#delivaryZipcode").val(${user.userZipCode});
 				 	$("#delivaryAddr").val('${user.addr}');

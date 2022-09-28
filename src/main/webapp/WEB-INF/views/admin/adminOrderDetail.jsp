@@ -40,6 +40,7 @@ th, td {
 #bodyWrapper{
 	padding-left:200px;
 	padding-top:80px;
+margin-bottom:10%;
 }
 #btn_receiveConfirm,#btn_delivaryStart{
  height:30px; 
@@ -173,13 +174,15 @@ th, td {
 				</tr>
 			</table>
 		</div>
+	
 
 	</div>
 </div>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
 
-
-	<script type="text/javascript">
+</body>
+<script type="text/javascript">
 	
 		
 		$("#btn_receiveConfirm").click(function(){
@@ -244,5 +247,5 @@ th, td {
 	
 	
 	</script>
-</body>
+
 </html>
