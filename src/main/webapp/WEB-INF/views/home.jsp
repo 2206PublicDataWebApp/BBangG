@@ -40,6 +40,9 @@
 	<div style="margin-top:50px;">
 		<jsp:include page="/WEB-INF/views/include/mainReviewList.jsp"/>
 	</div>
+	<div>
+		<jsp:include page="/WEB-INF/views/include/footer.jsp"/>
+	</div>
 	
 	
   <script type="text/javascript">

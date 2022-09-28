@@ -1,4 +1,4 @@
-package com.kh.bbang.review.controller;
+package com.kh.bbang.review.domain;
 
 public class Search {
 	private String searchCondition;

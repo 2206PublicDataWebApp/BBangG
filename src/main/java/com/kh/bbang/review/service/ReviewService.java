@@ -25,5 +25,5 @@ public interface ReviewService {
 	// 메인 best4 게시글 목록
 	public List<Review> heartCountBest();
 	// 스토어리뷰
-	public List<Review> storeReviewPrint(int storeNo, int currentPage, int listLimit);
+	public List<Review> storeReviewPrint(int storeNo);
 }

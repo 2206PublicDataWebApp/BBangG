@@ -30,12 +30,16 @@ public class ReviewController {
 	private ReviewService rService;
 	
 	/**
-	 * 게시글 등록 화면
+	 * 
+	 * @param review
 	 * @return
 	 */
 	@RequestMapping(value = "/review/writeView.kh", method = RequestMethod.GET)
-	public String reviewWrite() {
-		return "review/reviewWriteForm";
+	public ModelAndView reviewWrite(@ModelAttribute Review review) {
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("storeNo", review.getStoreNo());
+		mv.setViewName("/review/reviewWriteForm");
+		return mv;
 	}
 	
 	/**
@@ -219,6 +223,7 @@ public class ReviewController {
 		return mv;
 	}
 
+
 	/**
 	 * 게시글 리스트
 	 * @param mv
@@ -271,7 +276,11 @@ public class ReviewController {
 		User user = (User)session.getAttribute("login");
 		review.setUserId(user.getUserId());
 		int result = rService.insertHeartCount(review);
-		mv.setViewName("redirect:/review/detail.kh?reviewNo="+review.getReviewNo());
+		if(review.getStoreNo() == 0 ) {
+			mv.setViewName("redirect:/review/detail.kh?reviewNo="+review.getReviewNo());			
+		}else {
+			mv.setViewName("redirect:/store/storeDetail.kh?storeNo="+review.getStoreNo());
+		}
 		return mv;
 	}
 	/**

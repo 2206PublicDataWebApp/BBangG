@@ -298,57 +298,19 @@ li {
 				</table>
 			</div>
 			<div class="item">
-				<button type="button" id="goReview">리뷰작성 하러가기</button>
+				<button type="button" id="goReview" onclick="goReview()">리뷰작성 하러가기</button>
 				<button type="button" id="goOrder" onclick="goOrder()">주문하러
 					가기</button>
 			</div>
 			<div class="item">
-				<div id="review-title">
-					<div id="review-title">
-						<h1 id="storename">${review.storeName }<div id="sort">
-								<a id="bestSort" href="#">인기순</a> <a id="latestSort" href="#"
-									onclick="">최신순</a>
-							</div>
-						</h1>
-					</div>
-				</div>
-				<!-- 1 -->
-				<div class="review-detail">
-					<div class="detail-title-wrap">
-						<div class="user-date-star">
-							<div class="user-date">
-								<div class="user-id">${review.reviewWriter }</div>
-								<div class="date">${review.rCreateDate }</div>
-							</div>
-							<div id="star">
-								<div>${review.starRating }별점</div>
-							</div>
-						</div>
-						<div class="heart-count">
-							<div id="heart">
-								<a
-									href="/review/heartCountUpdate.kh?reviewNo=${review.reviewNo }">♡
-									${review.reviewHeart }</a>
-							</div>
-							<div>조회 ${review.reviewCount }</div>
-						</div>
-					</div>
-					<div class="reivew-content">
-						<div id="bbang-img">
-							<img alt="본문이미지"
-								src="/resources/reviewUploadFiles/${review.reviewFilename }"
-								width="500">
-						</div>
-						<div>${review.reviewContent }</div>
-						<div class="btn-wrap">
-							<a id="btn-modify"
-								href="/review/modifyView.kh?reviewNo=${review.reviewNo }&page=${page }">수정</a>
-							<a id="btn-delete" href="#" onclick="reviewRemove(${page});">삭제</a>
 
-						</div>
-					</div>
+				<div>
+					<jsp:include page="/WEB-INF/views/include/storeReviewList.jsp"/>
 				</div>
+
 	</section>
+	
+	
 	<script>
 		var address = '${store.storeAddr}'
 		var storeName = '${store.storeName}'
@@ -407,6 +369,17 @@ li {
 				}
 			} 
 		
+		}
+		
+		function goReview(){
+			if(${login ne null}){
+				location.href="/review/writeView.kh?storeNo="+${store.storeNo};
+			}else{
+				event.preventDefault();
+				if(confirm("로그인이 필요한 서비스입니다. 로그인 화면으로 이동하시겠습니까?")){
+					location.href="/user/loginView.kh";
+				}
+			} 
 		}
 	
 	</script>

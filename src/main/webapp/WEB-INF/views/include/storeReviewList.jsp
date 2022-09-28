@@ -1,11 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-    <title>스토어 후기</title>
     <style>
        html, body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, blockquote, th, td, img {
            margin: 0;
@@ -155,18 +150,19 @@
        
     </style>
     <script src="/resources/js/jquery-3.6.1.min.js"></script>
-    </head>
-    <body>
-        <div><!-- 임시 버튼-->
+ 
+        <!-- 임시 버튼 <div>
             <a href="#"><button type="submit" id="order-btn">주문하러 가기</button></a>
-        </div>
+        </div>-->
         <div id="review-title">
-            <h1 id="storename">${review.storeName }<div id="sort">
-                <a id="bestSort" href="#">인기순</a>
-                <a id="latestSort" href="#" onclick="">최신순</a>
-            </div></h1>
+            <h1 id="storename">${store.storeName } 리뷰
+	            <!-- <div id="sort">
+	                <a id="bestSort" href="#">인기순</a>
+	                <a id="latestSort" href="#" onclick="">최신순</a>
+	            </div> -->
+            </h1>
         </div>
-        <c:forEach items="{rList}" value="review">
+        <c:forEach items="${rList}" var="review">
           <!-- 1 -->
           <div class="review-detail">
             <div class="detail-title-wrap">
@@ -176,30 +172,46 @@
                         <div class="date">${review.rCreateDate }</div>
                     </div>
                     <div id="star">
-                        <div>${review.starRating }</div>
+                        <c:if test="${review.starRating == 1 }">★☆☆☆☆</c:if>
+                       	<c:if test="${review.starRating == 2 }">★★☆☆☆</c:if>
+                       	<c:if test="${review.starRating == 3 }">★★★☆☆</c:if>
+                       	<c:if test="${review.starRating == 4 }">★★★★☆</c:if>
+                       	<c:if test="${review.starRating == 5 }">★★★★★</c:if>
                     </div>
                 </div>
                 <div class="heart-count">
-                    <div id="heart"><a href="/review/heartCountUpdate.kh?reviewNo=${review.reviewNo }">♡  ${review.reviewHeart }</a></div>
+                    <div id="heart"><a href="javascript:void(0);" onclick="clickHeart('${review.reviewNo}', '${review.storeNo }');">♡  ${review.reviewHeart }</a></div>
                     <div>조회 ${review.reviewCount } </div>
                 </div>
             </div>
             <div class="reivew-content">
                 <div id="bbang-img">
-                    <img alt="본문이미지" src="/resources/reviewUploadFiles/${review.reviewFilename }" width="500">
+                    <img alt="본문이미지" src="/resources/reviewUploadFiles/${review.reviewFileRename }" width="500">
                 </div>
-            <div>
-                ${review.reviewContent }
-            </div>
-            <div class="btn-wrap">
-                <a id="btn-modify" href="/review/modifyView.kh?reviewNo=${review.reviewNo }&page=${page }">수정</a>
-                <a id="btn-delete" href="#" onclick="reviewRemove(${page});">삭제</a>
-    
-            </div>
+	            <div>
+	                ${review.reviewContent }
+	            </div>
+			    <c:if test="${login.userId eq review.reviewWriter }">
+				    <div class="btn-wrap">
+				            <a id="btn-modify" href="/review/modifyView.kh?reviewNo=${review.reviewNo }">수정</a>
+				            <a id="btn-delete" href="#" onclick="reviewRemove('${review.reviewNo}');">삭제</a>
+				     </div>
+			    </c:if>
         	</div>
        		</div>
         </c:forEach>
       <script>
+      
+     	function clickHeart(reviewNo, storeNo){
+       		var userId = '${login.userId}';
+       		if('${empty login}' == 'true'){
+       			alert('로그인을 해주세요');
+       			
+       		}else{
+    	   		location.href='/review/heartCountUpdate.kh?reviewNo='+reviewNo+'&storeNo='+storeNo;   			
+       		}
+       	}
+       	
        function reviewRemove(value){
         event.preventDefault();
         if(confirm("삭제하시겠습니까?")){
@@ -207,5 +219,4 @@
 	       }
 	   }
       </script>
-    </body>
-    </html>
+ 

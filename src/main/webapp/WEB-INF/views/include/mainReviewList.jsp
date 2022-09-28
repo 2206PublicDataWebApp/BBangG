@@ -143,7 +143,13 @@
 									</a>
 								</div>
 								<div class="writer">${review.reviewWriter }</div>
-		                        <p class="point displaynone">${review.starRating }☆☆☆☆☆</p>
+		                        <p class="point displaynone">
+		                        	<c:if test="${review.starRating == 1 }">★☆☆☆☆</c:if>
+		                        	<c:if test="${review.starRating == 2 }">★★☆☆☆</c:if>
+		                        	<c:if test="${review.starRating == 3 }">★★★☆☆</c:if>
+		                        	<c:if test="${review.starRating == 4 }">★★★★☆</c:if>
+		                        	<c:if test="${review.starRating == 5 }">★★★★★</c:if>
+		                        </p>
 		                        <p class="date "><i class="bar"></i>${review.rCreateDate }</p>
 		                        <div class="review_product_info">
 			                        <a href="/review/detail.kh?reviewNo=${review.reviewNo  }">

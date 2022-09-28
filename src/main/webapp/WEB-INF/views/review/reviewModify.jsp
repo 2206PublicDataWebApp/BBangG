@@ -166,7 +166,11 @@
 	                <button class="write-btn" type="submit">수정</button>
 	            </div>
 			</form>
+	
     </div>
+    <div>
+		<jsp:include page="/WEB-INF/views/include/footer.jsp"/>
+	</div>
      <script>
 
      

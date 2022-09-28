@@ -1,13 +1,11 @@
 package com.kh.bbang.store.controller;
 
 import java.io.File;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.kh.bbang.product.domain.Product;
-import com.kh.bbang.product.service.ProductService;
+import com.kh.bbang.review.domain.Review;
+import com.kh.bbang.review.service.ReviewService;
 import com.kh.bbang.store.domain.Store;
 import com.kh.bbang.store.domain.StoreImage;
 import com.kh.bbang.store.service.StoreService;
@@ -31,6 +29,11 @@ public class StoreController {
 	
 	@Autowired
 	private StoreService sService;
+	
+	// 220928 장은선 스토어 리뷰 기능 추가
+	@Autowired
+	private ReviewService rService;
+	// 220928 장은선 스토어 리뷰 기능 추가
 	
 	//관리자 점포 리스트 - 페이징완료
 	@RequestMapping(value="/store/adminStoreList.kh", method=RequestMethod.GET)
@@ -173,8 +176,12 @@ public class StoreController {
 			@RequestParam Integer storeNo) {
 		
 		Store store = sService.showOneStoreById(storeNo);
+		List<Review> review = rService.storeReviewPrint(storeNo);
 		
 		if(store != null) {
+			// 리뷰 목록
+			mv.addObject("rList", review);
+			// 리뷰 목록
 			mv.addObject("store",store);
 			mv.setViewName("/store/storeDetailView");
 		}
