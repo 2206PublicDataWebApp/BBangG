@@ -173,6 +173,7 @@
 <%@ include file="/WEB-INF/views/include/header.jsp"%>
 <div id="wrapper">
 <input type="hidden" name="userId" value="${login.userId }">
+<input type="hidden" name="page" value="${page }">
     <div id="faq-title">
         <div id="faq-title">
             <h1 id="storename">${faq.faqTitle } </h1>
@@ -199,8 +200,9 @@
     </div>
    <c:if test="${login.userId eq faq.faqWriter || login.status eq '0'}">
 	    <div class="btn-wrap">
-	        <a id="btn-modify" href="/faq/modifyView.kh?faqNo=${faq.faqNo }&page=${page}">수정</a>&nbsp&nbsp
-            <a id="btn-delete" href="#" onclick="qnaRemove(${page});">삭제</a><br>
+	        <a id="btn-modify" href="/faq/modifyView.kh?faqNo=${faq.faqNo }&page=${page}">수정</a>
+<%--        		<a id="btn-delete" href="#" onclick="qnaRemove(${page});">삭제</a><br> --%>
+            <a id="btn-delete" href="#" onclick="faqRemove(${page});">삭제</a> <br>
 	     </div>
     </c:if> 
     </div>
@@ -213,41 +215,15 @@
 
 
    	<script>
-   	function qnaRemove(value) {
+   	function faqRemove(value) {
 		event.preventDefault(); 
 		if(confirm("게시물을 삭제하시겠습니까?")) {
-			location.href="/qna/remove.kh?page="+value;
+			location.href="/faq/remove.kh?page="+value;
 		}
 	}
-	function removeReply(replyNo) {
-		event.preventDefault();
-		if(confirm("정말 삭제하시겠습니까?")) {
-			var $delForm = $("<form>");
-			$delForm.attr("action", "/qna/removeReply.kh");
-			$delForm.attr("method", "post");
-			$delForm.append("<input type='hidden' name='qnaReplyNo' value='"+replyNo+"'>");
-			$delForm.appendTo("body");
-			$delForm.submit();
-		}
-	}
-	function modifyView(obj, qnaReplyContent, qnaReplyNo) {
-		event.preventDefault();
-		var $tr = $("<tr>");
-		$tr.append("<td colspan='3'><input type='text' size='50' value='"+qnaReplyContent+"'></td>");
-		$tr.append("<td><button onclick='modifyReply(this, "+qnaReplyNo+");'>수정</button></td>");
-		$(obj).parent().parent().after($tr);
-	}
-	function modifyReply(obj, rNo) {
-		var inputTag = $(obj).parent().prev().children();
-		var qnaReplyContent = inputTag.val();
-		var $form = $("<form>");
-		$form.attr("action", "/qna/modifyReply.kh");
-		$form.attr("method", "post");
-		$form.append("<input type='hidden' value='"+qnaReplyContent+"' name='qnaReplyContent'>");
-		$form.append("<input type='hidden' value='"+rNo+"' name='qnaReplyNo'>");
-		$form.appendTo("body");
-		$form.submit();
-	}
+	
+	
+	
    
 	
 
