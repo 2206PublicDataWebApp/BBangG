@@ -182,14 +182,10 @@
 					</select>
 					<input type="text" name="searchValue" value="${searchValue }">
 					<input id="search-icon" type="image" src="/resources/image/icon/serch_bt.png" alt="검색">
-
 			</td>
-		
 		<div>
 			<td>
-			<c:if test="${sessionScope.login.status == 0}">
-				<button onclick="location.href='/faq/writeView.kh';">글쓰기</button>
-				</c:if>
+			
 			</td>
 			</div>
 		</tr>
