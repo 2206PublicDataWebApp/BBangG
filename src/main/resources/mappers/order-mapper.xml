@@ -71,6 +71,7 @@
 			</if>
 			 	OR TO_CHAR(ORDER_DATE,'YYYY-MM-DD')=#{orderDate}
 		</where>
+		ORDER BY ORDER_DATE DESC
 	</select><select id="selectOneOrder" resultMap="orderDetailResultMap">
  		SELECT*FROM ORDER_TBL WHERE ORDER_NO=#{orderNo}
  	</select><select id="selectStore" resultMap="storeResultMap">
@@ -90,9 +91,7 @@
 		DELIVARY_MEMO=#{delivaryMemo}
 		WHERE ORDER_NO=#{orderNo}
 	</update>
-	
- 	
- 	
+
 	<delete id="deleteOrder">
 		DELETE FROM ORDER_TBL WHERE ORDER_NO=#{orderNo}
 	</delete>
@@ -114,6 +113,7 @@
 			</if>
 				OR TO_CHAR(ORDER_DATE,'YYYY-MM-DD')=#{orderDate}
 		</where>
+		
 	</select>
 	
  	

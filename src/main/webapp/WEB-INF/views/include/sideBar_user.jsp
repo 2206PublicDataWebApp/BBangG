@@ -21,6 +21,7 @@
     position: fixed;
       height:100%;
     padding-top:30px;
+     z-index:1000;
 
 }
 .menu li a{

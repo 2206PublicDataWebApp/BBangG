@@ -85,7 +85,8 @@ public class OrderController {
 	}
 
 	@RequestMapping(value = "/order/orderSuccess.kh", method = RequestMethod.GET)
-	public ModelAndView orderSuccess(ModelAndView mv, @RequestParam("orderNo") Integer orderNo) {
+	public ModelAndView orderSuccess(ModelAndView mv
+			, @RequestParam("orderNo") Integer orderNo) {
 		try {
 			Order order = oService.findOneOrder(orderNo);
 			Store store = oService.findStore(order.getStoreNo());
@@ -210,7 +211,8 @@ public class OrderController {
 
 	// 사용자 주문취소요청
 	@RequestMapping(value = "/order/orderRemoveRequest.kh", method = RequestMethod.GET)
-	public String orderRemoveRequest(Model model, @RequestParam("orderNo") Integer orderNo) {
+	public String orderRemoveRequest(Model model
+			, @RequestParam("orderNo") Integer orderNo) {
 		try {
 			int result = oService.removeOrderRequest(orderNo);
 			return "redirect:/order/userOrderDetail.kh?orderNo=" + orderNo;
@@ -222,7 +224,8 @@ public class OrderController {
 
 	// 사용자 주문 수정화면
 	@RequestMapping(value = "/order/orderModifyView.kh", method = RequestMethod.GET)
-	public ModelAndView modifyOrderView(ModelAndView mv, @RequestParam("orderNo") Integer orderNo) {
+	public ModelAndView modifyOrderView(ModelAndView mv
+			, @RequestParam("orderNo") Integer orderNo) {
 		try {
 
 			Order order = oService.findOneOrder(orderNo);
@@ -240,8 +243,9 @@ public class OrderController {
 
 	// 사용자 주문 수정 보내기
 	@RequestMapping(value = "/order/orderModify.kh", method = RequestMethod.POST)
-	public ModelAndView modifyOrderSend(ModelAndView mv, @ModelAttribute Order order,
-			@RequestParam("orderNo") Integer orderNo) {
+	public ModelAndView modifyOrderSend(ModelAndView mv
+			, @ModelAttribute Order order
+			, @RequestParam("orderNo") Integer orderNo) {
 		order.setOrderNo(orderNo);
 		int result = oService.modifyOrder(order);
 		if (result > 0) {
@@ -257,7 +261,8 @@ public class OrderController {
 
 	// 사용자 배송상태 순차적으로 변경
 	@RequestMapping(value = "/order/userChangeOrdeState.kh", method = RequestMethod.GET)
-	public String userChangeOrdeState(Model model, @RequestParam("orderNo") Integer orderNo) {
+	public String userChangeOrdeState(Model model
+			, @RequestParam("orderNo") Integer orderNo) {
 		int result = oService.changeOrdeState(orderNo);
 		if (result > 0) {
 			return "redirect:/order/userOrderDetail.kh?orderNo=" + orderNo;
@@ -285,7 +290,8 @@ public class OrderController {
 
 	// 관리자 주문 즉시취소
 	@RequestMapping(value = "/admin/adminOrderRemove.kh", method = RequestMethod.GET)
-	public String adminOrderRemove(HttpSession session, Model model, @RequestParam("orderNo") Integer orderNo) {
+	public String adminOrderRemove(HttpSession session, Model model
+			, @RequestParam("orderNo") Integer orderNo) {
 		try {
 			int result = oService.removeOrder(orderNo);
 			if (result > 0) {
