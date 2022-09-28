@@ -47,6 +47,7 @@
 			<th>번호</th>
 			<th>제목</th>
 			<th>날짜</th>
+			<th>작성자</th>
 			<th>조회수</th>
 		</tr>
 		<c:if test="${!empty faqList }">
@@ -55,6 +56,7 @@
 					<td>${i.count }</td>
 					<td><a href="/faq/detail.kh?faqNo=${faq.faqNo }&page=${currentPage }">${faq.faqTitle }</a></td>
 					<td>${faq.faqCreateDate }</td>
+					<td>${faq.faqWriter } </td>
 					<td>${faq.faqViewCount }</td>
 				</tr>
 			</c:forEach>

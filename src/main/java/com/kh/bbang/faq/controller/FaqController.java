@@ -167,7 +167,7 @@ public class FaqController {
 				faq.setFaqFilepath(faqFilepath);
 			}
 			int result = faqService.modifyFaq(faq);
-			mv.setViewName("redirect:/faq/list.kh?page=" + page);
+			mv.setViewName("redirect:/faq/list.kh?page="+page);
 		} catch (Exception e) {
 			mv.addObject("msg", e.toString()).setViewName("common/errorPage");
 		}

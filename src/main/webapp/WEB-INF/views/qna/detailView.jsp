@@ -9,6 +9,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>QNA게시판 상세 정보</title>
     <style>
+    
+   
+      
         html, body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, blockquote, th, td, img {
             margin: 0;
             padding: 0;
@@ -150,6 +153,7 @@
 </head>
 <body>
 <%@ include file="/WEB-INF/views/include/header.jsp"%>
+<%-- <jsp:include page="/WEB-INF/views/include/footer.jsp"/> --%>
 <div id="all" style="padding:0px 300px 0px 300px"]>
 <br><br><br>
     <div id="qna-page" padding="150px" align="center">
@@ -256,6 +260,9 @@
 			$form.submit();
 		}
 	</script>
+	<br><br><br><br><br>
 	</div>
+		</div id="wrapper"><jsp:include page="/WEB-INF/views/include/footer.jsp" /></div>
+	
 </body>
 </html>

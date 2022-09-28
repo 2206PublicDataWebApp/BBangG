@@ -93,19 +93,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT * FROM FAQ_TBL WHERE FAQ_NUMBER = #{faqNo} 
 	</select>
 
-
-	
-
-	<update id="updatefaq">
-		UPDATE FAQ_TBL SET FAQ_TITLE = #{faqTitle},
-		FAQ_CONTENT = #{faqContents},
-		FAQ_FILENAME = #{faqFilename},FAQ_RENAME = #{faqFileRename},
-		FAQ_FILEPATH = #{faqFilepath}, FAQ_UPDATEDATE = DEFAULT
+	<update id="updateFaq">
+		UPDATE FAQ_TBL SET 
+		FAQ_TITLE = #{faqTitle},
+		FAQ_CONTENT = #{faqContent},
+		FAQ_UPDATEDATE = DEFAULT
 		WHERE FAQ_NUMBER = #{faqNo}
 	</update>
 	
 	 <delete id="deleteOneByNo">
-   DELETE FROM FAQ_TBL WHERE FAQ_NO = #{faqNo } 
+   DELETE FROM FAQ_TBL
+    WHERE FAQ_NUMBER = #{faqNo} 
    </delete>
 	
 	<update id="updateFaqCount">
@@ -113,6 +111,4 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	WHERE FAQ_NUMBER = #{faqNo}
 	</update>
 	
-
-
 </mapper>

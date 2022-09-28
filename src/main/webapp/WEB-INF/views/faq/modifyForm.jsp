@@ -9,32 +9,32 @@
 <title>게시글 수정</title>
 </head>
 <body>
-	<h1 align="center">${faq.faqNo }번게시글 수정하기</h1>
+	<h1 align="center">${faq.faqNo}번게시글 수정하기</h1>
 	<br>
 	<form action="/faq/modify.kh" method="post"
 		enctype="multipart/form-data">
-		<input type="hidden" name="page" value="${page }" /> <input
-			type="hidden" name="faqNo" value="${faq.faqNo }" /> <input
-			type="hidden" name="faqFilename" value="${faq.faqFilename }" /> <input
-			type="hidden" name="faqFileRename" value="${faq.faqFileRename }" />
+		<input type="hidden" name="page" value="${page}" /> <input
+			type="hidden" name="faqNo" value="${faq.faqNo}" /> <input
+			type="hidden" name="faqFilename" value="${faq.faqFilename}" /> <input
+			type="hidden" name="faqFileRename" value="${faq.faqFileRename}" />
 		<table align="center" border="1">
 
 			<tr>
 				<td>제목</td>
-				<td><input type="text" name="faqTitle" value="${faq.faqTitle }"></td>
+				<td><input type="text" name="faqTitle" value="${faq.faqTitle}"></td>
 			</tr>
 			<tr>
 				<td>작성자</td>
 				<td><input type="text" name="faqWriter"
-					value="${faq.faqWriter }" readonly></td>
+					value="${faq.faqWriter}" readonly></td>
 			</tr>
 			<tr>
 				<td>내용</td>
-				<td><textarea col="30" rows="7" name="faqContent">${faq.faqContent }</textarea></td>
+				<td><textarea col="30" rows="7" name="faqContent">${faq.faqContent}</textarea></td>
 			</tr>
 			<tr>
 				<td>첨부파일</td>
-				<td><input type="file" name="reloadFile"> <a href="#">${faq.faqFilename }</a>
+				<td><input type="file" name="reloadFile"> <a href="#">${faq.faqFilename}</a>
 				</td>
 			</tr>
 			<tr>
