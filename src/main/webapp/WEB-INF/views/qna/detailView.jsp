@@ -153,7 +153,6 @@
 </head>
 <body>
 <%@ include file="/WEB-INF/views/include/header.jsp"%>
-<%-- <jsp:include page="/WEB-INF/views/include/footer.jsp"/> --%>
 <div id="all" style="padding:0px 300px 0px 300px"]>
 <br><br><br>
     <div id="qna-page" padding="150px" align="center">
@@ -260,9 +259,8 @@
 			$form.submit();
 		}
 	</script>
-	<br><br><br><br><br>
-	</div>
-		</div id="wrapper"><jsp:include page="/WEB-INF/views/include/footer.jsp" /></div>
 	
+	</div>
+		
 </body>
 </html>
