@@ -126,10 +126,9 @@ button {
 	</div>
 </body>
 <script>
-/* 	function serch(){
-		consol.log(document.getElementById('orderDate'));
-		
-	} */
-
+	<c:if test="${empty login}">
+		alert("접근이 제한된 페이지 입니다. 메인으로 돌아갑니다.");
+		location.href="/home.kh";	
+	</c:if>
 </script>
 </html>

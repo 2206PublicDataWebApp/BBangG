@@ -38,7 +38,7 @@ public class OrderController {
 			@RequestParam(name = "storeNo", required = false) Integer refStoreNo) {
 
 		List<Product> pList = oService.findAllProduct(refStoreNo);
-		if(!pList.isEmpty()) {
+		if (!pList.isEmpty()) {
 			HttpSession session = request.getSession();
 			User user = (User) session.getAttribute("login");
 			String userId = user.getUserId();
@@ -46,7 +46,7 @@ public class OrderController {
 			mv.addObject("storeNo", refStoreNo);
 			mv.addObject("user", user);
 			mv.addObject("pList", pList);
-		}else {
+		} else {
 			mv.addObject("msg", "해당점포에 등록된 빵이 없습니다.");
 			mv.setViewName("common/errorPage");
 		}
@@ -58,7 +58,7 @@ public class OrderController {
 	public ModelAndView orderSend(ModelAndView mv, @ModelAttribute Order order,
 			@ModelAttribute OrderProduct orderProduct, @RequestParam(name = "storeNo", required = false) Integer storeNo
 
-	) {	
+	) {
 		try {
 
 			String tmp[] = new String[orderProduct.getOrderProductNm().length];
@@ -171,10 +171,6 @@ public class OrderController {
 
 	}
 
-	private void SerchDate(String dateFrom, String dateTo, String userId) {
-		// TODO Auto-generated method stub
-
-	}
 
 	// 사용자 주문상세화면
 	@RequestMapping(value = "/order/userOrderDetail.kh", method = RequestMethod.GET)
@@ -352,7 +348,8 @@ public class OrderController {
 
 	// 관리자 주문 상세화면
 	@RequestMapping(value = "/admin/adminOrderDetail.kh", method = RequestMethod.GET)
-	public ModelAndView adminOrderDetail(ModelAndView mv, @RequestParam("orderNo") Integer orderNo) {
+	public ModelAndView adminOrderDetail(ModelAndView mv
+			, @RequestParam(name="orderNo", required = false) Integer orderNo) {
 		try {
 
 			Order order = oService.findOneOrder(orderNo);

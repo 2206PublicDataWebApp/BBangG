@@ -9,6 +9,14 @@
 <title>사용자 주문 상세페이지</title>
 </head>
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<script>
+
+<c:if test="${empty login}">
+	alert("접근이 제한된 페이지 입니다. 메인으로 돌아갑니다.");
+	location.href="/home.kh";	
+</c:if>
+
+</script>
 <style>
 #f_table {
 	width: 90%;
@@ -242,9 +250,8 @@ margin-bottom:10%;
 				event.preventDefault();
 				alert("취소요청이 없으므로 주문취소 불가합니다.")
 		});
-			
-
 	
+
 	
 	</script>
 
