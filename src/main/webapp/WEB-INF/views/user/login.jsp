@@ -111,6 +111,12 @@ input:focus{
 </style>
 </head>
 <body>
+	<c:if test="${login.status == '1' or login.status =='0'}">
+		<script type="text/javascript">
+			alert("이미 로그인 하셨습니다.");
+			location.href = "/home.kh";
+		</script>
+		</c:if>
 	<div class="logo">
 		<a href="/home.kh"> <img src="../resources/image/logo.png" /></a>
 	</div>
@@ -130,12 +136,7 @@ input:focus{
 						</ul>
 					</div>
 				<input type="submit" value="Login">
-			<c:if test="${login.status == '1' or login.status =='0'}">
-				<script type="text/javascript">
-					alert("이미 로그인 하셨습니다. 메인으로 돌아갑니다.");
-					location.href = "/home.kh";
-				</script>
-			</c:if>
+			
 		</form>
 	</div>
 

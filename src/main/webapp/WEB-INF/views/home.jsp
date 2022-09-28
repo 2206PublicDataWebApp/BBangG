@@ -16,16 +16,16 @@
 	    </div>
 	
 	    <article class="slides">
-	        <img src="./resources/image/main/111.jpg" alt="">
+	        <a href="/store/storeDetail.kh?storeNo=768"><img src="./resources/image/main/na.jpg" alt=""></a>
 	    </article><!--1-->
 	    <article class="slides">
-	        <img src="./resources/image/main/222.jpg" alt="">
+	        <a href="/store/storeDetail.kh?storeNo=766"><img src="./resources/image/main/sung.jpg" alt=""></a>
 	    </article><!--2-->
 	    <article class="slides">
-	        <img src="./resources/image/main/333.jpg" alt="">
+	        <a href="/store/storeDetail.kh?storeNo=771"><img src="./resources/image/main/sam.jpg" alt=""></a>
 	    </article><!--3-->
 	    <article class="slides">
-	        <img src="./resources/image/main/444.jpg" alt="">
+	        <a href="/store/storeDetail.kh?storeNo=770"><img src="./resources/image/main/mam.jpg" alt=""></a>
 	    </article><!--4-->
 	</section>
 
@@ -40,7 +40,6 @@
 	<div style="margin-top:50px;">
 		<jsp:include page="/WEB-INF/views/include/mainReviewList.jsp"/>
 	</div>
-	
 	
   <script type="text/javascript">
   var slides = document.getElementsByClassName('slides');
