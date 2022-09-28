@@ -33,6 +33,7 @@
   	border: none;
   	margin-right:5px;
   	cursor:pointer;
+  	background-color:transparent;
  	
  }
 input[type=date]{
@@ -43,13 +44,17 @@ border-bottom:1px solid #3A2618;
 	padding-left:200px;
 	padding-top:80px;
 }
-
+.orderNo a{
+	color: mediumblue;
+	text-decoration-line:underline;
+	
+}
 
 </style>
 </head>
 <body>
 <jsp:include page = "/WEB-INF/views/include/header.jsp"/>
-<jsp:include page="/WEB-INF/views/include/sideBar_admin.jsp"/>
+<jsp:include page="/WEB-INF/views/include/sideBar_user.jsp"/>
 	<div id="bodyWrapper">
 		<input type="hidden" name="userId" value="${login.userId }">
 		<h1 align="center">${login.userId }님의 주문 목록</h1>
@@ -100,7 +105,7 @@ border-bottom:1px solid #3A2618;
 			</tr>
 			<c:forEach items="${oList}" var="order" varStatus="i">
 				<tr>
-					<td><a href="/order/userOrderDetail.kh?orderNo=${order.orderNo }">${order.orderNo }</a></td>
+					<td class="orderNo"><a href="/order/userOrderDetail.kh?orderNo=${order.orderNo }">${order.orderNo }</a></td>
 					<td>${order.orderDetail}</td>
 					<c:set var="orderDateOn" value="${order.orderDate}"/>
 					<c:set var="simpleDate" value="${ fn:substring(orderDateOn,0,10)}"/>
@@ -127,7 +132,7 @@ border-bottom:1px solid #3A2618;
 		</table>
 	</div>
 
-</style>
+
 <script>
 var from = document.getElementById("dateFrom");
 var end = document.getElementById("dateTo");

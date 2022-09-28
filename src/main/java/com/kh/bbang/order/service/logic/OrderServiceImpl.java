@@ -1,6 +1,5 @@
 package com.kh.bbang.order.service.logic;
 
-import java.util.Date;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -8,28 +7,35 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.bbang.order.domain.Order;
-import com.kh.bbang.order.domain.OrderProduct;
-import com.kh.bbang.order.domain.SerchDate;
+import com.kh.bbang.order.domain.SearchBasic;
 import com.kh.bbang.order.service.OrderService;
 import com.kh.bbang.order.store.OrderStore;
 import com.kh.bbang.product.domain.Product;
 import com.kh.bbang.store.domain.Store;
+
 @Service
-public class OrderServiceImpl implements OrderService{
+public class OrderServiceImpl implements OrderService {
 	@Autowired
 	private SqlSessionTemplate session;
 	@Autowired
 	private OrderStore oStore;
 
 	@Override
-	public List<Order> findOrderByDate(String orderDate,int boardLimit,int currentPage) {
-		List<Order> oList = oStore.selectOrderByDate(session, orderDate, boardLimit,currentPage);
+	public List<Order> findOrderById(SearchBasic sd) {
+		List<Order> oList = oStore.selectOrderById(session, sd);
 		return oList;
 	}
 
 	@Override
-	public List<Order> findOrderById(SerchDate sd) {
-		List<Order> oList = oStore.selectOrderById(session, sd);
+	public List<Product> findAllProduct(int refStoreNo) {
+		List<Product> pList = oStore.selectAllProduct(session, refStoreNo);
+		return pList;
+	}
+
+	@Override
+	public List<Order> printAllByValue(Order order, int currentPage, int boardLimit) {
+		List<Order> oList = oStore.selecAllByValue(session, order, currentPage, boardLimit);
+	
 		return oList;
 	}
 
@@ -40,9 +46,16 @@ public class OrderServiceImpl implements OrderService{
 	}
 
 	@Override
+	public Store findStore(int storeNo) {
+		Store store = oStore.selectStore(session, storeNo);
+		return store;
+	}
+
+	@Override
 	public int registerOrder(Order order) {
-		int result = oStore.insertOrder(session, order);
-		return result;
+		oStore.insertOrder(session, order);
+		int orderNo = order.getOrderNo();
+		return orderNo;
 	}
 
 	@Override
@@ -56,24 +69,11 @@ public class OrderServiceImpl implements OrderService{
 		int result = oStore.deleteOrder(session, orderNo);
 		return result;
 	}
-	
+
 	@Override
 	public int removeOrderRequest(int orderNo) {
-		int result =oStore.deleteOrderRequest(session,orderNo);
+		int result = oStore.deleteOrderRequest(session, orderNo);
 		return result;
-	}
-
-
-	@Override
-	public List<Product> findAllProduct(int refStoreNo) {
-		List<Product> pList = oStore.selectAllProduct(session, refStoreNo);
-		return pList;
-	}
-
-	@Override
-	public List<OrderProduct> findOrderProductList(int orderNo) {
-		List<OrderProduct> opList=oStore.selectOrderProductList(session, orderNo);
-		return opList;
 	}
 
 	@Override
@@ -83,19 +83,9 @@ public class OrderServiceImpl implements OrderService{
 	}
 
 	@Override
-	public Store findStore(int storeNo) {
-		Store store = oStore.selectStore(session,storeNo);
-		return store;
+	public int getTotalOrderCountByValue(Order order) {
+		int totalCount = oStore.selectTotalOrderCountByValue(session, order);
+		return totalCount;
 	}
-
-	@Override
-	public int getTotalOrderCount( String orderDate) {
-		int totalOrderCount = oStore.selectTotalOrderCount(session, orderDate);
-		return totalOrderCount;
-	}
-
-
-
-
 
 }

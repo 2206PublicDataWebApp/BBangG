@@ -50,6 +50,15 @@
  	font-size:16px;
 
 }
+#btn_sendMoney,#btn_orderConfirm{
+	background-color:#3A2618;
+ 	color:#ffffff;
+ 	border:1px solid;
+ 	border-color:#3A2618;
+ 	height:30px;
+ 	font-size:16px;
+ 	cursor:pointer;
+}
 #btn_orderModify{
 	background-color:#3A2618;
  	color:#ffffff;
@@ -69,6 +78,11 @@
  	color:#3A2618;
  	border:1px solid;
  	border-color:#3A2618;
+}
+.storeNo a{
+	color: mediumblue;
+	text-decoration-line:underline;
+	
 }
 </style>
 <body>
@@ -90,9 +104,9 @@
 			<tr>
 				<td>${order.orderNo }</td>
 				<td>${order.orderDetail}</td>
-				<td><a href="#">${order.storeNo}</a></td>
+				<td class="storeNo"><a href="/store/storeDetail.kh?storeNo=${order.storeNo}">${store.storeName }</a></td>
 				<td >
-					<c:if test="${order.orderState eq 0 }">입금전 <button id="btn_sendMoney" type="button">입금완료</button></c:if>
+					<c:if test="${order.orderState eq 0 }">입금전  <button id="btn_sendMoney" type="button">입금완료</button></c:if>
 					<c:if test="${order.orderState eq 1 }">입금완료(입금확인 대기중)</c:if>
 					<c:if test="${order.orderState eq 2 }">입금확인완료</c:if>
 					<c:if test="${order.orderState eq 3}" >입금확인완료</c:if>
@@ -103,7 +117,7 @@
 					<c:if test="${order.orderState eq 0 }">배송전</c:if>
 					<c:if test="${order.orderState eq 1 }">배송전</c:if>
 					<c:if test="${order.orderState eq 2 }">배송전</c:if>
-					<c:if test="${order.orderState eq 3}" >배송출발<button id="btn_orderConfirm" type="button">구매확정</button></c:if>
+					<c:if test="${order.orderState eq 3}" >배송출발  <button id="btn_orderConfirm" type="button">구매확정</button></c:if>
 					<c:if test="${order.orderState eq 4}" >구매확정</c:if>
 					<c:if test="${order.orderState eq 5}" >취소요청 진행중</c:if>
 				</td>
