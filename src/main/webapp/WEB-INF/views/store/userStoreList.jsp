@@ -18,6 +18,8 @@ section{
 }
 
 #region {
+	margin-top: 10px;
+	margin-bottom: 10px;
 	background-color: lightgray;
 	text-align: center;
 }
@@ -51,10 +53,19 @@ img {
 	height: 100%;
 	object-fit: contain;
 }
+select{
+	height: 30px;
+	border: 3px solid #3A2618;
+}
+#searchInput{
+	width: 400px;
+	height: 30px;
+	border: 3px solid #3A2618;
+}
 
 #search {
-	width: 20px;
-	height: 20px;
+	width: 23px;
+	height: 23px;
 	cursor: pointer;
 }
 
@@ -62,12 +73,25 @@ img {
 	background-color: white;
 	border: none;
 }
+.navigator{
+	font-size: large;
+}
+
 </style>
 </head>
 <body>
 	<%@ include file="/WEB-INF/views/include/header.jsp"%>
 	<section>
 		<h1 align="center">빵집 리스트</h1>
+		<form action="/store/userStoreSearch.kh" method="get" align="center">
+			<select name="searchCondition">
+				<option value="all"<c:if test="${searchCondition  eq 'all'}">selected</c:if>>전체</option>
+				<option value="name"<c:if test="${searchCondition  eq 'name'}">selected</c:if>>이름</option>
+				<option value="region"<c:if test="${searchCondition  eq 'region'}">selected</c:if>>지역</option>
+			</select> <input type="text" id="searchInput"name="searchValue" value="${searchValue }">
+			<button type="submit" id="searchBtn"><img id="search" alt="" src="/resources/image/icon/serch_bt.png"></button>
+			<!-- <input type="submit" value="검색"> -->
+		</form>
 		<div id="region">
 			<ul id="region">
 				<a onclick="getValue(event)">서울/경기</a>
@@ -92,7 +116,8 @@ img {
 				</div>
 			</c:forEach>
 		</div>
-		<table align="center">
+		<hr>
+		<table align="center" class="navigator">
 			<tr>
 				<td colspan="6"><c:if test="${currentPage != 1}">
 						<a
@@ -112,15 +137,7 @@ img {
 					</c:if></td>
 			</tr>
 		</table>
-		<form action="/store/userStoreSearch.kh" method="get" align="center">
-			<select name="searchCondition">
-				<option value="all">전체</option>
-				<option value="name">이름</option>
-				<option value="region">지역</option>
-			</select> <input type="text" name="searchValue" value="${searchValue }">
-			<button type="submit" id="searchBtn"><img id="search" alt="" src="/resources/image/icon/serch_bt.png"></button>
-			<!-- <input type="submit" value="검색"> -->
-		</form>
+		
 	</section>
 	<footer></footer>
 	<script>

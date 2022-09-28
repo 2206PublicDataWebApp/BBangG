@@ -106,7 +106,7 @@ td {
 			</tr>
 			<tr>
 				<td class="th">계좌번호</td>
-				<td><input type="text" name="storeAccount" class="text"
+				<td class="right"><input type="text" name="storeAccount" class="text"
 					value="${store.storeAccount}" /></td>
 				<td><select name="storeBank">
 						<option value="우리">우리</option>

@@ -31,6 +31,19 @@
 	width: 100px;
 	display: inline-block;
 }
+
+#goBack{
+	width: 150px;
+	font-size: 15px;
+	border: 3px solid #414141;
+	background-color: #414141;
+	color: rgb(255, 255, 255);
+	/* padding: 15px 25px; */
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	left: 80%;
+}
 </style>
 </head>
 <body>
@@ -58,7 +71,7 @@
 			onclick="productRegist(${storeNo},'${storeName }')">상품등록</button>
 		<button id="btn-delete"
 			onclick="productRemove(${storeNo},'${storeName }')">선택삭제</button>
-
+		<button id="goBack" onclick="goBack()">이전 페이지로 이동</button>
 	</div>
 	<script>
 		var productCode = '';
@@ -72,6 +85,13 @@
 		}
 		function productRemove(storeNo, storeName){
 			location.href="/product/removeProduct.kh?storeNo="+storeNo+"&storeName="+encodeURI(encodeURIComponent(storeName))+"&productCode="+productCode;
+		}
+		function goBack(){
+			event.preventDefault();
+			if(confirm('점포리스트로 돌아갈까요?')){
+				location.href="/store/adminStoreList.kh";
+				
+			}
 		}
 	</script>
 </body>

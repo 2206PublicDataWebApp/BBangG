@@ -37,4 +37,5 @@ public class ProductServiceImpl implements ProductService{
 		int result = pStore.deleteProduct(session, productCode, refStoreNo);
 		return result;
 	}
+
 }
