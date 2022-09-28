@@ -99,9 +99,9 @@
         .write-btn-cancel{
             width: 80px;
             font-size: 15px;
-            border: 2px solid #002954;
-            background-color: #ffffff;
-            color: #002954;
+            border: 1px solid #767676;
+            background-color: #767676;
+            color: rgb(255, 255, 255);
             /* padding: 15px 25px; */
             text-align: center;
             text-decoration: none;
@@ -113,9 +113,9 @@
         .write-btn{
             width: 80px;
             font-size: 15px;
-            border: 2px solid #002954;
-            background-color: #002954;
-            color: #ffffff;
+            border: 1px solid #767676;
+            background-color: #ffffff;
+            color: #767676;
             /* padding: 15px 25px; */
             text-align: center;
             text-decoration: none;
@@ -150,7 +150,7 @@
 	         <form id="modifyForm" action="/review/modify.kh" method="post" enctype="multipart/form-data">
 	         	<input type="hidden" name="page" value="${page }">
 				<input type="hidden" name="reviewNo" value="${review.reviewNo }">
-				<input type="hidden" name="reviewFilename" value="${review.reviewFilename }">
+				<input type="hidden" name="reloadFile" value="${review.reviewFilename }">
 				<input type="hidden" name="reviewFileRename" value="${review.reviewFileRename }">
                 <div id="review-content">
                 	<%-- <input type="hidden" name="userId" value="${review.userId}" placeholder="작성자"/> --%>

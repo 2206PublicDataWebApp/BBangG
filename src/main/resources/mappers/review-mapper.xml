@@ -17,12 +17,11 @@
   			<result property="rUpdateDate" column="R_UPDATE_DATE"/>
   			<result property="useYn" column="USE_YN"/>
   			<result property="storeName" column="STORE_NAME"/>
-  			<result property="reviewHeart" column="REVIEW_HEART"/>
+  			<result property="reviewHeart" column="REVIEW_HEART"/> 
+  			<result property="heartCount" column="HEART_COUNT"/> 
   			
   		</resultMap>
-  		<!-- <resultMap type="Review" id="reviewHeartResultMap">
-  			<id property=""
-  		</resultMap> -->
+
   		
 		<!-- 리뷰 등록 -->
   		<insert id="insertReview">
@@ -48,11 +47,15 @@
   				REVIEW_FILEPATH = #{reviewFilepath},
   				R_UPDATE_DATE = DEFAULT
   				WHERE REVIEW_NO = #{reviewNo}
+  				
+  				
   		</update>
   		
   		<!-- 전체게시글 조회 -->
   		<select id="selectAllReview" resultMap="reviewResultMap">
-  			SELECT * FROM REVIEW_TBL WHERE USE_YN = 'Y' ORDER BY REVIEW_NO ASC
+			SELECT R.*, (SELECT STORE_NAME FROM STORE_TBL WHERE STORE_NO = R.STORE_NO) STORE_NAME
+			FROM REVIEW_TBL R
+			WHERE USE_YN = 'Y' ORDER BY REVIEW_NO ASC
   		</select>
   		
   		<!--  리뷰 검색 -->
@@ -81,14 +84,14 @@
   			WHERE REVIEW_NO = #{reviewNo}
   		</select>
   		
-<!--수정 중   		<select id="selectStoreReview" resultMap="reviewResultMap">
+		<select id="storeReviewPrint" resultMap="reviewResultMap">
   			SELECT R.*,
   				(SELECT STORE_NAME FROM STORE_TBL WHERE STORE_NO = R.STORE_NO) STORE_NAME,
   				(SELECT COUNT (HEART_NO) FROM REVIEW_HEART WHERE REVIEW_NO = R.REVIEW_NO) REVIEW_HEART
   			FROM REVIEW_TBL R 
-  			WHERE REVIEW_NO = #{reviewNo}
+  			WHERE STORE_NO = #{storeNo}
   		</select>
-  		 -->
+  		
   		<select id="selectAllByValue" resultMap="reviewResultMap">
   			SELECT * FROM REVIEW_TBL
 			<where>
@@ -108,7 +111,17 @@
   		<select id="selectHeartCount" resultType="_int">
   			SELECT COUNT (HEART_NO) FROM REVIEW_HEART WHERE REVIEW_NO = #{reviewNo}
   		</select>
-
+		<select id="heartCountBest" resultMap="reviewResultMap">
+			SELECT A.*,(SELECT STORE_NAME FROM STORE_TBL WHERE STORE_NO = A.STORE_NO) STORE_NAME
+			FROM (SELECT R.*,
+			    NVL((SELECT COUNT(REVIEW_NO)
+			        FROM REVIEW_HEART
+			        WHERE REVIEW_NO = R.REVIEW_NO
+			        GROUP BY REVIEW_NO),0) HEART_COUNT
+					FROM REVIEW_TBL R 
+					ORDER BY HEART_COUNT DESC) A
+			<![CDATA[WHERE ROWNUM <= 4]]>
+		</select>
   		
   		<update id="updateCount">
   			UPDATE REVIEW_TBL 

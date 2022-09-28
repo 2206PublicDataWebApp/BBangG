@@ -19,6 +19,7 @@ public class Review {
 	private Date rCreateDate;	
 	private Date rUpdateDate;
 	private String useYn;
+	private int heartCount = 0;
 	
 	private String userId;
 	
@@ -58,6 +59,14 @@ public class Review {
 
 	
 	
+	public int getHeartCount() {
+		return heartCount;
+	}
+
+	public void setHeartCount(int heartCount) {
+		this.heartCount = heartCount;
+	}
+
 	public String getUserId() {
 		return userId;
 	}

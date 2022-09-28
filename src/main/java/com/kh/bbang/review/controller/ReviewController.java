@@ -101,11 +101,12 @@ public class ReviewController {
 	 public ModelAndView reviewModifyView(
 			 ModelAndView mv 
 			 ,@RequestParam("reviewNo") Integer reviewNo
-			 ,@RequestParam("page")int page){
+//			 ,@RequestParam("page")int page
+			 ){
 		 try {
 			 Review review = rService.printOneByNo(reviewNo);
 			 mv.addObject("review", review);
-			 mv.addObject("page", page);
+//			 mv.addObject("page", page);
 			 mv.setViewName("review/reviewModify");
 			 }catch (Exception e) {
 				mv.addObject("msg", e.toString());
@@ -129,7 +130,7 @@ public class ReviewController {
 			@ModelAttribute Review review
 			,ModelAndView mv
 			,@RequestParam(value = "reloadFile", required = false) MultipartFile reloadFile
-			,@RequestParam("page") Integer page
+//			,@RequestParam("page") Integer page
 			,HttpServletRequest request) {
 		try {
 			String reviewFilename = reloadFile.getOriginalFilename();
@@ -149,7 +150,8 @@ public class ReviewController {
 				review.setReviewFilepath(reviewFilepath);
 			}
 			int result = rService.modifyReview(review);
-			mv.setViewName("redirect:/review/list.kh?page="+page);
+//			mv.setViewName("redirect:/review/list.kh?page="+page);
+			mv.setViewName("redirect:/review/detail.kh?reviewNo="+review.getReviewNo());
 		} catch (Exception e) {
 			mv.addObject("msg", e.toString()).setViewName("common/errorPage");
 		}
@@ -164,16 +166,20 @@ public class ReviewController {
 	 * @return
 	 */
 	 @RequestMapping(value = "/review/remove.kh", method = RequestMethod.GET)
-	 public String reviewRemove(HttpSession session 
+	 public String reviewRemove(
+			 HttpSession session 
 			 ,Model model
-			 ,@RequestParam("page")Integer page) {
+			 ,@RequestParam("reviewNo")int reviewNo
+//			 ,@RequestParam("page")Integer page
+			 ) {
 		  try {
-			int reviewNo = (int)session.getAttribute("reviewNo");
+//			int reviewNo = (int)session.getAttribute("reviewNo");
 			int result = rService.removeOneByNo(reviewNo);
-			if(result > 0) {
-				session.removeAttribute("reviewNo");
-			}
-			return "redirect:/review/list.kh?page="+page;
+//			if(result > 0) {
+//				session.removeAttribute("reviewNo");
+//			}
+//			return "redirect:/review/list.kh?page="+page;
+			return "redirect:/review/list.kh";
 			
 		} catch (Exception e) {
 			model.addAttribute("msg", e.toString());
@@ -193,17 +199,17 @@ public class ReviewController {
 	public ModelAndView reviewDetailView(
 			ModelAndView mv
 			, @RequestParam("reviewNo") Integer reviewNo
-			, @RequestParam("page") Integer page
+//			, @RequestParam("page") Integer page
 			, HttpSession session) {
 		try {
 			System.out.println("reviewNo="+reviewNo);
 			Review review = rService.printOneByNo(reviewNo);
 			// List<ReviewComment> cList = rService.printAllComment(reivewNo);
-			session.setAttribute("reviewNo", review.getReviewNo());
+//			session.setAttribute("reviewNo", review.getReviewNo());
 			// mv.addObject("rList", attributeValue) List.jsp에 page있음 
 			// mv.addObject("cList", cList); //commentList
 			mv.addObject("review", review);
-			mv.addObject("page", page); 
+//			mv.addObject("page", page); 
 			mv.setViewName("review/detail") ;
 		} catch (Exception e) {
 			mv.addObject("msg", e.toString());
@@ -212,37 +218,7 @@ public class ReviewController {
 		
 		return mv;
 	}
-	/**
-	 * 
-	 * @param mv
-	 * @param reviewNo
-	 * @param page
-	 * @param session
-	 * @return
-	 */
-	@RequestMapping(value = "/review/storeDetail.kh", method=RequestMethod.GET)
-	public ModelAndView storeDetileView(
-			ModelAndView mv
-			, @RequestParam("reviewNo") Integer reviewNo
-			, @RequestParam("page") Integer page
-			, HttpSession session) {
-		try {
-			System.out.println("reviewNo="+reviewNo);
-			Review review = rService.printStoreReview(reviewNo);
-			// List<ReviewComment> cList = rService.printAllComment(reivewNo);
-			session.setAttribute("reviewNo", review.getReviewNo());
-			// mv.addObject("rList", attributeValue) List.jsp에 page있음 
-			// mv.addObject("cList", cList); //commentList
-			mv.addObject("review", review);
-			mv.addObject("page", page); 
-			mv.setViewName("review/storeReviewList") ;
-		} catch (Exception e) {
-			mv.addObject("msg", e.toString());
-			mv.setViewName("common/errorPage");
-		}
-		
-		return mv;
-	}
+
 	/**
 	 * 게시글 리스트
 	 * @param mv
@@ -345,6 +321,8 @@ public class ReviewController {
 		}
 		return mv;
 	}
+	
+	
 	
 	
 }

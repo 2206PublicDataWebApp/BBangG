@@ -8,19 +8,7 @@
 <meta charset="UTF-8">
 <title>빵지순례 리뷰</title>
     <style>
-        html, body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, blockquote, th, td, img {
-            margin: 0;
-            padding: 0;
-            padding-left:0px;
-            list-style:none;
-            font-family: ‘Noto Sans KR’, sans-serif;
-            
-        }
-        a,li,ul{
-            text-decoration: none;
-            color : dimgray;
-        }
-        ul {
+        /* ul {
             display: block;
             list-style-type: disc;
             margin-block-start: 1em;
@@ -28,7 +16,7 @@
             margin-inline-start: 0px;
             margin-inline-end: 0px;
             padding-inline-start: 40px;
-        }
+        } */
         /* html {
             width: 980px;
             height: 100%;
@@ -37,9 +25,7 @@
         div {
             display: block;
         }
-        body, code {
-            font-size: 15px;
-        }
+        
         #common #contents {
             margin-top: 140px;
             max-width: var(--width);
@@ -75,6 +61,14 @@
             margin: 25px auto;
             flex-wrap: wrap;
     		justify-content: space-between;
+    		
+    		/* display: block; */
+            list-style-type: disc;
+            margin-block-start: 1em;
+            margin-block-end: 1em;
+            margin-inline-start: 0px;
+            margin-inline-end: 0px;
+            padding-inline-start: 40px;
         }
         .review-list{
             text-align: center;
@@ -104,6 +98,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            font-size : 13px;
         }
         .paging-btn{
             margin: 30px;
@@ -128,6 +123,14 @@
         	display: flex;
         	justify-content: center;
         }
+        #search-icon{
+        	width : 15px;
+	       	border: none;
+		    margin-right:5px;
+		    cursor:pointer;
+		    background-color:transparent;
+        }
+       
     </style>
 <%@ include file="/WEB-INF/views/include/head.jsp"%>
 </head>
@@ -140,7 +143,7 @@
 		        <c:forEach items ="${rList}" var="review" varStatus="i">
 		            <li data-href="#" class="review-list">
 		                <div class="review_list_inner" data-href="#">
-		                    <a href="/review/detail.kh?reviewNo=${review.reviewNo }&page=${currentPage}">
+		                    <a href="/review/detail.kh?reviewNo=${review.reviewNo }<%-- &page=${currentPage} --%>">
 			                    <div class="thumb-box">
 			                        <div class="thumb">
 			                        	<img src="../resources/reviewUploadFiles/${review.reviewFilename }">
@@ -155,7 +158,7 @@
 			                        <p class="date "><i class="bar"></i>${review.rCreateDate }</p>
 			                        <div class="review_product_info">
 				                        <a href="/review/detail.kh?reviewNo=${review.reviewNo  }">
-				                            <span class="storeName">${review.storeName }점포명안나오는중</span><!-- 점포명이 들어가야함 -->
+				                            <span class="storeName">${review.storeName }</span>
 				                        </a>	                       
 				                    </div>
 			                 	</div>
@@ -185,7 +188,8 @@
 		                </li>
 			        </c:if>
 	            </ul>
-            </c:if>
+           </c:if>
+            
             <c:if test="${empty rList }">
 				<tr>
 					<td colspan="6" align="center"><b>데이터가 존재하지 않습니다.</b></td>
@@ -199,7 +203,8 @@
 						<option value="content" <c:if test="${searchCondition eq 'content' }">selected</c:if>>내용</option>
 					</select>
 					<input type="text" name="searchValue" value="${searchValue }">
-					<input type="submit" value="검색">
+					<input id="search-icon" type="image" src="/resources/image/icon/serch_bt.png" alt="검색">
+					<!-- <a id="search-icon" href="/resources/image/icon/search_icon.png"></a><input type="submit" value="검색"></a> -->
 				</form>
 			</div>
         </div>

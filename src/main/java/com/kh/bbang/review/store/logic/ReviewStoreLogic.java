@@ -76,6 +76,8 @@ public class ReviewStoreLogic implements ReviewStore{
 		return totalCount;
 
 	}
+
+	
 	@Override
 	public List<Review> selectAllByValue(SqlSession session, String searchCondition, String searchValue,int currentPage, int listLimit) {
 		int offset = (currentPage-1) * listLimit;
@@ -86,7 +88,24 @@ public class ReviewStoreLogic implements ReviewStore{
 		List<Review> rList = session.selectList("ReviewMapper.selectAllByValue", paramMap, rowBounds);
 		return rList;
 	}
-
+	
+	// 좋아요 베스트 게시물
+	@Override
+	public List<Review> heartCountBest(SqlSession session) {
+			List<Review> rList = session.selectList("ReviewMapper.heartCountBest", null);
+		return rList;
+	}
+	
+	// 스토어 리뷰
+	@Override
+	public List<Review> storeReviewPrint(SqlSession session, int storeNo, int currentPage, int limit) {
+			int offset = (currentPage-1)*limit;
+			RowBounds rowBounds = new RowBounds(offset, limit);
+			List<Review> rList = session.selectList("ReviewMapper.storeReviewPrint");
+			return rList;
+	}
+ 
+	
 
 	
 

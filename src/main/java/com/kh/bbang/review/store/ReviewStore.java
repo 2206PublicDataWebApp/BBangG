@@ -36,8 +36,12 @@ public interface ReviewStore {
 
 	public List<Review> selectAllByValue(SqlSession session, String searchCondition, String searchValue, int currentPage, int listLimit);
 
-	
+	// 하트 best 리뷰목록
+	public List<Review> heartCountBest(SqlSession session);
 
+	// 스토어 리뷰 목록
+	public List<Review> storeReviewPrint(SqlSession session, int storeNo, int currentPage, int listLimit);
+	
 	
 	
 	
