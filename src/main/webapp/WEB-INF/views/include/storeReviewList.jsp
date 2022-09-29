@@ -180,7 +180,7 @@
                     </div>
                 </div>
                 <div class="heart-count">
-                    <div id="heart"><a href="javascript:void(0);" onclick="clickHeart('${review.reviewNo}', '${review.storeNo }');">♡  ${review.reviewHeart }</a></div>
+                    <div id="heart"><a href="javascript:void(0);" onclick="clickHeart('${review.reviewNo}', '${review.storeNo }');">♥  ${review.reviewHeart }</a></div>
                     <div>조회 ${review.reviewCount } </div>
                 </div>
             </div>
