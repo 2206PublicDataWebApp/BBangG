@@ -142,7 +142,7 @@
 <%@ include file="/WEB-INF/views/include/header.jsp"%>
 
     <div class="wrap">
-    	<div id="review-page">어서오세요<br>빵덕의 성지로 초대합니다</div>
+    	<div id="review-page">리뷰 게시판</div>
     	<c:if test="${!empty rList }">
 	        <ul class="review-board board-fixed">
 		        <c:forEach items ="${rList}" var="review" varStatus="i">
@@ -168,7 +168,7 @@
 									</p>
 			                        <p class="date "><i class="bar"></i>${review.rCreateDate }</p>
 			                        <div class="review_product_info">
-				                        <a href="/review/detail.kh?reviewNo=${review.reviewNo  }">
+				                        <a href="/review/detail.kh?reviewNo=${review.storeName  }">
 				                            <span class="storeName">빵집 : ${review.storeName }</span>
 				                        </a>	                       
 				                    </div>
