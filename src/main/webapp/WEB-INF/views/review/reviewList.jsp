@@ -115,7 +115,7 @@
         	margin-top : 80px;
             margin: 80px auto;
             color:#3A2618;
-            font-size: 30px;
+            font-size: 45px;
         	font-weight: bold;
         }
         #search{
@@ -130,6 +130,10 @@
 		    cursor:pointer;
 		    background-color:transparent;
         }
+        .content{
+            width: 290px;
+            height: 110px;
+        }
        
     </style>
 <%@ include file="/WEB-INF/views/include/head.jsp"%>
@@ -138,7 +142,7 @@
 <%@ include file="/WEB-INF/views/include/header.jsp"%>
 
     <div class="wrap">
-    	<div id="review-page">빵지순례 리뷰</div>
+    	<div id="review-page">어서오세요<br>빵덕의 성지로 초대합니다</div>
     	<c:if test="${!empty rList }">
 	        <ul class="review-board board-fixed">
 		        <c:forEach items ="${rList}" var="review" varStatus="i">
@@ -154,7 +158,7 @@
 				                       	 	${review.reviewContent }<br><br>
 										</a>
 									</div>
-									<div class="writer">${review.reviewWriter }</div>
+									<div class="writer">작성자 : ${review.reviewWriter }</div>
 			                        <p class="point displaynone">
 			                        	<c:if test="${review.starRating == 1 }">★☆☆☆☆</c:if>
 			                        	<c:if test="${review.starRating == 2 }">★★☆☆☆</c:if>
@@ -165,7 +169,7 @@
 			                        <p class="date "><i class="bar"></i>${review.rCreateDate }</p>
 			                        <div class="review_product_info">
 				                        <a href="/review/detail.kh?reviewNo=${review.reviewNo  }">
-				                            <span class="storeName">${review.storeName }</span>
+				                            <span class="storeName">빵집 : ${review.storeName }</span>
 				                        </a>	                       
 				                    </div>
 			                 	</div>

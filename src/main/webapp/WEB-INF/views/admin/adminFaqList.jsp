@@ -30,8 +30,14 @@
 }
 .orderNo a,.storeNo a{
 	color: mediumblue;
-	
 }
+#search-icon {
+			width: 15px;
+			border: none;
+			margin-right: 5px;
+			cursor: pointer;
+			background-color: transparent;
+		}
 </style>
 </head>
 <body>
@@ -49,22 +55,24 @@
 			<th>날짜</th>
 			<th>작성자</th>
 			<th>조회수</th>
+			<th>비고</th>
 		</tr>
 		<c:if test="${!empty faqList }">
 			<c:forEach items="${faqList }" var="faq" varStatus="i">
 				<tr>
-					<td>${i.count }</td>
+					<td align=center>${i.count }</td>
 					<td><a href="/faq/detail.kh?faqNo=${faq.faqNo }&page=${currentPage }">${faq.faqTitle }</a></td>
-					<td>${faq.faqCreateDate }</td>
-					<td>${faq.faqWriter } </td>
-					<td>${faq.faqViewCount }</td>
+					<td align=center>${faq.faqCreateDate }</td>
+					<td align=center>관리자</td>
+					<td align=center>${faq.faqViewCount }</td>
+					<td></td>
 				</tr>
 			</c:forEach>
 
 			<tr align="center" height="20">
 			<td colspan="6">
 				<c:if test="${currentPage != 1 }">
-					<a href="/faq/${urlValue }.kh?page=${currentPage - 1 }&searchCondition=${searchCondition}&searchValue=${searchValue}">[이전]</a>
+					<a href="/admin/admin${urlValue }.kh?page=${currentPage - 1 }&searchCondition=${searchCondition}&searchValue=${searchValue}">[이전]</a>
 				</c:if>
 				<c:forEach var="p" begin="${startNavi }" end="${endNavi }">
 					<c:if test="${currentPage eq p }">
@@ -95,7 +103,8 @@
 						<option value="content" <c:if test="${searchCondition eq 'contents' }">selected</c:if>>내용</option>
 					</select>
 					<input type="text" name="searchValue" value="${searchValue }">
-					<input type="submit" value="검색">
+					<input id="search-icon" type="image"
+							src="/resources/image/icon/serch_bt.png" alt="검색">
 				</form>
 			</td>
 			<td>

@@ -152,7 +152,7 @@
 	                <a  href = "/qna/list.kh"><button class="write-btn-cancel" type="reset">취소</button></a>
 	                <button class="write-btn" type="submit">수정</button>
 	                <br>
-	                <a href="/qna/list.kh" >목록</a>
+	                <a href="/qna/list.kh" >목록</a>&nbsp&nbsp&nbsp
 					<a href="javascript:history.go(-1);">이전 페이지로</a>
 	          
 	          

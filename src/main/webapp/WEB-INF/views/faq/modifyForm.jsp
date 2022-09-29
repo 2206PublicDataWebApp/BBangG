@@ -1,47 +1,179 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/views/include/header.jsp" %>
-	
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>게시글 수정</title>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ 수정</title>
+    <style>
+        html, body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, blockquote, th, td, img {
+            margin: 0;
+            padding: 0;
+            padding-left:0px;
+            list-style:none;
+            font-family: 'Montserrat','Noto Sans KR',"Malgun Gothic","맑은 고딕",-apple-system,BlinkMacSystemFont,helvetica,"Apple SD Gothic Neo",sans-serif;
+        }
+        a,li,ul{
+            text-decoration: none;
+        }
+
+        .review-write{
+            width: 980px;
+            margin: 25px auto;
+            box-sizing:border-box ;
+            padding : 30px 40px;
+            text-align:center; 
+        }
+        #store-name{
+            margin: 50px;
+        }
+        #review-title{
+            margin: 5px;
+        }
+        #faq-content{
+            
+            margin: 0px auto;
+           
+        }
+        #max{
+        	
+        	margin: 10px auto;
+            font-size : 10px;
+          
+        }
+        
+        #select-file{
+            margin: 10px;
+            text-decoration: none; 
+            position: relative;
+            right: 6%;
+        }
+        .write-btn{
+            margin: 10px auto;
+        }
+        
+        #star-form fieldset{
+            display: inline-block;
+            direction: rtl;
+            border:0;
+        }
+        
+        #star-form fieldset legend{
+            
+            text-align: right;
+        }
+        
+        #star-form input[type=radio]{
+            display: none;
+        }
+        #star-form label{
+            font-size: 20px;
+            color: transparent;
+            text-shadow: 0 0 0 #c5c5c5;
+        }
+        
+        #star-form label:hover{
+            text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
+        }
+        
+        #star-form label:hover ~ label{
+            text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
+        }
+        
+        #star-form input[type=radio]:checked ~ label{
+            text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
+        }
+        
+        .star-rating{
+            
+            margin: 10px auto;
+            box-sizing:border-box ;
+            padding : 10px ;
+        }
+        #myform input[type=radio]:checked ~ label{
+		    text-shadow: 0 0 0 #a00; 
+		}
+        .write-btn-cancel{
+            width: 80px;
+            font-size: 15px;
+            border: 2px solid #002954;
+            background-color: #ffffff;
+            color: #002954;
+        
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+       
+        }
+        
+        .write-btn{
+            width: 80px;
+            font-size: 15px;
+            border: 2px solid #002954;
+            background-color: #002954;
+            color: #ffffff;
+          
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+          
+        }
+
+    </style>
+    <script src="/resources/js/jquery-3.6.1.min.js"></script>
+    <%@ include file="/WEB-INF/views/include/head.jsp"%>
 </head>
 <body>
-	<h1 align="center">${faq.faqNo}번게시글 수정하기</h1>
-	<br>
-	<form action="/faq/modify.kh" method="post"
-		enctype="multipart/form-data">
-		<input type="hidden" name="page" value="${page}" /> <input
-			type="hidden" name="faqNo" value="${faq.faqNo}" /> <input
-			type="hidden" name="faqFilename" value="${faq.faqFilename}" /> <input
-			type="hidden" name="faqFileRename" value="${faq.faqFileRename}" />
-		<table align="center" border="1">
+<%@ include file="/WEB-INF/views/include/header.jsp"%>
+    <div class="review-write">
+        <h2 id="store-name">FAQ 수정</h2>
+            <div id="write_area">
+                		
+	         </div>
+	         <form action="/faq/modify.kh" method="post" enctype="multipart/form-data">
+	         	<input type="hidden" name="page" value="${page }">
+				<input type="hidden" name="faqNo" value="${faq.faqNo }">
+				<input type="hidden" name="faqFilename" value="${faq.faqFilename }">
+				<input type="hidden" name="faqFileRename" value="${faq.faqFileRename }">
+				
+                	<input type="text" name="faqTitle" value="${faq.faqTitle }">
+                	<br><br>
+                <div id="faq-content">
+                    <textarea name="faqContent" id="in-content" rows="20" cols="55" placeholder="내용을 작성해주세요" required>${faq.faqContent}</textarea>
+                    <div id="max">(0 / 2000)</div>
+                </div>
 
-			<tr>
-				<td>제목</td>
-				<td><input type="text" name="faqTitle" value="${faq.faqTitle}"></td>
-			</tr>
-			<tr>
-				<td>작성자</td>
-				<td><input type="text" name="faqWriter"
-					value="${faq.faqWriter}" readonly></td>
-			</tr>
-			<tr>
-				<td>내용</td>
-				<td><textarea col="30" rows="7" name="faqContent">${faq.faqContent}</textarea></td>
-			</tr>
-			<tr>
-				<td>첨부파일</td>
-				<td><input type="file" name="reloadFile"> <a href="#">${faq.faqFilename}</a>
-				</td>
-			</tr>
-			<tr>
-				<td colspan="2" align="center"><input type="submit" value="수정">
-					<a href="/faq/list.kh">목록으로</a> <a href="javascript:history.go(-1)">이전페이지로</a></td>
-			</tr>
-		</table>
-	</form>
+                <input type="file" id="select-file" name="reloadFile" value="${faq.faqFilename }"/>
+                
+	            <div>
+	                <a  href = "/faq/list.kh"><button class="write-btn-cancel" type="reset">취소</button></a>
+	                <button class="write-btn" type="submit">수정</button>
+	                <br>
+	                <a href="/faq/list.kh" >목록</a>&nbsp&nbsp&nbsp
+					<a href="javascript:history.go(-1);">이전 페이지로</a>
+	          
+	          
+				
+			</form>
+    </div>
+     <script>
+
+     
+        $(document).ready(function() {
+            $('#in-content').on('keyup', function() {
+                $('#max').html("("+$(this).val().length+" / 2000)");
+    
+                if($(this).val().length > 2000) {
+                    $(this).val($(this).val().substring(0, 2000));
+                    $('#max').html("(2000 / 2000)");
+                }
+            });
+    	});
+
+     
+    </script>
 </body>
 </html>
