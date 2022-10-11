@@ -97,3 +97,63 @@
   <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white">
   <br>
 </div>
+
+
+
+## 구현화면
+#### 로그인
+![로그인](https://user-images.githubusercontent.com/105486016/194996588-019995ab-6d47-4454-9a30-26963b92078b.JPG)
+#### 회원가입
+![회원가입](https://user-images.githubusercontent.com/105486016/194996631-e4dcf3f5-f060-419b-8770-93daced06391.jpg)
+#### ID/PW찾기
+![idpw찾기](https://user-images.githubusercontent.com/105486016/194996567-36f3f9aa-a4aa-4091-9ac6-b635e20665a8.JPG)
+#### 가입 / 임시 비밀번호 메일
+![메일](https://user-images.githubusercontent.com/105486016/194997324-cbd5e85d-20a0-4953-a673-a5d59e0b7d8f.JPG)
+#### 마이페이지 > 정보수정
+![마이페이지-정보수정](https://user-images.githubusercontent.com/105486016/194996605-6ffd1324-2251-4dca-b8c8-c62b528f758f.png)
+#### 관리자 > 회원관리
+![관리자-회원](https://user-images.githubusercontent.com/105486016/194996587-9d33c8ce-fa3f-4614-b666-8560f4548ab9.JPG)
+#### 빵집리스트 및 검색
+![빵집검색](https://user-images.githubusercontent.com/105486016/194996614-281dc0e5-4e4f-4b5f-a231-479595149575.JPG)
+#### 빵집 상세페이지
+![상세페이지](https://user-images.githubusercontent.com/105486016/194996628-7af2169c-9798-4efe-af69-30a85be0c39f.png)
+#### 관리자 > 점포관리
+![관리자-점포](https://user-images.githubusercontent.com/105486016/194998516-36d0e56b-9e8e-4d5c-a542-93bb5f7826a8.png)
+#### 관리자 > 점포관리 > 상품관리
+![관리자-상품관리](https://user-images.githubusercontent.com/105486016/194998514-5d2319e4-d664-4844-8126-c7dae65af6de.png)
+#### 관리자 > 점포관리 > 점포등록
+![관리자-점포등록](https://user-images.githubusercontent.com/105486016/194998519-34e2d898-051b-4d9b-a844-4c84c8020515.PNG)
+#### 관리자 > 점포관리 > 점포수정
+![관리자-점포수정](https://user-images.githubusercontent.com/105486016/194998520-d4e62c4d-249c-4632-a542-02abfc4140d4.png)
+#### 주문하기
+![주문하기](https://user-images.githubusercontent.com/105486016/194999794-91e7da4e-8916-44df-988c-a16818e9986b.PNG)
+#### 마이페이지 > 주문목록
+![마이페이지-주문](https://user-images.githubusercontent.com/105486016/194996634-874175e5-1415-4f48-9bfe-00e7cdd5552f.png)
+#### 마이페이지 > 주문목록 > 주문상세
+![마이페이지-주문2](https://user-images.githubusercontent.com/105486016/194996639-49bc31bc-90e4-4c23-9fc8-d7f6ae15154d.png)
+#### 관리자 > 주문관리
+![관리자-주문](https://user-images.githubusercontent.com/105486016/194996583-11779dc5-3489-4733-9c67-e0e3d3b13c52.png)
+#### 관리자 > 주문상세
+![관리자-주문상세](https://user-images.githubusercontent.com/105486016/195000264-5e80fc2b-f4b6-46e1-91c3-83bbc661d482.png)
+#### 리뷰게시판
+![리뷰게시판](https://user-images.githubusercontent.com/105486016/194996597-a0b2340d-cbf3-4aa3-ad69-c66bc45459da.JPG)
+#### 리뷰게시판 > 상세글보기
+![리뷰게시판-1](https://user-images.githubusercontent.com/105486016/194996602-a8a20ce2-baeb-4839-be1a-89f1ea2a8763.JPG)
+#### 리뷰게시판 > 리뷰작성
+![리뷰작성](https://user-images.githubusercontent.com/105486016/194999105-add02d81-68fe-4ea3-a527-4e4d19966b56.JPG)
+#### 리뷰게시판 > 리뷰수정
+![리뷰수정](https://user-images.githubusercontent.com/105486016/194999101-8109e96d-2523-4b78-89fb-1ab0e57c0bc8.JPG)
+#### Q&A게시판
+![qna](https://user-images.githubusercontent.com/105486016/194996571-1b0ad9a3-e107-4dd8-a2b7-1463be33902a.JPG)
+#### Q&A게시판 > 상세 글조회
+![qna-2](https://user-images.githubusercontent.com/105486016/194996580-cae0eba3-a06d-4cc6-9632-fde0a4775b7b.JPG)
+#### Q&A게시판 > 질문글 작성
+![qna-1](https://user-images.githubusercontent.com/105486016/194996577-a067afbf-6467-49d0-a244-099b8db94f9d.JPG)
+#### FAQ게시판
+![faq](https://user-images.githubusercontent.com/105486016/194996550-7decfa99-9fac-4525-9728-b6b06d5d43b6.JPG)
+#### 관리자 > FAQ 관리
+![관리자-faq](https://user-images.githubusercontent.com/105486016/194998521-94912baf-4eba-4687-a4f0-92c7ad89b8e9.PNG)
+#### 관리자 > FAQ 등록
+![관리자-faq등록](https://user-images.githubusercontent.com/105486016/195000648-3c4f062a-a0b2-41be-a640-c407408c66f0.PNG)
+#### 관리자 > FAQ 수정/삭제
+![관리자-faq수정삭제](https://user-images.githubusercontent.com/105486016/195000651-e7b9843c-93e4-40ec-8d7c-1525f18acb3f.PNG)
