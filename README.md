@@ -160,7 +160,7 @@
 #### 관리자 > 주문상세
 ![관리자-주문상세](https://user-images.githubusercontent.com/105486016/195000264-5e80fc2b-f4b6-46e1-91c3-83bbc661d482.png)
 #### 리뷰게시판
-![리뷰게시판](https://user-images.githubusercontent.com/105486016/194996597-a0b2340d-cbf3-4aa3-ad69-c66bc45459da.JPG)
+![review_List](https://user-images.githubusercontent.com/108337430/195141778-9f6e50b0-872e-432f-86fe-2194ffc33233.png)
 #### 리뷰게시판 > 상세글보기
 ![리뷰게시판-1](https://user-images.githubusercontent.com/105486016/194996602-a8a20ce2-baeb-4839-be1a-89f1ea2a8763.JPG)
 #### 리뷰게시판 > 리뷰작성
